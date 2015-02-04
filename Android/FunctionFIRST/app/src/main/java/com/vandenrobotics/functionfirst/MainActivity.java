@@ -8,9 +8,13 @@ import android.os.Bundle;
 import android.view.View;
 
 import org.apache.http.Header;
-import org.apache.http.message.BasicHeader;
 import org.json.*;
+
 import com.loopj.android.http.*;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 
 /**
@@ -21,7 +25,8 @@ import com.loopj.android.http.*;
  */
 public class MainActivity extends Activity {
 
-    private static Header[] GET_HEADER = {new BasicHeader("X-TBA-App-Id", "frc701:scouting-system:dev_v01")};
+    private ArrayList<JSONObject> eventList;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,18 +43,24 @@ public class MainActivity extends Activity {
     public void activityScout(View view) throws JSONException {
 
         // no need to pass a year to the API, as it will default to the current year, which is always what we want
-        TheBlueAllianceRestClient.get(this, "events/", GET_HEADER, null, new JsonHttpResponseHandler() {
-            @Override
-            public void onSuccess(int statusCode, Header[] headers, JSONObject response){
-                //if the reponse is JSONObject instead of expected JSONArray
-                System.out.println("SYSTEM SUCCESS - JSON OBJECT");
-            }
-
+        TheBlueAllianceRestClient.get(this, "events/", TheBlueAllianceRestClient.GET_HEADER, null, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONArray events) {
-                System.out.println("SYSTEM SUCCESS - JSON ARRAY");
+                // handle the incoming JSONArray of events and create a dialog with a list view
+                try {
+                    eventList = JSONArrayParser(events);
+                    sortJSONArray(eventList, "start_date");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
         });
+        if(eventList!=null) {
+            System.out.println(eventList.size());
+            for(int i = 0; i < eventList.size(); i++){
+                System.out.println(eventList.get(i).getString("name") + "\n\t" + eventList.get(i).getString("start_date"));
+            }
+        }
         //startActivity(new Intent(this, com.vandenrobotics.functionfirst.scout.ScoutActivity.class));
     }
 
@@ -62,5 +73,27 @@ public class MainActivity extends Activity {
                     }
                 })
                 .show();
+    }
+
+    private ArrayList<JSONObject> JSONArrayParser(JSONArray jsonArray) throws JSONException
+    {
+        ArrayList<JSONObject> jsonObjects = new ArrayList<>();
+        for(int i = 0; i < jsonArray.length(); i++)
+            jsonObjects.add(jsonArray.getJSONObject(i));
+        return jsonObjects;
+    }
+
+    private void sortJSONArray(ArrayList<JSONObject> jsonObjects, final String sortParam){
+        Collections.sort(jsonObjects, new Comparator<JSONObject>() {
+            @Override
+            public int compare(JSONObject a, JSONObject b) {
+                try{
+                    return a.getString(sortParam).compareTo(b.getString(sortParam));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                return -1;
+            }
+        });
     }
 }
