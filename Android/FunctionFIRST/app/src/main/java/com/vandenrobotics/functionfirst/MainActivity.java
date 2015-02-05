@@ -10,8 +10,10 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import org.apache.http.Header;
 import org.json.*;
@@ -69,19 +71,14 @@ public class MainActivity extends Activity {
                 }
             });
             if (eventList != null) {
-                String[] eventNames = new String[eventList.size()];
-                for(int i = 0; i <eventList.size(); i++)
-                    eventNames[i] = eventList.get(i).getString("name");
-
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
                 builder.setTitle("Select FRC Event");
 
-                ListView eventLister = new ListView(this);
-                ArrayAdapter<String> eventAdapter
-                        = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, android.R.id.text1, eventNames);
+                EventListView eventLister = new EventListView(this);  // eventually will be put into a layout file, then must findViewById to set EventListView
+                EventArrayAdapter eventAdapter = new EventArrayAdapter(eventList,this);
                 eventLister.setAdapter(eventAdapter);
 
-                builder.setView(eventLister);
+                builder.setView(eventLister); // eventually will be some linear layout set up with 2 list views in its own custom layout file
                 final Dialog dialog = builder.create();
 
                 dialog.show();
