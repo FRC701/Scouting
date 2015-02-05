@@ -2,6 +2,7 @@ package com.vandenrobotics.functionfirst;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -9,6 +10,8 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
 import org.apache.http.Header;
 import org.json.*;
@@ -66,10 +69,22 @@ public class MainActivity extends Activity {
                 }
             });
             if (eventList != null) {
-                System.out.println(eventList.size());
-                for (int i = 0; i < eventList.size(); i++) {
-                    System.out.println(eventList.get(i).getString("name") + "\n\t" + eventList.get(i).getString("start_date"));
-                }
+                String[] eventNames = new String[eventList.size()];
+                for(int i = 0; i <eventList.size(); i++)
+                    eventNames[i] = eventList.get(i).getString("name");
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                builder.setTitle("Select FRC Event");
+
+                ListView eventLister = new ListView(this);
+                ArrayAdapter<String> eventAdapter
+                        = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, android.R.id.text1, eventNames);
+                eventLister.setAdapter(eventAdapter);
+
+                builder.setView(eventLister);
+                final Dialog dialog = builder.create();
+
+                dialog.show();
             }
         }
         else {
