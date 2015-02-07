@@ -138,8 +138,8 @@ public class EventListView extends ListView {
             }
         } catch (Exception e){
             e.printStackTrace();
-            super.onTouchEvent(event);
         }
+        super.onTouchEvent(event);
         return true;
     }
 

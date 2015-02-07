@@ -19,6 +19,7 @@ import com.loopj.android.http.*;
 import com.vandenrobotics.functionfirst.events.*;
 
 import android.widget.ArrayAdapter;
+import android.widget.AdapterView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -34,9 +35,9 @@ import java.util.Comparator;
  */
 public class MainActivity extends Activity {
 
-    private ArrayList<JSONObject> tbaEventList;
+    private ArrayList<JSONObject> tbaEventList = new ArrayList<>();
     private ArrayList<String> tbaMissingList = new ArrayList<>();
-    private ArrayList<JSONObject> downloadEventList;
+    private ArrayList<JSONObject> downloadEventList = new ArrayList<>();
     private ArrayList<String> downloadMissingList = new ArrayList<>();
 
     @Override
@@ -67,8 +68,15 @@ public class MainActivity extends Activity {
         --> on internet connection, list downloaded competitions first, then all competitions by date
         --> uses The Blue Alliance API to grab data for all events
         */
-        tbaEventList = null;
 
+        // reset all Blue Alliance Events so that the list does not appear when we do not have internet connection
+        tbaEventList = new ArrayList<>();
+
+        // access all downloaded events and the corresponding json documents, putting them into an ArrayList
+        // first must access the json document of downloaded events saved under the scouting directory
+        sortJSONArray(downloadEventList, "start_date");
+
+        // check online status to see if we can load the Blue Alliance Data, otherwise load the dialog without it
         if(isOnline()) {
             TheBlueAllianceRestClient.get(this, "events/", TheBlueAllianceRestClient.GET_HEADER, null, new JsonHttpResponseHandler() {
                 // no need to pass a year to the API, as it will default to the current year, which is always what we want
@@ -81,53 +89,12 @@ public class MainActivity extends Activity {
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
+                    loadEventDialog();
                 }
             });
+        } else {
+            loadEventDialog();
         }
-
-        final Dialog event_chooser = new Dialog(this);
-        event_chooser.setContentView(R.layout.event_chooser);
-        event_chooser.setTitle("Select a FRC Event");
-
-        try {
-            EventListView tbaList = (EventListView) event_chooser.findViewById(R.id.tbaEventListView);
-            EventArrayAdapter eventAdapter = new EventArrayAdapter(tbaEventList, this);
-            tbaList.setAdapter(eventAdapter);
-        } catch (NullPointerException e) {
-            e.printStackTrace();
-            ListView tbaList = (ListView) event_chooser.findViewById(R.id.tbaEventListView);
-            ArrayAdapter<String> eventAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, android.R.id.text1, tbaMissingList);
-            tbaList.setAdapter(eventAdapter);
-        }
-
-        try{
-            ListView downloadList = (ListView) event_chooser.findViewById(R.id.downloadEventListView);
-            ArrayAdapter<JSONObject> downloadAdapter = new ArrayAdapter<JSONObject>(this,android.R.layout.simple_list_item_2,android.R.id.text1,downloadEventList){
-                @Override
-                public View getView(int position, View convertView, ViewGroup parent){
-                    View view = super.getView(position, convertView, parent);
-                    TextView text1 = (TextView) view.findViewById(android.R.id.text1);
-                    TextView text2 = (TextView) view.findViewById(android.R.id.text2);
-
-                    try {
-                        text1.setText(downloadEventList.get(position).getString("name"));
-                        text2.setText("Start Date: " + downloadEventList.get(position).getString("start_date"));
-                    } catch (JSONException e){
-                        e.printStackTrace();
-                    }
-                    return view;
-                }
-            };
-            downloadList.setAdapter(downloadAdapter);
-        } catch (NullPointerException e) {
-            e.printStackTrace();
-            ListView downloadList = (ListView) event_chooser.findViewById(R.id.downloadEventListView);
-            ArrayAdapter<String> downloadAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,android.R.id.text1,downloadMissingList);
-            downloadList.setAdapter(downloadAdapter);
-        }
-
-        event_chooser.show();
-        //startActivity(new Intent(this, com.vandenrobotics.functionfirst.scout.ScoutActivity.class));
     }
 
     public void messageAbout(View view) {
@@ -167,5 +134,90 @@ public class MainActivity extends Activity {
         ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo netInfo = cm.getActiveNetworkInfo();
         return netInfo != null && netInfo.isConnectedOrConnecting();
+    }
+
+    private void loadEventDialog(){
+
+        final Dialog event_chooser = new Dialog(this);
+        event_chooser.setContentView(R.layout.event_chooser);
+        event_chooser.setTitle("Select a FRC Event");
+
+        try {
+            EventListView tbaList = (EventListView) event_chooser.findViewById(R.id.tbaEventListView);
+            EventArrayAdapter eventAdapter = new EventArrayAdapter(tbaEventList, this);
+            tbaList.setAdapter(eventAdapter);
+            tbaList.setOnItemClickListener(new ListView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> adapter, View v, int position, long arg3) {
+                    JSONObject event = (JSONObject) adapter.getItemAtPosition(position);
+                    // perform TheBlueAllianceRestClient get on that value, and run the saving of data and pictures, etc. to a competition file
+                    try {
+                        boolean newEvent = true;
+                        for (int i = 0; i < downloadEventList.size(); i++) {
+                            if (downloadEventList.get(i).getString("name").equals(event.getString("name"))) {
+                                newEvent = false;
+                                break;
+                            }
+                        }
+                        if (newEvent) {
+                            downloadEventList.add(event);
+                        }
+                    } catch (JSONException e){
+                        e.printStackTrace();
+                    }
+
+                    // eventually will also download data, and then load data and send it to the scout activity
+                    event_chooser.dismiss();
+                }
+            });
+        } catch (NullPointerException e) {
+            e.printStackTrace();
+            ListView tbaList = (ListView) event_chooser.findViewById(R.id.tbaEventListView);
+            ArrayAdapter<String> eventAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, android.R.id.text1, tbaMissingList);
+            tbaList.setAdapter(eventAdapter);
+        }
+
+        if(downloadEventList.size()>0) {
+            ListView downloadList = (ListView) event_chooser.findViewById(R.id.downloadEventListView);
+            final ArrayAdapter<JSONObject> downloadAdapter = new ArrayAdapter<JSONObject>(this,android.R.layout.simple_list_item_2,android.R.id.text1,downloadEventList){
+                @Override
+                public View getView(int position, View convertView, ViewGroup parent){
+                    View view = super.getView(position, convertView, parent);
+                    TextView text1 = (TextView) view.findViewById(android.R.id.text1);
+                    TextView text2 = (TextView) view.findViewById(android.R.id.text2);
+
+                    try {
+                        text1.setText(downloadEventList.get(position).getString("name"));
+                        text2.setText("Start Date: " + downloadEventList.get(position).getString("start_date"));
+                    } catch (JSONException e){
+                        e.printStackTrace();
+                    }
+                    return view;
+                }
+            };
+            downloadList.setAdapter(downloadAdapter);
+
+            downloadList.setOnItemClickListener(new ListView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> adapter, View v, int position, long arg3) {
+                    JSONObject event = (JSONObject) adapter.getItemAtPosition(position);
+                    // search the directory for all data, load data, and load the scout activity with that information
+                }
+            });
+
+            downloadList.setOnItemLongClickListener(new ListView.OnItemLongClickListener() {
+                @Override
+                public boolean onItemLongClick(AdapterView<?> adapter, View v, int position, long arg3) {
+                    downloadEventList.remove(position);
+                    downloadAdapter.notifyDataSetChanged();
+                    return false;
+                }
+            });
+        } else {
+            ListView downloadList = (ListView) event_chooser.findViewById(R.id.downloadEventListView);
+            ArrayAdapter<String> downloadAdapter = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,android.R.id.text1,downloadMissingList);
+            downloadList.setAdapter(downloadAdapter);
+        }
+        event_chooser.show();
     }
 }
