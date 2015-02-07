@@ -1,4 +1,4 @@
-package com.vandenrobotics.functionfirst;
+package com.vandenrobotics.functionfirst.tools;
 
 import android.content.Context;
 
@@ -17,8 +17,8 @@ public class TheBlueAllianceRestClient {
 
     private static AsyncHttpClient client = new AsyncHttpClient();
 
-    public static void get(Context context, String url, Header[] headers, RequestParams params, AsyncHttpResponseHandler responseHandler){
-        client.get(context, getAbsoluteUrl(url), headers, params, responseHandler);
+    public static void get(Context context, String url, AsyncHttpResponseHandler responseHandler){
+        client.get(context, getAbsoluteUrl(url), GET_HEADER, null, responseHandler);
     }
 
     public static String getAbsoluteUrl(String relativeUrl){

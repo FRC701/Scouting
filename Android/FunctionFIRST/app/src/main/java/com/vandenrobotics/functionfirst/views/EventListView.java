@@ -1,4 +1,4 @@
-package com.vandenrobotics.functionfirst.events;
+package com.vandenrobotics.functionfirst.views;
 
 import android.content.Context;
 import android.graphics.Canvas;
