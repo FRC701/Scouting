@@ -29,5 +29,7 @@
     <string name="cb_noShow">No Show</string>
     <string name="text_fieldDiagram">Field Diagram</string>
     <string name="title_activity_review">ReviewActivity</string>
+    <string name="text_tbaEventListTitle">2015 FRC Events</string>
+    <string name="text_downloadEventListTitle">Downloaded Events</string>
 
 </resources>

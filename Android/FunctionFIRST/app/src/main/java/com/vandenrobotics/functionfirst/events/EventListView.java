@@ -1,8 +1,7 @@
-package com.vandenrobotics.functionfirst;
+package com.vandenrobotics.functionfirst.events;
 
 import android.content.Context;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
 import android.os.Handler;
 import android.os.Message;
@@ -11,6 +10,8 @@ import android.view.MotionEvent;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SectionIndexer;
+
+import com.vandenrobotics.functionfirst.R;
 
 public class EventListView extends ListView {
 

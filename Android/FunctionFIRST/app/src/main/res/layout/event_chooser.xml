@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:id="@+id/event_chooser"
+    android:layout_height="match_parent">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        android:layout_weight="2">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:text="@string/text_downloadEventListTitle"
+            android:textColor="@color/Gold"
+            android:layout_weight="1"
+            android:id="@+id/text_downloadEventListTitle"
+            android:typeface="serif" />
+
+        <ListView
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:id="@+id/downloadEventListView"
+            android:layout_weight="11"
+            android:layout_gravity="center_horizontal|bottom"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        android:layout_weight="4">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/text_tbaEventListTitle"
+            android:textColor="@color/Gold"
+            android:layout_weight="1"
+            android:id="@+id/text_tbaEventListTitle"
+            android:typeface="serif" />
+
+        <com.vandenrobotics.functionfirst.events.EventListView
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="11"
+            android:id="@+id/tbaEventListView"
+            android:layout_gravity="center_horizontal"/>
+
+
+        </LinearLayout>
+
+
+
+</LinearLayout>

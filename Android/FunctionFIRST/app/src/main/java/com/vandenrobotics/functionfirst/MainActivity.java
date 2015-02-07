@@ -5,20 +5,17 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import org.apache.http.Header;
 import org.json.*;
 
 import com.loopj.android.http.*;
+import com.vandenrobotics.functionfirst.events.*;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -33,7 +30,8 @@ import java.util.Comparator;
  */
 public class MainActivity extends Activity {
 
-    private ArrayList<JSONObject> eventList;
+    private ArrayList<JSONObject> tbaEventList;
+    private ArrayList<JSONObject> downloadEventList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,29 +61,29 @@ public class MainActivity extends Activity {
                 public void onSuccess(int statusCode, Header[] headers, JSONArray events) {
                     // handle the incoming JSONArray of events and create a dialog with a list view
                     try {
-                        eventList = JSONArrayParser(events);
-                        sortJSONArray(eventList, "start_date");
+                        tbaEventList = JSONArrayParser(events);
+                        sortJSONArray(tbaEventList, "start_date");
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
                 }
             });
-            if (eventList != null) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                builder.setTitle("Select FRC Event");
-
-                EventListView eventLister = new EventListView(this);  // eventually will be put into a layout file, then must findViewById to set EventListView
-                EventArrayAdapter eventAdapter = new EventArrayAdapter(eventList,this);
-                eventLister.setAdapter(eventAdapter);
-
-                builder.setView(eventLister); // eventually will be some linear layout set up with 2 list views in its own custom layout file
-                final Dialog dialog = builder.create();
-
-                dialog.show();
-            }
         }
         else {
             System.out.println("NO INTERNET CONNECTION!!!");
+        }
+        if (tbaEventList!=null) {
+            final Dialog event_chooser = new Dialog(this);
+            event_chooser.setContentView(R.layout.event_chooser);
+            event_chooser.setTitle("Select and FRC Event");
+
+            ListView downloadList = (ListView) event_chooser.findViewById(R.id.downloadEventListView);
+            EventListView tbaList = (EventListView) event_chooser.findViewById(R.id.tbaEventListView);
+
+            EventArrayAdapter eventAdapter = new EventArrayAdapter(tbaEventList,this);
+            tbaList.setAdapter(eventAdapter);
+
+            event_chooser.show();
         }
         //startActivity(new Intent(this, com.vandenrobotics.functionfirst.scout.ScoutActivity.class));
     }
