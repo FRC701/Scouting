@@ -23,7 +23,6 @@ public class EventListView extends ListView {
     private float sx;
     private int indexSize;
     private String section;
-    private boolean showLetter = true;
     private Handler listHandler;
 
     public EventListView(Context context, AttributeSet attrs, int defStyle) {
@@ -44,32 +43,33 @@ public class EventListView extends ListView {
 
     }
 
-
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
-        scaledWidth = indWidth * getSizeInPixel(ctx);
-        sx = this.getWidth() - this.getPaddingRight() - scaledWidth;
+        if(sections!=null) {
+            scaledWidth = indWidth * getSizeInPixel(ctx);
+            sx = this.getWidth() - this.getPaddingRight() - scaledWidth;
 
-        Paint p = new Paint();
-        p.setColor(getResources().getColor(R.color.DarkGreen));
-        p.setAlpha(200);
+            Paint p = new Paint();
+            p.setColor(getResources().getColor(R.color.DarkGreen));
+            p.setAlpha(200);
 
-        canvas.drawRect(sx, this.getPaddingTop(), sx + scaledWidth,
-                this.getHeight() - this.getPaddingBottom(), p);
+            canvas.drawRect(sx, this.getPaddingTop(), sx + scaledWidth,
+                    this.getHeight() - this.getPaddingBottom(), p);
 
-        indexSize = (this.getHeight() - this.getPaddingTop() - getPaddingBottom())
-                / sections.length;
+            indexSize = (this.getHeight() - this.getPaddingTop() - getPaddingBottom())
+                    / sections.length;
 
-        Paint textPaint = new Paint();
-        textPaint.setColor(getResources().getColor(R.color.Gold));
-        textPaint.setTextSize(scaledWidth / 3);
+            Paint textPaint = new Paint();
+            textPaint.setColor(getResources().getColor(R.color.Gold));
+            textPaint.setTextSize(scaledWidth / 3);
 
-        for (int i = 0; i < sections.length; i++)
-            canvas.drawText(sections[i].toUpperCase(),
-                    sx + textPaint.getTextSize() / 2, getPaddingTop()
-                            + indexSize * (float)(i+0.5), textPaint);
+            for (int i = 0; i < sections.length; i++)
+                canvas.drawText(sections[i].toUpperCase(),
+                        sx + textPaint.getTextSize() / 2, getPaddingTop()
+                                + indexSize * (float) (i + 0.5), textPaint);
+        }
     }
 
     private static float getSizeInPixel(Context ctx) {
@@ -85,66 +85,69 @@ public class EventListView extends ListView {
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        float x = event.getX();
+        try {
+            float x = event.getX();
 
-        switch (event.getAction()) {
-            case MotionEvent.ACTION_DOWN: {
-                if (x < sx)
-                    return super.onTouchEvent(event);
-                else {
-                    // We touched the index bar
-                    float y = event.getY() - this.getPaddingTop() - getPaddingBottom();
-                    int currentPosition = (int) Math.floor(y / indexSize);
-                    try {
-                        section = sections[currentPosition];
-                        this.setSelection(((SectionIndexer) getAdapter())
-                                .getPositionForSection(currentPosition));
-                    } catch (IndexOutOfBoundsException e){
-                        e.printStackTrace();
-                        this.setSelection(((SectionIndexer) getAdapter())
-                                .getPositionForSection(0));
+            switch (event.getAction()) {
+                case MotionEvent.ACTION_DOWN: {
+                    if (x < sx)
+                        return super.onTouchEvent(event);
+                    else {
+                        // We touched the index bar
+                        float y = event.getY() - this.getPaddingTop() - getPaddingBottom();
+                        int currentPosition = (int) Math.floor(y / indexSize);
+                        try {
+                            section = sections[currentPosition];
+                            this.setSelection(((SectionIndexer) getAdapter())
+                                    .getPositionForSection(currentPosition));
+                        } catch (IndexOutOfBoundsException e) {
+                            e.printStackTrace();
+                            this.setSelection(((SectionIndexer) getAdapter())
+                                    .getPositionForSection(0));
+                        }
                     }
+                    break;
                 }
-                break;
-            }
-            case MotionEvent.ACTION_MOVE: {
-                if (x < sx)
-                    return super.onTouchEvent(event);
-                else {
-                    float y = event.getY();
-                    int currentPosition = (int) Math.floor(y / indexSize);
-                    try {
-                        section = sections[currentPosition];
-                        this.setSelection(((SectionIndexer) getAdapter())
-                                .getPositionForSection(currentPosition));
-                    } catch (IndexOutOfBoundsException e){
-                        e.printStackTrace();
-                        this.setSelection(((SectionIndexer) getAdapter())
-                                .getPositionForSection(0));
+                case MotionEvent.ACTION_MOVE: {
+                    if (x < sx)
+                        return super.onTouchEvent(event);
+                    else {
+                        float y = event.getY();
+                        int currentPosition = (int) Math.floor(y / indexSize);
+                        try {
+                            section = sections[currentPosition];
+                            this.setSelection(((SectionIndexer) getAdapter())
+                                    .getPositionForSection(currentPosition));
+                        } catch (IndexOutOfBoundsException e) {
+                            e.printStackTrace();
+                            this.setSelection(((SectionIndexer) getAdapter())
+                                    .getPositionForSection(0));
+                        }
+
                     }
+                    break;
 
                 }
-                break;
+                case MotionEvent.ACTION_UP: {
 
+                    listHandler = new ListHandler();
+                    listHandler.sendEmptyMessageDelayed(0, 30 * 1000);
+
+                    break;
+                }
             }
-            case MotionEvent.ACTION_UP: {
-
-                listHandler = new ListHandler();
-                listHandler.sendEmptyMessageDelayed(0, 30 * 1000);
-
-                break;
-            }
+        } catch (Exception e){
+            e.printStackTrace();
+            super.onTouchEvent(event);
         }
         return true;
     }
-
 
     private class ListHandler extends Handler {
 
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
-            showLetter = false;
             EventListView.this.invalidate();
         }
     }

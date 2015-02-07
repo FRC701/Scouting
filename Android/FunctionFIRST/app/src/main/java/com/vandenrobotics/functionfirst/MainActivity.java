@@ -9,6 +9,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ListView;
 
 import org.apache.http.Header;
@@ -16,6 +17,9 @@ import org.json.*;
 
 import com.loopj.android.http.*;
 import com.vandenrobotics.functionfirst.events.*;
+
+import android.widget.ArrayAdapter;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -31,12 +35,21 @@ import java.util.Comparator;
 public class MainActivity extends Activity {
 
     private ArrayList<JSONObject> tbaEventList;
+    private ArrayList<String> tbaMissingList = new ArrayList<>();
     private ArrayList<JSONObject> downloadEventList;
+    private ArrayList<String> downloadMissingList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        tbaMissingList.add("Could not access The Blue Alliance");
+        tbaMissingList.add("Try connecting to the internet");
+        tbaMissingList.add("Or dismiss this dialog and try again");
+
+        downloadMissingList.add("Could not find any downloaded events");
+        downloadMissingList.add("Try selecting an event to download");
+        downloadMissingList.add("Available events are listed below");
     }
 
     /**
@@ -54,6 +67,8 @@ public class MainActivity extends Activity {
         --> on internet connection, list downloaded competitions first, then all competitions by date
         --> uses The Blue Alliance API to grab data for all events
         */
+        tbaEventList = null;
+
         if(isOnline()) {
             TheBlueAllianceRestClient.get(this, "events/", TheBlueAllianceRestClient.GET_HEADER, null, new JsonHttpResponseHandler() {
                 // no need to pass a year to the API, as it will default to the current year, which is always what we want
@@ -69,22 +84,49 @@ public class MainActivity extends Activity {
                 }
             });
         }
-        else {
-            System.out.println("NO INTERNET CONNECTION!!!");
-        }
-        if (tbaEventList!=null) {
-            final Dialog event_chooser = new Dialog(this);
-            event_chooser.setContentView(R.layout.event_chooser);
-            event_chooser.setTitle("Select and FRC Event");
 
-            ListView downloadList = (ListView) event_chooser.findViewById(R.id.downloadEventListView);
+        final Dialog event_chooser = new Dialog(this);
+        event_chooser.setContentView(R.layout.event_chooser);
+        event_chooser.setTitle("Select a FRC Event");
+
+        try {
             EventListView tbaList = (EventListView) event_chooser.findViewById(R.id.tbaEventListView);
-
-            EventArrayAdapter eventAdapter = new EventArrayAdapter(tbaEventList,this);
+            EventArrayAdapter eventAdapter = new EventArrayAdapter(tbaEventList, this);
             tbaList.setAdapter(eventAdapter);
-
-            event_chooser.show();
+        } catch (NullPointerException e) {
+            e.printStackTrace();
+            ListView tbaList = (ListView) event_chooser.findViewById(R.id.tbaEventListView);
+            ArrayAdapter<String> eventAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, android.R.id.text1, tbaMissingList);
+            tbaList.setAdapter(eventAdapter);
         }
+
+        try{
+            ListView downloadList = (ListView) event_chooser.findViewById(R.id.downloadEventListView);
+            ArrayAdapter<JSONObject> downloadAdapter = new ArrayAdapter<JSONObject>(this,android.R.layout.simple_list_item_2,android.R.id.text1,downloadEventList){
+                @Override
+                public View getView(int position, View convertView, ViewGroup parent){
+                    View view = super.getView(position, convertView, parent);
+                    TextView text1 = (TextView) view.findViewById(android.R.id.text1);
+                    TextView text2 = (TextView) view.findViewById(android.R.id.text2);
+
+                    try {
+                        text1.setText(downloadEventList.get(position).getString("name"));
+                        text2.setText("Start Date: " + downloadEventList.get(position).getString("start_date"));
+                    } catch (JSONException e){
+                        e.printStackTrace();
+                    }
+                    return view;
+                }
+            };
+            downloadList.setAdapter(downloadAdapter);
+        } catch (NullPointerException e) {
+            e.printStackTrace();
+            ListView downloadList = (ListView) event_chooser.findViewById(R.id.downloadEventListView);
+            ArrayAdapter<String> downloadAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,android.R.id.text1,downloadMissingList);
+            downloadList.setAdapter(downloadAdapter);
+        }
+
+        event_chooser.show();
         //startActivity(new Intent(this, com.vandenrobotics.functionfirst.scout.ScoutActivity.class));
     }
 
