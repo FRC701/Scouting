@@ -1,6 +1,8 @@
 package com.vandenrobotics.functionfirst.tools;
 
 import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 
 import com.loopj.android.http.*;
 
@@ -24,4 +26,11 @@ public class TheBlueAllianceRestClient {
     public static String getAbsoluteUrl(String relativeUrl){
         return BASE_URL + relativeUrl;
     }
+
+    public static boolean isOnline(Context context){
+        ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo netInfo = cm.getActiveNetworkInfo();
+        return netInfo != null && netInfo.isConnectedOrConnecting();
+    }
+
 }

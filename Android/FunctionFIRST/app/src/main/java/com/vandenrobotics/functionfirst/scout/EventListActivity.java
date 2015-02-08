@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -18,6 +19,7 @@ import android.widget.TextView;
 
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.vandenrobotics.functionfirst.R;
+import com.vandenrobotics.functionfirst.tools.ExternalStorageTools;
 import com.vandenrobotics.functionfirst.tools.JSONTools;
 import com.vandenrobotics.functionfirst.tools.TheBlueAllianceRestClient;
 import com.vandenrobotics.functionfirst.tools.EventArrayAdapter;
@@ -56,7 +58,7 @@ public class EventListActivity extends Activity {
         downloadedEvents = JSONTools.sortJSONArray(downloadedEvents, "start_date", "name");
 
         // check online status to see if we can load the Blue Alliance Data, otherwise load the dialog without it
-        if (isOnline()) {
+        if (TheBlueAllianceRestClient.isOnline(this)) {
             TheBlueAllianceRestClient.get(this, "events/", new JsonHttpResponseHandler() {
                 // no need to pass a year to the API, as it will default to the current year, which is always what we want
                 @Override
@@ -74,32 +76,6 @@ public class EventListActivity extends Activity {
         } else {
             loadEventList();
         }
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_event_list, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        switch(id){
-            case R.id.action_settings:
-                return true;
-            case R.id.action_sort:
-                return true;
-            default:
-                break;
-        }
-
-        return super.onOptionsItemSelected(item);
     }
 
     private void loadEventList() {
@@ -134,7 +110,8 @@ public class EventListActivity extends Activity {
                 JSONObject event = (JSONObject) adapter.getItemAtPosition(position);
 
                 // perform TheBlueAllianceRestClient get on that value, and run the saving of data and pictures, etc. to a competition file
-                downloadEvent(event);
+                downloadNewEvent(event);
+                startActivity(loadEventToScout(event));
             }
         });
 
@@ -145,8 +122,8 @@ public class EventListActivity extends Activity {
                 JSONObject event = (JSONObject) adapter.getItemAtPosition(position);
 
                 // download the event but do not load it immediately (downloading for later)
-                downloadEvent(event);
-                return false;
+                downloadNewEvent(event);
+                return true; // do not also run the regular click event
             }
         });
 
@@ -155,7 +132,9 @@ public class EventListActivity extends Activity {
             @Override
             public void onItemClick(AdapterView<?> adapter, View v, int position, long arg3) {
                 JSONObject event = (JSONObject) adapter.getItemAtPosition(position);
-                // search the directory for all data, load data, and load the scout activity with that information
+
+                // send the event key to the ScoutActivity to gather all data in that directory
+                loadEventToScout(event);
             }
         });
 
@@ -168,7 +147,7 @@ public class EventListActivity extends Activity {
                 messageConfirmDelete.setMessage(R.string.text_messageConfirmDelete)
                         .setPositiveButton(R.string.button_ok, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
-                                // delete the event and all releative data
+                                // delete the event and all relative data
                                 downloadedEvents.remove(position);
                                 downloadedEvents = JSONTools.sortJSONArray(downloadedEvents, "start_date", "name");
                                 downloadedAdapter.notifyDataSetChanged();
@@ -180,12 +159,12 @@ public class EventListActivity extends Activity {
                             }
                         })
                         .show();
-                return false;
+                return true; // do not also run the regular click event
             }
         });
     }
 
-    private void downloadEvent(JSONObject event){
+    private void downloadNewEvent(JSONObject event){
         try {
             boolean newEvent = true;
             for (int i = 0; i < downloadedEvents.size(); i++) {
@@ -202,12 +181,24 @@ public class EventListActivity extends Activity {
         } catch (JSONException e) {
             e.printStackTrace();
         }
+
+        try {
+            ExternalStorageTools.writeEvents(downloadedEvents);
+        } catch(JSONException e) {
+            e.printStackTrace();
+        }
+
+        //TheBlueAllianceRestClient.get(EventListActivity.this, "")
+
     }
 
-    private boolean isOnline(){
-        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo netInfo = cm.getActiveNetworkInfo();
-        return netInfo != null && netInfo.isConnectedOrConnecting();
+    private Intent loadEventToScout(JSONObject event){
+        Intent intent = new Intent(this, ScoutActivity.class);
+        try {
+            intent.putExtra("event", event.getString("key"));
+        } catch (JSONException e){
+            e.printStackTrace();
+        }
+        return intent;
     }
-
 }
