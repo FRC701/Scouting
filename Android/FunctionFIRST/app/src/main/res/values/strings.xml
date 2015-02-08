@@ -6,7 +6,7 @@
     <string name="text_appTitle">FUNCTION FIRST</string>
     <string name="text_appSubtitle">For the 2015 FRC Season: Recycle Rush</string>
 
-    <string name="text_appVersion">Development Version 2/7/2015</string>
+    <string name="text_appVersion">Development Version 2/8/2015</string>
     <string name="text_developerInfo">Designed by FIRST Team 701</string>
 
     <string name="text_tbaEventListTitle">2015 FRC Events</string>
@@ -22,6 +22,8 @@
     <string name="text_titleAlreadyDownloaded">Event Already Downloaded</string>
     <string name="text_messageAlreadyDownloaded">This event already has existing data.  To reset all data,
         first delete this file from the downloaded list and then re-download the event.</string>
+    <string name="text_titleProgress">Please wait...</string>
+    <string name="text_messageProgressEventList">Accessing Event Lists...</string>
     <string name="button_ok">OK</string>
     <string name="button_cancel">Cancel</string>
 

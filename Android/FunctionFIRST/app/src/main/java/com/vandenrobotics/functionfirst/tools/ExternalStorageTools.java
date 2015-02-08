@@ -2,6 +2,8 @@ package com.vandenrobotics.functionfirst.tools;
 
 import android.os.Environment;
 
+import com.vandenrobotics.functionfirst.model.Match;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -78,23 +80,55 @@ public class ExternalStorageTools {
         return downloadedEvents;
     }
 
-    /*
     // writes all teams at an event the file under directory BASE_DIR/event (as a JSONDocument)
     public static void writeTeams(ArrayList<JSONObject> teams, String event){
-
+        JSONArray presentTeams = new JSONArray(teams);
+        if(isExternalStorageWritable()){
+            try {
+                FileWriter fileWriter = new FileWriter(createFile("ScoutData/"+event,"teams.json"));
+                fileWriter.write(presentTeams.toString());
+                fileWriter.flush();
+                fileWriter.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     // reads the JSONDocument and returns a JSONArray of teams (from a certain event (BASE_DIR/event)
     public static ArrayList<JSONObject> readTeams(String event){
+        ArrayList<JSONObject> teams = new ArrayList<>();
 
+        if(isExternalStorageReadable()){
+            try{
+                String fileContents = "";
+                String line;
+                FileInputStream fileInputStream = new FileInputStream(createFile("ScoutData/"+event,"teams.json"));
+                BufferedReader br = new BufferedReader(new InputStreamReader(fileInputStream));
+                while((line = br.readLine())!=null)
+                    fileContents += line;
+                br.close();
+                fileInputStream.close();
+
+                JSONArray events = new JSONArray(fileContents);
+                teams = JSONTools.parseJSONArray(events);
+            } catch(FileNotFoundException e){
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return teams;
     }
-    */
 
     // writes the device number to the event directory
     public static void writeDevice(int device, String event){
         if(isExternalStorageWritable()){
             try {
-                FileWriter fileWriter = new FileWriter(createFile(event,"device.txt"));
+                FileWriter fileWriter = new FileWriter(createFile("ScoutData/"+event,"device.txt"));
                 fileWriter.write(device);
                 fileWriter.flush();
                 fileWriter.close();
@@ -109,7 +143,7 @@ public class ExternalStorageTools {
         int dNum = 0;
         if(isExternalStorageReadable()){
             try{
-                FileInputStream fileInputStream = new FileInputStream(createFile(event, "device.txt"));
+                FileInputStream fileInputStream = new FileInputStream(createFile("ScoutData/"+event, "device.txt"));
                 BufferedReader br = new BufferedReader(new InputStreamReader(fileInputStream));
                 dNum = Integer.parseInt(br.readLine());
                 br.close();
@@ -126,10 +160,10 @@ public class ExternalStorageTools {
     }
 
     // writes the currentMatch to the event / device number directory
-    public static void writeMatch(int match, String event, int device){
+    public static void writeCurrentMatch(int match, String event, int device){
         if(isExternalStorageWritable()){
             try {
-                FileWriter fileWriter = new FileWriter(createFile(event+"/"+getDeviceString(device),"savedmatch.txt"));
+                FileWriter fileWriter = new FileWriter(createFile("ScoutData/"+event+"/"+getDeviceString(device),"savedmatch.txt"));
                 fileWriter.write(match);
                 fileWriter.flush();
                 fileWriter.close();
@@ -140,11 +174,11 @@ public class ExternalStorageTools {
     }
 
     // reads the currentMatch from the event / device number directory
-    public static int readMatch(String event, int device){
+    public static int readCurrentMatch(String event, int device){
         int mNum = 0;
         if(isExternalStorageReadable()) {
             try {
-                FileInputStream fileInputStream = new FileInputStream(createFile(event + "/" + getDeviceString(device), "savedmatch.txt"));
+                FileInputStream fileInputStream = new FileInputStream(createFile("ScoutData/"+event + "/" + getDeviceString(device), "savedmatch.txt"));
                 BufferedReader br = new BufferedReader(new InputStreamReader(fileInputStream));
                 mNum = Integer.parseInt(br.readLine());
                 br.close();
@@ -160,17 +194,46 @@ public class ExternalStorageTools {
         return mNum;
     }
 
-    /*
-    // creates a text-file matchlist out of the JSONArray
-    public static void writeMatchList(JSONArray matches, String event){
-
+    // creates a txt file matchlist out of the ArrayList of matches
+    public static void writeMatches(ArrayList<Match> matches, String event){
+        if(isExternalStorageWritable()){
+            try{
+                FileWriter fileWriter = new FileWriter(createFile("ScoutData/"+event, "matchlist.txt"));
+                for(int i = 0; i < matches.size(); i++){
+                    fileWriter.write(matches.get(i).toString());
+                }
+                fileWriter.flush();
+                fileWriter.close();
+            } catch (IOException e){
+                e.printStackTrace();
+            }
+        }
     }
 
     // reads the text-file matchlist and creates a matchlist to return
-    public static MatchList readMatchList(String event){
+    public static ArrayList<Match> readMatches(String event){
+        ArrayList<Match> matches = new ArrayList<>();
+        if(isExternalStorageReadable()){
+            try{
+                String line;
+                FileInputStream fileInputStream = new FileInputStream(createFile("ScoutData/"+event,"teams.json"));
+                BufferedReader br = new BufferedReader(new InputStreamReader(fileInputStream));
+                while((line = br.readLine())!=null)
+                    matches.add(new Match(line));
+                br.close();
+                fileInputStream.close();
 
+            } catch(FileNotFoundException e){
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return matches;
     }
 
+    /*
     // writes a JSONDocument data file out of MatchData to the event/device directory
     public static void writeData(MatchData matchData, String event, int device){
 
@@ -206,7 +269,7 @@ public class ExternalStorageTools {
         return f;
     }
 
-    public static String getDeviceString(int device){
+    private static String getDeviceString(int device){
         return ((device<4) ? "Red"+device : "Blue"+(device-3));
     }
 

@@ -2,14 +2,10 @@ package com.vandenrobotics.functionfirst.scout;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.Context;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -18,6 +14,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.loopj.android.http.JsonHttpResponseHandler;
+
 import com.vandenrobotics.functionfirst.R;
 import com.vandenrobotics.functionfirst.tools.ExternalStorageTools;
 import com.vandenrobotics.functionfirst.tools.JSONTools;
@@ -49,6 +46,10 @@ public class EventListActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_event_list);
 
+        // create a progress dialog to make a visual representation of the downloads and reading files
+        final ProgressDialog progressDialog = ProgressDialog.show(this, getResources().getString(R.string.text_titleProgress), getResources().getString(R.string.text_messageProgressEventList));
+        progressDialog.setCancelable(false);
+
         // reset all Blue Alliance Events so that the list does not appear when we do not have internet connection
         tbaEvents = new ArrayList<>();
 
@@ -58,8 +59,8 @@ public class EventListActivity extends Activity {
         downloadedEvents = JSONTools.sortJSONArray(downloadedEvents, "start_date", "name");
 
         // check online status to see if we can load the Blue Alliance Data, otherwise load the dialog without it
-        if (TheBlueAllianceRestClient.isOnline(this)) {
-            TheBlueAllianceRestClient.get(this, "events/", new JsonHttpResponseHandler() {
+        if (TheBlueAllianceRestClient.isOnline(EventListActivity.this)) {
+            TheBlueAllianceRestClient.get(EventListActivity.this, "events/", new JsonHttpResponseHandler() {
                 // no need to pass a year to the API, as it will default to the current year, which is always what we want
                 @Override
                 public void onSuccess(int statusCode, Header[] headers, JSONArray events) {
@@ -71,11 +72,14 @@ public class EventListActivity extends Activity {
                         e.printStackTrace();
                     }
                     loadEventList();
+                    progressDialog.dismiss();
                 }
             });
         } else {
             loadEventList();
+            progressDialog.dismiss();
         }
+
     }
 
     private void loadEventList() {
