@@ -33,12 +33,12 @@ public class MainActivity extends Activity {
         AlertDialog.Builder messageAbout = new AlertDialog.Builder(this);
         messageAbout.setTitle(R.string.text_titleAbout);
         messageAbout.setMessage(R.string.text_messageAbout)
-                .setPositiveButton(R.string.button_ok, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        // pass through and simply close the dialog
-                    }
-                })
-                .show();
+            .setPositiveButton(R.string.button_ok, new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int id) {
+                    // pass through and simply close the dialog
+                }
+            })
+            .show();
     }
 
 }

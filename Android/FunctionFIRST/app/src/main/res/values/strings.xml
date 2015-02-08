@@ -19,6 +19,9 @@
     <string name="text_titleConfirmDelete">Delete Event Data?</string>
     <string name="text_messageConfirmDelete">This will remove all event data from this device, including collected
         scouting data.  Are you sure you want to proceed?</string>
+    <string name="text_titleAlreadyDownloaded">Event Already Downloaded</string>
+    <string name="text_messageAlreadyDownloaded">This event already has existing data.  To reset all data,
+        first delete this file from the downloaded list and then re-download the event.</string>
     <string name="button_ok">OK</string>
     <string name="button_cancel">Cancel</string>
 

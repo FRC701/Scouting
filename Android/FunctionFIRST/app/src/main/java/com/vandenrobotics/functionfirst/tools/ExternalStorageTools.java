@@ -1,6 +1,5 @@
 package com.vandenrobotics.functionfirst.tools;
 
-import android.media.Image;
 import android.os.Environment;
 
 import org.json.JSONArray;
@@ -9,7 +8,11 @@ import org.json.JSONObject;
 
 import java.io.File;
 import java.io.FileWriter;
+import java.io.FileInputStream;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.io.IOException;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 /**
@@ -18,6 +21,7 @@ import java.util.ArrayList;
 public class ExternalStorageTools {
 
     private static final File BASE_DIR = Environment.getExternalStorageDirectory();
+
     /*
     // saves image to the main image directory, naming it by team number and deleting duplicates
     public static void saveImage(Image image, int teamNumber){
@@ -35,7 +39,7 @@ public class ExternalStorageTools {
         JSONArray downloadedEvents = new JSONArray(events);
         if(isExternalStorageWritable()){
             try {
-                FileWriter fileWriter = new FileWriter(createFile("ScoutData","event.txt"));
+                FileWriter fileWriter = new FileWriter(createFile("ScoutData","events.json"));
                 fileWriter.write(downloadedEvents.toString());
                 fileWriter.flush();
                 fileWriter.close();
@@ -44,42 +48,119 @@ public class ExternalStorageTools {
             }
         }
     }
-    /*
+
     // reads the JSONDocument and returns a JSONArray of events (BASE_DIR)
     public static ArrayList<JSONObject> readEvents(){
+        ArrayList<JSONObject> downloadedEvents = new ArrayList<>();
 
+        if(isExternalStorageReadable()){
+            try{
+                String fileContents = "";
+                String line;
+                FileInputStream fileInputStream = new FileInputStream(createFile("ScoutData","events.json"));
+                BufferedReader br = new BufferedReader(new InputStreamReader(fileInputStream));
+                while((line = br.readLine())!=null)
+                    fileContents += line;
+                br.close();
+                fileInputStream.close();
+
+                JSONArray events = new JSONArray(fileContents);
+                downloadedEvents = JSONTools.parseJSONArray(events);
+            } catch(FileNotFoundException e){
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return downloadedEvents;
     }
 
+    /*
     // writes all teams at an event the file under directory BASE_DIR/event (as a JSONDocument)
-    public static void writeTeams(JSONArray teams, String event){
+    public static void writeTeams(ArrayList<JSONObject> teams, String event){
 
     }
 
     // reads the JSONDocument and returns a JSONArray of teams (from a certain event (BASE_DIR/event)
-    public static JSONArray readTeams(String event){
+    public static ArrayList<JSONObject> readTeams(String event){
 
     }
+    */
 
     // writes the device number to the event directory
     public static void writeDevice(int device, String event){
-
+        if(isExternalStorageWritable()){
+            try {
+                FileWriter fileWriter = new FileWriter(createFile(event,"device.txt"));
+                fileWriter.write(device);
+                fileWriter.flush();
+                fileWriter.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     // reads the device number from the event directory
     public static int readDevice(String event){
-
+        int dNum = 0;
+        if(isExternalStorageReadable()){
+            try{
+                FileInputStream fileInputStream = new FileInputStream(createFile(event, "device.txt"));
+                BufferedReader br = new BufferedReader(new InputStreamReader(fileInputStream));
+                dNum = Integer.parseInt(br.readLine());
+                br.close();
+                fileInputStream.close();
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (NumberFormatException e) {
+                e.printStackTrace();
+            }
+        }
+        return dNum;
     }
 
     // writes the currentMatch to the event / device number directory
     public static void writeMatch(int match, String event, int device){
-
+        if(isExternalStorageWritable()){
+            try {
+                FileWriter fileWriter = new FileWriter(createFile(event+"/"+getDeviceString(device),"savedmatch.txt"));
+                fileWriter.write(match);
+                fileWriter.flush();
+                fileWriter.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     // reads the currentMatch from the event / device number directory
     public static int readMatch(String event, int device){
-
+        int mNum = 0;
+        if(isExternalStorageReadable()) {
+            try {
+                FileInputStream fileInputStream = new FileInputStream(createFile(event + "/" + getDeviceString(device), "savedmatch.txt"));
+                BufferedReader br = new BufferedReader(new InputStreamReader(fileInputStream));
+                mNum = Integer.parseInt(br.readLine());
+                br.close();
+                fileInputStream.close();
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (NumberFormatException e) {
+                e.printStackTrace();
+            }
+        }
+        return mNum;
     }
 
+    /*
     // creates a text-file matchlist out of the JSONArray
     public static void writeMatchList(JSONArray matches, String event){
 
@@ -123,6 +204,10 @@ public class ExternalStorageTools {
         File path = createDirectory(dir);
         File f = new File(path, filename);
         return f;
+    }
+
+    public static String getDeviceString(int device){
+        return ((device<4) ? "Red"+device : "Blue"+(device-3));
     }
 
 }

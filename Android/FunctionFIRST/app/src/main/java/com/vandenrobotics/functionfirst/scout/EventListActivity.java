@@ -53,8 +53,8 @@ public class EventListActivity extends Activity {
         tbaEvents = new ArrayList<>();
 
         // access all downloaded events and the corresponding json documents, putting them into an ArrayList
-
-        // sort the loaded list by start_date
+        downloadedEvents = ExternalStorageTools.readEvents();
+        // sort the loaded list by start_date, then by name alphabetically
         downloadedEvents = JSONTools.sortJSONArray(downloadedEvents, "start_date", "name");
 
         // check online status to see if we can load the Blue Alliance Data, otherwise load the dialog without it
@@ -134,7 +134,7 @@ public class EventListActivity extends Activity {
                 JSONObject event = (JSONObject) adapter.getItemAtPosition(position);
 
                 // send the event key to the ScoutActivity to gather all data in that directory
-                loadEventToScout(event);
+                startActivity(loadEventToScout(event));
             }
         });
 
@@ -142,54 +142,78 @@ public class EventListActivity extends Activity {
         downloadedListView.setOnItemLongClickListener(new ListView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> adapter, View v, final int position, long arg3) {
-                AlertDialog.Builder messageConfirmDelete = new AlertDialog.Builder(EventListActivity.this);
-                messageConfirmDelete.setTitle(R.string.text_titleConfirmDelete);
-                messageConfirmDelete.setMessage(R.string.text_messageConfirmDelete)
-                        .setPositiveButton(R.string.button_ok, new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-                                // delete the event and all relative data
-                                downloadedEvents.remove(position);
-                                downloadedEvents = JSONTools.sortJSONArray(downloadedEvents, "start_date", "name");
-                                downloadedAdapter.notifyDataSetChanged();
-                            }
-                        })
-                        .setNegativeButton(R.string.button_cancel, new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-                                // pass through and close the dialog
-                            }
-                        })
-                        .show();
-                return true; // do not also run the regular click event
+            AlertDialog.Builder messageConfirmDelete = new AlertDialog.Builder(EventListActivity.this);
+            messageConfirmDelete.setTitle(R.string.text_titleConfirmDelete);
+            messageConfirmDelete.setMessage(R.string.text_messageConfirmDelete)
+                .setPositiveButton(R.string.button_ok, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        // delete the event and all relative data
+                        downloadedEvents.remove(position);
+                        downloadedEvents = JSONTools.sortJSONArray(downloadedEvents, "start_date", "name");
+                        downloadedAdapter.notifyDataSetChanged();
+
+                        try {
+                            ExternalStorageTools.writeEvents(downloadedEvents);
+                        } catch(JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                })
+                .setNegativeButton(R.string.button_cancel, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        // pass through and close the dialog
+                    }
+                })
+                .show();
+            return true; // do not also run the regular click event
             }
         });
     }
 
     private void downloadNewEvent(JSONObject event){
+
+        // add event to the list of downloaded events if it is new, then proceed to grab all downloadable information about it
+        // if the event is not new, create a dialog alerting the user that the event has already been downloaded.
+
+        boolean newEvent = true;
+
+        // check to make sure the event is new
         try {
-            boolean newEvent = true;
             for (int i = 0; i < downloadedEvents.size(); i++) {
                 if (downloadedEvents.get(i).getString("name").equals(event.getString("name"))) {
                     newEvent = false;
                     break;
                 }
             }
-            if (newEvent) {
-                downloadedEvents.add(event);
-                downloadedEvents = JSONTools.sortJSONArray(downloadedEvents, "start_date", "name");
-                downloadedAdapter.notifyDataSetChanged();
-            }
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
-        try {
-            ExternalStorageTools.writeEvents(downloadedEvents);
-        } catch(JSONException e) {
-            e.printStackTrace();
+        if (newEvent) {
+            try {
+                // add the new event to the list of downloaded events and update the ListView
+                downloadedEvents.add(event);
+                downloadedEvents = JSONTools.sortJSONArray(downloadedEvents, "start_date", "name");
+                downloadedAdapter.notifyDataSetChanged();
+
+                // write the new list of events to the json data file
+                ExternalStorageTools.writeEvents(downloadedEvents);
+
+            } catch (JSONException e) {
+                    e.printStackTrace();
+            }
         }
-
-        //TheBlueAllianceRestClient.get(EventListActivity.this, "")
-
+        else {
+            AlertDialog.Builder messageAlreadyDownloaded = new AlertDialog.Builder(EventListActivity.this);
+            messageAlreadyDownloaded.setTitle(R.string.text_titleAlreadyDownloaded);
+            messageAlreadyDownloaded.setMessage(R.string.text_messageAlreadyDownloaded)
+                .setPositiveButton(R.string.button_ok, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        // pass through and close the dialog
+                    }
+                })
+                .show();
+        }
     }
 
     private Intent loadEventToScout(JSONObject event){
