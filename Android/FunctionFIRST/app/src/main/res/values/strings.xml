@@ -24,6 +24,9 @@
         first delete this file from the downloaded list and then re-download the event.</string>
     <string name="text_titleProgress">Please wait...</string>
     <string name="text_messageProgressEventList">Accessing Event Lists...</string>
+    <string name="text_messageProgressDownload">Downloading Event Data...</string>
+    <string name="text_titleNoInternet">Turn on Internet Connection</string>
+    <string name="text_messageNoInternet">Please turn on the internet connection to download an event.</string>
     <string name="button_ok">OK</string>
     <string name="button_cancel">Cancel</string>
 

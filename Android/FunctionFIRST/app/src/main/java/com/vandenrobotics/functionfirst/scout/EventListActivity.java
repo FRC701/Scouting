@@ -64,7 +64,7 @@ public class EventListActivity extends Activity {
                 // no need to pass a year to the API, as it will default to the current year, which is always what we want
                 @Override
                 public void onSuccess(int statusCode, Header[] headers, JSONArray events) {
-                    // handle the incoming JSONArray of events and create a dialog with a list view
+                    // handle the incoming JSONArray of events and populate the list view
                     try {
                         tbaEvents = JSONTools.parseJSONArray(events);
                         tbaEvents = JSONTools.sortJSONArray(tbaEvents, "start_date", "name");
@@ -174,10 +174,14 @@ public class EventListActivity extends Activity {
         });
     }
 
-    private void downloadNewEvent(JSONObject event){
+    private void downloadNewEvent(final JSONObject event){
 
         // add event to the list of downloaded events if it is new, then proceed to grab all downloadable information about it
         // if the event is not new, create a dialog alerting the user that the event has already been downloaded.
+
+        // create a dialog to show user that the activity is working
+        final ProgressDialog progressDialog = ProgressDialog.show(this, getResources().getString(R.string.text_titleProgress), getResources().getString(R.string.text_messageProgressDownload));
+        progressDialog.setCancelable(false);
 
         boolean newEvent = true;
 
@@ -194,29 +198,75 @@ public class EventListActivity extends Activity {
         }
 
         if (newEvent) {
-            try {
-                // add the new event to the list of downloaded events and update the ListView
-                downloadedEvents.add(event);
-                downloadedEvents = JSONTools.sortJSONArray(downloadedEvents, "start_date", "name");
-                downloadedAdapter.notifyDataSetChanged();
+            if(TheBlueAllianceRestClient.isOnline(EventListActivity.this)) {
+                try {
+                    TheBlueAllianceRestClient.get(EventListActivity.this, "event/" + event.getString("key") + "/teams", new JsonHttpResponseHandler() {
+                        @Override
+                        public void onSuccess(int statusCode, Header[] headers, JSONArray teams) {
+                            // handle the incoming JSONArray of teams and write them to a file
+                            try {
+                                ArrayList<JSONObject> teamlist = JSONTools.parseJSONArray(teams);
+                                teamlist = JSONTools.sortJSONArray(teamlist, "team_number");
+                                ExternalStorageTools.writeTeams(teamlist, event.getString("key"));
 
-                // write the new list of events to the json data file
-                ExternalStorageTools.writeEvents(downloadedEvents);
+                                // for each team at the event, attempt to download the image of that team, with no cross-event duplicates
+                                for(int i = 0; i < teamlist.size(); i++){
+                                    //final int team_number = teamlist.get(i).getInt("team_number");
+                                    TheBlueAllianceRestClient.get(EventListActivity.this, "team/"+teamlist.get(i).getString("key")+"/media", new JsonHttpResponseHandler() {
+                                        // no need to pass a year to the API, as it will default to the current year, which is always what we want
+                                        @Override
+                                        public void onSuccess(int statusCode, Header[] headers, JSONArray media) {
+                                            // handle the incoming JSONArray of events and grab the photo partial
+                                            // download the photo-partial to an Image object and save that Image to the device (overriding any old image of that team)
+                                        }
+                                    });
+                                }
 
-            } catch (JSONException e) {
+                                // add the new event to the list of downloaded events and update the ListView
+                                downloadedEvents.add(event);
+                                downloadedEvents = JSONTools.sortJSONArray(downloadedEvents, "start_date", "name");
+                                downloadedAdapter.notifyDataSetChanged();
+
+                                // write the new list of events to the json data file
+                                ExternalStorageTools.writeEvents(downloadedEvents);
+
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+
+                            progressDialog.dismiss();
+                        }
+                    });
+
+
+
+                } catch (JSONException e) {
                     e.printStackTrace();
+                    progressDialog.dismiss();
+                }
+            } else {
+                progressDialog.dismiss();
+                AlertDialog.Builder messageAlreadyDownloaded = new AlertDialog.Builder(EventListActivity.this);
+                messageAlreadyDownloaded.setTitle(R.string.text_titleNoInternet);
+                messageAlreadyDownloaded.setMessage(R.string.text_messageNoInternet)
+                        .setPositiveButton(R.string.button_ok, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                // pass through and close the dialog
+                            }
+                        })
+                        .show();
             }
-        }
-        else {
+        } else {
+            progressDialog.dismiss();
             AlertDialog.Builder messageAlreadyDownloaded = new AlertDialog.Builder(EventListActivity.this);
             messageAlreadyDownloaded.setTitle(R.string.text_titleAlreadyDownloaded);
             messageAlreadyDownloaded.setMessage(R.string.text_messageAlreadyDownloaded)
-                .setPositiveButton(R.string.button_ok, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        // pass through and close the dialog
-                    }
-                })
-                .show();
+                    .setPositiveButton(R.string.button_ok, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            // pass through and close the dialog
+                        }
+                    })
+                    .show();
         }
     }
 
