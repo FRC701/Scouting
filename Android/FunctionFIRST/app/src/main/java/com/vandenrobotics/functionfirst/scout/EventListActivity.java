@@ -153,6 +153,12 @@ public class EventListActivity extends Activity {
                 .setPositiveButton(R.string.button_ok, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         // delete the event and all relative data
+                        try {
+                            ExternalStorageTools.deleteFiles(downloadedEvents.get(position).getString("key"));
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
                         downloadedEvents.remove(position);
                         downloadedEvents = JSONTools.sortJSONArray(downloadedEvents, "start_date", "name");
                         downloadedAdapter.notifyDataSetChanged();
@@ -205,6 +211,8 @@ public class EventListActivity extends Activity {
                                 final ArrayList<JSONObject> teamlist = JSONTools.sortJSONArray(JSONTools.parseJSONArray(teams), "team_number");
                                 ExternalStorageTools.writeTeams(teamlist, event.getString("key"));
 
+                                final ArrayList<JSONArray> all_media = new ArrayList<>();
+                                final ArrayList<Integer> teamnumbers = new ArrayList<>();
                                 // for each team at the event, attempt to download the image of that team, with no cross-event duplicates
                                 for(int i = 0; i < teamlist.size(); i++){
                                     final int team_number = teamlist.get(i).getInt("team_number");
@@ -218,26 +226,33 @@ public class EventListActivity extends Activity {
                                             try {
                                                 ArrayList<JSONObject> teamMedia = JSONTools.parseJSONArray(media);
                                                 if(teamMedia.size()>0) {
-                                                    ImageTools.downloadImage(teamMedia.get(0).getJSONObject("details").getString("image_partial"), Integer.toString(team_number));
+                                                    all_media.add(media);
+                                                    teamnumbers.add(team_number);
                                                 }
+
+                                                if(index == teamlist.size()-1){
+                                                    ImageTools.downloadImages(all_media, teamnumbers);
+                                                    // add the new event to the list of downloaded events and update the ListView
+                                                    downloadedEvents.add(event);
+                                                    downloadedEvents = JSONTools.sortJSONArray(downloadedEvents, "start_date", "name");
+                                                    downloadedAdapter.notifyDataSetChanged();
+
+                                                    // write the new list of events to the json data file
+                                                    ExternalStorageTools.writeEvents(downloadedEvents);
+                                                    progressDialog.dismiss();
+                                                }
+
                                             } catch (IndexOutOfBoundsException e) {
                                                 e.printStackTrace();
                                             } catch (JSONException e) {
                                                 e.printStackTrace();
                                             }
-                                            if (index == teamlist.size()-1) {
-                                                // add the new event to the list of downloaded events and update the ListView
-                                                downloadedEvents.add(event);
-                                                downloadedEvents = JSONTools.sortJSONArray(downloadedEvents, "start_date", "name");
-                                                downloadedAdapter.notifyDataSetChanged();
-
-                                                // write the new list of events to the json data file
-                                                ExternalStorageTools.writeEvents(downloadedEvents);
-                                                progressDialog.dismiss();
-                                            }
                                         }
                                     });
+
                                 }
+
+
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }

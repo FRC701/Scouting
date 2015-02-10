@@ -118,8 +118,8 @@ public class ExternalStorageTools {
     public static void writeImage(Bitmap image, int team_number){
         if(isExternalStorageWritable()){
             try {
-                FileOutputStream fileOutputStream = new FileOutputStream(createFile("ScoutData/Images", team_number+".jpeg"));
-                image.compress(Bitmap.CompressFormat.JPEG, 100, fileOutputStream);
+                FileOutputStream fileOutputStream = new FileOutputStream(createFile("ScoutData/Images", team_number+".png"));
+                image.compress(Bitmap.CompressFormat.PNG, 100, fileOutputStream);
                 fileOutputStream.flush();
                 fileOutputStream.close();
             } catch (IOException e){
@@ -274,6 +274,19 @@ public class ExternalStorageTools {
     public static File createFile(String dir, String filename){
         File path = createDirectory(dir);
         return new File(path, filename);
+    }
+
+    public static void deleteFiles(String dir){
+        File file = createDirectory("ScoutData/"+dir);
+        if(file.exists()){
+            String deleteCmd = "rm -r " + dir;
+            Runtime runtime = Runtime.getRuntime();
+            try{
+                runtime.exec(deleteCmd);
+            } catch (IOException e){
+                e.printStackTrace();
+            }
+        }
     }
 
     private static String getDeviceString(int device){
