@@ -17,6 +17,7 @@ import com.loopj.android.http.JsonHttpResponseHandler;
 
 import com.vandenrobotics.functionfirst.R;
 import com.vandenrobotics.functionfirst.tools.ExternalStorageTools;
+import com.vandenrobotics.functionfirst.tools.ImageTools;
 import com.vandenrobotics.functionfirst.tools.JSONTools;
 import com.vandenrobotics.functionfirst.tools.TheBlueAllianceRestClient;
 import com.vandenrobotics.functionfirst.tools.EventArrayAdapter;
@@ -60,7 +61,7 @@ public class EventListActivity extends Activity {
 
         // check online status to see if we can load the Blue Alliance Data, otherwise load the dialog without it
         if (TheBlueAllianceRestClient.isOnline(EventListActivity.this)) {
-            TheBlueAllianceRestClient.get(EventListActivity.this, "events/", new JsonHttpResponseHandler() {
+            TheBlueAllianceRestClient.get(EventListActivity.this, "events/2014", new JsonHttpResponseHandler() {
                 // no need to pass a year to the API, as it will default to the current year, which is always what we want
                 @Override
                 public void onSuccess(int statusCode, Header[] headers, JSONArray events) {
@@ -156,11 +157,7 @@ public class EventListActivity extends Activity {
                         downloadedEvents = JSONTools.sortJSONArray(downloadedEvents, "start_date", "name");
                         downloadedAdapter.notifyDataSetChanged();
 
-                        try {
-                            ExternalStorageTools.writeEvents(downloadedEvents);
-                        } catch(JSONException e) {
-                            e.printStackTrace();
-                        }
+                        ExternalStorageTools.writeEvents(downloadedEvents);
                     }
                 })
                 .setNegativeButton(R.string.button_cancel, new DialogInterface.OnClickListener() {
@@ -205,40 +202,47 @@ public class EventListActivity extends Activity {
                         public void onSuccess(int statusCode, Header[] headers, JSONArray teams) {
                             // handle the incoming JSONArray of teams and write them to a file
                             try {
-                                ArrayList<JSONObject> teamlist = JSONTools.parseJSONArray(teams);
-                                teamlist = JSONTools.sortJSONArray(teamlist, "team_number");
+                                final ArrayList<JSONObject> teamlist = JSONTools.sortJSONArray(JSONTools.parseJSONArray(teams), "team_number");
                                 ExternalStorageTools.writeTeams(teamlist, event.getString("key"));
 
                                 // for each team at the event, attempt to download the image of that team, with no cross-event duplicates
                                 for(int i = 0; i < teamlist.size(); i++){
-                                    //final int team_number = teamlist.get(i).getInt("team_number");
-                                    TheBlueAllianceRestClient.get(EventListActivity.this, "team/"+teamlist.get(i).getString("key")+"/media", new JsonHttpResponseHandler() {
+                                    final int team_number = teamlist.get(i).getInt("team_number");
+                                    final int index = i;
+                                    TheBlueAllianceRestClient.get(EventListActivity.this, "team/"+teamlist.get(i).getString("key")+"/2014/media", new JsonHttpResponseHandler() {
                                         // no need to pass a year to the API, as it will default to the current year, which is always what we want
                                         @Override
                                         public void onSuccess(int statusCode, Header[] headers, JSONArray media) {
                                             // handle the incoming JSONArray of events and grab the photo partial
                                             // download the photo-partial to an Image object and save that Image to the device (overriding any old image of that team)
+                                            try {
+                                                ArrayList<JSONObject> teamMedia = JSONTools.parseJSONArray(media);
+                                                if(teamMedia.size()>0) {
+                                                    ImageTools.downloadImage(teamMedia.get(0).getJSONObject("details").getString("image_partial"), Integer.toString(team_number));
+                                                }
+                                            } catch (IndexOutOfBoundsException e) {
+                                                e.printStackTrace();
+                                            } catch (JSONException e) {
+                                                e.printStackTrace();
+                                            }
+                                            if (index == teamlist.size()-1) {
+                                                // add the new event to the list of downloaded events and update the ListView
+                                                downloadedEvents.add(event);
+                                                downloadedEvents = JSONTools.sortJSONArray(downloadedEvents, "start_date", "name");
+                                                downloadedAdapter.notifyDataSetChanged();
+
+                                                // write the new list of events to the json data file
+                                                ExternalStorageTools.writeEvents(downloadedEvents);
+                                                progressDialog.dismiss();
+                                            }
                                         }
                                     });
                                 }
-
-                                // add the new event to the list of downloaded events and update the ListView
-                                downloadedEvents.add(event);
-                                downloadedEvents = JSONTools.sortJSONArray(downloadedEvents, "start_date", "name");
-                                downloadedAdapter.notifyDataSetChanged();
-
-                                // write the new list of events to the json data file
-                                ExternalStorageTools.writeEvents(downloadedEvents);
-
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
-
-                            progressDialog.dismiss();
                         }
                     });
-
-
 
                 } catch (JSONException e) {
                     e.printStackTrace();

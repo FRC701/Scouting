@@ -23,14 +23,14 @@ public class TheBlueAllianceRestClient {
         client.get(context, getAbsoluteUrl(url), GET_HEADER, null, responseHandler);
     }
 
-    public static String getAbsoluteUrl(String relativeUrl){
-        return BASE_URL + relativeUrl;
-    }
-
     public static boolean isOnline(Context context){
         ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo netInfo = cm.getActiveNetworkInfo();
         return netInfo != null && netInfo.isConnectedOrConnecting();
+    }
+
+    private static String getAbsoluteUrl(String relativeUrl){
+        return BASE_URL + relativeUrl;
     }
 
 }

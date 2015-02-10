@@ -1,5 +1,7 @@
 package com.vandenrobotics.functionfirst.tools;
 
+import android.graphics.Bitmap;
+import android.media.Image;
 import android.os.Environment;
 
 import com.vandenrobotics.functionfirst.model.Match;
@@ -9,6 +11,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.FileInputStream;
 import java.io.BufferedReader;
@@ -24,20 +27,8 @@ public class ExternalStorageTools {
 
     private static final File BASE_DIR = Environment.getExternalStorageDirectory();
 
-    /*
-    // saves image to the main image directory, naming it by team number and deleting duplicates
-    public static void saveImage(Image image, int teamNumber){
-
-    }
-
-    // loads an image for a team (from Images directory)
-    public static Image loadImage(int teamNumber){
-
-    }
-    */
-
     // writes all events currently downloaded to the file (as a JSONDocument)
-    public static void writeEvents(ArrayList<JSONObject> events) throws JSONException {
+    public static void writeEvents(ArrayList<JSONObject> events) {
         JSONArray downloadedEvents = new JSONArray(events);
         if(isExternalStorageWritable()){
             try {
@@ -122,6 +113,23 @@ public class ExternalStorageTools {
         }
 
         return teams;
+    }
+
+    public static void writeImage(Bitmap image, int team_number){
+        if(isExternalStorageWritable()){
+            try {
+                FileOutputStream fileOutputStream = new FileOutputStream(createFile("ScoutData/Images", team_number+".jpeg"));
+                image.compress(Bitmap.CompressFormat.JPEG, 100, fileOutputStream);
+                fileOutputStream.flush();
+                fileOutputStream.close();
+            } catch (IOException e){
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public static File readImage(int team_number){
+        return createFile("ScoutData/Images", team_number + ".png");
     }
 
     // writes the device number to the event directory
@@ -265,8 +273,7 @@ public class ExternalStorageTools {
 
     public static File createFile(String dir, String filename){
         File path = createDirectory(dir);
-        File f = new File(path, filename);
-        return f;
+        return new File(path, filename);
     }
 
     private static String getDeviceString(int device){
