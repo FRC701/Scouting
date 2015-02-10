@@ -6,8 +6,13 @@
         android:minSdkVersion="14"
         android:targetSdkVersion="16" />
 
-    <uses-permission
-        android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <android:uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        android:maxSdkVersion="18" />
+    <android:uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
     <application
         android:allowBackup="true"
@@ -22,6 +27,22 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".scout.EventListActivity"
+            android:label="@string/title_activity_event_list"
+            android:parentActivityName=".MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.vandenrobotics.functionfirst.MainActivity" />
+        </activity>
+        <activity
+            android:name=".scout.ScoutActivity"
+            android:label="@string/title_activity_scout"
+            android:parentActivityName=".scout.EventListActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.vandenrobotics.functionfirst.scout.EventListActivity" />
         </activity>
     </application>
 

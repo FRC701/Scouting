@@ -1,33 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
     <string name="app_name">Function FIRST</string>
-    <string name="action_settings">Settings</string>
     <string name="button_scout">SCOUT</string>
     <string name="button_about">ABOUT APP</string>
     <string name="text_appTitle">FUNCTION FIRST</string>
     <string name="text_appSubtitle">For the 2015 FRC Season: Recycle Rush</string>
-    <string name="text_appVersion">Development Version 2/1/2015</string>
+
+    <string name="text_appVersion">Development Version 2/8/2015</string>
     <string name="text_developerInfo">Designed by FIRST Team 701</string>
+
+    <string name="text_tbaEventListTitle">2015 FRC Events</string>
+    <string name="text_downloadEventListTitle">Downloaded Events</string>
+
+    <string name="text_titleAbout">ABOUT FUNCTION FIRST</string>
     <string name="text_messageAbout">Function FIRST is an electronic FRC scouting application designed
         to analyze real statistical data on teams as they compete.  This version is designed for use with
         the 2015 FRC Season: Recycle Rush. \nDesigned by Joseph A. Lewis - FIRST Team 701 </string>
-    <string name="text_titleNoShow">Proceed to Next Match?</string>
-    <string name="text_messageNoShow">Click OK to mark this robot as a no show and continue to the next match.</string>
+    <string name="text_titleConfirmDelete">Delete Event Data?</string>
+    <string name="text_messageConfirmDelete">This will remove all event data from this device, including collected
+        scouting data.  Are you sure you want to proceed?</string>
+    <string name="text_titleAlreadyDownloaded">Event Already Downloaded</string>
+    <string name="text_messageAlreadyDownloaded">This event already has existing data.  To reset all data,
+        first delete this file from the downloaded list and then re-download the event.</string>
+    <string name="text_titleProgress">Please wait...</string>
+    <string name="text_messageProgressEventList">Accessing Event Lists...</string>
+    <string name="text_messageProgressDownload">Downloading Event Data...</string>
+    <string name="text_titleNoInternet">Turn on Internet Connection</string>
+    <string name="text_messageNoInternet">Please turn on the internet connection to download an event.</string>
     <string name="button_ok">OK</string>
     <string name="button_cancel">Cancel</string>
-    <string name="text_scoutInfo">Loading Next Match</string>
-    <string name="button_nextMatch">Next Match</string>
-    <string name="text_missingPage">Oops!  It seems this page is missing.</string>
+
+    <string name="text_titleNoShow">Proceed to Next Match?</string>
+    <string name="text_messageNoShow">Click OK to mark this robot as a no show and continue to the next match.</string>
+
+    <string name="text_teamNumber">Team #</string>
+    <string name="text_matchNumber">Match #</string>
+    <string name="text_deviceNumber">Device #</string>
+
     <string name="title_initTab">Init Info</string>
     <string name="title_autoTab">Autonomous</string>
     <string name="title_teleTab">Tele-Op</string>
     <string name="title_postTab">Post Match</string>
-    <string name="text_teamNumber">Team #</string>
-    <string name="text_matchNumber">Match #</string>
-    <string name="text_deviceNumber">Device #</string>
-    <string name="cb_noShow">No Show</string>
-    <string name="text_fieldDiagram">Field Diagram</string>
-    <string name="title_activity_review">ReviewActivity</string>
 
+    <string name="cb_noShow">No Show</string>
+
+    <string name="title_activity_event_list">Choose a FRC Event</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="action_sort">Sort</string>
+    <string name="title_activity_scout">ScoutActivity</string>
+
+    <string name="hello_world">Hello world!</string>
 </resources>
