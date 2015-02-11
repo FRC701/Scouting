@@ -1,4 +1,4 @@
-package com.vandenrobotics.functionfirst.scout;
+package com.vandenrobotics.functionfirst.activities;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -251,7 +251,6 @@ public class EventListActivity extends Activity {
                                     });
 
                                 }
-
 
                             } catch (JSONException e) {
                                 e.printStackTrace();

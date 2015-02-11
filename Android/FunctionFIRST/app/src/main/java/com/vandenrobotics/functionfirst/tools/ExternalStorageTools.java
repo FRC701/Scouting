@@ -5,6 +5,7 @@ import android.media.Image;
 import android.os.Environment;
 
 import com.vandenrobotics.functionfirst.model.Match;
+import com.vandenrobotics.functionfirst.model.MatchData;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -164,7 +165,7 @@ public class ExternalStorageTools {
                 e.printStackTrace();
             }
         }
-        return dNum;
+        return (dNum>0 && dNum<=6)? dNum : 1;
     }
 
     // writes the currentMatch to the event / device number directory
@@ -241,17 +242,46 @@ public class ExternalStorageTools {
         return matches;
     }
 
-    /*
     // writes a JSONDocument data file out of MatchData to the event/device directory
-    public static void writeData(MatchData matchData, String event, int device){
-
+    public static void writeData(ArrayList<MatchData> matchData, String event, int device){
+        if(isExternalStorageWritable()) {
+            try {
+                FileWriter fileWriter = new FileWriter(createFile("ScoutData/" + event + "/device" + device, "data.txt"));
+                for (int i = 0; i < matchData.size(); i++) {
+                    fileWriter.write(matchData.get(i).toString());
+                }
+                fileWriter.flush();
+                fileWriter.close();
+            } catch (IOException e){
+                e.printStackTrace();
+            }
+        }
     }
 
     // reads the JSONDocument data file in to the device and into a MatchData value
-    public static MatchData readData(String event, int device){
-
+    public static ArrayList<MatchData> readData(String event, int device){
+        ArrayList<MatchData> matchData = new ArrayList<>();
+        if(isExternalStorageReadable()) {
+            try {
+                String line;
+                FileInputStream fileInputStream = new FileInputStream(createFile("ScoutData/" + event + "/device" + device, "data.txt"));
+                BufferedReader br = new BufferedReader(new InputStreamReader(fileInputStream));
+                while ((line = br.readLine()) != null) {
+                    try {
+                        String[] lineSections = line.split("\\$");
+                        String[] initData = lineSections[0].split(",");
+                        int match = Integer.parseInt(initData[0]) - 1;
+                        matchData.add(match, new MatchData(line));
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+            return matchData;
     }
-    */
 
     public static boolean isExternalStorageWritable() {
         String state = Environment.getExternalStorageState();
