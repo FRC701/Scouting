@@ -1,7 +1,6 @@
 package com.vandenrobotics.functionfirst.tools;
 
 import android.graphics.Bitmap;
-import android.media.Image;
 import android.os.Environment;
 
 import com.vandenrobotics.functionfirst.model.Match;
@@ -138,7 +137,7 @@ public class ExternalStorageTools {
         if(isExternalStorageWritable()){
             try {
                 FileWriter fileWriter = new FileWriter(createFile("ScoutData/"+event,"device.txt"));
-                fileWriter.write(device);
+                fileWriter.write(device+"");
                 fileWriter.flush();
                 fileWriter.close();
             } catch (IOException e) {
@@ -173,7 +172,7 @@ public class ExternalStorageTools {
         if(isExternalStorageWritable()){
             try {
                 FileWriter fileWriter = new FileWriter(createFile("ScoutData/"+event+"/"+getDeviceString(device),"savedmatch.txt"));
-                fileWriter.write(match);
+                fileWriter.write(match+"");
                 fileWriter.flush();
                 fileWriter.close();
             } catch (IOException e) {
@@ -248,8 +247,21 @@ public class ExternalStorageTools {
             try {
                 FileWriter fileWriter = new FileWriter(createFile("ScoutData/" + event + "/device" + device, "data.txt"));
                 for (int i = 0; i < matchData.size(); i++) {
-                    fileWriter.write(matchData.get(i).toString());
+                    fileWriter.append(matchData.get(i).toString() + "\n");
                 }
+                fileWriter.flush();
+                fileWriter.close();
+            } catch (IOException e){
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public static void writeData(MatchData matchData, String event, int device){
+        if(isExternalStorageWritable()) {
+            try {
+                FileWriter fileWriter = new FileWriter(createFile("ScoutData/" + event + "/device" + device, "data.txt"), true);
+                fileWriter.append(matchData.toString() + "\n");
                 fileWriter.flush();
                 fileWriter.close();
             } catch (IOException e){
@@ -303,20 +315,35 @@ public class ExternalStorageTools {
 
     public static File createFile(String dir, String filename){
         File path = createDirectory(dir);
-        return new File(path, filename);
-    }
-
-    public static void deleteFiles(String dir){
-        File file = createDirectory("ScoutData/"+dir);
-        if(file.exists()){
-            String deleteCmd = "rm -r " + dir;
-            Runtime runtime = Runtime.getRuntime();
-            try{
-                runtime.exec(deleteCmd);
+        File f = new File(path, filename);
+        if(!f.exists())
+            try {
+                f.createNewFile();
             } catch (IOException e){
                 e.printStackTrace();
             }
+        return f;
+    }
+
+    public static void deleteFiles(String dir){
+        deleteDirectory(new File(BASE_DIR.getAbsolutePath()+"/ScoutData/"+dir));
+    }
+    public static boolean deleteDirectory(File path) {
+        if( path.exists() ) {
+            File[] files = path.listFiles();
+            if (files == null) {
+                return true;
+            }
+            for(int i=0; i<files.length; i++) {
+                if(files[i].isDirectory()) {
+                    deleteDirectory(files[i]);
+                }
+                else {
+                    files[i].delete();
+                }
+            }
         }
+        return( path.delete() );
     }
 
     private static String getDeviceString(int device){

@@ -7,4 +7,13 @@
     tools:context=".PostFragment"
     android:background="@color/DarkGreen">
 
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/button_finish"
+        android:id="@+id/button"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:textColor="@color/Gold"
+        android:onClick="finishMatch" />
 </RelativeLayout>

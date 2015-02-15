@@ -9,8 +9,11 @@ import android.content.Intent;
 import android.app.Activity;
 import android.os.Bundle;
 
-import android.text.TextWatcher;
-import android.text.Editable;
+import android.widget.TextView;
+import android.view.inputmethod.EditorInfo;
+import android.view.KeyEvent;
+import android.view.inputmethod.InputMethodManager;
+import android.content.Context;
 
 import com.vandenrobotics.functionfirst.R;
 import com.vandenrobotics.functionfirst.model.Match;
@@ -41,11 +44,14 @@ public class ScoutActivity extends Activity {
     private Spinner spinnerTeams;
     private ArrayAdapter<Integer> teamAdapter;
 
+    private final int MAX_MATCHES = 200; // a reasonable amount of matches to expect any event to have less than
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scout);
         mEvent = getIntent().getStringExtra("event");
+        System.out.println(mEvent);
         mDeviceNumber = ExternalStorageTools.readDevice(mEvent);
         mCurMatch = ExternalStorageTools.readCurrentMatch(mEvent, mDeviceNumber);
         mMatchList = ExternalStorageTools.readMatches(mEvent);
@@ -70,7 +76,7 @@ public class ScoutActivity extends Activity {
         spinnerDevices.setSelection(mDeviceNumber-1);
 
         editMatches = (EditText)findViewById(R.id.editMatch);
-        editMatches.setText(mCurMatch+"");
+        editMatches.setText(mCurMatch + "");
 
         spinnerTeams = (Spinner)findViewById(R.id.spinnerTeamNumber);
         teamAdapter = new ArrayAdapter<>(this, R.layout.spinner_base, team_numbers);
@@ -95,15 +101,35 @@ public class ScoutActivity extends Activity {
             }
         });
 
-        editMatches.addTextChangedListener(new TextWatcher(){
-            public void afterTextChanged(Editable s){
-                mCurMatch = Integer.parseInt(s.toString());
-                mTeamNumber = (mMatchList.size()>0)? mMatchList.get(mCurMatch-1).teams[mDeviceNumber - 1] : 0;
+        editMatches.setOnEditorActionListener(new TextView.OnEditorActionListener(){
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if(actionId == EditorInfo.IME_ACTION_DONE) {
+                    int matchNum = 0;
+                    try {
+                        matchNum = Integer.parseInt(editMatches.getText().toString());
+                    } catch (NumberFormatException e){
+                        e.printStackTrace();
+                        matchNum = 1;
+                    }
+                    mCurMatch = (matchNum > 0 && matchNum <= MAX_MATCHES) ? matchNum : 1;
+                    mTeamNumber = (mMatchList.size() > 0) ? mMatchList.get(mCurMatch - 1).teams[mDeviceNumber - 1] : 0;
 
-                spinnerTeams.setSelection(teamAdapter.getPosition(mTeamNumber));
+
+                    editMatches.setText(mCurMatch+"");
+                    spinnerTeams.setSelection(teamAdapter.getPosition(mTeamNumber));
+
+                    try {
+                        InputMethodManager inputManager = (InputMethodManager) ScoutActivity.this.getSystemService(Context.INPUT_METHOD_SERVICE);
+                        inputManager.hideSoftInputFromWindow(ScoutActivity.this.getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+                    } catch (NullPointerException e){
+                        e.printStackTrace();
+                    }
+                    return true;
+                }
+
+                return false;
             }
-            public void beforeTextChanged(CharSequence s, int start, int count, int after){}
-            public void onTextChanged(CharSequence s, int start, int before, int count){}
         });
 
         spinnerTeams.setOnItemSelectedListener(new Spinner.OnItemSelectedListener() {
@@ -122,17 +148,21 @@ public class ScoutActivity extends Activity {
     public void activityMatch(View view){
         // load the new match, passing all the info to it
         mDeviceNumber = spinnerDevices.getSelectedItemPosition()+1;
+        ExternalStorageTools.writeDevice(mDeviceNumber, mEvent);
         mCurMatch = Integer.parseInt(editMatches.getText().toString());
+        ExternalStorageTools.writeCurrentMatch(mCurMatch, mEvent, mDeviceNumber);
         mTeamNumber = (int)spinnerTeams.getSelectedItem();
         Intent intent = new Intent(this, MatchActivity.class);
         try {
+            intent.putExtra("event", mEvent);
             intent.putExtra("matchNumber", mCurMatch);
-            intent.putExtra("team_numbers", team_numbers);
             intent.putExtra("teamNumber", mTeamNumber);
             intent.putExtra("deviceNumber", mDeviceNumber);
+            intent.putExtra("matchData", mMatchData.get(mCurMatch-1));
         } catch (IndexOutOfBoundsException e){
             e.printStackTrace();
         }
         startActivity(intent);
+        this.finish();
     }
 }

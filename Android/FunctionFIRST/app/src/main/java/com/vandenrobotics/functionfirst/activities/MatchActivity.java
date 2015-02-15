@@ -8,12 +8,13 @@ import android.support.v4.app.FragmentTabHost;
 import android.support.v4.view.PagerTabStrip;
 import android.view.View;
 import android.widget.TextView;
+import android.content.Intent;
 
 import com.vandenrobotics.functionfirst.R;
 import com.vandenrobotics.functionfirst.dialogs.DialogListener;
+import com.vandenrobotics.functionfirst.model.MatchData;
 import com.vandenrobotics.functionfirst.tabs.*;
-
-import java.util.ArrayList;
+import com.vandenrobotics.functionfirst.tools.ExternalStorageTools;
 
 public class MatchActivity extends FragmentActivity implements DialogListener {
 
@@ -23,10 +24,11 @@ public class MatchActivity extends FragmentActivity implements DialogListener {
     private TeleFragment mTeleFrag;
     private PostFragment mPostFrag;
 
+    public String mEvent;
     public int mMatchNumber;
-    public ArrayList<Integer> mTeams;
     public int mTeamNumber;
     public int mDeviceNumber;
+    public MatchData mMatchData;
 
     private int allianceColor;
     private int textColor;
@@ -34,18 +36,21 @@ public class MatchActivity extends FragmentActivity implements DialogListener {
     private TextView initTeamNumber;
     private TextView initMatchNumber;
     private TextView initDeviceNumber;
-    private PagerTabStrip allianceColorBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_match);
 
+        mEvent = getIntent().getStringExtra("event");
         mMatchNumber = getIntent().getIntExtra("matchNumber", 1);
-        mTeams = getIntent().getIntegerArrayListExtra("team_numbers");
         mTeamNumber = getIntent().getIntExtra("teamNumber", 0);
-        System.out.println("Team-Number: " + mTeamNumber);
         mDeviceNumber = getIntent().getIntExtra("deviceNumber", 1);
+        mMatchData = getIntent().getParcelableExtra("matchData");
+
+        if(mMatchData == null){
+            mMatchData = new MatchData();
+        }
 
         allianceColor = (mDeviceNumber>0 && mDeviceNumber<4)? R.color.FIRST_RED : R.color.FIRST_BLUE;
         textColor = (allianceColor==R.color.FIRST_RED)? R.color.Black : R.color.White;
@@ -55,14 +60,26 @@ public class MatchActivity extends FragmentActivity implements DialogListener {
         mTabHost = (FragmentTabHost) findViewById(R.id.tabHost);
         mTabHost.setup(this, getSupportFragmentManager(), android.R.id.tabcontent);
 
+        Bundle b = new Bundle();
+
+        b.putParcelable("initData", mMatchData.mInitData);
         mTabHost.addTab(mTabHost.newTabSpec("tab_init")
-                .setIndicator(getResources().getString(R.string.title_initTab), null), InitFragment.class, null);
+                .setIndicator(getResources().getString(R.string.title_initTab), null), InitFragment.class, b);
+
+        b = new Bundle();
+        b.putParcelable("autoData", mMatchData.mAutoData);
         mTabHost.addTab(mTabHost.newTabSpec("tab_auto")
-                .setIndicator(getResources().getString(R.string.title_autoTab), null), AutoFragment.class, null);
+                .setIndicator(getResources().getString(R.string.title_autoTab), null), AutoFragment.class, b);
+
+        b = new Bundle();
+        b.putParcelable("teleData", mMatchData.mTeleData);
         mTabHost.addTab(mTabHost.newTabSpec("tab_tele")
-                .setIndicator(getResources().getString(R.string.title_teleTab), null), TeleFragment.class, null);
+                .setIndicator(getResources().getString(R.string.title_teleTab), null), TeleFragment.class, b);
+
+        b = new Bundle();
+        b.putParcelable("postData", mMatchData.mPostData);
         mTabHost.addTab(mTabHost.newTabSpec("tab_post")
-                .setIndicator(getResources().getString(R.string.title_postTab), null), PostFragment.class, null);
+                .setIndicator(getResources().getString(R.string.title_postTab), null), PostFragment.class, b);
     }
 
     private void setupInfoBar(){
@@ -79,18 +96,11 @@ public class MatchActivity extends FragmentActivity implements DialogListener {
         initDeviceNumber.setText("Device: " + deviceText);
         initDeviceNumber.setTextColor(getResources().getColor(textColor));
 
-        allianceColorBar = (PagerTabStrip)findViewById(R.id.pager_title_strip);
+        PagerTabStrip allianceColorBar = (PagerTabStrip)findViewById(R.id.pager_title_strip);
         allianceColorBar.setDrawFullUnderline(true);
         allianceColorBar.setTabIndicatorColor(getResources().getColor(allianceColor));
         allianceColorBar.setBackgroundColor(getResources().getColor(allianceColor));
 
-    }
-
-    private void set_fragments() {
-        mInitFrag = (InitFragment) getSupportFragmentManager().findFragmentByTag("tab_init");
-        mAutoFrag = (AutoFragment) getSupportFragmentManager().findFragmentByTag("tab_auto");
-        mTeleFrag = (TeleFragment) getSupportFragmentManager().findFragmentByTag("tab_tele");
-        mPostFrag = (PostFragment) getSupportFragmentManager().findFragmentByTag("tab_post");
     }
 
     public void dialog_noShow(View view) {
@@ -99,17 +109,13 @@ public class MatchActivity extends FragmentActivity implements DialogListener {
         mInitFrag.command_noShow(view);
     }
 
-    public void dialog_autoAction(View view) {
-        if (mAutoFrag == null)
-            mAutoFrag = (AutoFragment) getSupportFragmentManager().findFragmentByTag("tab_auto");
-    }
-
     @Override
     public void onDialogPositiveClick(DialogFragment dialog) {
         if (!dialog.equals(null)) {
             if (dialog.equals(mInitFrag.noShowDF)) {
                 mInitFrag.setNoShow(true);
-                this.finish();
+                // save all data and close the match'
+                this.finishViaNoShow();
             }
         }
     }
@@ -121,5 +127,39 @@ public class MatchActivity extends FragmentActivity implements DialogListener {
                 mInitFrag.setNoShow(false);
             }
         }
+    }
+
+    public void finishMatch(View view){
+        getSupportFragmentManager().findFragmentByTag("tab_post").onPause();
+        mMatchData.mInitData.teamNumber = mTeamNumber;
+        mMatchData.mInitData.matchNumber = mMatchNumber;
+        mMatchData.mInitData.allianceColor = (mDeviceNumber>0 && mDeviceNumber<4)? 0 : 1;
+
+        ExternalStorageTools.writeData(mMatchData, mEvent, mDeviceNumber);
+        ExternalStorageTools.writeCurrentMatch(mMatchNumber+1, mEvent, mDeviceNumber);
+
+        Intent intent = new Intent(this, ScoutActivity.class);
+        intent.putExtra("event", mEvent);
+
+        startActivity(intent);
+        this.finish();
+    }
+
+    public void finishViaNoShow(){
+        getSupportFragmentManager().findFragmentByTag("tab_init").onPause();
+        mMatchData.mInitData.teamNumber = mTeamNumber;
+        mMatchData.mInitData.matchNumber = mMatchNumber;
+        mMatchData.mInitData.allianceColor = (mDeviceNumber>0 && mDeviceNumber<4)? 0 : 1;
+
+        ExternalStorageTools.writeData(mMatchData, mEvent, mDeviceNumber);
+
+        System.out.println(mMatchNumber);
+        ExternalStorageTools.writeCurrentMatch(mMatchNumber+1, mEvent, mDeviceNumber);
+
+        Intent intent = new Intent(this, ScoutActivity.class);
+        intent.putExtra("event", mEvent);
+
+        startActivity(intent);
+        this.finish();
     }
 }

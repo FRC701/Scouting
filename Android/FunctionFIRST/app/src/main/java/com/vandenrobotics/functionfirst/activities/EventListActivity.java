@@ -108,7 +108,7 @@ public class EventListActivity extends Activity {
         };
         downloadedListView.setAdapter(downloadedAdapter);
 
-        // download event and run now feature
+        // download event for later feature
         tbaListView.setOnItemClickListener(new ListView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapter, View v, int position, long arg3) {
@@ -116,7 +116,6 @@ public class EventListActivity extends Activity {
 
                 // perform TheBlueAllianceRestClient get on that value, and run the saving of data and pictures, etc. to a competition file
                 downloadNewEvent(event);
-                startActivity(loadEventToScout(event));
             }
         });
 
@@ -184,7 +183,7 @@ public class EventListActivity extends Activity {
 
         // create a dialog to show user that the activity is working
         final ProgressDialog progressDialog = ProgressDialog.show(this, getResources().getString(R.string.text_titleProgress), getResources().getString(R.string.text_messageProgressDownload));
-        progressDialog.setCancelable(false);
+        progressDialog.setCancelable(true);
 
         boolean newEvent = true;
 
@@ -291,6 +290,7 @@ public class EventListActivity extends Activity {
     private Intent loadEventToScout(JSONObject event){
         Intent intent = new Intent(this, ScoutActivity.class);
         try {
+            System.out.println(event.getString("key"));
             intent.putExtra("event", event.getString("key"));
         } catch (JSONException e){
             e.printStackTrace();

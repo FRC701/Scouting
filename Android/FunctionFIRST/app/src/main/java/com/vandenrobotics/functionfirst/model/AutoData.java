@@ -13,7 +13,6 @@ public class AutoData implements Parcelable {
 
     public AutoData(String string){
         try{
-            System.out.println("AUTODATA: " + string);
             String[] dataString = string.split(",");
 
             int[] data = new int[dataString.length];

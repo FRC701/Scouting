@@ -7,16 +7,17 @@ public class InitData implements Parcelable {
     public int teamNumber;
     public int matchNumber;
     public int allianceColor;
+    public boolean noShow;
 
     public InitData(){
         teamNumber = 0;
         matchNumber = 0;
         allianceColor = 0;
+        noShow = false;
     }
 
     public InitData(String string){
         try{
-            System.out.println("INITDATA: " + string);
             String[] dataString = string.split(",");
             int[] data = new int[dataString.length];
 
@@ -32,17 +33,20 @@ public class InitData implements Parcelable {
             matchNumber = data[0];
             teamNumber = data[1];
             allianceColor = data[2];
+            noShow = (data[3]==1);
 
         } catch (IndexOutOfBoundsException e){
             e.printStackTrace();
             teamNumber = 0;
             matchNumber = 0;
             allianceColor = 0;
+            noShow = false;
         } catch (Exception e){
             e.printStackTrace();
             teamNumber = 0;
             matchNumber = 0;
             allianceColor = 0;
+            noShow = false;
         }
     }
 
@@ -50,11 +54,13 @@ public class InitData implements Parcelable {
         teamNumber = initData.teamNumber;
         matchNumber = initData.matchNumber;
         allianceColor = initData.allianceColor;
+        noShow = initData.noShow;
     }
 
     @Override
     public String toString(){
-        return matchNumber+","+teamNumber+","+allianceColor;
+        int tempNoShow = (noShow)? 1 : 0;
+        return matchNumber+","+teamNumber+","+allianceColor+","+tempNoShow;
     }
 
     @Override
