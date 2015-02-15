@@ -17,6 +17,7 @@ public class InitData implements Parcelable {
     }
 
     public InitData(String string){
+        this();
         try{
             String[] dataString = string.split(",");
             int[] data = new int[dataString.length];
@@ -37,16 +38,8 @@ public class InitData implements Parcelable {
 
         } catch (IndexOutOfBoundsException e){
             e.printStackTrace();
-            teamNumber = 0;
-            matchNumber = 0;
-            allianceColor = 0;
-            noShow = false;
         } catch (Exception e){
             e.printStackTrace();
-            teamNumber = 0;
-            matchNumber = 0;
-            allianceColor = 0;
-            noShow = false;
         }
     }
 
