@@ -10,6 +10,9 @@ import com.vandenrobotics.functionfirst.model.Match;
 import com.vandenrobotics.functionfirst.model.MatchData;
 import com.vandenrobotics.functionfirst.tools.ExternalStorageTools;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 
 public class ScoutActivity extends ActionBarActivity {
@@ -31,17 +34,31 @@ public class ScoutActivity extends ActionBarActivity {
         mCurMatch = ExternalStorageTools.readCurrentMatch(mEvent, mDeviceNumber);
         mMatchList = ExternalStorageTools.readMatches(mEvent);
         mMatchData = ExternalStorageTools.readData(mEvent, mDeviceNumber);
+
+        ArrayList<JSONObject> teamInfo = ExternalStorageTools.readTeams(mEvent);
+        team_numbers = new ArrayList<>(teamInfo.size());
+        try {
+            for (int i = 0; i < teamInfo.size(); i++) {
+                team_numbers.add(i, teamInfo.get(i).getInt("team_number"));
+            }
+        } catch (JSONException e){
+            e.printStackTrace();
+        }
     }
 
     @Override
     protected void onResume(){
         super.onResume();
         mCurMatch = ExternalStorageTools.readCurrentMatch(mEvent, mDeviceNumber);
-        Intent intent = new Intent(this, null);//MatchActivity.class);
-        intent.putExtra("matchNumber", mCurMatch);
-        intent.putExtra("team_numbers", team_numbers);
-        intent.putExtra("teamNumber", mMatchList.get(-1).teams[mDeviceNumber-1]);
-        intent.putExtra("deviceNumber", mDeviceNumber);
+        Intent intent = new Intent(this, MatchActivity.class);
+        try {
+            intent.putExtra("matchNumber", mCurMatch);
+            intent.putExtra("team_numbers", team_numbers);
+            intent.putExtra("teamNumber", mMatchList.get(mCurMatch - 1).teams[mDeviceNumber - 1]);
+            intent.putExtra("deviceNumber", mDeviceNumber);
+        } catch (IndexOutOfBoundsException e){
+            e.printStackTrace();
+        }
         startActivity(intent);
     }
 
@@ -57,11 +74,15 @@ public class ScoutActivity extends ActionBarActivity {
         ExternalStorageTools.writeDevice(mDeviceNumber, mEvent);
         mMatchData = ExternalStorageTools.readData(mEvent, mDeviceNumber);
 
-        Intent intent = new Intent(context, null);//MatchActivity.class);
-        intent.putExtra("matchNumber", mCurMatch);
-        intent.putExtra("team_numbers", team_numbers);
-        intent.putExtra("teamNumber", mMatchList.get(-1).teams[mDeviceNumber-1]);
-        intent.putExtra("deviceNumber", mDeviceNumber);
+        Intent intent = new Intent(context, MatchActivity.class);
+        try {
+            intent.putExtra("matchNumber", mCurMatch);
+            intent.putExtra("team_numbers", team_numbers);
+            intent.putExtra("teamNumber", mMatchList.get(mCurMatch-1).teams[mDeviceNumber - 1]);
+            intent.putExtra("deviceNumber", mDeviceNumber);
+        } catch (IndexOutOfBoundsException e){
+            e.printStackTrace();
+        }
         return intent;
     }
 }

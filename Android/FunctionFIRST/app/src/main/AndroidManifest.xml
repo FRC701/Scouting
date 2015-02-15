@@ -13,6 +13,9 @@
         android:name="android.permission.WRITE_EXTERNAL_STORAGE"
         android:maxSdkVersion="18" />
     <android:uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <android:uses-permission
+        android:name="android.permission.READ_EXTERNAL_STORAGE"
+        android:maxSdkVersion="18" />
 
     <application
         android:allowBackup="true"
@@ -43,6 +46,14 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.vandenrobotics.functionfirst.activities.EventListActivity" />
+        </activity>
+        <activity
+            android:name=".activities.MatchActivity"
+            android:label="@string/title_activity_match"
+            android:parentActivityName=".activities.ScoutActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.vandenrobotics.functionfirst.activities.ScoutActivity" />
         </activity>
     </application>
 

@@ -20,7 +20,7 @@ import com.vandenrobotics.functionfirst.tools.ExternalStorageTools;
 import com.vandenrobotics.functionfirst.tools.ImageTools;
 import com.vandenrobotics.functionfirst.tools.JSONTools;
 import com.vandenrobotics.functionfirst.tools.TheBlueAllianceRestClient;
-import com.vandenrobotics.functionfirst.tools.EventArrayAdapter;
+import com.vandenrobotics.functionfirst.views.EventArrayAdapter;
 import com.vandenrobotics.functionfirst.views.EventListView;
 
 import org.apache.http.Header;

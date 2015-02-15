@@ -200,7 +200,7 @@ public class ExternalStorageTools {
                 e.printStackTrace();
             }
         }
-        return mNum;
+        return (mNum >0)? mNum : 1;
     }
 
     // creates a txt file matchlist out of the ArrayList of matches
