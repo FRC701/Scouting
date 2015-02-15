@@ -225,7 +225,7 @@ public class ExternalStorageTools {
         if(isExternalStorageReadable()){
             try{
                 String line;
-                FileInputStream fileInputStream = new FileInputStream(createFile("ScoutData/"+event,"teams.json"));
+                FileInputStream fileInputStream = new FileInputStream(createFile("ScoutData/"+event,"matchlist.txt"));
                 BufferedReader br = new BufferedReader(new InputStreamReader(fileInputStream));
                 while((line = br.readLine())!=null)
                     matches.add(new Match(line));

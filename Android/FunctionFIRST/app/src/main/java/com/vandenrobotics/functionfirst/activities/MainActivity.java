@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.vandenrobotics.functionfirst.R;
-import com.vandenrobotics.functionfirst.activities.EventListActivity;
 
 /**
  * MainActivity screen which handles the main menus that allow the
