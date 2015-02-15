@@ -1,6 +1,5 @@
 package com.vandenrobotics.functionfirst.tools;
 
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -39,7 +38,7 @@ public class ImageTools {
     public static void downloadImages(ArrayList<JSONArray> all_media, ArrayList<Integer> teamnumbers){
         // grab an image from the url given, and turn it into a bitmap
         BlockingQueue<Runnable> queue = new ArrayBlockingQueue<>(100, true);
-        ThreadPoolExecutor executor = new ThreadPoolExecutor(2,4,1,TimeUnit.MINUTES, queue);
+        ThreadPoolExecutor executor = new ThreadPoolExecutor(2,4,1,TimeUnit.SECONDS, queue);
 
         executor.setRejectedExecutionHandler(new RejectedHandler());
 
@@ -61,7 +60,7 @@ public class ImageTools {
                 e.printStackTrace();
             }
             try {
-                Thread.sleep(1);
+                Thread.sleep(30);
             } catch (InterruptedException e){
                 e.printStackTrace();
             }
@@ -94,8 +93,6 @@ public class ImageTools {
 
         @Override
         public void run() {
-            System.out.println(Thread.currentThread().getName() + " executing " + this);
-
             try{
                 Thread.sleep(50);
                 InputStream inputStream = (InputStream) new URL(getAbsoluteUrl(url)).getContent();
@@ -107,7 +104,6 @@ public class ImageTools {
             } catch (InterruptedException e){
                 e.printStackTrace();
             }
-            System.out.println(Thread.currentThread().getName() + " executed " + this);
         }
     }
 

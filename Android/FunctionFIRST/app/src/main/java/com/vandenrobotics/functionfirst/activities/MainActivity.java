@@ -1,4 +1,4 @@
-package com.vandenrobotics.functionfirst;
+package com.vandenrobotics.functionfirst.activities;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -7,7 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
-import com.vandenrobotics.functionfirst.scout.EventListActivity;
+import com.vandenrobotics.functionfirst.R;
 
 /**
  * MainActivity screen which handles the main menus that allow the

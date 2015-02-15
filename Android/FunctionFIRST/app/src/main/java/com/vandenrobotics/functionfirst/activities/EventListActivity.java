@@ -1,4 +1,4 @@
-package com.vandenrobotics.functionfirst.scout;
+package com.vandenrobotics.functionfirst.activities;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -20,7 +20,7 @@ import com.vandenrobotics.functionfirst.tools.ExternalStorageTools;
 import com.vandenrobotics.functionfirst.tools.ImageTools;
 import com.vandenrobotics.functionfirst.tools.JSONTools;
 import com.vandenrobotics.functionfirst.tools.TheBlueAllianceRestClient;
-import com.vandenrobotics.functionfirst.tools.EventArrayAdapter;
+import com.vandenrobotics.functionfirst.views.EventArrayAdapter;
 import com.vandenrobotics.functionfirst.views.EventListView;
 
 import org.apache.http.Header;
@@ -108,7 +108,7 @@ public class EventListActivity extends Activity {
         };
         downloadedListView.setAdapter(downloadedAdapter);
 
-        // download event and run now feature
+        // download event for later feature
         tbaListView.setOnItemClickListener(new ListView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapter, View v, int position, long arg3) {
@@ -116,7 +116,6 @@ public class EventListActivity extends Activity {
 
                 // perform TheBlueAllianceRestClient get on that value, and run the saving of data and pictures, etc. to a competition file
                 downloadNewEvent(event);
-                startActivity(loadEventToScout(event));
             }
         });
 
@@ -184,7 +183,7 @@ public class EventListActivity extends Activity {
 
         // create a dialog to show user that the activity is working
         final ProgressDialog progressDialog = ProgressDialog.show(this, getResources().getString(R.string.text_titleProgress), getResources().getString(R.string.text_messageProgressDownload));
-        progressDialog.setCancelable(false);
+        progressDialog.setCancelable(true);
 
         boolean newEvent = true;
 
@@ -252,7 +251,6 @@ public class EventListActivity extends Activity {
 
                                 }
 
-
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
@@ -292,6 +290,7 @@ public class EventListActivity extends Activity {
     private Intent loadEventToScout(JSONObject event){
         Intent intent = new Intent(this, ScoutActivity.class);
         try {
+            System.out.println(event.getString("key"));
             intent.putExtra("event", event.getString("key"));
         } catch (JSONException e){
             e.printStackTrace();
