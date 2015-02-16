@@ -68,6 +68,7 @@ public class InitFragment extends Fragment {
     public void onPause(){
         super.onPause();
         mInitData = new InitData(saveData());
+        mActivity.mMatchData.mInitData = mInitData;
         viewsAssigned=false;
     }
 
