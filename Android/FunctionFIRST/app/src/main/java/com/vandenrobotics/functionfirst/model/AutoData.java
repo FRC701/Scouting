@@ -87,7 +87,20 @@ public class AutoData implements Parcelable {
     }
 
     public AutoData(AutoData autoData){
+        this();
         hadAuto = autoData.hadAuto;
+        totesToAuto = autoData.totesToAuto;
+        containersToAuto = autoData.containersToAuto;
+        containersKnockedOver = autoData.containersKnockedOver;
+        containersFromStep = autoData.containersFromStep;
+        totesFromLandfill = autoData.totesFromLandfill;
+        totesStacked = autoData.totesStacked;
+        autoStack = new boolean[3];
+        for(int i = 0; i < autoData.autoStack.length; i++){
+            autoStack[i] = autoData.autoStack[i];
+        }
+        endInAuto = autoData.endInAuto;
+        hadOther = autoData.hadOther;
     }
 
     @Override
@@ -115,6 +128,16 @@ public class AutoData implements Parcelable {
     @Override
     public void writeToParcel(Parcel arg0, int arg1) {
         // TODO Auto-generated method stub
-
+        arg0.writeString(this.toString());
     }
+
+    public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
+        public AutoData createFromParcel(Parcel in){
+            return new AutoData(in.readString());
+        }
+
+        public AutoData[] newArray(int size){
+            return new AutoData[size];
+        }
+    };
 }
