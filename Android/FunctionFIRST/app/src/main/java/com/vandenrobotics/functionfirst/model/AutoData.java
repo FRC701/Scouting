@@ -7,11 +7,38 @@ public class AutoData implements Parcelable {
 
     public boolean hadAuto;
 
+    public int totesToAuto;
+    public int containersToAuto;
+    public int containersKnockedOver;
+    public int containersFromStep;
+    public int totesFromLandfill;
+    public int totesStacked;
+
+    public boolean[] autoStack;
+
+    public boolean endInAuto;
+    public boolean hadOther;
+
+
     public AutoData(){
         hadAuto = false;
+        totesToAuto = 0;
+        containersToAuto = 0;
+        containersKnockedOver = 0;
+        containersFromStep = 0;
+        totesFromLandfill = 0;
+        totesStacked = 0;
+
+        autoStack = new boolean[3];
+        for(int i =0; i < autoStack.length; i++)
+            autoStack[i] = false;
+
+        endInAuto = false;
+        hadOther = false;
     }
 
     public AutoData(String string){
+        this();
         try{
             String[] dataString = string.split(",");
 
@@ -26,26 +53,70 @@ public class AutoData implements Parcelable {
                 e.printStackTrace();
             }
 
-            hadAuto = (data[0]==1);
+            int index = 0;
+
+            hadAuto = (data[index]==1);
+            index += 1;
+            totesToAuto = data[index];
+            index += 1;
+            containersToAuto = data[index];
+            index += 1;
+            containersKnockedOver = data[index];
+            index += 1;
+            containersFromStep = data[index];
+            index += 1;
+            totesFromLandfill = data[index];
+            index += 1;
+            totesStacked = data[index];
+            index += 1;
+
+            for(int i = 0; i < autoStack.length; i++) {
+                autoStack[i] = (data[index] == 1);
+                index += 1;
+            }
+
+            endInAuto = (data[index]==1);
+            index += 1;
+            hadOther = (data[index]==1);
 
         } catch (IndexOutOfBoundsException e){
             e.printStackTrace();
-            hadAuto = false;
         } catch (Exception e){
             e.printStackTrace();
-            hadAuto = false;
         }
     }
 
     public AutoData(AutoData autoData){
+        this();
         hadAuto = autoData.hadAuto;
+        totesToAuto = autoData.totesToAuto;
+        containersToAuto = autoData.containersToAuto;
+        containersKnockedOver = autoData.containersKnockedOver;
+        containersFromStep = autoData.containersFromStep;
+        totesFromLandfill = autoData.totesFromLandfill;
+        totesStacked = autoData.totesStacked;
+        autoStack = new boolean[3];
+        for(int i = 0; i < autoData.autoStack.length; i++){
+            autoStack[i] = autoData.autoStack[i];
+        }
+        endInAuto = autoData.endInAuto;
+        hadOther = autoData.hadOther;
     }
 
     @Override
     public String toString(){
         int tempAuto = hadAuto? 1 : 0;
+        int tempStackBase = autoStack[0]? 1 : 0;
+        int tempStackMid = autoStack[1]? 1 : 0;
+        int tempStackTop = autoStack[2]? 1 : 0;
+        int tempEndAuto = endInAuto? 1 : 0;
+        int tempOther = hadOther? 1 : 0;
 
-        return tempAuto+"";
+        return tempAuto+","+totesToAuto+","+containersToAuto+","+
+                containersKnockedOver+","+containersFromStep+","+
+                totesFromLandfill+","+totesStacked+","+
+                tempStackBase+","+tempStackMid+","+tempStackTop+","+
+                tempEndAuto+","+tempOther;
     }
 
     @Override
@@ -57,6 +128,16 @@ public class AutoData implements Parcelable {
     @Override
     public void writeToParcel(Parcel arg0, int arg1) {
         // TODO Auto-generated method stub
-
+        arg0.writeString(this.toString());
     }
+
+    public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
+        public AutoData createFromParcel(Parcel in){
+            return new AutoData(in.readString());
+        }
+
+        public AutoData[] newArray(int size){
+            return new AutoData[size];
+        }
+    };
 }

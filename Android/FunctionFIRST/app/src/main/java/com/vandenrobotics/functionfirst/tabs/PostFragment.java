@@ -25,8 +25,7 @@ public class PostFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_post, container, false);
         mActivity = (MatchActivity) getActivity();
 
-        Bundle args = getArguments();
-        mPostData = args.getParcelable("postData");
+        mPostData = mActivity.mMatchData.mPostData;
 
         if(viewsAssigned) loadData(mPostData);
 
@@ -49,7 +48,7 @@ public class PostFragment extends Fragment {
             loadData(mPostData);
         }
         else if(!isVisibleToUser){
-            mPostData = saveData();
+            mPostData = new PostData(saveData());
         }
 
     }
@@ -57,22 +56,22 @@ public class PostFragment extends Fragment {
     @Override
     public void onPause(){
         super.onPause();
-        mPostData = saveData();
+        mPostData = new PostData(saveData());
         viewsAssigned=false;
     }
 
     @Override
     public void onResume(){
         super.onResume();
-        loadData(mPostData);
         assignViews(getView());
+        loadData(mPostData);
     }
 
-    private void loadData(final PostData postData){
+    public void loadData(final PostData postData){
         // take the postData and assign it to each view
     }
 
-    private PostData saveData(){
+    public PostData saveData(){
         PostData postData = new PostData();
 
         // save the data from each view into the data formats

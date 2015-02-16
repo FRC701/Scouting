@@ -17,6 +17,7 @@ public class InitData implements Parcelable {
     }
 
     public InitData(String string){
+        this();
         try{
             String[] dataString = string.split(",");
             int[] data = new int[dataString.length];
@@ -37,20 +38,13 @@ public class InitData implements Parcelable {
 
         } catch (IndexOutOfBoundsException e){
             e.printStackTrace();
-            teamNumber = 0;
-            matchNumber = 0;
-            allianceColor = 0;
-            noShow = false;
         } catch (Exception e){
             e.printStackTrace();
-            teamNumber = 0;
-            matchNumber = 0;
-            allianceColor = 0;
-            noShow = false;
         }
     }
 
     public InitData(InitData initData){
+        this();
         teamNumber = initData.teamNumber;
         matchNumber = initData.matchNumber;
         allianceColor = initData.allianceColor;
@@ -72,7 +66,17 @@ public class InitData implements Parcelable {
     @Override
     public void writeToParcel(Parcel arg0, int arg1) {
         // TODO Auto-generated method stub
-
+        arg0.writeString(this.toString());
     }
+
+    public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
+        public InitData createFromParcel(Parcel in){
+            return new InitData(in.readString());
+        }
+
+        public InitData[] newArray(int size){
+            return new InitData[size];
+        }
+    };
 
 }

@@ -65,6 +65,17 @@
     <string name="text_titleNoShow">Proceed to Next Match?</string>
     <string name="text_messageNoShow">Click OK to mark this robot as a no show and continue to the next match.</string>
 
+    <string name="cb_hadAuto">Had Autonomous?</string>
+    <string name="text_totesToAuto">Number of Totes Brought to Auto Zone</string>
+    <string name="text_containersToAuto">Number of Containers Brought to Auto Zone</string>
+    <string name="text_containersKnockedOver">Number of Containers Knocked Over</string>
+    <string name="text_containersFromStep">Number of Containers Taken From Step</string>
+    <string name="text_totesFromLandfill">Number of Totes Taken from Landfill</string>
+    <string name="text_totesStacked">Number of Non-Auto Totes Stacked on Scoring Platform</string>
+    <string name="text_autoStack">Auto Stack Constructed</string>
+    <string name="cb_endInAuto">Robot Ends in Auto Zone?</string>
+    <string name="cb_hadOther">Robot had Other Autonomous?</string>
+
     <string name="button_finish">Finish Match</string>
 
     <string name="button_ok">OK</string>

@@ -28,15 +28,14 @@ public class InitFragment extends Fragment {
 
     private boolean viewsAssigned = false;
 
-    private InitData mInitData;
+    public InitData mInitData;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
         View rootView = inflater.inflate(R.layout.fragment_init, container, false);
         mActivity = (MatchActivity) getActivity();
 
-        Bundle args = getArguments();
-        mInitData = args.getParcelable("initData");
+        mInitData = mActivity.mMatchData.mInitData;
 
         if(viewsAssigned) loadData(mInitData);
 
@@ -60,7 +59,7 @@ public class InitFragment extends Fragment {
             loadData(mInitData);
         }
         else if(!isVisibleToUser){
-            mInitData = saveData();
+            mInitData = new InitData(saveData());
         }
 
     }
@@ -68,23 +67,23 @@ public class InitFragment extends Fragment {
     @Override
     public void onPause(){
         super.onPause();
-        mInitData = saveData();
+        mInitData = new InitData(saveData());
         viewsAssigned=false;
     }
 
     @Override
     public void onResume(){
         super.onResume();
-        loadData(mInitData);
         assignViews(getView());
+        loadData(mInitData);
     }
 
-    private void loadData(final InitData initData){
+    public void loadData(final InitData initData){
         // take the initData and assign it to each view
         noShow.setChecked(initData.noShow);
     }
 
-    private InitData saveData(){
+    public InitData saveData(){
         InitData initData = new InitData();
 
         initData.noShow = noShow.isChecked();

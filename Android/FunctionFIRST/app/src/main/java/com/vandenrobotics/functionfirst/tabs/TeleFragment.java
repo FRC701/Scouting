@@ -25,8 +25,7 @@ public class TeleFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_tele, container, false);
         mActivity = (MatchActivity) getActivity();
 
-        Bundle args = getArguments();
-        mTeleData = args.getParcelable("teleData");
+        mTeleData = mActivity.mMatchData.mTeleData;
 
         if(viewsAssigned) loadData(mTeleData);
 
@@ -49,7 +48,7 @@ public class TeleFragment extends Fragment {
             loadData(mTeleData);
         }
         else if(!isVisibleToUser){
-            mTeleData = saveData();
+            mTeleData = new TeleData(saveData());
         }
 
     }
@@ -57,22 +56,22 @@ public class TeleFragment extends Fragment {
     @Override
     public void onPause(){
         super.onPause();
-        mTeleData = saveData();
+        mTeleData = new TeleData(saveData());
         viewsAssigned=false;
     }
 
     @Override
     public void onResume(){
         super.onResume();
-        loadData(mTeleData);
         assignViews(getView());
+        loadData(mTeleData);
     }
 
-    private void loadData(final TeleData teleData){
+    public void loadData(final TeleData teleData){
         // take the teleData and assign it to each view
     }
 
-    private TeleData saveData(){
+    public TeleData saveData(){
         TeleData teleData = new TeleData();
 
         // save the data from each view into the data formats

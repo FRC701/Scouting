@@ -51,7 +51,6 @@ public class ScoutActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scout);
         mEvent = getIntent().getStringExtra("event");
-        System.out.println(mEvent);
         mDeviceNumber = ExternalStorageTools.readDevice(mEvent);
         mCurMatch = ExternalStorageTools.readCurrentMatch(mEvent, mDeviceNumber);
         mMatchList = ExternalStorageTools.readMatches(mEvent);

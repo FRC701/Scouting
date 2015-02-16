@@ -17,7 +17,7 @@ public class TeleData implements Parcelable {
     }
 
     public TeleData(TeleData teleData) {
-
+        this();
     }
 
     @Override
@@ -34,6 +34,16 @@ public class TeleData implements Parcelable {
     @Override
     public void writeToParcel(Parcel arg0, int arg1) {
         // TODO Auto-generated method stub
-
+        arg0.writeString(this.toString());
     }
+
+    public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
+        public TeleData createFromParcel(Parcel in){
+            return new TeleData(in.readString());
+        }
+
+        public TeleData[] newArray(int size){
+            return new TeleData[size];
+        }
+    };
 }
