@@ -44,6 +44,7 @@ public class InitData implements Parcelable {
     }
 
     public InitData(InitData initData){
+        this();
         teamNumber = initData.teamNumber;
         matchNumber = initData.matchNumber;
         allianceColor = initData.allianceColor;
@@ -65,7 +66,17 @@ public class InitData implements Parcelable {
     @Override
     public void writeToParcel(Parcel arg0, int arg1) {
         // TODO Auto-generated method stub
-
+        arg0.writeString(this.toString());
     }
+
+    public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
+        public InitData createFromParcel(Parcel in){
+            return new InitData(in.readString());
+        }
+
+        public InitData[] newArray(int size){
+            return new InitData[size];
+        }
+    };
 
 }

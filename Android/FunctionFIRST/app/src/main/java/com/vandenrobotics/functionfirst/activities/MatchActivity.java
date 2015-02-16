@@ -1,12 +1,14 @@
 package com.vandenrobotics.functionfirst.activities;
 
 import android.support.v4.app.DialogFragment;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 
 import android.os.Bundle;
 import android.support.v4.app.FragmentTabHost;
 import android.support.v4.view.PagerTabStrip;
 import android.view.View;
+import android.widget.TabHost;
 import android.widget.TextView;
 import android.content.Intent;
 
@@ -60,26 +62,14 @@ public class MatchActivity extends FragmentActivity implements DialogListener {
         mTabHost = (FragmentTabHost) findViewById(R.id.tabHost);
         mTabHost.setup(this, getSupportFragmentManager(), android.R.id.tabcontent);
 
-        Bundle b = new Bundle();
-
-        b.putParcelable("initData", mMatchData.mInitData);
         mTabHost.addTab(mTabHost.newTabSpec("tab_init")
-                .setIndicator(getResources().getString(R.string.title_initTab), null), InitFragment.class, b);
-
-        b = new Bundle();
-        b.putParcelable("autoData", mMatchData.mAutoData);
+                .setIndicator(getResources().getString(R.string.title_initTab), null), InitFragment.class, null);
         mTabHost.addTab(mTabHost.newTabSpec("tab_auto")
-                .setIndicator(getResources().getString(R.string.title_autoTab), null), AutoFragment.class, b);
-
-        b = new Bundle();
-        b.putParcelable("teleData", mMatchData.mTeleData);
+                .setIndicator(getResources().getString(R.string.title_autoTab), null), AutoFragment.class, null);
         mTabHost.addTab(mTabHost.newTabSpec("tab_tele")
-                .setIndicator(getResources().getString(R.string.title_teleTab), null), TeleFragment.class, b);
-
-        b = new Bundle();
-        b.putParcelable("postData", mMatchData.mPostData);
+                .setIndicator(getResources().getString(R.string.title_teleTab), null), TeleFragment.class, null);
         mTabHost.addTab(mTabHost.newTabSpec("tab_post")
-                .setIndicator(getResources().getString(R.string.title_postTab), null), PostFragment.class, b);
+                .setIndicator(getResources().getString(R.string.title_postTab), null), PostFragment.class, null);
     }
 
     private void setupInfoBar(){
