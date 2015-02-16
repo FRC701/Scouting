@@ -8,21 +8,58 @@ import android.os.Parcelable;
  */
 public class PostData implements Parcelable {
 
-    public PostData(){
+    public int numFouls;
+    public boolean gotRedCard;
+    public boolean gotYellowCard;
+    public boolean wasDisabled;
 
+    public PostData(){
+        numFouls = 0;
+        gotRedCard = false;
+        gotYellowCard = false;
+        wasDisabled = false;
     }
 
     public PostData(String string){
+        this();
+        try{
+            String[] dataString = string.split(",");
+            int[] data = new int[dataString.length];
 
+            try{
+                for(int i = 0; i < data.length; i++)
+                    data[i] = Integer.parseInt(dataString[i]);
+            } catch (NumberFormatException e){
+                e.printStackTrace();
+            } catch (IndexOutOfBoundsException e){
+                e.printStackTrace();
+            }
+
+            numFouls = data[0];
+            gotRedCard = (data[1]==1);
+            gotYellowCard = (data[2]==1);
+            wasDisabled = (data[3]==1);
+
+        } catch (IndexOutOfBoundsException e){
+            e.printStackTrace();
+        }
     }
 
     public PostData(PostData postData) {
         this();
+        numFouls = postData.numFouls;
+        gotRedCard = postData.gotRedCard;
+        gotYellowCard = postData.gotYellowCard;
+        wasDisabled = postData.wasDisabled;
     }
 
     @Override
     public String toString(){
-        return null;
+        int tempRedCard = gotRedCard? 1 : 0;
+        int tempYellowCard = gotYellowCard? 1 : 0;
+        int tempDisabled = wasDisabled? 1 : 0;
+
+        return numFouls+","+tempRedCard+","+tempYellowCard+","+tempDisabled;
     }
 
     @Override

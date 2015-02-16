@@ -7,6 +7,24 @@
     tools:context=".PostFragment"
     android:background="@color/DarkGreen">
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/text_numFouls"
+        android:id="@+id/textNumFouls"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:textColor="@color/Gold" />
+
+    <NumberPicker
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/pickerNumFouls"
+        android:layout_below="@+id/textNumFouls"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"/>
+
     <Button
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -16,4 +34,38 @@
         android:layout_centerHorizontal="true"
         android:textColor="@color/Gold"
         android:onClick="finishMatch" />
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/cb_gotRedCard"
+        android:id="@+id/cb_gotRedCard"
+        android:layout_below="@+id/pickerNumFouls"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:checked="false"
+        android:textColor="@color/Gold" />
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/cb_gotYellowCard"
+        android:id="@+id/cb_gotYellowCard"
+        android:layout_below="@+id/cb_gotRedCard"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:checked="false"
+        android:textColor="@color/Gold" />
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/cb_wasDisabled"
+        android:id="@+id/cb_wasDisabled"
+        android:layout_below="@+id/cb_gotYellowCard"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:checked="false"
+        android:textColor="@color/Gold" />
+
 </RelativeLayout>

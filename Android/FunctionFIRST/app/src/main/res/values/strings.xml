@@ -76,6 +76,10 @@
     <string name="cb_endInAuto">Robot Ends in Auto Zone?</string>
     <string name="cb_hadOther">Robot had Other Autonomous?</string>
 
+    <string name="text_numFouls">Number of Fouls Incurred by This Robot</string>
+    <string name="cb_gotRedCard">Robot Received Red Card?</string>
+    <string name="cb_gotYellowCard">Robot Received Yellow Card?</string>
+    <string name="cb_wasDisabled">Was Disabled During Match?</string>
     <string name="button_finish">Finish Match</string>
 
     <string name="button_ok">OK</string>

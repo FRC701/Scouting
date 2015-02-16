@@ -41,15 +41,12 @@ public class AutoData implements Parcelable {
         this();
         try{
             String[] dataString = string.split(",");
-
             int[] data = new int[dataString.length];
 
             try{
                 for(int i = 0; i < data.length; i++)
                     data[i] = Integer.parseInt(dataString[i]);
             } catch (NumberFormatException e){
-                e.printStackTrace();
-            } catch (IndexOutOfBoundsException e){
                 e.printStackTrace();
             }
 
@@ -80,8 +77,6 @@ public class AutoData implements Parcelable {
             hadOther = (data[index]==1);
 
         } catch (IndexOutOfBoundsException e){
-            e.printStackTrace();
-        } catch (Exception e){
             e.printStackTrace();
         }
     }

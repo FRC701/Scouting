@@ -27,8 +27,6 @@ public class InitData implements Parcelable {
                     data[i] = Integer.parseInt(dataString[i]);
             } catch (NumberFormatException e){
                 e.printStackTrace();
-            } catch (IndexOutOfBoundsException e){
-                e.printStackTrace();
             }
 
             matchNumber = data[0];
@@ -37,8 +35,6 @@ public class InitData implements Parcelable {
             noShow = (data[3]==1);
 
         } catch (IndexOutOfBoundsException e){
-            e.printStackTrace();
-        } catch (Exception e){
             e.printStackTrace();
         }
     }
