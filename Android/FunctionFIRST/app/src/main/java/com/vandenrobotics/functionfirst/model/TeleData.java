@@ -3,17 +3,38 @@ package com.vandenrobotics.functionfirst.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.util.ArrayList;
+
 /**
  * Created by Programming701-A on 1/31/2015.
  */
 public class TeleData implements Parcelable {
 
-    public TeleData(){
+    public ArrayList<Stack> stacks;         // all the stacks for the match
+    public ArrayList<StepStack> stepStacks; // all of the stacks made on the step for the match (up to 3 that this robot can contribute to)
 
+    public int totesFromChute;
+    public int litterFromChute;
+    public int totesFromLandfill;
+    public int totesFromStep;
+    public int litterToLandfill;
+    public int containersUpright;
+    public int totesUpright;
+
+    public TeleData(){
+        stacks = new ArrayList<>();
+        stepStacks = new ArrayList<>();
+        totesFromChute = 0;
+        litterFromChute = 0;
+        totesFromLandfill = 0;
+        totesFromStep = 0;
+        litterToLandfill = 0;
+        containersUpright = 0;
+        totesUpright = 0;
     }
 
     public TeleData(String string){
-
+        this();
     }
 
     public TeleData(TeleData teleData) {

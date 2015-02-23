@@ -21,6 +21,7 @@ public class MatchData implements Parcelable{
     }
 
     public MatchData(String string){
+        this();
         try{
             String[] dataString = string.split("\\$");
             mInitData = new InitData(dataString[0]);
@@ -29,10 +30,6 @@ public class MatchData implements Parcelable{
             mPostData = new PostData(dataString[3]);
         } catch (Exception e){
             e.printStackTrace();
-            mInitData = new InitData();
-            mAutoData = new AutoData();
-            mTeleData = new TeleData();
-            mPostData = new PostData();
         }
     }
 

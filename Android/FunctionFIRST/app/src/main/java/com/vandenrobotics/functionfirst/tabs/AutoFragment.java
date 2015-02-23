@@ -6,7 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
-import android.widget.NumberPicker;
+import com.vandenrobotics.functionfirst.views.NumberPicker;
 import android.widget.ToggleButton;
 
 import com.vandenrobotics.functionfirst.R;
@@ -29,6 +29,7 @@ public class AutoFragment extends Fragment {
     private NumberPicker containersKnockedOver;
     private NumberPicker containersFromStep;
     private NumberPicker totesFromLandfill;
+    private NumberPicker totesFromStep;
     private NumberPicker totesStacked;
     private ToggleButton[] autoStack;
     private CheckBox endInAuto;
@@ -90,6 +91,7 @@ public class AutoFragment extends Fragment {
         containersKnockedOver.setValue(autoData.containersKnockedOver);
         containersFromStep.setValue(autoData.containersFromStep);
         totesFromLandfill.setValue(autoData.totesFromLandfill);
+        totesFromStep.setValue(autoData.totesFromStep);
         totesStacked.setValue(autoData.totesStacked);
         for(int i = 0; i < autoStack.length; i++){
             autoStack[i].setChecked(autoData.autoStack[i]);
@@ -112,6 +114,7 @@ public class AutoFragment extends Fragment {
             autoData.containersKnockedOver = containersKnockedOver.getValue();
             autoData.containersFromStep = containersFromStep.getValue();
             autoData.totesFromLandfill = totesFromLandfill.getValue();
+            autoData.totesFromStep = totesFromStep.getValue();
             autoData.totesStacked = totesStacked.getValue();
             for(int i = 0; i < autoData.autoStack.length; i++){
                 autoData.autoStack[i] = autoStack[i].isChecked();
@@ -132,6 +135,7 @@ public class AutoFragment extends Fragment {
             containersKnockedOver = (NumberPicker)view.findViewById(R.id.pickerContainersKnockedOver);
             containersFromStep = (NumberPicker)view.findViewById(R.id.pickerContainersFromStep);
             totesFromLandfill = (NumberPicker)view.findViewById(R.id.pickerTotesFromLandfill);
+            totesFromStep = (NumberPicker)view.findViewById(R.id.pickerTotesFromStep);
             totesStacked = (NumberPicker)view.findViewById(R.id.pickerTotesStacked);
             autoStack = new ToggleButton[3];
             autoStack[0] = (ToggleButton)view.findViewById(R.id.toggleAutoStackBase);
@@ -160,6 +164,8 @@ public class AutoFragment extends Fragment {
             containersFromStep.setMaxValue(2);
             totesFromLandfill.setMinValue(0);
             totesFromLandfill.setMaxValue(28);
+            totesFromStep.setMinValue(0);
+            totesFromStep.setMaxValue(12);
             totesStacked.setMinValue(0);
             totesStacked.setMaxValue(28);
 
@@ -176,6 +182,7 @@ public class AutoFragment extends Fragment {
         containersKnockedOver.setEnabled(true);
         containersFromStep.setEnabled(true);
         totesFromLandfill.setEnabled(true);
+        totesFromStep.setEnabled(true);
         totesStacked.setEnabled(true);
         for(ToggleButton tb : autoStack){
             tb.setEnabled(true);
@@ -189,10 +196,14 @@ public class AutoFragment extends Fragment {
         totesToAuto.setEnabled(false);
         containersToAuto.setValue(0);
         containersToAuto.setEnabled(false);
+        containersKnockedOver.setValue(0);
+        containersKnockedOver.setEnabled(false);
         containersFromStep.setValue(0);
         containersFromStep.setEnabled(false);
         totesFromLandfill.setValue(0);
         totesFromLandfill.setEnabled(false);
+        totesFromStep.setValue(0);
+        totesFromStep.setEnabled(false);
         totesStacked.setValue(0);
         totesStacked.setEnabled(false);
         for(ToggleButton tb : autoStack){

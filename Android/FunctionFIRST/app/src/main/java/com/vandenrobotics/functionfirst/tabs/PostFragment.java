@@ -6,7 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
-import android.widget.NumberPicker;
+import com.vandenrobotics.functionfirst.views.NumberPicker;
 
 import com.vandenrobotics.functionfirst.R;
 import com.vandenrobotics.functionfirst.activities.MatchActivity;
@@ -104,7 +104,7 @@ public class PostFragment extends Fragment {
             wasDisabled = (CheckBox)view.findViewById(R.id.cb_wasDisabled);
 
             numFouls.setMinValue(0);
-            numFouls.setMaxValue(20);
+            numFouls.setMaxValue(999);
 
             viewsAssigned = true;
         } catch (Exception e){
