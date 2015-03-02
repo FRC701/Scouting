@@ -35,8 +35,8 @@ public class DeleteStackDialogFragment extends DialogFragment {
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setTitle(R.string.text_titleDeleteAll)
-                .setMessage(R.string.text_messageDeleteAll)
+        builder.setTitle(R.string.text_titleDeleteStack)
+                .setMessage(R.string.text_messageDeleteStack)
                 .setPositiveButton(R.string.button_ok, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         // user clicked OK Button
