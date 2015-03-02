@@ -99,13 +99,34 @@ public class MatchActivity extends FragmentActivity implements DialogListener {
         mInitFrag.command_noShow(view);
     }
 
+    public void dialog_deleteStack(View view) {
+        if (mTeleFrag == null)
+            mTeleFrag = (TeleFragment) getSupportFragmentManager().findFragmentByTag("tab_tele");
+        mTeleFrag.command_deleteStack(view);
+    }
+
+    public void dialog_deleteStepStack(View view) {
+        if (mTeleFrag == null)
+            mTeleFrag = (TeleFragment) getSupportFragmentManager().findFragmentByTag("tab_tele");
+        mTeleFrag.command_deleteStepStack(view);
+    }
+
     @Override
     public void onDialogPositiveClick(DialogFragment dialog) {
         if (!dialog.equals(null)) {
-            if (dialog.equals(mInitFrag.noShowDF)) {
-                mInitFrag.setNoShow(true);
-                // save all data and close the match'
-                this.finishViaNoShow();
+            if(mInitFrag!=null) {
+                if (dialog.equals(mInitFrag.noShowDF)) {
+                    mInitFrag.setNoShow(true);
+                    // save all data and close the match'
+                    this.finishViaNoShow();
+                }
+            }
+            if(mTeleFrag!=null){
+                if (dialog.equals(mTeleFrag.deleteStackDF)) {
+                    mTeleFrag.deleteStack();
+                } else if (dialog.equals(mTeleFrag.deleteStepStackDF)){
+                    mTeleFrag.deleteStepStack();
+                }
             }
         }
     }
@@ -113,8 +134,17 @@ public class MatchActivity extends FragmentActivity implements DialogListener {
     @Override
     public void onDialogNegativeClick(DialogFragment dialog) {
         if (!dialog.equals(null)) {
-            if (dialog.equals(mInitFrag.noShowDF)) {
-                mInitFrag.setNoShow(false);
+            if (mInitFrag != null) {
+                if (dialog.equals(mInitFrag.noShowDF)) {
+                    mInitFrag.setNoShow(false);
+                }
+                if (mTeleFrag != null) {
+                    if (dialog.equals(mTeleFrag.deleteStackDF)) {
+                        // pass through without deleting the stack
+                    } else if (dialog.equals(mTeleFrag.deleteStepStackDF)){
+                        // pass through without deleting the step stack
+                    }
+                }
             }
         }
     }
@@ -142,8 +172,6 @@ public class MatchActivity extends FragmentActivity implements DialogListener {
         mMatchData.mInitData.allianceColor = (mDeviceNumber>0 && mDeviceNumber<4)? 0 : 1;
 
         ExternalStorageTools.writeData(mMatchData, mEvent, mDeviceNumber);
-
-        System.out.println(mMatchNumber);
         ExternalStorageTools.writeCurrentMatch(mMatchNumber+1, mEvent, mDeviceNumber);
 
         Intent intent = new Intent(this, ScoutActivity.class);

@@ -86,6 +86,8 @@
     <string name="text_litterToLandfill">Number of Litter Pushed to Landfill</string>
     <string name="text_containersUpright">Number of Containers Made Upright</string>
     <string name="text_totesUpright">Number of Totes Made Upright</string>
+    <string name="text_titleDeleteStack">Delete This Stack?</string>
+    <string name="text_messageDeleteStack">This will delete this stack from the saved data for the match.</string>
 
     <string name="text_numFouls">Number of Fouls Incurred by This Robot</string>
     <string name="cb_gotRedCard">Robot Received Red Card?</string>

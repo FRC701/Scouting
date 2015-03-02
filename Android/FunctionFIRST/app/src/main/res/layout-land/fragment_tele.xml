@@ -156,56 +156,18 @@
 
             </RelativeLayout>
         </LinearLayout>
-
     </ScrollView>
 
-    <LinearLayout
-        android:id="@+id/layoutDiagramButtons"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_toRightOf="@+id/scrollViewTele"
-        android:layout_toEndOf="@+id/scrollViewTele"
-        android:orientation="horizontal">
-
-        <Button
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:id="@+id/buttonAddStack"
-            android:textColor="@color/Gold"
-            android:text="@string/button_addStack" />
-
-        <Button
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:id="@+id/buttonEditStack"
-            android:text="@string/button_editStack"
-            android:textColor="@color/Gold" />
-
-        <Button
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:id="@+id/buttonDeleteStack"
-            android:text="@string/button_deleteStack"
-            android:textColor="@color/Gold" />
-
-    </LinearLayout>
-
     <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
         android:id="@+id/fieldDiagram"
         android:src="@drawable/field_diagram_red"
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
+        android:keepScreenOn="true"
         android:layout_toRightOf="@+id/scrollViewTele"
-        android:layout_toEndOf="@+id/scrollViewTele"
-        android:layout_above="@+id/layoutDiagramButtons"/>
+        android:layout_toEndOf="@+id/scrollViewTele"/>
 
 </RelativeLayout>

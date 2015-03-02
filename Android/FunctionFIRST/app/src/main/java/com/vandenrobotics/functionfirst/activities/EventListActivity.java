@@ -290,7 +290,6 @@ public class EventListActivity extends Activity {
     private Intent loadEventToScout(JSONObject event){
         Intent intent = new Intent(this, ScoutActivity.class);
         try {
-            System.out.println(event.getString("key"));
             intent.putExtra("event", event.getString("key"));
         } catch (JSONException e){
             e.printStackTrace();

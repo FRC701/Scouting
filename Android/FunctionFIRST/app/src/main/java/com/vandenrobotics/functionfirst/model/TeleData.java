@@ -39,6 +39,16 @@ public class TeleData implements Parcelable {
 
     public TeleData(TeleData teleData) {
         this();
+
+        stacks = teleData.stacks;
+        stepStacks = teleData.stepStacks;
+        totesFromChute = teleData.totesFromChute;
+        litterFromChute = teleData.totesFromLandfill;
+        totesFromLandfill = teleData.totesFromLandfill;
+        totesFromStep = teleData.totesFromStep;
+        litterToLandfill = teleData.litterToLandfill;
+        containersUpright = teleData.containersUpright;
+        totesUpright = teleData.totesUpright;
     }
 
     @Override
