@@ -55,20 +55,6 @@ public class AutoFragment extends Fragment {
     }
 
     @Override
-    public void setUserVisibleHint(boolean isVisibleToUser){
-        super.setUserVisibleHint(isVisibleToUser);
-        if(!viewsAssigned);
-        else if(isVisibleToUser){
-            assignViews(getView());
-            loadData(mAutoData);
-        }
-        else if(!isVisibleToUser){
-            mAutoData = new AutoData(saveData());
-        }
-
-    }
-
-    @Override
     public void onPause(){
         super.onPause();
         mAutoData = new AutoData(saveData());

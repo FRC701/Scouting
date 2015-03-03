@@ -111,6 +111,18 @@ public class MatchActivity extends FragmentActivity implements DialogListener {
         mTeleFrag.command_deleteStepStack(view);
     }
 
+    public void dialog_editStack(View view) {
+        if (mTeleFrag == null)
+            mTeleFrag = (TeleFragment) getSupportFragmentManager().findFragmentByTag("tab_tele");
+        mTeleFrag.command_editStack(view);
+    }
+
+    public void dialog_editStepStack(View view) {
+        if (mTeleFrag == null)
+            mTeleFrag = (TeleFragment) getSupportFragmentManager().findFragmentByTag("tab_tele");
+        mTeleFrag.command_editStepStack(view);
+    }
+
     @Override
     public void onDialogPositiveClick(DialogFragment dialog) {
         if (!dialog.equals(null)) {
@@ -126,6 +138,10 @@ public class MatchActivity extends FragmentActivity implements DialogListener {
                     mTeleFrag.deleteStack();
                 } else if (dialog.equals(mTeleFrag.deleteStepStackDF)){
                     mTeleFrag.deleteStepStack();
+                } else if (dialog.equals(mTeleFrag.editStackDF)){
+                    mTeleFrag.editStack();
+                } else if (dialog.equals(mTeleFrag.editStepStackDF)){
+                    mTeleFrag.editStepStack();
                 }
             }
         }
@@ -138,12 +154,16 @@ public class MatchActivity extends FragmentActivity implements DialogListener {
                 if (dialog.equals(mInitFrag.noShowDF)) {
                     mInitFrag.setNoShow(false);
                 }
-                if (mTeleFrag != null) {
-                    if (dialog.equals(mTeleFrag.deleteStackDF)) {
-                        // pass through without deleting the stack
-                    } else if (dialog.equals(mTeleFrag.deleteStepStackDF)){
-                        // pass through without deleting the step stack
-                    }
+            }
+            if (mTeleFrag != null) {
+                if (dialog.equals(mTeleFrag.deleteStackDF)) {
+                    // pass through without deleting the stack
+                } else if (dialog.equals(mTeleFrag.deleteStepStackDF)){
+                    // pass through without deleting the step stack
+                } else if (dialog.equals(mTeleFrag.editStackDF)){
+                    // do not edit the stack and leave the values the same
+                } else if (dialog.equals(mTeleFrag.editStepStackDF)){
+                    // do not edit the stack and leave the values the same
                 }
             }
         }

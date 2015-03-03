@@ -37,8 +37,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:id="@+id/toggleAutoStackMid"
-            android:background="@drawable/tote_toggle_button"
-            android:checked="false" />
+            android:background="@drawable/tote_toggle_button" />
 
         <ToggleButton
             android:layout_width="fill_parent"

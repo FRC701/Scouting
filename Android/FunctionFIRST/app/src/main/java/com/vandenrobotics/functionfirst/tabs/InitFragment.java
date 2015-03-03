@@ -51,20 +51,6 @@ public class InitFragment extends Fragment {
     }
 
     @Override
-    public void setUserVisibleHint(boolean isVisibleToUser){
-        super.setUserVisibleHint(isVisibleToUser);
-        if(!viewsAssigned);
-        else if(isVisibleToUser){
-            assignViews(getView());
-            loadData(mInitData);
-        }
-        else if(!isVisibleToUser){
-            mInitData = new InitData(saveData());
-        }
-
-    }
-
-    @Override
     public void onPause(){
         super.onPause();
         mInitData = new InitData(saveData());

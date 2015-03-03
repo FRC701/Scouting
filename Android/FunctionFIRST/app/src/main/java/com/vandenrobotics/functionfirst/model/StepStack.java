@@ -8,14 +8,14 @@ import android.graphics.PointF;
 public class StepStack {
 
     public PointF mPoint;
-    public int[] mTotes;        // takes values 0 for no tote, 1 for tote stacked width-wise, 2 for tote stacked length-wise
+    public boolean[] mTotes;        // takes values 0 for no tote, 1 for tote stacked width-wise, 2 for tote stacked length-wise
                                 // takes values 3 for upside down width-wise, 4 for upside-down length-wise
                                 // this allows us to track: number of totes contributed to stack, level of top tote, orientation
     public boolean mKnocked;    // takes values 0 for no, 1 for this robot knocked over this stack
 
     public StepStack(){
         mPoint = new PointF();
-        mTotes = new int[6];
+        mTotes = new boolean[4];
         mKnocked = false;
     }
 
@@ -29,18 +29,23 @@ public class StepStack {
 
     @Override
     public String toString(){
+        int[] tempTotes = new int[mTotes.length];
+        for(int i = 0; i < tempTotes.length; i++){
+            tempTotes[i] = mTotes[i]? 1 : 0;
+        }
+        int tempKnocked = mKnocked? 1 : 0;
+
         return mPoint.x+","+mPoint.y+","+
-               mTotes[0]+","+mTotes[1]+","+
-               mTotes[2]+","+mTotes[3]+","+
-               mTotes[4]+","+mTotes[5]+","+
-               mKnocked;
+               tempTotes[0]+","+tempTotes[1]+","+
+               tempTotes[2]+","+tempTotes[3]+","+
+               tempKnocked;
     }
 
-    public int getHeight(){
-        int i;
-        for(i = mTotes.length-1; i >= 0; i--){
-            if(mTotes[i]!=0) break;
+    public int getTotalTotes(){
+        int count = 0;
+        for(int i = mTotes.length-1; i >= 0; i--){
+            if(mTotes[i]) count++;
         }
-        return (i>=0)? i : 0;
+        return count;
     }
 }

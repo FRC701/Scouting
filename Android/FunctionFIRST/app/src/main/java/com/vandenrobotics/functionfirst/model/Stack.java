@@ -8,20 +8,20 @@ import android.graphics.PointF;
 public class Stack {
 
     public PointF mPoint;
-    public int[] mTotes;        // takes values 0 for no tote, 1 for tote stacked width-wise, 2 for tote stacked length-wise
+    public boolean[] mTotes;        // takes values 0 for no tote, 1 for tote stacked width-wise, 2 for tote stacked length-wise
                                 // takes values 3 for tote upside down width-wise, 4 for tote upside down length-wise
                                 // this allows us to track: number of totes contributed to stack, level of top tote, orientation
-    public int mContainer;      // takes values 0 for no container, 1 for container stacked upright, 2 for container stacked sideways, 3 container upside down
+    public boolean mContainer;      // takes values 0 for no container, 1 for container stacked upright, 2 for container stacked sideways, 3 container upside down
     public int mContainerHeight;// takes the value of the number of totes under the container when stacked (if this robot stacked the container), otherwise -1
-    public int mLitter;         // takes values 0 for not litter, 1 for litter loaded normal, 2 for litter loaded
+    public boolean mLitter;         // takes values 0 for not litter, 1 for litter loaded normal, 2 for litter loaded
     public boolean mKnocked;    // takes values 0 for no, 1 for this robot knocked over this stack
 
     public Stack(){
         mPoint = new PointF();
-        mTotes = new int[6];
-        mContainer = 0;
-        mContainerHeight = -1;
-        mLitter = 0;
+        mTotes = new boolean[6];
+        mContainer = false;
+        mContainerHeight = 0;
+        mLitter = false;
         mKnocked = false;
     }
 
@@ -38,19 +38,27 @@ public class Stack {
 
     @Override
     public String toString(){
+        int[] tempTotes = new int[mTotes.length];
+        for(int i = 0; i < tempTotes.length; i++){
+            tempTotes[i] = (mTotes[i])? 1 : 0;
+        }
+        int tempContainer = mContainer? 1 : 0;
+        int tempLitter = mLitter? 1 : 0;
+        int tempKnocked = mKnocked? 1 : 0;
+
         return mPoint.x+","+mPoint.y+","+
-               mTotes[0]+","+mTotes[1]+","+
-               mTotes[2]+","+mTotes[3]+","+
-               mTotes[4]+","+mTotes[5]+","+
-               mContainer+","+mContainerHeight+","+
-               mLitter+","+mKnocked;
+               tempTotes[0]+","+tempTotes[1]+","+
+               tempTotes[2]+","+tempTotes[3]+","+
+               tempTotes[4]+","+tempTotes[5]+","+
+               tempContainer+","+mContainerHeight+","+
+               tempLitter+","+tempKnocked;
     }
 
-    public int getHeight(){
-        int i;
-        for(i = mTotes.length-1; i >= 0; i--){
-            if(mTotes[i]!=0) break;
+    public int getTotalTotes(){
+        int count = 0;
+        for(int i = mTotes.length-1; i >= 0; i--){
+            if(mTotes[i]) count++;
         }
-        return (i>=0)? i : 0;
+        return count;
     }
 }

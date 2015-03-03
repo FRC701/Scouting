@@ -1,9 +1,5 @@
 package com.vandenrobotics.functionfirst.tabs;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Canvas;
-import android.graphics.Paint;
 import android.graphics.PointF;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -11,19 +7,18 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-
 import com.vandenrobotics.functionfirst.dialogs.DeleteStackDialogFragment;
 import com.vandenrobotics.functionfirst.dialogs.DeleteStepStackDialogFragment;
+import com.vandenrobotics.functionfirst.dialogs.EditStackDialogFragment;
+import com.vandenrobotics.functionfirst.dialogs.EditStepStackDialogFragment;
 import com.vandenrobotics.functionfirst.model.Stack;
 import com.vandenrobotics.functionfirst.model.StepStack;
+import com.vandenrobotics.functionfirst.views.FieldDiagram;
 import com.vandenrobotics.functionfirst.views.NumberPicker;
 
 import com.vandenrobotics.functionfirst.R;
 import com.vandenrobotics.functionfirst.activities.MatchActivity;
 import com.vandenrobotics.functionfirst.model.TeleData;
-
-import java.util.ArrayList;
 
 /**
  * Created by Programming701-A on 12/11/2014.
@@ -35,7 +30,7 @@ public class TeleFragment extends Fragment {
 
     private TeleData mTeleData;
 
-    private ImageView fieldDiagram;
+    private FieldDiagram fieldDiagram;
     private NumberPicker totesFromChute;
     private NumberPicker litterFromChute;
     private NumberPicker totesFromLandfill;
@@ -44,17 +39,20 @@ public class TeleFragment extends Fragment {
     private NumberPicker containersUpright;
     private NumberPicker totesUpright;
 
-    private ArrayList<Stack> mStacks;
-    private ArrayList<StepStack> mStepStacks;
-
     private long then;
     private final int longClickDuration = 1000;
+
+    private Stack mStackToEdit;
+    private StepStack mStepStackToEdit;
 
     private Stack mStackToDelete;
     private StepStack mStepStackToDelete;
 
     public DeleteStackDialogFragment deleteStackDF;
     public DeleteStepStackDialogFragment deleteStepStackDF;
+
+    public EditStackDialogFragment editStackDF;
+    public EditStepStackDialogFragment editStepStackDF;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
@@ -63,13 +61,17 @@ public class TeleFragment extends Fragment {
 
         mTeleData = mActivity.mMatchData.mTeleData;
 
-        if(viewsAssigned) loadData(mTeleData);
+        if(!viewsAssigned) assignViews(rootView);
+        if(viewsAssigned){
+            loadData(mTeleData);
+            System.out.println("VIEWS ASSIGNED AND DATA LOADED");
+        }
 
         deleteStackDF = new DeleteStackDialogFragment();
         deleteStepStackDF = new DeleteStepStackDialogFragment();
 
-        mStacks = new ArrayList<>();
-        mStepStacks = new ArrayList<>();
+        editStackDF = new EditStackDialogFragment();
+        editStepStackDF = new EditStepStackDialogFragment();
 
         return rootView;
     }
@@ -78,21 +80,7 @@ public class TeleFragment extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState){
         super.onViewCreated(view, savedInstanceState);
         assignViews(view);
-        if(viewsAssigned)loadData(mTeleData);
-    }
-
-    @Override
-    public void setUserVisibleHint(boolean isVisibleToUser){
-        super.setUserVisibleHint(isVisibleToUser);
-        if(!viewsAssigned);
-        else if(isVisibleToUser){
-            assignViews(getView());
-            if(viewsAssigned)loadData(mTeleData);
-        }
-        else if(!isVisibleToUser){
-            mTeleData = new TeleData(saveData());
-        }
-
+        loadData(mTeleData);
     }
 
     @Override
@@ -106,7 +94,7 @@ public class TeleFragment extends Fragment {
     public void onResume(){
         super.onResume();
         assignViews(getView());
-        if(viewsAssigned) loadData(mTeleData);
+        loadData(mTeleData);
     }
 
     public void loadData(final TeleData teleData){
@@ -118,9 +106,8 @@ public class TeleFragment extends Fragment {
         litterToLandfill.setValue(teleData.litterToLandfill);
         containersUpright.setValue(teleData.containersUpright);
         totesUpright.setValue(teleData.totesUpright);
-        mStacks = teleData.stacks;
-        mStepStacks = teleData.stepStacks;
-        drawPoints();
+        fieldDiagram.mStacks = teleData.stacks;
+        fieldDiagram.mStepStacks = teleData.stepStacks;
     }
 
     public TeleData saveData(){
@@ -133,8 +120,8 @@ public class TeleFragment extends Fragment {
         teleData.litterToLandfill = litterToLandfill.getValue();
         teleData.containersUpright = containersUpright.getValue();
         teleData.totesUpright = totesUpright.getValue();
-        teleData.stacks = mStacks;
-        teleData.stepStacks = mStepStacks;
+        teleData.stacks = fieldDiagram.mStacks;
+        teleData.stepStacks = fieldDiagram.mStepStacks;
 
         return teleData;
     }
@@ -165,9 +152,8 @@ public class TeleFragment extends Fragment {
             totesUpright.setMinValue(0);
             totesUpright.setMaxValue(999);
 
-            fieldDiagram = (ImageView)view.findViewById(R.id.fieldDiagram);
-            fieldDiagram.setImageDrawable(getResources().getDrawable((mActivity.mDeviceNumber>0 && mActivity.mDeviceNumber<4)? R.drawable.field_diagram_red : R.drawable.field_diagram_blue));
-            drawPoints();
+            fieldDiagram = (FieldDiagram)view.findViewById(R.id.fieldDiagram);
+            fieldDiagram.setupCanvas((mActivity.mDeviceNumber > 0 && mActivity.mDeviceNumber < 4) ? R.drawable.field_diagram_red : R.drawable.field_diagram_blue);
 
             fieldDiagram.setOnTouchListener(new View.OnTouchListener(){
                 @Override
@@ -181,7 +167,7 @@ public class TeleFragment extends Fragment {
                             boolean step = (mActivity.mDeviceNumber > 0 && mActivity.mDeviceNumber < 4) ? point.x <= 0.1500 : point.x >= 0.8500;
                             if (!step) {
                                 boolean stackExists = false;
-                                for(Stack s : mStacks) {
+                                for(Stack s : fieldDiagram.mStacks) {
                                     if (point.x >= s.mPoint.x - (30.0 / fieldDiagram.getWidth())  && point.x <= s.mPoint.x + (30.0 / fieldDiagram.getWidth()) &&
                                         point.y >= s.mPoint.y - (20.0 / fieldDiagram.getHeight()) && point.y <= s.mPoint.y + (20.0 / fieldDiagram.getHeight())) {
                                         // the click was on a stack that already existed
@@ -191,6 +177,9 @@ public class TeleFragment extends Fragment {
                                             mActivity.dialog_deleteStack(v);
                                         } else {
                                             // edit the stack instead
+                                            mStackToEdit = s;
+                                            editStackDF.mStack = mStackToEdit;
+                                            mActivity.dialog_editStack(v);
                                         }
                                         stackExists = true;
                                         break;
@@ -199,12 +188,17 @@ public class TeleFragment extends Fragment {
                                 // the click was not on a place where a stack did not already exist
                                 if (!stackExists) {
                                     Stack stack = new Stack();
-                                    mStacks.add(stack);
+                                    // edit the new Stack
                                     stack.mPoint = point;
+                                    mStackToEdit = stack;
+                                    editStackDF.mStack = mStackToEdit;
+                                    fieldDiagram.mStacks.add(stack);
+                                    mActivity.dialog_editStack(v);
+
                                 }
                             } else {
                                 boolean stackExists = false;
-                                for(StepStack s : mStepStacks) {
+                                for(StepStack s : fieldDiagram.mStepStacks) {
                                     if (point.x >= s.mPoint.x - (30.0 / fieldDiagram.getWidth())  && point.x <= s.mPoint.x + (30.0 / fieldDiagram.getWidth()) &&
                                         point.y >= s.mPoint.y - (20.0 / fieldDiagram.getHeight()) && point.y <= s.mPoint.y + (20.0 / fieldDiagram.getHeight())) {
                                         // the click was on a stack that already existed
@@ -214,24 +208,31 @@ public class TeleFragment extends Fragment {
                                             mActivity.dialog_deleteStepStack(v);
                                         } else {
                                             // edit the stack instead
+                                            mStepStackToEdit = s;
+                                            editStepStackDF.mStepStack = mStepStackToEdit;
+                                            mActivity.dialog_editStepStack(v);
                                         }
                                         stackExists = true;
                                         break;
                                     }
                                 }
-                                // the lick was not on a place where a stack did not already exist
+                                // the click was not on a place where a stack did not already exist
                                 if (!stackExists){
                                     StepStack stepStack = new StepStack();
-                                    mStepStacks.add(stepStack);
+                                    // edit the new StepStack
                                     stepStack.mPoint = point;
+                                    mStepStackToEdit = stepStack;
+                                    editStepStackDF.mStepStack = mStepStackToEdit;
+                                    fieldDiagram.mStepStacks.add(stepStack);
+                                    mActivity.dialog_editStepStack(v);
                                 }
                             }
-                            drawPoints();
                             break;
                     }
                     return true;
                 }
             });
+
             viewsAssigned = true;
         } catch (Exception e){
             e.printStackTrace();
@@ -247,10 +248,17 @@ public class TeleFragment extends Fragment {
         deleteStepStackDF.show(getFragmentManager(), "DeleteStepStackDialogFragment");
     }
 
+    public void command_editStack(View view){
+        editStackDF.show(getFragmentManager(), "EditStackDialogFragment");
+    }
+
+    public void command_editStepStack(View view){
+        editStepStackDF.show(getFragmentManager(), "EditStepStackDialogFragment");
+    }
+
     public void deleteStack(){
         try{
-            mStacks.remove(mStackToDelete);
-            drawPoints();
+            fieldDiagram.mStacks.remove(mStackToDelete);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -258,47 +266,26 @@ public class TeleFragment extends Fragment {
 
     public void deleteStepStack(){
         try{
-            mStepStacks.remove(mStepStackToDelete);
-            drawPoints();
+            fieldDiagram.mStepStacks.remove(mStepStackToDelete);
         } catch (Exception e){
             e.printStackTrace();
         }
     }
 
-    private void drawPoints(){
-        Bitmap background = BitmapFactory.decodeResource(getResources(), (mActivity.mDeviceNumber>0 && mActivity.mDeviceNumber<4)? R.drawable.field_diagram_red : R.drawable.field_diagram_blue);
-        Bitmap bmp = Bitmap.createScaledBitmap(background, fieldDiagram.getWidth()!=0? fieldDiagram.getWidth() : 513, fieldDiagram.getHeight()!=0? fieldDiagram.getHeight() : 355, true);
-        Canvas canvas = new Canvas(bmp);
-
-        Paint paint = new Paint();
-        paint.setStyle(Paint.Style.FILL);
-
-        for (Stack s : mStacks) {
-            String containerText = (s.mContainer != 0) ? "C" : "";
-            String litterText = (s.mLitter != 0) ? "L" : "";
-            String text = s.getHeight() + containerText + litterText;
-
-            float x = (float) fieldDiagram.getWidth() * s.mPoint.x;
-            float y = (float) fieldDiagram.getHeight() * s.mPoint.y;
-
-            paint.setColor(getResources().getColor(R.color.Gray));
-            canvas.drawRect(x - 25, (float) (y - 12.5), x + 25, (float) (y + 12.5), paint);
-            paint.setColor(getResources().getColor(R.color.Gold));
-            canvas.drawText(text, x, y, paint);
+    public void editStack(){
+        try{
+            fieldDiagram.mStacks.set(fieldDiagram.mStacks.indexOf(mStackToEdit), editStackDF.mStack);
+        } catch (Exception e){
+            e.printStackTrace();
         }
-
-        for (StepStack s : mStepStacks) {
-            String text = s.getHeight() + "";
-
-            float x = (float) fieldDiagram.getWidth() * s.mPoint.x;
-            float y = (float) fieldDiagram.getHeight() * s.mPoint.y;
-
-            paint.setColor(getResources().getColor(R.color.Gold));
-            canvas.drawRect(x - 25, (float) (y - 12.5), x + 25, (float) (y + 12.5), paint);
-            paint.setColor(getResources().getColor(R.color.Gray));
-            canvas.drawText(text, x, y, paint);
-        }
-
-        fieldDiagram.setImageBitmap(bmp);
     }
+
+    public void editStepStack(){
+        try{
+            fieldDiagram.mStepStacks.set(fieldDiagram.mStepStacks.indexOf(mStepStackToEdit), editStepStackDF.mStepStack);
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
 }

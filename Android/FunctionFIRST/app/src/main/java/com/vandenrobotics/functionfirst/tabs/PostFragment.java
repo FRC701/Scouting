@@ -47,20 +47,6 @@ public class PostFragment extends Fragment {
     }
 
     @Override
-    public void setUserVisibleHint(boolean isVisibleToUser){
-        super.setUserVisibleHint(isVisibleToUser);
-        if(!viewsAssigned);
-        else if(isVisibleToUser){
-            assignViews(getView());
-            loadData(mPostData);
-        }
-        else if(!isVisibleToUser){
-            mPostData = new PostData(saveData());
-        }
-
-    }
-
-    @Override
     public void onPause(){
         super.onPause();
         mPostData = new PostData(saveData());

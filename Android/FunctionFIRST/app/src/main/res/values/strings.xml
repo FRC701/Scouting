@@ -77,17 +77,19 @@
     <string name="cb_endInAuto">Robot Ends in Auto Zone?</string>
     <string name="cb_hadOther">Robot had Other Autonomous?</string>
 
-    <string name="button_addStack">New Stack</string>
-    <string name="button_editStack">Edit Stack</string>
-    <string name="button_deleteStack">Delete Stack</string>
     <string name="text_fieldDescription">FIELD DIAGRAM</string>
     <string name="text_totesFromChute">Number of Totes Received from Chute</string>
     <string name="text_litterFromChute">Number of Litter Received by Robot</string>
     <string name="text_litterToLandfill">Number of Litter Pushed to Landfill</string>
     <string name="text_containersUpright">Number of Containers Made Upright</string>
     <string name="text_totesUpright">Number of Totes Made Upright</string>
+    <string name="text_teleStack">Stack Totes Contributed</string>
+    <string name="cb_stackKnockedOver">Knocked Over Stack?</string>
+    <string name="text_coopStack">Coop Totes Contributed</string>
+
     <string name="text_titleDeleteStack">Delete This Stack?</string>
     <string name="text_messageDeleteStack">This will delete this stack from the saved data for the match.</string>
+    <string name="text_titleEditStack">Edit Stack</string>
 
     <string name="text_numFouls">Number of Fouls Incurred by This Robot</string>
     <string name="cb_gotRedCard">Robot Received Red Card?</string>
