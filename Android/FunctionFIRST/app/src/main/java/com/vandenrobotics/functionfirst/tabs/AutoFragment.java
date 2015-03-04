@@ -51,7 +51,7 @@ public class AutoFragment extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState){
         super.onViewCreated(view, savedInstanceState);
         assignViews(view);
-        loadData(mAutoData);
+        if(viewsAssigned) loadData(mAutoData);
     }
 
     @Override
@@ -66,7 +66,7 @@ public class AutoFragment extends Fragment {
     public void onResume(){
         super.onResume();
         assignViews(getView());
-        loadData(mAutoData);
+        if(viewsAssigned) loadData(mAutoData);
     }
 
     public void loadData(final AutoData autoData){
@@ -143,17 +143,17 @@ public class AutoFragment extends Fragment {
             totesToAuto.setMinValue(0);
             totesToAuto.setMaxValue(3);
             containersToAuto.setMinValue(0);
-            containersToAuto.setMaxValue(5);
+            containersToAuto.setMaxValue(7);
             containersKnockedOver.setMinValue(0);
-            containersKnockedOver.setMaxValue(5);
+            containersKnockedOver.setMaxValue(7);
             containersFromStep.setMinValue(0);
-            containersFromStep.setMaxValue(2);
+            containersFromStep.setMaxValue(4);
             totesFromLandfill.setMinValue(0);
             totesFromLandfill.setMaxValue(28);
             totesFromStep.setMinValue(0);
             totesFromStep.setMaxValue(12);
             totesStacked.setMinValue(0);
-            totesStacked.setMaxValue(28);
+            totesStacked.setMaxValue(40);
 
             viewsAssigned = true;
         } catch (Exception e){

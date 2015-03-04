@@ -42,6 +42,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 /**
  * A simple layout group that provides a numeric text area with two buttons to
@@ -65,7 +66,7 @@ public class NumberPicker extends LinearLayout {
 
     Button decrement;
     Button increment;
-    public EditText valueText;
+    public TextView valueText;
 
     private Handler repeatUpdateHandler = new Handler();
 
@@ -102,7 +103,7 @@ public class NumberPicker extends LinearLayout {
 
         // init the individual elements
         initDecrementButton( context );
-        initValueEditText( context );
+        initValueTextView( context );
         initIncrementButton( context );
 
         // Can be configured to be vertical or horizontal
@@ -152,45 +153,15 @@ public class NumberPicker extends LinearLayout {
         });
     }
 
-    private void initValueEditText( Context context){
+    private void initValueTextView( Context context){
 
         value = new Integer(minValue);
 
-        valueText = new EditText( context );
+        valueText = new TextView( context );
         valueText.setTextSize(25);
 
-        // Since we're a number that gets affected by the button, we need to be
-        // ready to change the numeric value with a simple ++/--, so whenever
-        // the value is changed with a keyboard, convert that text value to a
-        // number. We can set the text area to only allow numeric input, but
-        // even so, a carriage return can get hacked through. To prevent this
-        // little quirk from causing a crash, store the value of the internal
-        // number before attempting to parse the changed value in the text area
-        // so we can revert to that in case the text change causes an invalid
-        // number
-        valueText.setOnKeyListener(new View.OnKeyListener() {
-            public boolean onKey(View v, int arg1, KeyEvent event) {
-                int backupValue = value;
-                try {
-                    value = Integer.parseInt( ((EditText)v).getText().toString() );
-                } catch( NumberFormatException nfe ){
-                    value = backupValue;
-                }
-                return false;
-            }
-        });
-
-        // Highlight the number when we get focus
-        valueText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            public void onFocusChange(View v, boolean hasFocus) {
-                if( hasFocus ){
-                    ((EditText)v).selectAll();
-                }
-            }
-        });
-        valueText.setGravity( Gravity.CENTER_VERTICAL | Gravity.CENTER_HORIZONTAL );
-        valueText.setText( value.toString() );
-        valueText.setInputType( InputType.TYPE_CLASS_NUMBER );
+        valueText.setGravity(Gravity.CENTER_VERTICAL | Gravity.CENTER_HORIZONTAL);
+        valueText.setText(value.toString());
     }
 
     private void initDecrementButton( Context context){

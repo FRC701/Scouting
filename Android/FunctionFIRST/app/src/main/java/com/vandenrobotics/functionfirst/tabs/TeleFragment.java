@@ -62,10 +62,7 @@ public class TeleFragment extends Fragment {
         mTeleData = mActivity.mMatchData.mTeleData;
 
         if(!viewsAssigned) assignViews(rootView);
-        if(viewsAssigned){
-            loadData(mTeleData);
-            System.out.println("VIEWS ASSIGNED AND DATA LOADED");
-        }
+        if(viewsAssigned) loadData(mTeleData);
 
         deleteStackDF = new DeleteStackDialogFragment();
         deleteStepStackDF = new DeleteStepStackDialogFragment();
@@ -80,13 +77,14 @@ public class TeleFragment extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState){
         super.onViewCreated(view, savedInstanceState);
         assignViews(view);
-        loadData(mTeleData);
+        if(viewsAssigned) loadData(mTeleData);
     }
 
     @Override
     public void onPause(){
         super.onPause();
         mTeleData = new TeleData(saveData());
+        mActivity.mMatchData.mTeleData = mTeleData;
         viewsAssigned=false;
     }
 
@@ -94,7 +92,7 @@ public class TeleFragment extends Fragment {
     public void onResume(){
         super.onResume();
         assignViews(getView());
-        loadData(mTeleData);
+        if(viewsAssigned) loadData(mTeleData);
     }
 
     public void loadData(final TeleData teleData){
@@ -108,6 +106,7 @@ public class TeleFragment extends Fragment {
         totesUpright.setValue(teleData.totesUpright);
         fieldDiagram.mStacks = teleData.stacks;
         fieldDiagram.mStepStacks = teleData.stepStacks;
+        fieldDiagram.invalidate();
     }
 
     public TeleData saveData(){
@@ -153,7 +152,8 @@ public class TeleFragment extends Fragment {
             totesUpright.setMaxValue(999);
 
             fieldDiagram = (FieldDiagram)view.findViewById(R.id.fieldDiagram);
-            fieldDiagram.setupCanvas((mActivity.mDeviceNumber > 0 && mActivity.mDeviceNumber < 4) ? R.drawable.field_diagram_red : R.drawable.field_diagram_blue);
+            fieldDiagram.setImageDrawable((mActivity.mDeviceNumber > 0 && mActivity.mDeviceNumber < 4) ?
+                    getResources().getDrawable(R.drawable.field_diagram_red) : getResources().getDrawable(R.drawable.field_diagram_blue));
 
             fieldDiagram.setOnTouchListener(new View.OnTouchListener(){
                 @Override
@@ -232,7 +232,7 @@ public class TeleFragment extends Fragment {
                     return true;
                 }
             });
-
+            fieldDiagram.invalidate();
             viewsAssigned = true;
         } catch (Exception e){
             e.printStackTrace();
@@ -259,6 +259,7 @@ public class TeleFragment extends Fragment {
     public void deleteStack(){
         try{
             fieldDiagram.mStacks.remove(mStackToDelete);
+            fieldDiagram.invalidate();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -267,6 +268,7 @@ public class TeleFragment extends Fragment {
     public void deleteStepStack(){
         try{
             fieldDiagram.mStepStacks.remove(mStepStackToDelete);
+            fieldDiagram.invalidate();
         } catch (Exception e){
             e.printStackTrace();
         }
@@ -275,6 +277,7 @@ public class TeleFragment extends Fragment {
     public void editStack(){
         try{
             fieldDiagram.mStacks.set(fieldDiagram.mStacks.indexOf(mStackToEdit), editStackDF.mStack);
+            fieldDiagram.invalidate();
         } catch (Exception e){
             e.printStackTrace();
         }
@@ -283,9 +286,17 @@ public class TeleFragment extends Fragment {
     public void editStepStack(){
         try{
             fieldDiagram.mStepStacks.set(fieldDiagram.mStepStacks.indexOf(mStepStackToEdit), editStepStackDF.mStepStack);
+            fieldDiagram.invalidate();
         } catch (Exception e){
             e.printStackTrace();
         }
     }
 
+    public void cancelDialog(){
+        try{
+            fieldDiagram.invalidate();
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+    }
 }

@@ -24,7 +24,7 @@ public class EditStepStackDialogFragment extends DialogFragment {
 
     public StepStack mStepStack;
 
-    private ToggleButton[] totes = new ToggleButton[4];
+    private ToggleButton[] totes = new ToggleButton[6];
     private CheckBox knockedOver;
 
     // Override the Fragment.onAttach() method to instantiate the NoticeDialogListener
@@ -76,6 +76,8 @@ public class EditStepStackDialogFragment extends DialogFragment {
             totes[1] = (ToggleButton)view.findViewById(R.id.toggleCoopStack2);
             totes[2] = (ToggleButton)view.findViewById(R.id.toggleCoopStack3);
             totes[3] = (ToggleButton)view.findViewById(R.id.toggleCoopStack4);
+            totes[4] = (ToggleButton)view.findViewById(R.id.toggleCoopStack5);
+            totes[5] = (ToggleButton)view.findViewById(R.id.toggleCoopStack6);
             knockedOver = (CheckBox)view.findViewById(R.id.cb_coopStackKnockedOver);
         } catch (Exception e){
             e.printStackTrace();

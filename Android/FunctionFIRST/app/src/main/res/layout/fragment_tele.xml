@@ -15,7 +15,7 @@
         android:layout_alignParentStart="true">
 
         <LinearLayout
-            android:layout_width="fill_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content">
 
             <RelativeLayout
@@ -175,7 +175,8 @@
 
     <com.vandenrobotics.functionfirst.views.FieldDiagram
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
+        android:layout_height="wrap_content"
+        android:scaleType="fitXY"
         android:id="@+id/fieldDiagram"
         android:src="@drawable/field_diagram_red"
         android:layout_below="@+id/scrollViewTele"

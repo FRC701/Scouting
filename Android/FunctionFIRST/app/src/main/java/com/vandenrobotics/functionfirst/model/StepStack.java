@@ -15,7 +15,7 @@ public class StepStack {
 
     public StepStack(){
         mPoint = new PointF();
-        mTotes = new boolean[4];
+        mTotes = new boolean[6];
         mKnocked = false;
     }
 
@@ -25,6 +25,35 @@ public class StepStack {
         mPoint = stepstack.mPoint;
         mTotes = stepstack.mTotes;
         mKnocked = stepstack.mKnocked;
+    }
+
+    public StepStack(String s){
+        this();
+        try {
+            String[] dataString = s.split(",");
+            float[] data = new float[dataString.length];
+
+            for(int i = 0; i < data.length; i++){
+                data[i] = Float.parseFloat(dataString[i]);
+            }
+
+            int index = 0;
+
+            mPoint.x = data[index];
+            index++;
+            mPoint.y = data[index];
+            index++;
+
+            for(int i = 0; i < mTotes.length; i++){
+                mTotes[i] = ((int)data[index]==1);
+                index++;
+            }
+
+            mKnocked = ((int)data[index]==1);
+
+        } catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -38,6 +67,7 @@ public class StepStack {
         return mPoint.x+","+mPoint.y+","+
                tempTotes[0]+","+tempTotes[1]+","+
                tempTotes[2]+","+tempTotes[3]+","+
+               tempTotes[4]+","+tempTotes[5]+","+
                tempKnocked;
     }
 

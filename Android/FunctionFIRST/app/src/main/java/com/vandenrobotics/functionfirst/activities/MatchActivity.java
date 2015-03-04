@@ -1,14 +1,12 @@
 package com.vandenrobotics.functionfirst.activities;
 
 import android.support.v4.app.DialogFragment;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 
 import android.os.Bundle;
 import android.support.v4.app.FragmentTabHost;
 import android.support.v4.view.PagerTabStrip;
 import android.view.View;
-import android.widget.TabHost;
 import android.widget.TextView;
 import android.content.Intent;
 
@@ -17,6 +15,8 @@ import com.vandenrobotics.functionfirst.dialogs.DialogListener;
 import com.vandenrobotics.functionfirst.model.MatchData;
 import com.vandenrobotics.functionfirst.tabs.*;
 import com.vandenrobotics.functionfirst.tools.ExternalStorageTools;
+
+import java.util.ArrayList;
 
 public class MatchActivity extends FragmentActivity implements DialogListener {
 
@@ -30,6 +30,7 @@ public class MatchActivity extends FragmentActivity implements DialogListener {
     public int mMatchNumber;
     public int mTeamNumber;
     public int mDeviceNumber;
+    public ArrayList<MatchData> mMatchDataList;
     public MatchData mMatchData;
 
     private int allianceColor;
@@ -48,7 +49,15 @@ public class MatchActivity extends FragmentActivity implements DialogListener {
         mMatchNumber = getIntent().getIntExtra("matchNumber", 1);
         mTeamNumber = getIntent().getIntExtra("teamNumber", 0);
         mDeviceNumber = getIntent().getIntExtra("deviceNumber", 1);
-        mMatchData = getIntent().getParcelableExtra("matchData");
+        mMatchDataList = getIntent().getParcelableArrayListExtra("matchData");
+
+        try {
+            mMatchData = mMatchDataList.get(mMatchNumber - 1);
+        } catch (Exception e){
+            e.printStackTrace();
+            mMatchData = new MatchData();
+            mMatchDataList.add(mMatchNumber-1, mMatchData);
+        }
 
         if(mMatchData == null){
             mMatchData = new MatchData();
@@ -158,12 +167,16 @@ public class MatchActivity extends FragmentActivity implements DialogListener {
             if (mTeleFrag != null) {
                 if (dialog.equals(mTeleFrag.deleteStackDF)) {
                     // pass through without deleting the stack
+                    mTeleFrag.cancelDialog();
                 } else if (dialog.equals(mTeleFrag.deleteStepStackDF)){
                     // pass through without deleting the step stack
+                    mTeleFrag.cancelDialog();
                 } else if (dialog.equals(mTeleFrag.editStackDF)){
                     // do not edit the stack and leave the values the same
+                    mTeleFrag.cancelDialog();
                 } else if (dialog.equals(mTeleFrag.editStepStackDF)){
                     // do not edit the stack and leave the values the same
+                    mTeleFrag.cancelDialog();
                 }
             }
         }
@@ -174,8 +187,9 @@ public class MatchActivity extends FragmentActivity implements DialogListener {
         mMatchData.mInitData.teamNumber = mTeamNumber;
         mMatchData.mInitData.matchNumber = mMatchNumber;
         mMatchData.mInitData.allianceColor = (mDeviceNumber>0 && mDeviceNumber<4)? 0 : 1;
+        mMatchDataList.set(mMatchNumber-1, mMatchData);
 
-        ExternalStorageTools.writeData(mMatchData, mEvent, mDeviceNumber);
+        ExternalStorageTools.writeData(mMatchDataList, mEvent, mDeviceNumber);
         ExternalStorageTools.writeCurrentMatch(mMatchNumber+1, mEvent, mDeviceNumber);
 
         Intent intent = new Intent(this, ScoutActivity.class);
@@ -190,8 +204,9 @@ public class MatchActivity extends FragmentActivity implements DialogListener {
         mMatchData.mInitData.teamNumber = mTeamNumber;
         mMatchData.mInitData.matchNumber = mMatchNumber;
         mMatchData.mInitData.allianceColor = (mDeviceNumber>0 && mDeviceNumber<4)? 0 : 1;
+        mMatchDataList.set(mMatchNumber-1, mMatchData);
 
-        ExternalStorageTools.writeData(mMatchData, mEvent, mDeviceNumber);
+        ExternalStorageTools.writeData(mMatchDataList, mEvent, mDeviceNumber);
         ExternalStorageTools.writeCurrentMatch(mMatchNumber+1, mEvent, mDeviceNumber);
 
         Intent intent = new Intent(this, ScoutActivity.class);

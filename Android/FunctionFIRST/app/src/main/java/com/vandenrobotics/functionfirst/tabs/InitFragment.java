@@ -47,7 +47,7 @@ public class InitFragment extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState){
         super.onViewCreated(view, savedInstanceState);
         assignViews(view);
-        loadData(mInitData);
+        if(viewsAssigned) loadData(mInitData);
     }
 
     @Override
@@ -62,7 +62,7 @@ public class InitFragment extends Fragment {
     public void onResume(){
         super.onResume();
         assignViews(getView());
-        loadData(mInitData);
+        if(viewsAssigned) loadData(mInitData);
     }
 
     public void loadData(final InitData initData){

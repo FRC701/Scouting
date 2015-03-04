@@ -19,34 +19,33 @@ import java.util.ArrayList;
  */
 public class FieldDiagram extends ImageView {
 
-    public int mDrawable;
     public ArrayList<Stack> mStacks;
     public ArrayList<StepStack> mStepStacks;
     public Bitmap background;
-    public Bitmap bmp;
     public Paint mPaint;
 
     public FieldDiagram(Context context){
         super(context);
         mStacks = new ArrayList<>();
         mStepStacks = new ArrayList<>();
+        background = BitmapFactory.decodeResource(getResources(), R.drawable.field_diagram_red);
+        mPaint = new Paint();
+        mPaint.setStyle(Paint.Style.FILL);
     }
 
     public FieldDiagram(Context context, AttributeSet attrs){
         super(context, attrs);
         mStacks = new ArrayList<>();
         mStepStacks = new ArrayList<>();
+        background = BitmapFactory.decodeResource(getResources(), R.drawable.field_diagram_red);
+        mPaint = new Paint();
+        mPaint.setStyle(Paint.Style.FILL);
     }
 
     public FieldDiagram(Context context, AttributeSet attrs, int defStyle){
         super(context, attrs, defStyle);
         mStacks = new ArrayList<>();
         mStepStacks = new ArrayList<>();
-    }
-
-    public void setupCanvas(int drawable){
-        mDrawable = drawable;
-        background = BitmapFactory.decodeResource(getResources(), mDrawable);
         mPaint = new Paint();
         mPaint.setStyle(Paint.Style.FILL);
     }
@@ -55,8 +54,6 @@ public class FieldDiagram extends ImageView {
     protected void onDraw(Canvas canvas){
         super.onDraw(canvas);
         try {
-            bmp = Bitmap.createScaledBitmap(background, getWidth(), getHeight(), true);
-            canvas = new Canvas(bmp);
             for (Stack s : mStacks) {
                 String containerText = (s.mContainer) ? "C" : "";
                 String litterText = (s.mLitter) ? "L" : "";
@@ -84,12 +81,9 @@ public class FieldDiagram extends ImageView {
                 mPaint.setColor(getResources().getColor(R.color.Gray));
                 canvas.drawText(text, x-20, y+(float)2.5, mPaint);
             }
-
-            setImageBitmap(bmp);
-
         } catch(Exception e){
             e.printStackTrace();
-            setImageDrawable(getResources().getDrawable(mDrawable));
+            setImageDrawable(getResources().getDrawable(R.drawable.field_diagram_red));
         }
     }
 }

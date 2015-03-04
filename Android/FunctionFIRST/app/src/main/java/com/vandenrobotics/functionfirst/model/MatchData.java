@@ -42,8 +42,8 @@ public class MatchData implements Parcelable{
 
     @Override
     public String toString(){
-        return mInitData.toString()+"$"+mAutoData.toString()+"$"
-                +mTeleData.toString()+"$"+mPostData.toString();
+        return mInitData.toString()+"$"+mAutoData.toString()+"$"+
+               mTeleData.toString()+"$"+mPostData.toString();
     }
 
     @Override

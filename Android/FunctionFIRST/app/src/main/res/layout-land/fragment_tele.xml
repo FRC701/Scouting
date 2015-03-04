@@ -161,6 +161,7 @@
     <com.vandenrobotics.functionfirst.views.FieldDiagram
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
+        android:scaleType="fitXY"
         android:id="@+id/fieldDiagram"
         android:src="@drawable/field_diagram_red"
         android:layout_alignParentTop="true"
@@ -168,6 +169,6 @@
         android:layout_alignParentEnd="true"
         android:keepScreenOn="true"
         android:layout_toRightOf="@+id/scrollViewTele"
-        android:layout_toEndOf="@+id/scrollViewTele"/>
+        android:layout_toEndOf="@+id/scrollViewTele" />
 
 </RelativeLayout>

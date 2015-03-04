@@ -20,6 +20,7 @@ import com.vandenrobotics.functionfirst.model.Match;
 import com.vandenrobotics.functionfirst.model.MatchData;
 import com.vandenrobotics.functionfirst.tools.ExternalStorageTools;
 import com.vandenrobotics.functionfirst.tools.JSONTools;
+import com.vandenrobotics.functionfirst.views.NumberPicker;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -40,7 +41,7 @@ public class ScoutActivity extends Activity {
 
     private Spinner spinnerDevices;
     private ArrayAdapter<CharSequence> deviceAdapter;
-    private EditText editMatches;
+    private NumberPicker pickerMatches;
     private Spinner spinnerTeams;
     private ArrayAdapter<Integer> teamAdapter;
 
@@ -74,8 +75,10 @@ public class ScoutActivity extends Activity {
         spinnerDevices.setAdapter(deviceAdapter);
         spinnerDevices.setSelection(mDeviceNumber-1);
 
-        editMatches = (EditText)findViewById(R.id.editMatch);
-        editMatches.setText(mCurMatch + "");
+        pickerMatches = (NumberPicker)findViewById(R.id.pickerMatch);
+        pickerMatches.setMinValue(1);
+        pickerMatches.setMaxValue(MAX_MATCHES);
+        pickerMatches.setValue(mCurMatch);
 
         spinnerTeams = (Spinner)findViewById(R.id.spinnerTeamNumber);
         teamAdapter = new ArrayAdapter<>(this, R.layout.spinner_base, team_numbers);
@@ -90,44 +93,13 @@ public class ScoutActivity extends Activity {
                 mCurMatch = ExternalStorageTools.readCurrentMatch(mEvent, mDeviceNumber);
                 mTeamNumber = (mMatchList.size()>0)? mMatchList.get(mCurMatch-1).teams[mDeviceNumber - 1] : 0;
 
-                editMatches.setText(mCurMatch+"");
+                pickerMatches.setValue(mCurMatch);
                 spinnerTeams.setSelection(teamAdapter.getPosition(mTeamNumber));
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> adapter){
 
-            }
-        });
-
-        editMatches.setOnEditorActionListener(new TextView.OnEditorActionListener(){
-            @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                if(actionId == EditorInfo.IME_ACTION_DONE) {
-                    int matchNum = 0;
-                    try {
-                        matchNum = Integer.parseInt(editMatches.getText().toString());
-                    } catch (NumberFormatException e){
-                        e.printStackTrace();
-                        matchNum = 1;
-                    }
-                    mCurMatch = (matchNum > 0 && matchNum <= MAX_MATCHES) ? matchNum : 1;
-                    mTeamNumber = (mMatchList.size() > 0) ? mMatchList.get(mCurMatch - 1).teams[mDeviceNumber - 1] : 0;
-
-
-                    editMatches.setText(mCurMatch+"");
-                    spinnerTeams.setSelection(teamAdapter.getPosition(mTeamNumber));
-
-                    try {
-                        InputMethodManager inputManager = (InputMethodManager) ScoutActivity.this.getSystemService(Context.INPUT_METHOD_SERVICE);
-                        inputManager.hideSoftInputFromWindow(ScoutActivity.this.getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
-                    } catch (NullPointerException e){
-                        e.printStackTrace();
-                    }
-                    return true;
-                }
-
-                return false;
             }
         });
 
@@ -148,7 +120,7 @@ public class ScoutActivity extends Activity {
         // load the new match, passing all the info to it
         mDeviceNumber = spinnerDevices.getSelectedItemPosition()+1;
         ExternalStorageTools.writeDevice(mDeviceNumber, mEvent);
-        mCurMatch = Integer.parseInt(editMatches.getText().toString());
+        mCurMatch = pickerMatches.getValue();
         ExternalStorageTools.writeCurrentMatch(mCurMatch, mEvent, mDeviceNumber);
         mTeamNumber = (int)spinnerTeams.getSelectedItem();
         Intent intent = new Intent(this, MatchActivity.class);
@@ -157,7 +129,7 @@ public class ScoutActivity extends Activity {
             intent.putExtra("matchNumber", mCurMatch);
             intent.putExtra("teamNumber", mTeamNumber);
             intent.putExtra("deviceNumber", mDeviceNumber);
-            intent.putExtra("matchData", mMatchData.get(mCurMatch-1));
+            intent.putExtra("matchData", mMatchData);
         } catch (IndexOutOfBoundsException e){
             e.printStackTrace();
         }

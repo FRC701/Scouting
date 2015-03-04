@@ -27,6 +27,20 @@
             android:layout_width="wrap_content"
             android:layout_height="0dp"
             android:layout_weight="1"
+            android:id="@+id/toggleCoopStack6"
+            android:background="@drawable/tote_toggle_button" />
+
+        <ToggleButton
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:id="@+id/toggleCoopStack5"
+            android:background="@drawable/tote_toggle_button" />
+
+        <ToggleButton
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"
             android:id="@+id/toggleCoopStack4"
             android:background="@drawable/tote_toggle_button" />
 

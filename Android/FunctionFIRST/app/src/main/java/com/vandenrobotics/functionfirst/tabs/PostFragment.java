@@ -43,7 +43,7 @@ public class PostFragment extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState){
         super.onViewCreated(view, savedInstanceState);
         assignViews(view);
-        loadData(mPostData);
+        if(viewsAssigned) loadData(mPostData);
     }
 
     @Override
@@ -58,7 +58,7 @@ public class PostFragment extends Fragment {
     public void onResume(){
         super.onResume();
         assignViews(getView());
-        loadData(mPostData);
+        if(viewsAssigned) loadData(mPostData);
     }
 
     public void loadData(final PostData postData){
