@@ -61,7 +61,7 @@ public class EventListActivity extends Activity {
 
         // check online status to see if we can load the Blue Alliance Data, otherwise load the dialog without it
         if (TheBlueAllianceRestClient.isOnline(EventListActivity.this)) {
-            TheBlueAllianceRestClient.get(EventListActivity.this, "events/2014", new JsonHttpResponseHandler() {
+            TheBlueAllianceRestClient.get(EventListActivity.this, "events/", new JsonHttpResponseHandler() {
                 // no need to pass a year to the API, as it will default to the current year, which is always what we want
                 @Override
                 public void onSuccess(int statusCode, Header[] headers, JSONArray events) {
@@ -216,7 +216,7 @@ public class EventListActivity extends Activity {
                                 for(int i = 0; i < teamlist.size(); i++){
                                     final int team_number = teamlist.get(i).getInt("team_number");
                                     final int index = i;
-                                    TheBlueAllianceRestClient.get(EventListActivity.this, "team/"+teamlist.get(i).getString("key")+"/2014/media", new JsonHttpResponseHandler() {
+                                    TheBlueAllianceRestClient.get(EventListActivity.this, "team/"+teamlist.get(i).getString("key")+"/media", new JsonHttpResponseHandler() {
                                         // no need to pass a year to the API, as it will default to the current year, which is always what we want
                                         @Override
                                         public void onSuccess(int statusCode, Header[] headers, JSONArray media) {
@@ -290,7 +290,6 @@ public class EventListActivity extends Activity {
     private Intent loadEventToScout(JSONObject event){
         Intent intent = new Intent(this, ScoutActivity.class);
         try {
-            System.out.println(event.getString("key"));
             intent.putExtra("event", event.getString("key"));
         } catch (JSONException e){
             e.printStackTrace();

@@ -47,21 +47,7 @@ public class InitFragment extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState){
         super.onViewCreated(view, savedInstanceState);
         assignViews(view);
-        loadData(mInitData);
-    }
-
-    @Override
-    public void setUserVisibleHint(boolean isVisibleToUser){
-        super.setUserVisibleHint(isVisibleToUser);
-        if(!viewsAssigned);
-        else if(isVisibleToUser){
-            assignViews(getView());
-            loadData(mInitData);
-        }
-        else if(!isVisibleToUser){
-            mInitData = new InitData(saveData());
-        }
-
+        if(viewsAssigned) loadData(mInitData);
     }
 
     @Override
@@ -76,7 +62,7 @@ public class InitFragment extends Fragment {
     public void onResume(){
         super.onResume();
         assignViews(getView());
-        loadData(mInitData);
+        if(viewsAssigned) loadData(mInitData);
     }
 
     public void loadData(final InitData initData){

@@ -12,6 +12,7 @@ public class AutoData implements Parcelable {
     public int containersKnockedOver;
     public int containersFromStep;
     public int totesFromLandfill;
+    public int totesFromStep;
     public int totesStacked;
 
     public boolean[] autoStack;
@@ -27,6 +28,7 @@ public class AutoData implements Parcelable {
         containersKnockedOver = 0;
         containersFromStep = 0;
         totesFromLandfill = 0;
+        totesFromStep = 0;
         totesStacked = 0;
 
         autoStack = new boolean[3];
@@ -64,6 +66,8 @@ public class AutoData implements Parcelable {
             index += 1;
             totesFromLandfill = data[index];
             index += 1;
+            totesFromStep = data[index];
+            index += 1;
             totesStacked = data[index];
             index += 1;
 
@@ -89,6 +93,7 @@ public class AutoData implements Parcelable {
         containersKnockedOver = autoData.containersKnockedOver;
         containersFromStep = autoData.containersFromStep;
         totesFromLandfill = autoData.totesFromLandfill;
+        totesFromStep = autoData.totesFromStep;
         totesStacked = autoData.totesStacked;
         autoStack = new boolean[3];
         for(int i = 0; i < autoData.autoStack.length; i++){
@@ -109,7 +114,7 @@ public class AutoData implements Parcelable {
 
         return tempAuto+","+totesToAuto+","+containersToAuto+","+
                 containersKnockedOver+","+containersFromStep+","+
-                totesFromLandfill+","+totesStacked+","+
+                totesFromLandfill+","+totesFromStep+","+totesStacked+","+
                 tempStackBase+","+tempStackMid+","+tempStackTop+","+
                 tempEndAuto+","+tempOther;
     }

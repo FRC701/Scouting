@@ -6,7 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
-import android.widget.NumberPicker;
+import com.vandenrobotics.functionfirst.views.NumberPicker;
 
 import com.vandenrobotics.functionfirst.R;
 import com.vandenrobotics.functionfirst.activities.MatchActivity;
@@ -43,21 +43,7 @@ public class PostFragment extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState){
         super.onViewCreated(view, savedInstanceState);
         assignViews(view);
-        loadData(mPostData);
-    }
-
-    @Override
-    public void setUserVisibleHint(boolean isVisibleToUser){
-        super.setUserVisibleHint(isVisibleToUser);
-        if(!viewsAssigned);
-        else if(isVisibleToUser){
-            assignViews(getView());
-            loadData(mPostData);
-        }
-        else if(!isVisibleToUser){
-            mPostData = new PostData(saveData());
-        }
-
+        if(viewsAssigned) loadData(mPostData);
     }
 
     @Override
@@ -72,7 +58,7 @@ public class PostFragment extends Fragment {
     public void onResume(){
         super.onResume();
         assignViews(getView());
-        loadData(mPostData);
+        if(viewsAssigned) loadData(mPostData);
     }
 
     public void loadData(final PostData postData){
@@ -104,7 +90,7 @@ public class PostFragment extends Fragment {
             wasDisabled = (CheckBox)view.findViewById(R.id.cb_wasDisabled);
 
             numFouls.setMinValue(0);
-            numFouls.setMaxValue(20);
+            numFouls.setMaxValue(999);
 
             viewsAssigned = true;
         } catch (Exception e){

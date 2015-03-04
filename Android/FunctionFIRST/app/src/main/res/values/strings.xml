@@ -69,12 +69,27 @@
     <string name="text_totesToAuto">Number of Totes Brought to Auto Zone</string>
     <string name="text_containersToAuto">Number of Containers Brought to Auto Zone</string>
     <string name="text_containersKnockedOver">Number of Containers Knocked Over</string>
-    <string name="text_containersFromStep">Number of Containers Taken From Step</string>
+    <string name="text_containersFromStep">Number of Containers Taken from Step</string>
     <string name="text_totesFromLandfill">Number of Totes Taken from Landfill</string>
+    <string name="text_totesFromStep">Number of Totes Taken from the Step</string>
     <string name="text_totesStacked">Number of Non-Auto Totes Stacked on Scoring Platform</string>
     <string name="text_autoStack">Auto Stack Constructed</string>
     <string name="cb_endInAuto">Robot Ends in Auto Zone?</string>
     <string name="cb_hadOther">Robot had Other Autonomous?</string>
+
+    <string name="text_fieldDescription">FIELD DIAGRAM</string>
+    <string name="text_totesFromChute">Number of Totes Received from Chute</string>
+    <string name="text_litterFromChute">Number of Litter Received by Robot</string>
+    <string name="text_litterToLandfill">Number of Litter Pushed to Landfill</string>
+    <string name="text_containersUpright">Number of Containers Made Upright</string>
+    <string name="text_totesUpright">Number of Totes Made Upright</string>
+    <string name="text_teleStack">Stack Totes Contributed</string>
+    <string name="cb_stackKnockedOver">Knocked Over Stack?</string>
+    <string name="text_coopStack">Coop Totes Contributed</string>
+
+    <string name="text_titleDeleteStack">Delete This Stack?</string>
+    <string name="text_messageDeleteStack">This will delete this stack from the saved data for the match.</string>
+    <string name="text_titleEditStack">Edit Stack</string>
 
     <string name="text_numFouls">Number of Fouls Incurred by This Robot</string>
     <string name="cb_gotRedCard">Robot Received Red Card?</string>

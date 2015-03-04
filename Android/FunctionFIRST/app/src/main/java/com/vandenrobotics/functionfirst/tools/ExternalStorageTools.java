@@ -272,7 +272,7 @@ public class ExternalStorageTools {
 
     // reads the JSONDocument data file in to the device and into a MatchData value
     public static ArrayList<MatchData> readData(String event, int device){
-        ArrayList<MatchData> matchData = new ArrayList<>(200);
+        ArrayList<MatchData> matchData = new ArrayList<>();
         if(isExternalStorageReadable()) {
             try {
                 String line;
