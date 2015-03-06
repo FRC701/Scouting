@@ -12,62 +12,115 @@ class _TeamInfo(object):
     """Used to handle information for different teams."""
 
     def __init__(self):
-        self.matches = []           # list holding the matches the team was in
-        self.numOff = 0             # the number of matches for which the team played offensively
-        self.numDef = 0             # the number of matches for which the team played defensively
-        self.numAst = 0             # the number of matches for which the team played assistively
+        self.matches = []                   # list holding the matches the team was in
+        self.numOff = 0                     # the number of matches for which the team played offensively
         
-        self.autoHadAuto = 0        # the number of matches for which the team had an autonomous mode that did something
-        self.autoMobilityBonus = 0  # the number of matches for which the team obtained the mobility bonus
-        self.autoGoalieZone = 0     # the number of matches for which the team started in the goalie zone
-        self.autoHighScored = []    # list holding the number of scores in the high goal in autonomous (by match)
-        self.autoLowScored = []     # list holding the number of scores in the low goal in autonomous (by match)
-        self.autoHotScored = []     # list holding the number of scores in a hot goal in autonomous (by match)
-        self.autoScoredAuto = 0     # the number of matches for which the team scored in autonomous mode
+        self.autoHadAuto = 0                # number of matches for which the team had autonomous
+        self.autoTotesToZone = []           # list containing number of totes brought to zone during auto
+        self.autoContainersToZone = []      # list containing number of containers brought to zone during auto
+        self.autoContainersKnockedOver = [] # list containing number of containers knocked over during auto
+        self.autoContainersFromStep = []    # list containing number of containers received from step during auto
+        self.autoTotesFromLandfill = []     # list containing number of totes taken from landfill during auto
+        self.autoTotesStacked = []          # list containing number of totes stacked that weren't auto totes during auto
+        self.autoStackTotalTotes = []       # list containing number of total totes in the auto stack made by this robot
+        self.autoEndInZone = 0              # number of matches for which the team ended in the auto zone
+        self.autoOther = 0                  # number of matches for which the team did something else in auto
 
-        self.teleHadTele = 0        # the number of matches for which the robot scored in tele-op mode
-        self.teleHighScored = []    # list holding the number of scores in the high goal in tele-op (by match)
-        self.teleScoredHigh = 0     # the number of matches for which the team scored in the high goal (search field)
-        self.teleLowScored = []     # list holding the number of scores in the high goal in tele-op (by match)
-        self.teleTrussScored = []   # list holding the number of successful truss scores in tele-op (by match)
-        self.teleScoredTruss = 0    # the number of matches for which the team scored in over the truss (search field)
-        self.teleCatchScored = []   # list holding the number of successful catch scores in tele-op (by match)
-        self.teleCaught = 0         # the number of matches for which the team caught a ball (search field)
-        self.teleAssistScored = []  # list holding the number of successful assist scores in tele-op (by match)
-        self.teleScoredTele = 0     # the number of matches for which the team scored (in a goal) in tele-op mode
-        self.teleHotSpots = []      # list holding the hots spots for this team (by match)
-        self.teleIntakeTimes = []   # list holding the average intake times for this team (by match)
-        
-        self.postRegFouls = []      # list holding the number of regular fouls for each match
-        self.postTechFouls = []     # list holding the number of technical fouls for each match
-        self.postHadRegFoul = 0     # the number of matches for which a team incurred a regular foul
-        self.postHadTechFoul = 0    # the number of matches for which a team incurred a technical foul
-        self.postDisabled = 0       # the number of matches in which a team was disabled
-        self.postNoShow = 0         # the number of matches in which a team didn't show up to the field
-        self.postHadYellow = 0      # the number of matches for which a team incurred a yellow card
-        self.postHadRed = 0         # the number of matches for which a team incurred a red card
-        self.postAggressive = 0     # the number of matches for which a team played aggressively
+        self.teleStackTotes = []            # list containing a list of the number of totes in each stack for tele
+        self.teleStepStackTotes = []        # list containing a list of the number of totes in each stepstack for tele
+        self.teleStackHeights = []          # list containing a list of the max height of each stack for tele
+        self.teleStepStackTotes = []        # list containing a list of the max height of each step stack for tele
+        self.teleStackContainers = []       # list containing a list of the container state for each stack in tele
+        self.teleStackContainerHeights = [] # list containing a list of the container heights for each stack in tele
+        self.teleStackLitter = []           # list containing a list of the litter state for each stack in tele 
+        self.teleStackKnockedOver = []      # list containing a list of the knocked over state for each stack in tele
+        self.teleStepStackKnockedOver = []  # list containing a list of the knocked over state for each step stack in tele
+        self.teleStacksScored = []          # list containing the number of stacks scored each match
+        self.teleStepStacksScored = []      # list containing the number of step stacks scored each match
 
-    def get_more_info(self):
-        self.autoHotAccuracy = sum(self.autoHotScored)/(sum(self.autoHighScored)+sum(self.autoLowScored)) \
-                                if (sum(self.autoHighScored)+sum(self.autoLowScored))>0 else 0
-        self.totalTrussScores = sum(self.teleTrussScored)
-        self.totalCatchScores = sum(self.teleCatchScored)
-        self.totalAssistScores = sum(self.teleAssistScored)
+        self.teleTotesFromChute = []        # list containing the number of totes received from the chute each match
+        self.teleLitterFromChute = []       # list containing the number of litter received from the chute each match
+        self.teleTotesFromLandfill = []     # list containing the number of totes received from the landfill each match
+        self.teleTotesFromStep = []         # list containing the number of totes received from the step each match
+        self.teleLitterToLandfill = []      # list containing the number of litter pushed to the landfill zone each match
+        self.teleContainersUpright = []     # list containing the number of containers upright each match
+        self.teleTotesUpright = []          # list containing the number of totes upright each match
+
+        self.postFouls = []                 # list containing the number of fouls each match
+        self.postRedCard = 0                # number of matches for which robot received red card
+        self.postYellowCard = 0             # number of matches for which robot received yellow card
+        self.postDisabled = 0               # number of matches for which robot was disabled
+
+        self.scoredInTele = 0               # number of matches for which the robot scored in tele-op
+        self.scoredInAuto = 0               # number of matches for which the robot scored in auto
+        self.hasFoul = 0                    # number of matches for which the robot received a foul
+
+    def get_info(self):
+        self.avgAutoTotesToZone = float(sum(self.autoTotesToZone))/float(len(self.autoTotesToZone)) if len(self.autoTotesToZone) else 0
+        self.avgAutoContainersToZone = float(sum(self.autoContainersToZone))/float(len(self.autoContainersToZone)) if len(self.autoContainersToZone) else 0
+        self.avgAutoContainersKnockedOver = float(sum(self.autoContainersKnockedOver))/float(len(self.autoContainersKnockedOver)) if len(self.autoContainersKnockedOver) else 0
+        self.avgAutoContainersFromStep = float(sum(self.autoContainersFromStep))/float(len(self.autoContainersFromStep)) if len(self.autoContainersFromStep) else 0
+        self.avgAutoTotesFromLandfill = float(sum(self.autoTotesFromLandfill))/float(len(self.autoTotesFromLandfill)) if len(self.autoTotesFromLandfill) else 0
+        self.avgAutoTotesStacked = float(sum(self.autoTotesStacked))/float(len(self.autoTotesStacked)) if len(self.autoTotesStacked) else 0
+        self.avgAutoStackTotalTotes = float(sum(self.autoStackTotalTotes))/float(len(self.autoStackTotalTotes)) if len(self.autoStackTotalTotes) else 0
+
+        self.avgTeleStackTotes = 0
+        for stack in self.teleStackTotes:
+            self.avgTeleStackTotes += float(sum(stack))/float(len(stack)) if len(stack) else 0
+        self.avgTeleStackTotes = float(self.avgTeleStackTotes) / float(len(self.teleStackTotes)) if len(self.teleStackTotes) else 0
+
+        self.avgTeleStepStackTotes = 0
+        for stepstack in self.teleStepStackTotes:
+            self.avgTeleStepStackTotes += float(sum(stepstack))/float(len(stepstack)) if len(stepstack) else 0
+        self.avgTeleStepStackTotes = float(self.avgTeleStepStackTotes) / float(len(self.teleStepStackTotes)) if len(self.teleStepStackTotes) else 0
+
+        self.avgTeleStackHeights = 0
+        for stack in self.teleStackHeights:
+            self.avgTeleStackHeights += float(sum(stack))/float(len(stack)) if len(stack) else 0
+        self.avgTeleStackHeights = float(self.avgTeleStackHeights) / float(len(self.teleStackHeights)) if len(self.teleStackHeights) else 0
+
+        self.avgTeleStepStackHeights = 0
+        for stepstack in self.teleStepStackHeights:
+            self.avgTeleStepStackHeights += float(sum(stepstack))/float(len(stepstack)) if len(stepstack) else 0
+        self.avgTeleStepStackHeights = float(self.avgTeleStepStackHeights) / float(len(self.teleStepStackHeights)) if len(self.teleStepStackHeights) else 0
+
+        self.avgTeleStackContainers = 0
+        for stack in self.teleStackContainers:
+            self.avgTeleStackContainers += float(sum(stack))/float(len(stack)) if len(stack) else 0
+        self.avgTeleStackContainers = float(self.avgTeleStackContainers) / float(len(self.teleStackContainers)) if len(self.teleStackContainers) else 0
+
+        self.avgTeleStackContainerHeights = 0
+        for stack in self.teleStackContainerHeights:
+            self.avgTeleStackContainerHeights += float(sum(stack))/float(len(stack)) if len(stack) else 0
+        self.avgTeleStackContainerHeights = float(self.avgTeleStackContainerHeights) / float(len(self.teleStackContainerHeights)) if len(self.teleStackContainerHeights) else 0
+
+        self.avgTeleStackLitter = 0
+        for stack in self.teleStackLitter:
+            self.avgTeleStackLitter += float(sum(stack))/float(len(stack)) if len(stack) else 0
+        self.avgTeleStackLitter = float(self.avgTeleStackLitter) / float(len(self.teleStackLitter)) if len(self.teleStackLitter) else 0
+
+        self.avgTeleStackKnockedOver = 0
+        for stack in self.teleStackKnockedOver:
+            self.avgTeleStackKnockedOver += float(sum(stack))/float(len(stack)) if len(stack) else 0
+        self.avgTeleStackKnockedOver = float(self.avgTeleStackKnockedOver) / float(len(self.teleStackKnockedOver)) if len(self.teleStackKnockedOver) else 0
+
+        self.avgTeleStepStackKnockedOver = 0
+        for stepstack in self.teleStepStackKnockedOver:
+            self.avgTeleStepStackKnockedOver += float(sum(stepstack))/float(len(stepstack)) if len(stepstack) else 0
+        self.avgTeleStepStackKnockedOver = float(self.avgTeleStepStackKnockedOver) / float(len(self.teleStepStackKnockedOver)) if len(self.teleStepStackKnockedOver) else 0
+
+        self.avgTeleStacksScored = float(sum(self.teleStacksScored))/float(len(self.teleStacksScored)) if len(self.teleStacksScored) else 0
+        self.avgTeleStepStacksScored = float(sum(self.teleStepStacksScored))/float(len(self.teleStepStacksScored)) if len(self.teleStepStacksScored) else 0
+        self.avgTeleTotesFromChute = float(sum(self.teleTotesFromChute))/float(len(self.teleTotesFromChute)) if len(self.teleTotesFromChute) else 0
+        self.avgTeleLitterFromChute = float(sum(self.teleLitterFromChute))/float(len(self.teleLitterFromChute)) if len(self.teleLitterFromChute) else 0
+        self.avgTeleTotesFromLandfill = float(sum(self.teleTotesFromLandfill))/float(len(self.teleTotesFromLandfill)) if len(self.teleTotesFromLandfill) else 0
+        self.avgTeleTotesFromStep = float(sum(self.teleTotesFromStep))/float(len(self.teleTotesFromStep)) if len(self.teleTotesFromStep) else 0
+        self.avgTeleLitterToLandfill = float(sum(self.teleLitterToLandfill))/float(len(self.teleLitterToLandfill)) if len(self.teleLitterToLandfill) else 0
+        self.avgTeleContainersUpright = float(sum(self.teleContainersUpright))/float(len(self.teleContainersUpright)) if len(self.teleContainersUpright) else 0
+        self.avgTeleTotesUpright = float(sum(self.teleTotesUpright))/float(len(self.teleTotesUpright)) if len(self.teleTotesUpright) else 0
         
-    def get_final_info(self):
-        self.avgAutoHighScored = sum(self.autoHighScored)/len(self.autoHighScored) if len(self.autoHighScored) else 0
-        self.avgAutoLowScored = sum(self.autoLowScored)/len(self.autoLowScored) if len(self.autoLowScored) else 0
-        self.avgAutoHotScored = sum(self.autoHotScored)/len(self.autoHotScored) if len(self.autoHotScored) else 0
-        self.avgTeleHighScored = sum(self.teleHighScored)/len(self.teleHighScored) if len(self.teleHighScored) else 0
-        self.avgTeleLowScored = sum(self.teleLowScored)/len(self.teleLowScored) if len(self.teleLowScored) else 0
-        self.avgTeleTrussScored = sum(self.teleTrussScored)/len(self.teleTrussScored) if len(self.teleTrussScored) else 0
-        self.avgTeleCatchScored = sum(self.teleCatchScored)/len(self.teleCatchScored) if len(self.teleCatchScored) else 0
-        self.avgTeleAssistScored = sum(self.teleAssistScored)/len(self.teleAssistScored) if len(self.teleAssistScored) else 0
-        self.avgTeleIntakeTimes = sum(self.teleIntakeTimes)/len(self.teleIntakeTimes) if len(self.teleIntakeTimes) else 0
-        self.avgPostRegFoul = sum(self.postRegFouls)/len(self.postRegFouls) if len(self.postRegFouls) else 0
-        self.avgPostTechFoul = sum(self.postTechFouls)/len(self.postTechFouls) if len(self.postTechFouls) else 0
-        
+        self.avgPostFoul = sum(self.postFouls)/len(self.postFouls) if len(self.postFouls) else 0
+                
     def getAttr(self, source):
         return getattr(self, source)
 
@@ -79,90 +132,54 @@ class _TeamScores(object):
     """Used to handle scoring data for different teams."""
 
     def __init__(self):
-        self.oScores = []           # list holding offensive scores
-        self.dScores = []           # list holding defensive scores
-        self.aScores = []           # list holding assistive scores
-        self.tScores = []           # list holding total scores
-        self.wScores = []           # list holding weighted  scores
-        self.woScores = []          # list holding weighted offensive scores
-        self.wdScores = []          # list holding weighted defensive scores
-        self.waScores = []          # list holding weighted assistive scores
-        self.autoScores = []        # list holding auto scores
-        self.teleScores = []        # list holding tele scores
-        self.foulScores = []        # list holding foul scores
-
+        self.oScores = []               # list holding offensive scores
+        self.tScores = []               # list holding total scores
+        self.autoScores = []            # list holding auto scores
+        self.autoStackScores = []       # list holding auto stack scores
+        self.autoContainerScores = []   # list holding auto container scores
+        self.autoRobotScores = []       # list holding auto robot scores
+        self.teleScores = []            # list holding tele scores
+        self.teleToteScores = []        # list holding tele totes scores
+        self.teleContainerScores = []   # list holding tele container scores
+        self.teleLitterScores = []      # list holding tele litter scores
+        self.foulScores = []            # list holding foul scores
+        
     def get_maxmin_scores(self):
         self.maxOffScore = max(self.oScores)
         self.minOffScore = min(self.oScores)
-        self.maxDefScore = max(self.dScores)
-        self.minDefScore = min(self.dScores)
-        self.maxAstScore = max(self.aScores)
-        self.minAstScore = min(self.aScores)
         self.maxTotalScore = max(self.tScores)
         self.minTotalScore = min(self.tScores)
-        self.maxWScore = max(self.wScores)
-        self.minWScore = min(self.wScores)
-        self.maxWOScore = max(self.woScores)
-        self.minWOScore = min(self.woScores)
-        self.maxWDScore = max(self.wdScores)
-        self.minWDScore = min(self.wdScores)
-        self.maxWAScore = max(self.waScores)
-        self.minWAScore = min(self.waScores)
         self.maxAutoScore = max(self.autoScores)
         self.minAutoScore = min(self.autoScores)
+        self.maxAutoStackScore = max(self.autoStackScores)
+        self.minAutoStackScore = min(self.autoStackScores)
+        self.maxAutoContainerScore = max(self.autoContainerScores)
+        self.minAutoContainerScore = min(self.autoContainerScores)
+        self.maxAutoRobotScore = max(self.autoRobotScores)
+        self.minAutoRobotScore = min(self.autoRobotScores)
         self.maxTeleScore = max(self.teleScores)
         self.minTeleScore = min(self.teleScores)
+        self.maxTeleToteScore = max(self.teleToteScores)
+        self.minTeleToteScore = min(self.teleToteScores)
+        self.maxTeleContainerScore = max(self.teleContainerScores)
+        self.minTeleContainerScore = min(self.teleContainerScores)
+        self.maxTeleLitterScore = max(self.teleLitterScores)
+        self.minTeleLitterScore = min(self.teleLitterScores)
         self.maxFoulScore = max(self.foulScores)
         self.minFoulScore = min(self.foulScores)
 
-    def get_avgOff_scores(self, matches=1, offensive=0, auto=0, tele=0):
-        self.avgOffScore = sum(self.oScores)/matches if offensive else 0
+    def get_avg_scores(self, matches=1, auto=0, tele=0):
+        self.avgOffScore = sum(self.oScores)/matches if matches else 0
         self.avgAutoScore = sum(self.autoScores)/auto if auto else 0
+        self.avgAutoStackScore = sum(self.autoStackScores)/auto if auto else 0
+        self.avgAutoContainerScore = sum(self.autoContainerScores)/auto if auto else 0
+        self.avgAutoRobotScore = sum(self.autoRobotScores)/auto if auto else 0
         self.avgTeleScore = sum(self.teleScores)/tele if tele else 0
+        self.avgTeleToteScore = sum(self.teleToteScores)/tele if tele else 0
+        self.avgTeleContainerScore = sum(self.teleContainerScores)/tele if tele else 0
+        self.avgTeleLitterScore = sum(self.teleLitterScores)/tele if tele else 0
         self.avgFoulScore = sum(self.foulScores)/matches if matches else 0
-
-    def get_avgDefAst_scores(self, matches=1, defensive=0, assistive=0):
-        self.avgDefScore = sum(self.dScores)/matches if defensive else 0
-        self.avgAstScore = sum(self.aScores)/matches if assistive else 0
-
-    def get_avgWeight_scores(self):
-        self.avgTotalScore = sum(self.tScores)/len(self.tScores) if len(self.tScores) else 0
-        self.avgWScore = sum(self.wScores)/len(self.wScores) if len(self.wScores) else 0
-        self.avgWOScore = sum(self.woScores)/len(self.woScores) if len(self.woScores) else 0
-        self.avgWDScore = sum(self.wdScores)/len(self.wdScores) if len(self.wdScores) else 0
-        self.avgWAScore = sum(self.waScores)/len(self.waScores) if len(self.waScores) else 0
-
-    def getAttr(self, source):
-        return getattr(self, source)
-        
-
-#------------------------------------------------------------------------------
-# TeamPitInfo Class
-#   -- stores data unrelated to performance on the field
-#------------------------------------------------------------------------------
-class _TeamPitInfo(object):
-    """Used to handle information about a teams chassis and other
-       non-performance related information."""
-
-    def __init__(self):
-        self.robLength = 0          # the length of the robot's chassis
-        self.robWidth= 0            # the width  of the robot's chassis
-        self.robHeight = 0          # the height of the robot
-        self.robWeight = 0          # the weight of the robot
-        self.clearance = 0          # the distance to the floor from the bottom of the chassis
-        self.wheelSpace = 0         # the spacing between the wheels width-wise
-        self.driveSystem = ""       # what type of control the robot uses to drive
-                                    # 0 = tank, 1 = arcade, 2 = swerve, 3 = crab, 4 = other
-        self.shiftGear = ""         # if the robot has multiple gear drive
-                                    # 0 = no, 1 = yes
-        self.centerMass = ""        # the center of mass / gravity of the robot
-                                    # 0 = low, 1 = mid, 2 = high
-        self.driver1 = ""           # the robot's drive team
-        self.exp1 = None            # the robot's drive team's experience(in competitions / years)
-        self.driver2 = ""           # ''
-        self.expe2 = None           # ''
-        self.driver3 = ""           # ''
-        self.exp3 = None            # ''
+        self.avgTotalScore = sum(self.tScores)/matches if matches else 0
 
     def getAttr(self, source):
         return getattr(self, source)
@@ -175,16 +192,16 @@ class TeamRankings(object):
     """Used to keep track of rankings for each team."""
 
     off_rank = []
-    def_rank = []
-    ast_rank = []
-    tot_rank = []
     auto_rank = []
+    auto_stack_rank = []
+    auto_container_rank = []
+    auto_robot_rank = []
     tele_rank = []
+    tele_tote_rank = []
+    tele_container_rank = []
+    tele_litter_rank = []
     foul_rank = []
-    w_rank = []
-    wo_rank = []
-    wd_rank = []
-    wa_rank = []
+    tot_rank = []
     
     def __init__(self):
         print
@@ -211,73 +228,70 @@ class Team(object):
         self.number = num
         self.Info = _TeamInfo()
         self.Scores = _TeamScores()
-        self.PitInfo = _TeamPitInfo()
         self.team_list.append(self)
         self.available.append(self)
 
         # a few of the final details predefined so as to satisfy predictions with null teams
         self.avgOff = 0
-        self.avgDef = 0
-        self.avgAst = 0
         self.pOff = 0
-        self.pDef = 0
-        self.pAst = 0
         
-    def get_primary_details(self): # gets the offensive values of Team
-        self.Info.get_more_info()
-        self.Scores.get_avgOff_scores(len(self.Info.matches),
-                                   self.Info.numOff,
+    def get_details(self): # gets all of the information for the team
+        self.Info.get_info()
+        self.Scores.get_avg_scores(len(self.Info.matches),
                                    self.Info.autoHadAuto, self.Info.teleHadTele)
-
-    def get_secondary_details(self): # gets the defensive and assistive values of the team
-        self.Info.get_final_info()
-        self.Scores.get_avgDefAst_scores(len(self.Info.matches),
-                                         self.Info.numDef, self.Info.numAst)
-
-    def get_tertiary_details(self): # gets the max and min scores, etc. of the team
-        self.Scores.get_avgWeight_scores()
         self.Scores.get_maxmin_scores()
 
-    def get_final_details(self): # gets the values to be displayed in the TeamData window
         matches = self.Info.matches
         self.numMatch = len(matches)
+        self.pNoShow  = str(int(100*self.Info.noShow)/len(matches)) + "%"
+        self.pDisabled = str(int(100*self.Info.postDisabled)/len(matches)) + "%"
         self.pOff = str(int(100*self.Info.numOff)/len(matches)) + "%"
-        self.pDef = str(int(100*self.Info.numDef)/len(matches)) + "%"
-        self.pAst = str(int(100*self.Info.numAst)/len(matches)) + "%"
         self.avgOff = round(self.Scores.avgOffScore,2)
-        self.avgDef = round(self.Scores.avgDefScore,2)
-        self.avgAst = round(self.Scores.avgAstScore,2)
         self.avgTotal = round(self.Scores.avgTotalScore,2)
-        self.WeightedOff = round(self.Scores.avgWOScore,2)
-        self.WeightedDef = round(self.Scores.avgWDScore,2)
-        self.WeightedAst = round(self.Scores.avgWAScore,2)
-        self.WeightedTotal = round(self.Scores.avgWScore,2)
 
         self.pHadAuto = str(int(100*self.Info.autoHadAuto)/len(matches)) + "%"
-        self.pMobilityBonus = str(int(100*self.Info.autoMobilityBonus)/len(matches)) + "%"
-        self.pGoalieZone = str(int(100*self.Info.autoGoalieZone)/len(matches)) + "%"
         self.avgAutoScore = round(self.Scores.avgAutoScore,2)
-        self.avgAutoHighScored = round(self.Info.avgAutoHighScored,2)
-        self.avgAutoLowScored = round(self.Info.avgAutoLowScored,2)
-        self.avgAutoHotScored = round(self.Info.avgAutoHotScored,2)
-        self.pHotAccuracy = str(100*round(self.Info.autoHotAccuracy,2)) + "%"
-
+        self.avgAutoStackScore = round(self.Scores.avgAutoStackScore,2)
+        self.avgAutoContainerScore = round(self.Scores.avgAutoContainerScore,2)
+        self.avgAutoRobotScore = round(self.Scores.avgAutoRobotScore,2)
+        self.avgAutoTotesToZone = round(self.Info.avgAutoTotesToZone,2)
+        self.avgAutoContainersToZone = round(self.Info.avgAutoContainersToZone,2)
+        self.avgAutoContainersKnockedOver = round(self.Info.avgAutoContainersKnockedOver,2)
+        self.avgAutoContainersFromStep = round(self.Info.avgAutoContainersFromStep,2)
+        self.avgAutoTotesFromLandfill = round(self.Info.avgAutoTotesFromLandfill,2)
+        self.avgAutoTotesStacked = round(self.Info.avgAutoTotesStacked,2)
+        self.avgAutoStackTotalTotes = round(self.Info.avgAutoStackTotalTotes,2)
+        self.pEndInAuto = str(int(100*self.Info.autoEndInZone)/len(matches)) + "%"
+        self.pAutoOther = str(int(100*self.Info.autoOther)/len(matches)) + "%"
+        
         self.avgTeleScore = round(self.Scores.avgTeleScore,2)
-        self.avgTeleIntakeTimes = round(self.Info.avgTeleIntakeTimes,2)
-        self.avgTeleHighScored = round(self.Info.avgTeleHighScored,2)
-        self.avgTeleLowScored = round(self.Info.avgTeleLowScored,2)  
-        self.avgTeleTrussScored = round(self.Info.avgTeleTrussScored,2)
-        self.avgTeleCatchScored = round(self.Info.avgTeleCatchScored,2)
-        self.avgTeleAssistScored = round(self.Info.avgTeleAssistScored,2)
+        self.avgTeleToteScore = round(self.Scores.avgTeleToteScore,2)
+        self.avgTeleContainerScore = round(self.Scores.avgTeleContainerScore,2)
+        self.avgTeleLitterScore = round(self.Scores.avgTeleLitterScore,2)
+        self.avgTeleStackTotes = round(self.Info.avgTeleStackTotes,2)
+        self.avgTeleStepStackTotes = round(self.Info.avgTeleStepStackTotes,2)
+        self.avgTeleStackHeights = round(self.Info.avgTeleStackHeights,2)
+        self.avgTeleStepStackHeights = round(self.Info.avgTeleStepStackHeights,2)
+        self.avgTeleStackContainers = round(self.Info.avgTeleStackContainers,2)
+        self.avgTeleStackContainerHeights = round(self.Info.avgTeleStackContainerHeights,2)
+        self.avgTeleStackLitter = round(self.Info.avgTeleStackLitter,2)
+        self.avgTeleStackKnockedOver = round(self.Info.avgTeleStackKnockedOver,2)
+        self.avgTeleStepStackKnockedOver = round(self.Info.avgTeleStepStackKnockedOver,2)
+        self.avgTeleStacksScored = round(self.Info.avgTeleStacksScored,2)
+        self.avgTeleStepStacksScored = round(self.Info.avgTeleStepStacksScored,2)
+        self.avgTeleTotesFromChute = round(self.Info.avgTeleTotesFromChute,2)
+        self.avgTeleLitterFromChute = round(self.Info.avgTeleLitterFromChite,2)
+        self.avgTeleTotesFromLandfill = round(self.Info.avgTeleTotesFromLandfill,2)
+        self.avgTeleTotesFromStep = round(self.Info.avgTeleTotesFromStep,2)
+        self.avgTeleLitterToLandfill = round(self.Info.avgTeleLitterToLandfill,2)
+        self.avgTeleContainersUpright = round(self.Info.avgTeleContainersUpright,2)
+        self.avgTeleTotesUpright = round(self.Info.avgTeleTotesUpright,2)
 
-        self.pDisabled = str(int(100*self.Info.postDisabled)/len(matches)) + "%"
-        self.pNoShow  = str(int(100*self.Info.postNoShow)/len(matches)) + "%"
-        self.avgPostRegFoul = round(self.Info.avgPostRegFoul,2)
-        self.avgPostTechFoul = round(self.Info.avgPostTechFoul,2)
         self.avgFoulScore = round(self.Scores.avgFoulScore,2)
-        self.pYellow = str(int(100*self.Info.postHadYellow)/len(matches)) + "%"
-        self.pRed = str(int(100*self.Info.postHadRed)/len(matches)) + "%"
-        self.pAggressive = str(int(100*self.Info.postAggressive)/len(matches)) + "%"
+        self.avgPostFoul = round(self.Info.avgPostFoul,2)
+        self.pFoul = str(int(100*self.Info.hasFoul)/len(matches)) + "%"
+        self.pYellow = str(int(100*self.Info.postYellowCard)/len(matches)) + "%"
+        self.pRed = str(int(100*self.Info.postRedCard)/len(matches)) + "%"
 
     def getAttr(self, source):
         return getattr(self, source)
