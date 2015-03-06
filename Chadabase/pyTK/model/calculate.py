@@ -56,15 +56,15 @@ def assign_team_values(team, entry):
     team.Info.autoEndInZone += int(entry.autoEndInZone)
     team.Info.autoOther += int(entry.autoOther)
 
-    team.Info.teleStackTotes.append(entry.teleStackTotes)
-    team.Info.teleStepStackTotes.append(entry.teleStepStackTotes)
-    team.Info.teleStackHeights.append(entry.teleStackHeights)
-    team.Info.teleStepStackHeights.append(entry.teleStepStackHeights)
-    team.Info.teleStackContainers.append(entry.teleStackContainers)
-    team.Info.teleStackContainerHeights.append(entry.teleStackContainerHeights)
-    team.Info.teleStackLitter.append(entry.teleStackLitter)
-    team.Info.teleStackKnockedOver.append(entry.teleStackKnockedOver)
-    team.Info.teleStepStackKnockedOver.append(entry.teleStackKnockedOver)
+    team.Info.teleStackTotes.append(float(entry.avgTeleStackTotes))
+    team.Info.teleStepStackTotes.append(float(entry.avgTeleStepStackTotes))
+    team.Info.teleStackHeights.append(float(entry.avgTeleStackHeights))
+    team.Info.teleStepStackHeights.append(float(entry.avgTeleStepStackHeights))
+    team.Info.teleStackContainers.append(float(entry.avgTeleStackContainers))
+    team.Info.teleStackContainerHeights.append(float(entry.avgTeleStackContainerHeights))
+    team.Info.teleStackLitter.append(float(entry.avgTeleStackLitter))
+    team.Info.teleStackKnockedOver.append(float(entry.avgTeleStackKnockedOver))
+    team.Info.teleStepStackKnockedOver.append(float(entry.avgTeleStackKnockedOver))
     team.Info.teleStacksScored.append(float(entry.teleStacksScored))
     team.Info.teleStepStacksScored.append(float(entry.teleStepStacksScored))
 
@@ -107,14 +107,11 @@ def get_off_rank(sort="avg",rev=True):
     
     for team in Team.team_list:
         if sort == "avg":
-            if team.Info.numOff > 0:
-                TeamRankings.off_rank.append([team.Scores.avgOffScore,team.number])
+            TeamRankings.off_rank.append([team.Scores.avgOffScore,team.number])
         elif sort == "max":
-            if team.Info.numOff > 0:
-                TeamRankings.off_rank.append([team.Scores.maxOffScore,team.number])
+            TeamRankings.off_rank.append([team.Scores.maxOffScore,team.number])
         elif sort == "min":
-            if team.Info.numOff > 0:
-                TeamRankings.off_rank.append([team.Scores.minOffScore,team.number])
+            TeamRankings.off_rank.append([team.Scores.minOffScore,team.number])
 
     TeamRankings.off_rank.sort(reverse=rev)
 
@@ -266,13 +263,13 @@ def get_foul_rank(sort="avg",rev=False): # foul rank default from least points t
     
     for team in Team.team_list:
         if sort == "avg":
-            if team.Info.postHadRegFoul or team.Info.postHadTechFoul:
+            if team.Info.hasFoul or team.Info.hasTechFoul:
                 TeamRankings.foul_rank.append([team.Scores.avgFoulScore,team.number])
         elif sort == "max":
-            if team.Info.postHadRegFoul or team.Info.postHadTechFoul:
+            if team.Info.hasFoul or team.Info.hasTechFoul:
                 TeamRankings.foul_rank.append([team.Scores.maxFoulScore,team.number])
         elif sort == "min":
-            if team.Info.postHadRegFoul or team.Info.postHadTechFoul:
+            if team.Info.hasFoul or team.Info.hasFoul:
                 TeamRankings.foul_rank.append([team.Scores.minFoulScore,team.number])
 
     TeamRankings.foul_rank.sort(reverse=rev)
@@ -285,11 +282,11 @@ def get_tot_rank(sort="avg",rev=True):
     
     for team in Team.team_list:
         if sort == "avg":
-                TeamRankings.tot_rank.append([team.Scores.avgTotalScore,team.number])
+            TeamRankings.tot_rank.append([team.Scores.avgTotalScore,team.number])
         elif sort == "max":
-                TeamRankings.tot_rank.append([team.Scores.maxTotalScore,team.number])
+            TeamRankings.tot_rank.append([team.Scores.maxTotalScore,team.number])
         elif sort == "min":
-                TeamRankings.tot_rank.append([team.Scores.minTotalScore,team.number])
+            TeamRankings.tot_rank.append([team.Scores.minTotalScore,team.number])
 
     TeamRankings.tot_rank.sort(reverse=rev)
 
@@ -300,11 +297,12 @@ def get_tot_rank(sort="avg",rev=True):
 #   -- calculates predicted alliance scores predicts match outcomes
 #------------------------------------------------------------------------------
 def predict_scores(team1=None,team2=None,team3=None):
-    pOff1 = float(team1.pOff.rstrip("%"))/100
-    pOff2 = float(team2.pOff.rstrip("%"))/100
-    pOff3 = float(team3.pOff.rstrip("%"))/100
     try:
-        offScore = ((team1.avgOff*pOff1)+(team2.avgOff*pOff2)+(team3.avgOff*pOff3))
+        # make each team a confidence internal over proportion means and use
+        # that confidence interval to calculate a total range of scores (from lowest
+        # theoretical to highest theoretical, then take the center of that
+        # total range and place it as the expected offensive score
+        offScore = (team1.avgOff+team2.avgOff+team3.avgOff)
     except:
         offScore = 0
 

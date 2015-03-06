@@ -13,7 +13,7 @@ class _TeamInfo(object):
 
     def __init__(self):
         self.matches = []                   # list holding the matches the team was in
-        self.numOff = 0                     # the number of matches for which the team played offensively
+        self.noShow = 0                     # number of matches for which the team didn't show up
         
         self.autoHadAuto = 0                # number of matches for which the team had autonomous
         self.autoTotesToZone = []           # list containing number of totes brought to zone during auto
@@ -21,23 +21,23 @@ class _TeamInfo(object):
         self.autoContainersKnockedOver = [] # list containing number of containers knocked over during auto
         self.autoContainersFromStep = []    # list containing number of containers received from step during auto
         self.autoTotesFromLandfill = []     # list containing number of totes taken from landfill during auto
+        self.autoTotesFromStep = []         # list containing the number of totes taken from the step during auto
         self.autoTotesStacked = []          # list containing number of totes stacked that weren't auto totes during auto
         self.autoStackTotalTotes = []       # list containing number of total totes in the auto stack made by this robot
         self.autoEndInZone = 0              # number of matches for which the team ended in the auto zone
         self.autoOther = 0                  # number of matches for which the team did something else in auto
 
-        self.teleStackTotes = []            # list containing a list of the number of totes in each stack for tele
-        self.teleStepStackTotes = []        # list containing a list of the number of totes in each stepstack for tele
-        self.teleStackHeights = []          # list containing a list of the max height of each stack for tele
-        self.teleStepStackTotes = []        # list containing a list of the max height of each step stack for tele
-        self.teleStackContainers = []       # list containing a list of the container state for each stack in tele
-        self.teleStackContainerHeights = [] # list containing a list of the container heights for each stack in tele
-        self.teleStackLitter = []           # list containing a list of the litter state for each stack in tele 
-        self.teleStackKnockedOver = []      # list containing a list of the knocked over state for each stack in tele
-        self.teleStepStackKnockedOver = []  # list containing a list of the knocked over state for each step stack in tele
+        self.teleStackTotes = []            # list containing the average number of totes in each stack for tele
+        self.teleStepStackTotes = []        # list containing the average number of totes in each stepstack for tele
+        self.teleStackHeights = []          # list containing the average max height of each stack for tele
+        self.teleStepStackHeights = []        # list containing the average max height of each step stack for tele
+        self.teleStackContainers = []       # list containing the average number of stacks having containers for each match
+        self.teleStackContainerHeights = [] # list containing the average number of container heights for each step match
+        self.teleStackLitter = []           # list containing the average number of containers having litter for each match 
+        self.teleStackKnockedOver = []      # list containing the average number of knocked over stacks for each stack in tele
+        self.teleStepStackKnockedOver = []  # list containing the average number of knocked over stacks for each step stack in tele
         self.teleStacksScored = []          # list containing the number of stacks scored each match
         self.teleStepStacksScored = []      # list containing the number of step stacks scored each match
-
         self.teleTotesFromChute = []        # list containing the number of totes received from the chute each match
         self.teleLitterFromChute = []       # list containing the number of litter received from the chute each match
         self.teleTotesFromLandfill = []     # list containing the number of totes received from the landfill each match
@@ -61,54 +61,19 @@ class _TeamInfo(object):
         self.avgAutoContainersKnockedOver = float(sum(self.autoContainersKnockedOver))/float(len(self.autoContainersKnockedOver)) if len(self.autoContainersKnockedOver) else 0
         self.avgAutoContainersFromStep = float(sum(self.autoContainersFromStep))/float(len(self.autoContainersFromStep)) if len(self.autoContainersFromStep) else 0
         self.avgAutoTotesFromLandfill = float(sum(self.autoTotesFromLandfill))/float(len(self.autoTotesFromLandfill)) if len(self.autoTotesFromLandfill) else 0
+        self.avgAutoTotesFromStep = float(sum(self.autoTotesFromStep))/float(len(self.autoTotesFromStep)) if len(self.autoTotesFromStep) else 0
         self.avgAutoTotesStacked = float(sum(self.autoTotesStacked))/float(len(self.autoTotesStacked)) if len(self.autoTotesStacked) else 0
         self.avgAutoStackTotalTotes = float(sum(self.autoStackTotalTotes))/float(len(self.autoStackTotalTotes)) if len(self.autoStackTotalTotes) else 0
 
-        self.avgTeleStackTotes = 0
-        for stack in self.teleStackTotes:
-            self.avgTeleStackTotes += float(sum(stack))/float(len(stack)) if len(stack) else 0
-        self.avgTeleStackTotes = float(self.avgTeleStackTotes) / float(len(self.teleStackTotes)) if len(self.teleStackTotes) else 0
-
-        self.avgTeleStepStackTotes = 0
-        for stepstack in self.teleStepStackTotes:
-            self.avgTeleStepStackTotes += float(sum(stepstack))/float(len(stepstack)) if len(stepstack) else 0
-        self.avgTeleStepStackTotes = float(self.avgTeleStepStackTotes) / float(len(self.teleStepStackTotes)) if len(self.teleStepStackTotes) else 0
-
-        self.avgTeleStackHeights = 0
-        for stack in self.teleStackHeights:
-            self.avgTeleStackHeights += float(sum(stack))/float(len(stack)) if len(stack) else 0
-        self.avgTeleStackHeights = float(self.avgTeleStackHeights) / float(len(self.teleStackHeights)) if len(self.teleStackHeights) else 0
-
-        self.avgTeleStepStackHeights = 0
-        for stepstack in self.teleStepStackHeights:
-            self.avgTeleStepStackHeights += float(sum(stepstack))/float(len(stepstack)) if len(stepstack) else 0
-        self.avgTeleStepStackHeights = float(self.avgTeleStepStackHeights) / float(len(self.teleStepStackHeights)) if len(self.teleStepStackHeights) else 0
-
-        self.avgTeleStackContainers = 0
-        for stack in self.teleStackContainers:
-            self.avgTeleStackContainers += float(sum(stack))/float(len(stack)) if len(stack) else 0
-        self.avgTeleStackContainers = float(self.avgTeleStackContainers) / float(len(self.teleStackContainers)) if len(self.teleStackContainers) else 0
-
-        self.avgTeleStackContainerHeights = 0
-        for stack in self.teleStackContainerHeights:
-            self.avgTeleStackContainerHeights += float(sum(stack))/float(len(stack)) if len(stack) else 0
-        self.avgTeleStackContainerHeights = float(self.avgTeleStackContainerHeights) / float(len(self.teleStackContainerHeights)) if len(self.teleStackContainerHeights) else 0
-
-        self.avgTeleStackLitter = 0
-        for stack in self.teleStackLitter:
-            self.avgTeleStackLitter += float(sum(stack))/float(len(stack)) if len(stack) else 0
-        self.avgTeleStackLitter = float(self.avgTeleStackLitter) / float(len(self.teleStackLitter)) if len(self.teleStackLitter) else 0
-
-        self.avgTeleStackKnockedOver = 0
-        for stack in self.teleStackKnockedOver:
-            self.avgTeleStackKnockedOver += float(sum(stack))/float(len(stack)) if len(stack) else 0
-        self.avgTeleStackKnockedOver = float(self.avgTeleStackKnockedOver) / float(len(self.teleStackKnockedOver)) if len(self.teleStackKnockedOver) else 0
-
-        self.avgTeleStepStackKnockedOver = 0
-        for stepstack in self.teleStepStackKnockedOver:
-            self.avgTeleStepStackKnockedOver += float(sum(stepstack))/float(len(stepstack)) if len(stepstack) else 0
-        self.avgTeleStepStackKnockedOver = float(self.avgTeleStepStackKnockedOver) / float(len(self.teleStepStackKnockedOver)) if len(self.teleStepStackKnockedOver) else 0
-
+        self.avgTeleStackTotes = float(sum(self.teleStackTotes))/float(len(self.teleStackTotes)) if len(self.teleStackTotes) else 0
+        self.avgTeleStepStackTotes = float(sum(self.teleStepStackTotes))/float(len(self.teleStepStackTotes)) if len(self.teleStepStackTotes) else 0
+        self.avgTeleStackHeights = float(sum(self.teleStackHeights))/float(len(self.teleStackHeights)) if len(self.teleStackHeights) else 0
+        self.avgTeleStepStackHeights = float(sum(self.teleStepStackHeights))/float(len(self.teleStepStackHeights)) if len(self.teleStepStackHeights) else 0
+        self.avgTeleStackContainers = float(sum(self.teleStackContainers))/float(len(self.teleStackContainers)) if len(self.teleStackContainers) else 0
+        self.avgTeleStackContainerHeights = float(sum(self.teleStackContainerHeights))/float(len(self.teleStackContainerHeights)) if (self.teleStackContainerHeights) else 0
+        self.avgTeleStackLitter = float(sum(self.teleStackLitter))/float(len(self.teleStackLitter)) if len(self.teleStackLitter) else 0
+        self.avgTeleStackKnockedOver = float(sum(self.teleStackKnockedOver))/float(len(self.teleStackKnockedOver)) if len(self.teleStackKnockedOver) else 0
+        self.avgTeleStepStackKnockedOver = float(sum(self.teleStepStackKnockedOver))/float(len(self.teleStepStackKnockedOver)) if len(self.teleStepStackKnockedOver) else 0
         self.avgTeleStacksScored = float(sum(self.teleStacksScored))/float(len(self.teleStacksScored)) if len(self.teleStacksScored) else 0
         self.avgTeleStepStacksScored = float(sum(self.teleStepStacksScored))/float(len(self.teleStepStacksScored)) if len(self.teleStepStacksScored) else 0
         self.avgTeleTotesFromChute = float(sum(self.teleTotesFromChute))/float(len(self.teleTotesFromChute)) if len(self.teleTotesFromChute) else 0
@@ -168,16 +133,16 @@ class _TeamScores(object):
         self.maxFoulScore = max(self.foulScores)
         self.minFoulScore = min(self.foulScores)
 
-    def get_avg_scores(self, matches=1, auto=0, tele=0):
+    def get_avg_scores(self, matches=1, auto=0):
         self.avgOffScore = sum(self.oScores)/matches if matches else 0
         self.avgAutoScore = sum(self.autoScores)/auto if auto else 0
         self.avgAutoStackScore = sum(self.autoStackScores)/auto if auto else 0
         self.avgAutoContainerScore = sum(self.autoContainerScores)/auto if auto else 0
         self.avgAutoRobotScore = sum(self.autoRobotScores)/auto if auto else 0
-        self.avgTeleScore = sum(self.teleScores)/tele if tele else 0
-        self.avgTeleToteScore = sum(self.teleToteScores)/tele if tele else 0
-        self.avgTeleContainerScore = sum(self.teleContainerScores)/tele if tele else 0
-        self.avgTeleLitterScore = sum(self.teleLitterScores)/tele if tele else 0
+        self.avgTeleScore = sum(self.teleScores)/matches if matches else 0
+        self.avgTeleToteScore = sum(self.teleToteScores)/matches if matches else 0
+        self.avgTeleContainerScore = sum(self.teleContainerScores)/matches if matches else 0
+        self.avgTeleLitterScore = sum(self.teleLitterScores)/matches if matches else 0
         self.avgFoulScore = sum(self.foulScores)/matches if matches else 0
         self.avgTotalScore = sum(self.tScores)/matches if matches else 0
 
@@ -237,15 +202,13 @@ class Team(object):
         
     def get_details(self): # gets all of the information for the team
         self.Info.get_info()
-        self.Scores.get_avg_scores(len(self.Info.matches),
-                                   self.Info.autoHadAuto, self.Info.teleHadTele)
+        self.Scores.get_avg_scores(len(self.Info.matches),self.Info.autoHadAuto)
         self.Scores.get_maxmin_scores()
 
         matches = self.Info.matches
         self.numMatch = len(matches)
         self.pNoShow  = str(int(100*self.Info.noShow)/len(matches)) + "%"
         self.pDisabled = str(int(100*self.Info.postDisabled)/len(matches)) + "%"
-        self.pOff = str(int(100*self.Info.numOff)/len(matches)) + "%"
         self.avgOff = round(self.Scores.avgOffScore,2)
         self.avgTotal = round(self.Scores.avgTotalScore,2)
 
@@ -259,6 +222,7 @@ class Team(object):
         self.avgAutoContainersKnockedOver = round(self.Info.avgAutoContainersKnockedOver,2)
         self.avgAutoContainersFromStep = round(self.Info.avgAutoContainersFromStep,2)
         self.avgAutoTotesFromLandfill = round(self.Info.avgAutoTotesFromLandfill,2)
+        self.avgAutoTotesFromStep = round(self.Info.avgAutoTotesFromStep,2)
         self.avgAutoTotesStacked = round(self.Info.avgAutoTotesStacked,2)
         self.avgAutoStackTotalTotes = round(self.Info.avgAutoStackTotalTotes,2)
         self.pEndInAuto = str(int(100*self.Info.autoEndInZone)/len(matches)) + "%"
@@ -280,7 +244,7 @@ class Team(object):
         self.avgTeleStacksScored = round(self.Info.avgTeleStacksScored,2)
         self.avgTeleStepStacksScored = round(self.Info.avgTeleStepStacksScored,2)
         self.avgTeleTotesFromChute = round(self.Info.avgTeleTotesFromChute,2)
-        self.avgTeleLitterFromChute = round(self.Info.avgTeleLitterFromChite,2)
+        self.avgTeleLitterFromChute = round(self.Info.avgTeleLitterFromChute,2)
         self.avgTeleTotesFromLandfill = round(self.Info.avgTeleTotesFromLandfill,2)
         self.avgTeleTotesFromStep = round(self.Info.avgTeleTotesFromStep,2)
         self.avgTeleLitterToLandfill = round(self.Info.avgTeleLitterToLandfill,2)

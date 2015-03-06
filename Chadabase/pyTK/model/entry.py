@@ -152,18 +152,28 @@ class Entry(object):
         self.teleStacksScored = len(self.teleStacks)
         self.teleStepStacksScored = len(self.teleStepStacks)
 
-        for s in self.teleStacks
-            self.teleStackTotes.append(s.totalTotes)
-            self.teleStackHeights.append(s.highestTotes)
-            self.teleStackContainers.append(s.container)
-            self.teleStackContainerHeights.append(s.containerHeight)
-            self.teleStackLitter.append(s.litter)
-            self.teleStackKnockedOver.append(s.knockedOver)
+        for s in self.teleStacks:
+            self.teleStackTotes.append(float(s.totalTotes))
+            self.teleStackHeights.append(float(s.highestTotes))
+            self.teleStackContainers.append(float(int(s.container)))
+            self.teleStackContainerHeights.append(float(s.containerHeight))
+            self.teleStackLitter.append(float(int(s.litter)))
+            self.teleStackKnockedOver.append(float(int(s.knockedOver)))
 
-        for s in self.teleStepStacks
-            self.teleStepStackTotes.append(s.totalTotes)
-            self.teleStepStackHeights.append(s.highestTote)
-            self.teleStepStackKnockedOver.append(s.knockedOver)
+        for s in self.teleStepStacks:
+            self.teleStepStackTotes.append(float(s.totalTotes))
+            self.teleStepStackHeights.append(float(s.highestTote))
+            self.teleStepStackKnockedOver.append(float(int(s.knockedOver)))
+
+        self.avgTeleStackTotes = float(sum(self.teleStackTotes))/float(len(self.teleStackTotes)) if len(self.teleStackTotes) else 0
+        self.avgTeleStepStackTotes = float(sum(self.teleStepStackTotes))/float(len(self.teleStepStackTotes)) if len(self.teleStepStackTotes) else 0
+        self.avgTeleStackHeights = float(sum(self.teleStackHeights))/float(len(self.teleStackHeights)) if len(self.teleStackHeights) else 0
+        self.avgTeleStepStackHeights = float(sum(self.teleStepStackHeights))/float(len(self.teleStepStackHeights)) if len(self.teleStepStackHeights) else 0
+        self.avgTeleStackContainers = float(sum(self.teleStackContainers))/float(len(self.teleStackContainers)) if len(self.teleStackContainers) else 0
+        self.avgTeleStackContainerHeights = float(sum(self.teleStackContainerHeights))/float(len(self.teleStackContainerHeights)) if len(self.teleStackContainerHeights) else 0
+        self.avgTeleStackLitter = float(sum(self.teleStackLitter))/float(len(self.teleStackLitter)) if len(self.teleStackLitter) else 0
+        self.avgTeleStackKnockedOver = float(sum(self.teleStackKnockedOver))/float(len(self.teleStackKnockedOver)) if len(self.teleStackKnockedOver) else 0
+        self.avgTeleStepStackKnockedOver = float(sum(self.teleStepStackKnockedOver))/float(len(self.teleStepStackKnockedOver)) if len(self.teleStepStackKnockedOver) else 0
 
         i = 0
         while (i < len(self.autoStack)):
@@ -180,18 +190,20 @@ class Entry(object):
         
         self.autoScore = (self.autoStackScore + self.autoContainerScore + self.autoRobotScore)
 
-        self.teleToteScore = float(sum(self.teleStackTotes))*float(2.0)
+        self.teleToteScore = float(sum(self.teleStackTotes))*float(2)
+        self.teleToteScore+= float(self.autoTotesStacked)*float(2)
         self.teleContainerScore = 0
         i = 0
         while (i < len(self.teleStackContainers)):
             self.teleContainerScore += float((int(self.teleStackContainers[i])*self.teleStackContainerHeights[i]))
             i += 1
         self.teleLitterScore = 0
-        for litter in teleStackLitter:
+        for litter in self.teleStackLitter:
             self.teleLitterScore += float(int(litter)*6)
-        self.teleLitterScore += float(self.LitterToLandfill)
+        self.teleLitterScore += float(self.teleLitterToLandfill)
+        coopScore = float(sum(self.teleStepStackTotes))*float(5)
             
-        self.teleScore = (self.teleToteScore + self.teleContainerScore + self.teleLitterScore)
+        self.teleScore = (self.teleToteScore + self.teleContainerScore + self.teleLitterScore + coopScore)
 
         self.scoredInAuto = True if self.autoScore > 0 else False
         self.scoredInTele = True if self.teleScore > 0 else False

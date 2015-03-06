@@ -1,1 +1,1 @@
-__all__=["vchoose","vcompare","vranking","vsearch","vteamdata","vwindow"]
+__all__=["vchoose","vpredict","vranking","vsearch","vteamdata","vwindow"]

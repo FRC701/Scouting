@@ -79,21 +79,39 @@ class Search(Frame):
         self.searchFrame = Frame(self)
         self.searchFrame.pack(side=LEFT,padx=5,pady=5)
 
-        # create the frame to show the search entry options in
-        self.searchEntryFrame = Frame(self.searchFrame)
-        self.searchEntryFrame.pack(side=LEFT,padx=5,pady=5)
+        # create the frame to show the search entry gen auto options in
+        self.searchEntryGenAutoFrame = Frame(self.searchFrame)
+        self.searchEntryGenAutoFrame.pack(side=LEFT,padx=5,pady=5)
 
-        # make the entry option widgets
-        for x, y in self.controller.entryItemTypes:
-            self.entryFrame = Frame(self.searchEntryFrame)
-            self.entryFrame.pack(side=TOP,pady=5)
+        # make the entry option widgets for general and auto searches
+        for x, y in self.controller.entryItemGenAuto:
+            self.entryGenAutoFrame = Frame(self.searchEntryGenAutoFrame)
+            self.entryGenAutoFrame.pack(side=TOP,pady=5)
             
-            self.label = Label(self.entryFrame,text=y)
+            self.label = Label(self.entryGenAutoFrame,text=y)
             self.label.pack(side=LEFT,padx=5)
 
             self.searchEntryVar = StringVar()
-            self.searchEntryVar.set("-30")
-            self.searchEntry = Entry(self.entryFrame,textvariable=self.searchEntryVar,width=4,takefocus=True)
+            self.searchEntryVar.set("0")
+            self.searchEntry = Entry(self.entryGenAutoFrame,textvariable=self.searchEntryVar,width=4,takefocus=True)
+            self.searchEntry.bind("<Return>",lambda event, value=self.searchEntryVar,index=x:self.updateMatches(event,value,index))
+            self.searchEntry.pack(side=LEFT,padx=5)
+            
+        # create the frame to show the search entry tele post options in
+        self.searchEntryTelePostFrame = Frame(self.searchFrame)
+        self.searchEntryTelePostFrame.pack(side=LEFT,padx=5,pady=5)
+
+        # make the entry option widgets for tele and post searches
+        for x, y in self.controller.entryItemTelePost:
+            self.entryTelePostFrame = Frame(self.searchEntryTelePostFrame)
+            self.entryTelePostFrame.pack(side=TOP,pady=5)
+            
+            self.label = Label(self.entryTelePostFrame,text=y)
+            self.label.pack(side=LEFT,padx=5)
+
+            self.searchEntryVar = StringVar()
+            self.searchEntryVar.set("0")
+            self.searchEntry = Entry(self.entryTelePostFrame,textvariable=self.searchEntryVar,width=4,takefocus=True)
             self.searchEntry.bind("<Return>",lambda event, value=self.searchEntryVar,index=x:self.updateMatches(event,value,index))
             self.searchEntry.pack(side=LEFT,padx=5)
 

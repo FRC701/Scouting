@@ -1,22 +1,22 @@
 #------------------------------------------------------------------------------
-# vcompare module
-#   -- contains information for displaying the compare window
+# vpredict module
+#   -- contains information for displaying the predict window
 #------------------------------------------------------------------------------
 from Tkinter import *
 import tkSimpleDialog
 import tkMessageBox
 import re
 
-from controller.windows import ccompare
+from controller.windows import cpredict
 
 #------------------------------------------------------------------------------
-# Compare class
-#   -- contains all the functions, etc, for displaying a compare window
+# Predict class
+#   -- contains all the functions, etc, for displaying a predict window
 #------------------------------------------------------------------------------
-class Compare(Frame):
-    """Class that handles displaying a compare window to the screen."""
+class Predict(Frame):
+    """Class that handles displaying a predict window to the screen."""
 
-    def compare_alliances(self):
+    def predict_alliances(self):
         teams = []
         for i in self.rVals:
             teams.append(i[0])
@@ -25,7 +25,7 @@ class Compare(Frame):
 
         self.outcomeVar.set("Winner - " + self.controller.getComparison(teams) + "%")
 
-    def clear_compare(self):
+    def clear_predict(self):
         self.outcomeVar.set("N/A")
     
     def load_alliance(self, event=None, teams=None, ally=None):
@@ -64,22 +64,14 @@ class Compare(Frame):
 
             if teamVals == self.rVals:
                 self.rOffScore.set("Expected Offensive Score: " + str(data[0]))
-                self.rDefScore.set("Expected Defensive Score: " + str(data[1]))
-                self.rAstScore.set("Expected Assistive Score: " + str(data[2]))
             elif teamVals == self.bVals:
                 self.bOffScore.set("Expected Offensive Score: " + str(data[0]))
-                self.bDefScore.set("Expected Defensive Score: " + str(data[1]))
-                self.bAstScore.set("Expected Assistive Score: " + str(data[2]))
 
         elif teamVals[0][0].get() == "0" or teamVals[1][0].get() == "0" or teamVals[2][0].get() == "0":
             if teamVals == self.rVals:
                 self.rOffScore.set("Expected Offensive Score: N/A")
-                self.rDefScore.set("Expected Defensive Score: N/A")
-                self.rAstScore.set("Expected Assistive Score: N/A")
             elif teamVals == self.bVals:
                 self.bOffScore.set("Expected Offensive Score: N/A")
-                self.bDefScore.set("Expected Defensive Score: N/A")
-                self.bAstScore.set("Expected Assistive Score: N/A")
             
             
     def create_AllianceOptions(self):
@@ -95,7 +87,7 @@ class Compare(Frame):
         self.rAllChoiceVar.set("Custom")
         self.rAllianceOM = OptionMenu(self.rOptionFrame, self.rAllChoiceVar, *self.controller.allianceOptions,
                                       command=lambda new_value,ally=self.rVals:self.load_alliance(teams=new_value,ally=ally))
-        self.rAllianceOM.config(width=20)
+        self.rAllianceOM.config(width=15)
         self.rAllianceOM.pack(side=TOP,padx=5,pady=5)
         
         # create a frame to put the OptionMenu in
@@ -110,7 +102,7 @@ class Compare(Frame):
         self.bAllChoiceVar.set("Custom")
         self.bAllianceOM = OptionMenu(self.bOptionFrame, self.bAllChoiceVar, *self.controller.allianceOptions,
                                       command=lambda new_value,ally=self.bVals:self.load_alliance(teams=new_value,ally=ally))
-        self.bAllianceOM.config(width=20)
+        self.bAllianceOM.config(width=15)
         self.bAllianceOM.pack(side=TOP,padx=5,pady=5)
 
         # will eventually allow to save user alliances with custom names
@@ -156,7 +148,7 @@ class Compare(Frame):
 
     def create_AllianceInformation(self):
         # Red Alliance
-        for x, y in self.controller.compareIndex:
+        for x, y in self.controller.predictIndex:
             self.nextFrame = Frame(self.redAlliance)
             self.nextFrame.pack(side=LEFT,padx=5)
 
@@ -167,12 +159,12 @@ class Compare(Frame):
                 self.EntryVar.set("0")
                 self.rVals[i].append(self.EntryVar)
                 self.InfoEntry = Entry(self.nextFrame,textvariable=self.EntryVar,
-                                       width=12,readonlybackground="lightgreen",
+                                       width=8,readonlybackground="lightgreen",
                                        state="readonly",takefocus=False)
                 self.InfoEntry.pack(side=TOP,pady=5)
 
         # Blue Alliance
-        for x, y in self.controller.compareIndex:
+        for x, y in self.controller.predictIndex:
             self.nextFrame = Frame(self.blueAlliance)
             self.nextFrame.pack(side=LEFT,padx=5)
 
@@ -183,40 +175,24 @@ class Compare(Frame):
                 self.EntryVar.set("0")
                 self.bVals[i].append(self.EntryVar)
                 self.InfoEntry = Entry(self.nextFrame,textvariable=self.EntryVar,
-                                       width=12,readonlybackground="lightgreen",
+                                       width=8,readonlybackground="lightgreen",
                                        state="readonly",takefocus=False)
                 self.InfoEntry.pack(side=TOP,pady=5)
 
     def create_ScoreLabels(self):
         # Red Alliance
         self.rOffScore = StringVar()
-        self.rDefScore = StringVar()
-        self.rAstScore = StringVar()
         self.rOffScore.set("Expected Offensive Score: N/A")
-        self.rDefScore.set("Expected Defensive Score: N/A")
-        self.rAstScore.set("Expected Assistive Score: N/A")
 
         self.rOffLabel = Label(self.redPrediction, textvariable=self.rOffScore,anchor=W)
         self.rOffLabel.pack(side=TOP,pady=5)
-        self.rDefLabel = Label(self.redPrediction, textvariable=self.rDefScore,anchor=W)
-        self.rDefLabel.pack(side=TOP,pady=5)
-        self.rAstLabel = Label(self.redPrediction, textvariable=self.rAstScore,anchor=W)
-        self.rAstLabel.pack(side=TOP,pady=5)
 
         # Blue Alliance
         self.bOffScore = StringVar()
-        self.bDefScore = StringVar()
-        self.bAstScore = StringVar()
         self.bOffScore.set("Expected Offensive Score: N/A")
-        self.bDefScore.set("Expected Defensive Score: N/A")
-        self.bAstScore.set("Expected Assistive Score: N/A")
 
         self.bOffLabel = Label(self.bluePrediction, textvariable=self.bOffScore,anchor=W)
         self.bOffLabel.pack(side=TOP,pady=5)
-        self.bDefLabel = Label(self.bluePrediction, textvariable=self.bDefScore,anchor=W)
-        self.bDefLabel.pack(side=TOP,pady=5)
-        self.bAstLabel = Label(self.bluePrediction, textvariable=self.bAstScore,anchor=W)
-        self.bAstLabel.pack(side=TOP,pady=5)
         
     def startup(self):
         
@@ -245,11 +221,11 @@ class Compare(Frame):
         self.predictLabel = Label(self.predictFrame,textvariable=self.outcomeVar, font=("Times","18"))
         self.predictLabel.pack(side=LEFT,padx=5,pady=5)
         self.predictButton = Button(self.predictFrame, text="Predict Match Outcome", font=("Times","18"),
-                                    command=self.compare_alliances)
+                                    command=self.predict_alliances)
         self.predictButton.bind("<Return>",
-                                lambda event:self.compare_alliances())
+                                lambda event:self.predict_alliances())
         self.clearButton = Button(self.predictFrame, text="Clear Prediction", font=("Times","18"),
-                                  command=self.clear_compare)
+                                  command=self.clear_predict)
         self.clearButton.pack(side=RIGHT,padx=5,pady=5)
         self.predictButton.pack(side=RIGHT,padx=5,pady=5)
 
@@ -262,7 +238,7 @@ class Compare(Frame):
         self.rTeamEntries = []
         self.bTeamEntries = []
 
-        self.parent.title("Compare")
+        self.parent.title("Predict")
 
         Frame.__init__(self,parent)
         self.pack()

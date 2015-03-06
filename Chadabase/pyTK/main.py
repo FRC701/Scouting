@@ -41,11 +41,11 @@ class App(Frame):
         else:
             tkMessageBox.showinfo("Warning","No data has been imported.")
         
-    def compare(self):
+    def predict(self):
         if self.imported:
             newWindow = Toplevel(self)
-            controller = ccompare.CompareController()
-            compare = vcompare.Compare(newWindow,self,controller)
+            controller = cpredict.PredictController()
+            predict = vpredict.Predict(newWindow,self,controller)
         else:
             tkMessageBox.showinfo("Warning","No data has been imported.")
 
@@ -72,9 +72,9 @@ class App(Frame):
         self.searchB = Button(self.wbf, text="Search",
                               command=self.search)
         self.searchB.pack(side=TOP,pady=5)
-        self.compareB = Button(self.wbf,text="Compare",
-                               command=self.compare)
-        self.compareB.pack(side=TOP,pady=5)
+        self.predictB = Button(self.wbf,text="Predict",
+                               command=self.predict)
+        self.predictB.pack(side=TOP,pady=5)
         self.chooseB = Button(self.wbf,text="Choose",
                               command=self.choose)
         self.chooseB.pack(side=TOP,pady=5)
