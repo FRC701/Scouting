@@ -49,7 +49,7 @@ public class EventListActivity extends Activity {
 
         // create a progress dialog to make a visual representation of the downloads and reading files
         final ProgressDialog progressDialog = ProgressDialog.show(this, getResources().getString(R.string.text_titleProgress), getResources().getString(R.string.text_messageProgressEventList));
-        progressDialog.setCancelable(false);
+        progressDialog.setCancelable(true);
 
         // reset all Blue Alliance Events so that the list does not appear when we do not have internet connection
         tbaEvents = new ArrayList<>();
@@ -209,48 +209,6 @@ public class EventListActivity extends Activity {
                             try {
                                 final ArrayList<JSONObject> teamlist = JSONTools.sortJSONArray(JSONTools.parseJSONArray(teams), "team_number");
                                 ExternalStorageTools.writeTeams(teamlist, event.getString("key"));
-
-                                final ArrayList<JSONArray> all_media = new ArrayList<>();
-                                final ArrayList<Integer> teamnumbers = new ArrayList<>();
-                                // for each team at the event, attempt to download the image of that team, with no cross-event duplicates
-                                for(int i = 0; i < teamlist.size(); i++){
-                                    final int team_number = teamlist.get(i).getInt("team_number");
-                                    final int index = i;
-                                    TheBlueAllianceRestClient.get(EventListActivity.this, "team/"+teamlist.get(i).getString("key")+"/media", new JsonHttpResponseHandler() {
-                                        // no need to pass a year to the API, as it will default to the current year, which is always what we want
-                                        @Override
-                                        public void onSuccess(int statusCode, Header[] headers, JSONArray media) {
-                                            // handle the incoming JSONArray of events and grab the photo partial
-                                            // download the photo-partial to an Image object and save that Image to the device (overriding any old image of that team)
-                                            try {
-                                                ArrayList<JSONObject> teamMedia = JSONTools.parseJSONArray(media);
-                                                if(teamMedia.size()>0) {
-                                                    all_media.add(media);
-                                                    teamnumbers.add(team_number);
-                                                }
-
-                                                if(index == teamlist.size()-1){
-                                                    ImageTools.downloadImages(all_media, teamnumbers);
-                                                    // add the new event to the list of downloaded events and update the ListView
-                                                    downloadedEvents.add(event);
-                                                    downloadedEvents = JSONTools.sortJSONArray(downloadedEvents, "start_date", "name");
-                                                    downloadedAdapter.notifyDataSetChanged();
-
-                                                    // write the new list of events to the json data file
-                                                    ExternalStorageTools.writeEvents(downloadedEvents);
-                                                    progressDialog.dismiss();
-                                                }
-
-                                            } catch (IndexOutOfBoundsException e) {
-                                                e.printStackTrace();
-                                            } catch (JSONException e) {
-                                                e.printStackTrace();
-                                            }
-                                        }
-                                    });
-
-                                }
-
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }

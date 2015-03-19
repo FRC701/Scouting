@@ -99,7 +99,8 @@
             android:layout_height="0dp"
             android:layout_weight="6"
             android:id="@+id/toggleContainer"
-            android:background="@drawable/container_toggle_button"/>
+            android:background="@drawable/container_toggle_button"
+            android:checked="false" />
 
     </LinearLayout>
 

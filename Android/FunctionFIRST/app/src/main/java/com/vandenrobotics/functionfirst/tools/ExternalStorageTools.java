@@ -261,7 +261,7 @@ public class ExternalStorageTools {
         if(isExternalStorageWritable()) {
             try {
                 FileWriter fileWriter = new FileWriter(createFile("ScoutData/" + event + "/device" + device, "data.txt"), true);
-                fileWriter.append(matchData.toString() + "\n");
+                fileWriter.append(matchData.toString() + "\n\r");
                 fileWriter.flush();
                 fileWriter.close();
             } catch (IOException e){
@@ -271,8 +271,8 @@ public class ExternalStorageTools {
     }
 
     // reads the JSONDocument data file in to the device and into a MatchData value
-    public static ArrayList<MatchData> readData(String event, int device){
-        ArrayList<MatchData> matchData = new ArrayList<>();
+    public static ArrayList<MatchData> readData(String event, int   device){
+        ArrayList<MatchData> matchData = new ArrayList<>(200);
         if(isExternalStorageReadable()) {
             try {
                 String line;

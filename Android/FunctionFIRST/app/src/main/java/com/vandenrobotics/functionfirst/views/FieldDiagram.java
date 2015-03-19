@@ -28,7 +28,6 @@ public class FieldDiagram extends ImageView {
         super(context);
         mStacks = new ArrayList<>();
         mStepStacks = new ArrayList<>();
-        background = BitmapFactory.decodeResource(getResources(), R.drawable.field_diagram_red);
         mPaint = new Paint();
         mPaint.setStyle(Paint.Style.FILL);
     }
@@ -37,7 +36,6 @@ public class FieldDiagram extends ImageView {
         super(context, attrs);
         mStacks = new ArrayList<>();
         mStepStacks = new ArrayList<>();
-        background = BitmapFactory.decodeResource(getResources(), R.drawable.field_diagram_red);
         mPaint = new Paint();
         mPaint.setStyle(Paint.Style.FILL);
     }
