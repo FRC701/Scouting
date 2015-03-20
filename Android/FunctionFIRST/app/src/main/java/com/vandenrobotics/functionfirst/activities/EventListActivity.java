@@ -209,9 +209,16 @@ public class EventListActivity extends Activity {
                             try {
                                 final ArrayList<JSONObject> teamlist = JSONTools.sortJSONArray(JSONTools.parseJSONArray(teams), "team_number");
                                 ExternalStorageTools.writeTeams(teamlist, event.getString("key"));
+
+                                downloadedEvents.add(event);
+                                downloadedEvents = JSONTools.sortJSONArray(downloadedEvents, "start_date", "name");
+                                downloadedAdapter.notifyDataSetChanged();
+
+                                ExternalStorageTools.writeEvents(downloadedEvents);
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
+                            progressDialog.dismiss();
                         }
                     });
 
