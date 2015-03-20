@@ -13,23 +13,49 @@ from model import team
 class SearchController():
     """Class that handles commands from the search window."""
 
-    entryItemTypes = [("avgOff","Offensive Score >= "),("avgDef","Defensive Score >= "),
-                        ("avgAst","Assistive Score >= "),("avgTotal","Total Score >= "),
-                        ("WeightedOff","Weighted Offensive Score >= "),
-                        ("WeightedDef","Weighted Defensive Score >= "),
-                        ("WeightedAst","Weighted Assistive Score >= "),
-                        ("WeightedTotal","Weighted Total Score >= "),
-                        ("avgAutoScore","Auto Score >= "),("avgTeleScore","Tele Score >= "),
-                        ("avgFoulScore","Foul Score >= ")]
+    entryItemGenAuto = [("avgOff","Offensive Score >= "),
+                        ("avgTotal","Total Score >= "),
+                        ("avgAutoScore","Auto Score >= "),
+                        ("avgAutoStackScore","Auto Tote-Stack Set Score >= "),
+                        ("avgAutoContainerScore","Auto Container Set Score >= "),
+                        ("avgAutoRobotScore","Auto Robot Set Score >= "),
+                        ("avgAutoTotesToZone","Auto Totes Brought to Zone >= "),
+                        ("avgAutoContainersToZone","Auto Containers Brought to Zone >= "),
+                        ("avgAutoContainersFromStep","Auto Containers Taken From Step >= "),
+                        ("avgAutoTotesFromStep","Auto Totes Taken From Step >= "),
+                        ("avgAutoStackTotalTotes","Auto Totes Contribued to Stack >= ")]
+
+    entryItemTelePost = [("avgTeleScore","Tele Score >= "),
+                         ("avgTeleToteScore","Tele Tote Score >= "),
+                         ("avgTeleContainerScore","Tele Container Score >= "),
+                         ("avgTeleLitterScore","Tele Litter Score >= "),
+                         ("avgTeleStackTotes","Number of Totes Stacked per Match >= "),
+                         ("avgTeleStepStackTotes","Number of Coop-Totes Stacked per Match >= "),
+                         ("avgTeleStackHeights","Highest Tote Avg >= "),
+                         ("avgTeleStepStackHeights","Highest Coop-Tote Avg >= "),
+                         ("avgTeleStackContainers","Number of Containers Stacked per Match >= "),
+                         ("avgTeleStackContainerHeights","Container Stack Level Avg >= "),
+                         ("avgTeleStackLitter","Number of Litter Scored per Match >= "),
+                         ("avgTeleStackKnockedOver","Number of Stacks Knocked Over <= "),
+                         ("avgTeleStepStackKnockedOver","Number of Coop-Stacks Knocked Over <= "),
+                         ("avgTeleStacksScored","Number of Stacks Scored per Match >= "),
+                         ("avgTeleStepStacksScored","Number of Coop-Stacks Scored per Match >= "),
+                         ("avgTeleTotesFromChute","Number of Totes Received from Chute per Match >= "),
+                         ("avgTeleLitterFromChite","Number of Litter Received from Chute per Match >= "),
+                         ("avgTeleTotesFromLandfill","Number of Totes Taken From Landfill per Match >= "),
+                         ("avgTeleLitterToLandfill","Number of Litter Pushed to Landfill per Match >= "),
+                         ("avgFoulScore","Foul Score <= ")]
     
-    checkItemTypes = [("numOff","Played Offensive"),("numDef","Played Defensive"),("numAst","Played Assistive"),
-                    ("autoHadAuto","Had Autonomous"),("autoScoredAuto","Scored in Autonomous"),
-                    ("autoGoalieZone","Started in Goalie Zone"),("autoMobilityBonus","Obtained Mobility Bonus"),
-                    ("teleScoredTele","Scored in Tele"),("teleScoredHigh","Scored in High Goal (Tele-Op)"),
-                    ("teleScoredTruss","Shot over the Truss"),("teleCaught","Caught a Ball"),
-                    ("postDisabled","Never Disabled"),("postNoShow","Always Showed Up"),
-                    ("postHadRegFoul","No Regular Fouls"),("postHadTechFoul","No Technical Fouls"),
-                    ("postHadYellow","No Yellow Cards"),("postHadRed","No Red Cards")]
+    checkItemTypes = [("autoHadAuto","Had Autonomous"),
+                      ("scoredInAuto","Scored in Autonomous"),
+                      ("autoEndInZone","Ended Auto in Auto Zone"),
+                      ("autoOther","Had Other Autonomous"),
+                      ("scoredInTele","Scored in Tele"),
+                      ("postNoShow","Always Showed Up"),
+                      ("postDisabled","Never Disabled"),
+                      ("hasFoul","No Fouls"),
+                      ("postYellowCard","No Yellow Cards"),
+                      ("postRedCard","No Red Cards")]
                     
     def searchGreater(self, value=None, index=None):
         try:
@@ -37,6 +63,13 @@ class SearchController():
         except:
              print "Invalid Search Parameter " + str(value.get()) + " for " + str(index)
              value.set(0)
+
+    def searchLess(self, value=None, index=None):
+        try:
+            self.matchedList = filter(lambda team:team.getAttr(index)<=int(value.get()), self.matchedList)
+        except:
+             print "Invalid Search Parameter " + str(value.get()) + " for " + str(index)
+             value.set(999)
 
     def searchHas(self, value=None, index=None):
         try:
@@ -53,20 +86,47 @@ class SearchController():
             value.set(0)
 
     
-    Searches = {"avgOff":searchGreater,"avgDef":searchGreater,
-                "avgAst":searchGreater,"avgTotal":searchGreater,
-                "WeightedOff":searchGreater,"WeightedDef":searchGreater,
-                "WeightedAst":searchGreater,"WeightedTotal":searchGreater,
-                "avgAutoScore":searchGreater,"avgTeleScore":searchGreater,
-                "avgFoulScore":searchGreater,
-                "numOff":searchHas,"numDef":searchHas,"numAst":searchHas,
-                "autoHadAuto":searchHas,"autoScoredAuto":searchHas,
-                "autoGoalieZone":searchHas,"autoMobilityBonus":searchHas,
-                "teleScoredTele":searchHas,"teleScoredHigh":searchHas,
-                "teleScoredTruss":searchHas,"teleCaught":searchHas,
-                "postDisabled":searchNever,"postNoShow":searchNever,
-                "postHadRegFoul":searchNever,"postHadTechFoul":searchNever,
-                "postHadYellow":searchNever,"postHadRed":searchNever}
+    Searches = {"avgOff":searchGreater,
+                "avgTotal":searchGreater,
+                "avgAutoScore":searchGreater,
+                "avgAutoStackScore":searchGreater,
+                "avgAutoContainerScore":searchGreater,
+                "avgAutoRobotScore":searchGreater,
+                "avgAutoTotesToZone":searchGreater,
+                "avgAutoContainersToZone":searchGreater,
+                "avgAutoContainersFromStep":searchGreater,
+                "avgAutoTotesFromStep":searchGreater,
+                "avgAutoStackTotalTotes":searchGreater,
+                "autoHadAuto":searchHas,
+                "scoredInAuto":searchHas,
+                "autoEndInZone":searchHas,
+                "autoOther":searchHas,
+                "avgTeleScore":searchGreater,
+                "avgTeleToteScore":searchGreater,
+                "avgTeleContainerScore":searchGreater,
+                "avgTeleLitterScore":searchGreater,
+                "avgTeleStackTotes":searchGreater,
+                "avgTeleStepStackTotes":searchGreater,
+                "avgTeleStackHeights":searchGreater,
+                "avgTeleStepStackHeights":searchGreater,
+                "avgTeleStackContainers":searchGreater,
+                "avgTeleStackContainerHeights":searchGreater,
+                "avgTeleStackLitter":searchGreater,
+                "avgTeleStackKnockedOver":searchLess,
+                "avgTeleStepStackKnockedOver":searchLess,
+                "avgTeleStacksScored":searchGreater,
+                "avgTeleStepStacksScored":searchGreater,
+                "avgTeleTotesFromChute":searchGreater,
+                "avgTeleLitterFromChute":searchGreater,
+                "avgTeleTotesFromLandfill":searchGreater,
+                "avgTeleLitterToLandfill":searchGreater,
+                "scoredInTele":searchHas,
+                "avgFoulScore":searchLess,
+                "postDisabled":searchNever,
+                "noShow":searchNever,
+                "hasFoul":searchNever,
+                "postHadYellow":searchNever,
+                "postHadRed":searchNever}
 
     def search(self):
         self.matchedList = team.Team.team_list

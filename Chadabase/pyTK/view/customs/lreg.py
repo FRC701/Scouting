@@ -29,7 +29,7 @@ class Lreg(Canvas):
             self.x.append(long(i+1))
             self.y.append(long(self.graphData[i]))
         self.b = 0  # slope
-        self.a = 0  # constant
+        self.a = 0  # constant (y = a + bx)
         self.r2 = 0  # coefficient of determination
 
         # get a and b

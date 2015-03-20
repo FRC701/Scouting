@@ -1,1 +1,1 @@
-__all__=["cchoose","ccompare","cranking","csearch","cteamdata","cwindow"]
+__all__=["cchoose","cpredict","cranking","csearch","cteamdata","cwindow"]

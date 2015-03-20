@@ -23,21 +23,25 @@ class RankingController():
     # where key corredsponds to a value in self.rankingTypes and term is
     # the function to call when that option is selected
     rankingTypes = ["None",
-                    "Offensive Score","Defensive Score","Assistive Score","Total Score",
-                    "Weighted Offensive Score","Weighted Defensive Score",
-                    "Weighted Assistive Score","Weighted Total Score",
-                    "Auto Score","Tele Score","Foul Score"]
+                    "Offensive Score",
+                    "Total Score",
+                    "Auto Score",
+                    "Auto Stack Score","Auto Container Score","Auto Robot Score",
+                    "Tele Score",
+                    "Tele Tote Score","Tele Container Score","Tele Litter Score",
+                    "Foul Score"]
 
     rankingIndex = [("None",get_none),
                     ("Offensive Score",get_off_rank),
-                    ("Defensive Score",get_def_rank),
-                    ("Assistive Score",get_ast_rank),
                     ("Total Score",get_tot_rank),
-                    ("Weighted Offensive Score",get_wo_rank),
-                    ("Weighted Defensive Score",get_wd_rank),
-                    ("Weighted Assistive Score",get_wa_rank),
-                    ("Weighted Total Score",get_w_rank),
-                    ("Auto Score",get_auto_rank),("Tele Score",get_tele_rank),
+                    ("Auto Score",get_auto_rank),
+                    ("Auto Stack Score",get_auto_stack_rank),
+                    ("Auto Container Score",get_auto_container_rank),
+                    ("Auto Robot Score",get_auto_robot_rank),
+                    ("Tele Score",get_tele_rank),
+                    ("Tele Tote Score",get_tele_tote_rank),
+                    ("Tele Container Score",get_tele_container_rank),
+                    ("Tele Litter Score",get_tele_litter_rank),                     
                     ("Foul Score",get_foul_rank)]
 
     sortOptions = [("Maximum","max"),("Average","avg"),("Minimum","min")]

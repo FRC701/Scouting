@@ -1,6 +1,6 @@
 #------------------------------------------------------------------------------
-# ccompare module
-#   -- contains data and information for controlling the compare window
+# cpredict module
+#   -- contains data and information for controlling the predict window
 #------------------------------------------------------------------------------
 from Tkinter import *
 
@@ -11,7 +11,7 @@ from model import calculate
 # SearchController class
 #   -- contains functions, lists, data, etc, for handling the search window
 #------------------------------------------------------------------------------
-class CompareController():
+class PredictController():
     """Class that handles commands from the search window."""
 
     allianceOptions = ["Custom",
@@ -20,9 +20,20 @@ class CompareController():
                        "Alliance 5","Alliance 6",
                        "Alliance 7","Alliance 8"]
     
-    compareIndex = [("avgOff","Avg OffScore"),("avgDef","Avg DefScore"),("avgAst","Avg AstScore"),
-                    ("avgAutoScore","Avg AutoScore"),("avgTeleScore","Avg TeleScore"),("avgFoulScore","Avg FoulScore"),
-                    ("pHadAuto","Had Auto %"),("pHotAccuracy","Hot Accuracy %")]
+    predictIndex = [("avgOff","O-Scr"),
+                    ("avgTotal","T-Scr"),
+                    ("pHadAuto","Auto %"),
+                    ("avgAutoScore","A-Scr"),
+                    ("avgAutoStackScore","A-Stk-Scr"),
+                    ("avgAutoContainerScore","A-Cnt-Scr"),
+                    ("avgAutoRobotScore","A-Rbt-Scr"),
+                    ("avgTeleScore","T-Scr"),
+                    ("avgTeleToteScore","T-Tote-Scr"),
+                    ("avgTeleContainerScore","T-Cnt-Scr"),
+                    ("avgTeleStepStackTotes","T-Coop-Totes"),
+                    ("avgTeleLitterScore","T-Lit-Scr"),
+                    ("avgFoulScore","F-Scr"),
+                    ("pFoul","Foul %")]
     
     def __init__(self):
         self.available = []
@@ -33,11 +44,11 @@ class CompareController():
         if int(teamVals[index][0].get()) != 0:
             for t in team.Team.team_list:
                 if t.number == int(teamVals[index][0].get()):
-                    for i in xrange(0,len(self.compareIndex)):
-                        teamVals[index][i+1].set(str(t.getAttr(self.compareIndex[i][0])))
+                    for i in xrange(0,len(self.predictIndex)):
+                        teamVals[index][i+1].set(str(t.getAttr(self.predictIndex[i][0])))
                     break
         else:
-            for i in xrange(0,len(self.compareIndex)):
+            for i in xrange(0,len(self.predictIndex)):
                 teamVals[index][i+1].set("0")
 
     def getPrediction(self,team1,team2,team3):

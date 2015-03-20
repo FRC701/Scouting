@@ -16,48 +16,94 @@ class TeamDataController():
     # use these to index values to display, use the system: ("key", "term")
     # where key corresponds to a value in team and term labels that value
     dataLabelVals = [("numMatch","Number of Matches: "),
-                     ("pOff","Played Offensive: "),("pDef","Played Defensive: "),("pAst","Played Assistive: "),
-                     ("avgOff","Average Offensive Score: "),("avgDef","Average Defensive Score: "),("avgAst","Average Assistive Score: "),
-                     ("avgTotal","Average Total Score: "),("WeightedOff","Average Weighted Offensive Score: "),
-                     ("WeightedDef","Average Weighted Defensive Score: "),("WeightedAst","Average Weighted Assistive Score: "),
-                     ("WeightedTotal","Average Weighted Total Score: "),
-                     ("pHadAuto","Had Auto Mode: "),("pMobilityBonus","Obtained Mobility Bonus: "),
-                     ("pGoalieZone","Started in Goalie Zone: "),("avgAutoScore","Average Auto Score: "),
-                     ("avgAutoHighScored","Average Auto Scored in High Goals: "),("avgAutoLowScored","Average Auto Scored in Low Goals: "),
-                     ("avgAutoHotScored","Average Auto Scored in Hot Goals: "),("pHotAccuracy","Hot Goal Scoring Percentage: "),
-                     ("avgTeleScore","Average Tele Score: "),("avgTeleIntakeTimes","Average Intake Time: "),
-                     ("avgTeleHighScored","Average Tele Scored in High Goals: "),("avgTeleLowScored","Average Tele Scored in Low Goals: "),
-                     ("avgTeleTrussScored","Average Truss Scores: "),("avgTeleCatchScored","Average Catch Scores: "),
-                     ("avgTeleAssistScored","Average Number of Assists Per Match: "),
-                     ("pDisabled","Disabled: "),("pNoShow","No Show: "),
+                     ("pNoShow","No Show: "),
+                     ("pDisabled","Disabled: "),
+                     ("avgOff","Average Offensive Score: "),
+                     ("avgTotal","Average Total Score: "),
+                     ("pHadAuto","Had Auto Mode: "),
+                     ("avgAutoScore","Average Auto Score: "),
+                     ("avgAutoStackScore","Average Auto Tote + Stack Set Score: "),
+                     ("avgAutoContainerScore","Average Auto Container Set Score: "),
+                     ("avgAutoRobotScore","Average Auto Robot Set Score: "),
+                     ("avgAutoTotesToZone","Average Number of Auto Totes Brought to Zone: "),
+                     ("avgAutoContainersToZone","Average Number of Containers Brought to Zone: "),
+                     ("avgAutoContainersFromStep","Average Number of Containers Taken Off the Step in Auto: "),
+                     ("avgAutoTotesFromStep","Average Number of Totes Taken From the Step in Auto: "),
+                     ("avgAutoStackTotalTotes","Average Number of Totes Contributed to Auto Stack: "),
+                     ("pEndInAuto","Ended Autonomous in the Auto Zone: "),
+                     ("pAutoOther","Had Other Autonomous: "),
+                     ("avgTeleScore","Average Tele Score: "),
+                     ("avgTeleToteScore","Average Tele Tote-Stacking Score: "),
+                     ("avgTeleContainerScore","Average Tele Container-Stacking Score: "),
+                     ("avgTeleLitterScore","Average Tele Litter-Stacking and Pushing Score: "),
+                     ("avgTeleStackTotes","Average Number of Totes Stacked per Match: "),
+                     ("avgTeleStepStackTotes","Average Number of Step-Stack Totes Stacked per Match: "),
+                     ("avgTeleStackHeights","Average Height of Top-Contributed Tote in Stacks: "),
+                     ("avgTeleStepStackHeights","Average Height of Top-Contributed Tote in Coop Stacks: "),
+                     ("avgTeleStackContainers","Average Number of Containers Stacked per Match: "),
+                     ("avgTeleStackContainerHeights","Average Level of Container: "),
+                     ("avgTeleStackLitter","Average Litter Scored in Containers: "),
+                     ("avgTeleStackKnockedOver","Average Number of Stacks Knocked Over: "),
+                     ("avgTeleStepStackKnockedOver","Average Number of Coop-Stacks Knocked Over: "),
+                     ("avgTeleStacksScored","Average Number of Stacks Scored: "),
+                     ("avgTeleStepStacksScored","Average Number of Coop-Stacks Scored: "),
+                     ("avgTeleTotesFromChute","Average Number of Totes Received from Chute: "),
+                     ("avgTeleLitterFromChute","Average Number of Litter Received from Chute: "),
+                     ("avgTeleTotesFromLandfill","Average Number of Totes Taken from the Landfill: "),
+                     ("avgTeleLitterToLandfill","Average Number of Litter Pushed to the Landfill Zone: "),
                      ("avgFoulScore","Average Foul Score: "),
-                     ("avgPostRegFoul","Average Number of Regular Fouls: "),("avgPostTechFoul","Average Number of Technical Fouls: "),
-                     ("pYellow","Received Yellow Card: "),("pRed","Received Red Card: ")]
+                     ("avgPostFoul","Average Number of Fouls: "),
+                     ("pFoul","Matches Received Foul In: "),
+                     ("pYellow","Received Yellow Card: "),
+                     ("pRed","Received Red Card: ")]
 
     maxminLabelVals = [("maxOffScore","Maximum Offensive Score: "),("minOffScore","Minimum Offensive Score: "),
-                       ("maxDefScore","Maximum Defensive Score: "),("minDefScore","Minimum Defensive Score: "),
-                       ("maxAstScore","Maximum Assistive Score: "),("minAstScore","Minimum Assistive Score: "),
                        ("maxTotalScore","Maximum Total Score: "),("minTotalScore","Minimum Total Score: "),
-                       ("maxWScore","Maximum Weighted Score: "),("minWScore","Minimum Weighted Score: "),
-                       ("maxWOScore","Maximum Weighted Offensive Score: "),("minWOScore","Minimum Weighted Offensive Score: "),
-                       ("maxWDScore","Maximum Weighted Defensive Score: "),("minWDScore","Minimum Weighted Defensive Score: "),
-                       ("maxWAScore","Maximum Weighted Assistive Score: "),("minWAScore","Minimum Weighted Assistive Score: "),
                        ("maxAutoScore","Maximum Auto Score: "),("minAutoScore","Minimum Auto Score: "),
+                       ("maxAutoStackScore","Maximum Auto Tote + Stack Set Score: "),("minAutoStackScore","Minimum Auto Tote + Stack Set Score: "),
+                       ("maxAutoContainerScore","Maximum Auto Container Set Score: "),("minAutoContainerScore","Minimum Auto Container Set Score: "),
+                       ("maxAutoRobotScore","Maximum Auto Robot Set Score: "),("minAutoRobotScore","Minimum Auto Robot Set Score: "),
                        ("maxTeleScore","Maximum Tele Score: "),("minTeleScore","Minimum Tele Score: "),
+                       ("maxTeleToteScore","Maximum Tele Tote-Stacking Score"),("minTeleToteScore","Minimum Tele Tote-Stacking Score"),
+                       ("maxTeleContainerScore","Maximum Tele Container-Stacking Score: "),("minTeleContainerScore","Minimum Tele Container-Stacking Score: "),
+                       ("maxTeleLitterScore","Maximum Tele Litter-Stacking and Pushing Score: "),("minTeleLitterScore","Minimum Tele Litter-Stacking and Pushing Score: "),
                        ("maxFoulScore","Maximum Foul Score: "),("minFoulScore","Minimum Foul Score: ")]
 
-    graphVals = [("avgOff","Scores","oScores"),("avgDef","Scores","dScores"),
-                 ("avgAst","Scores","aScores"),("avgTotal","Scores","tScores"),
-                 ("WeightedOff","Scores","woScores"),("WeightedDef","Scores","wdScores"),
-                 ("WeightedAst","Scores","waScores"),("WeightedTotal","Scores","wScores"),
-                 ("avgAutoScore","Scores","autoScores"),("avgAutoHighScored","Info","autoHighScored"),
-                 ("avgAutoLowScored","Info","autoLowScored"),("avgAutoHotScored","Info","autoHotScored"),
-                 ("avgTeleScore","Scores","teleScores"),("avgTeleIntakeTimes","Info","teleIntakeTimes"),
-                 ("avgTeleHighScored","Info","teleHighScored"),("avgTeleLowScored","Info","teleLowScored"),
-                 ("avgTeleTrussScored","Info","teleTrussScored"),
-                 ("avgTeleCatchScored","Info","teleCatchScored"),("avgTeleAssistScored","Info","teleAssistScored"),
+    graphVals = [("avgOff","Scores","oScores"),
+                 ("avgTotal","Scores","tScores"),
+                 ("avgAutoScore","Scores","autoScores"),
+                 ("avgAutoStackScore","Scores","autoStackScores"),
+                 ("avgAutoContainerScore","Scores","autoContainerScores"),
+                 ("avgAutoRobotScore","Scores","autoRobotScores"),
+                 ("avgAutoTotesToZone","Info","autoTotesToZone"),
+                 ("avgAutoContainersToZone","Info","autoContainersToZone"),
+                 ("avgAutoContainersKnockedOver","Info","autoContainersKnockedOver"),
+                 ("avgAutoContainersFromStep","Info","autoContainersKnockedOver"),
+                 ("avgAutoTotesFromLandfill","Info","autoTotesFromLandfill"),
+                 ("avgAutoTotesFromStep","Info","autoTotesFromStep"),
+                 ("avgAutoTotesStacked","Info","autoTotesStacked"),
+                 ("avgAutoStackTotalTotes","Info","autoStackTotalTotes"),
+                 ("avgTeleScore","Scores","teleScores"),
+                 ("avgTeleToteScore","Scores","teleToteScores"),
+                 ("avgTeleContainerScore","Scores","teleContainerScores"),
+                 ("avgTeleLitterScore","Scores","teleLitterScores"),
+                 ("avgTeleStackTotes","Info","teleStackTotes"),
+                 ("avgTeleStepStackTotes","Info","teleStepStackTotes"),
+                 ("avgTeleStackHeights","Info","teleStackHeights"),
+                 ("avgTeleStepStackHeights","Info","teleStepStackHeights"),
+                 ("avgTeleStackContainers","Info","teleStackContainers"),
+                 ("avgTeleStackContainerHeights","Info","teleStackContainerHeights"),
+                 ("avgTeleStackLitter","Info","teleStackLitter"),
+                 ("avgTeleStackKnockedOver","Info","teleStackKnockedOver"),
+                 ("avgTeleStepStackKnockedOver","Info","teleStepStackKnockedOver"),
+                 ("avgTeleStacksScored","Info","teleStacksScored"),
+                 ("avgTeleStepStacksScored","Info","teleStepStacksScored"),
+                 ("avgTeleTotesFromChute","Info","teleTotesFromChute"),
+                 ("avgTeleLitterFromChute","Info","teleLitterFromChute"),
+                 ("avgTeleTotesFromLandfill","Info","teleTotesFromLandfill"),
+                 ("avgTeleLitterToLandfill","Info","teleLitterToLandfill"),
                  ("avgFoulScore","Scores","foulScores"),
-                 ("avgPostRegFoul","Info","postRegFouls"),("avgPostTechFoul","Info","postTechFouls")]
+                 ("avgPostFoul","Info","postFouls")]
     
     def __init__(self):
         self.teamNum = 0
@@ -93,17 +139,6 @@ class TeamDataController():
             self.image = PhotoImage(file="Images/nopic.gif")
             return self.image
         
-        self.image = PhotoImage(file=image_name)
-        return self.image
-
-    def get_FieldDiagram(self):
-        image_name = "Images/field_diagram.gif"
-        try:
-            open(image_name)
-        except:
-            self.image = PhotoImage(file="Images/nopic.gif")
-            return self.image
-
         self.image = PhotoImage(file=image_name)
         return self.image
 

@@ -7,7 +7,6 @@ from statlib import stats
 
 from team import *
 from entry import *
-from match import *
 
 #------------------------------------------------------------------------------
 # calculate_data function
@@ -16,218 +15,81 @@ from match import *
 def calculate_data():
     
     for entry in Entry.entries:
-        entry.primary_sort()
+        entry.sort()
 
     # get basic team data from the entries
     for entry in Entry.entries:
         done = False
         for team in Team.team_list:
             if team.number == entry.team:
-                assign_basic_team_values(team, entry)
+                assign_team_values(team, entry)
 
                 done = True
         if done == False:
             newTeam = Team(entry.team)
             print "Added Team #: " + str(entry.team)
 
-            assign_basic_team_values(newTeam,entry)
+            assign_team_values(newTeam,entry)
 
-    # get primary offensive information about the team
+    # get the rest of the information about each team
     for team in Team.team_list:
-        team.get_primary_details()
-    
-    # get basic match data from the entries
-    for entry in Entry.entries:
-        done = False
-        for match in Match.matches:
-            if match.number == entry.match:
-                assign_basic_match_values(match, entry)
+        team.get_details()
 
-                done = True
-        if done==False:
-            newMatch = Match(entry.match)
-            print "Added Match #: " + str(entry.match)
-            assign_basic_match_values(newMatch, entry)
-
-    # get defensive and assistive scores for each entry
-    for entry in Entry.entries:
-        if entry.defensive or entry.assistive:
-            for match in Match.matches:
-                if match.number == entry.match:
-                    if entry.allianceColor == 0:
-                        oppOff = match.offScore1
-                        allOff = match.offScore0
-                        allDef = match.def0
-                    elif entry.allianceColor == 1:
-                        oppOff = match.offScore0
-                        allOff = match.offScore1
-                        allDef = match.def1
-        else:
-            oppOff = 0
-            allOff = 0
-            allDef = 0
-
-        entry.secondary_sort(oppOff,allOff,allDef)
-
-        # get total score for the entry
-        entry.tertiary_sort()
-
-    # get team defensive and assistive scores
-    for entry in Entry.entries:
-        for team in Team.team_list:
-            if team.number == entry.team:
-                team.Scores.dScores.append(entry.defensiveScore)
-                team.Scores.aScores.append(entry.assistiveScore)
-    for team in Team.team_list:
-        team.get_secondary_details()
-
-    # get match defensive and assitive scores
-    for entry in Entry.entries:
-        for match in Match.matches:
-            if match.number == entry.match:
-                if entry.allianceColor == 0:
-                    match.defScore0 += entry.defensiveScore
-                    match.astScore0 += entry.assistiveScore
-                elif entry.allianceColor == 1:
-                    match.defScore1 += entry.defensiveScore
-                    match.astScore1 += entry.assistiveScore
-    # get match total scores
-    for match in Match.matches:
-        match.get_total()
-
-    # weight = (s[m]/(s[w]-s[1]))
-    for entry in Entry.entries:
-        for match in Match.matches:
-            if match.number == entry.match:
-                entry.wScore = abs(entry.totalScore/(match.total0 - match.total1)) if match.total0 != match.total1 else entry.totalScore
-                entry.woScore = abs(entry.offensiveScore/(match.offScore0 - match.offScore1)) if match.offScore0 != match.offScore1 else entry.offensiveScore
-                entry.wdScore = abs(entry.defensiveScore/(match.defScore0 - match.defScore1)) if match.defScore0 != match.defScore1 else entry.defensiveScore
-                entry.waScore = abs(entry.assistiveScore/(match.astScore0 - match.defScore1)) if match.astScore0 != match.astScore1 else entry.assistiveScore
-                    
-    # get team average, weighted, total, and max/min scores
-    for team in Team.team_list:
-        for entry in Entry.entries:
-            if entry.team == team.number:
-                team.Scores.wScores.append(entry.wScore)
-                team.Scores.woScores.append(entry.woScore)
-                team.Scores.wdScores.append(entry.wdScore)
-                team.Scores.waScores.append(entry.waScore)
-                team.Scores.tScores.append(entry.totalScore)
-
-        team.get_tertiary_details()
-        team.get_final_details()
-        
-#------------------------------------------------------------------------------
-# calculate_pit_data function
-#   - handles pit data and stores it to the teams
-#------------------------------------------------------------------------------
-def calculate_pit_data():
-    for entry in PitEntry.entries:
-        done = False
-        for team in Team.team_list:
-            if team.number == entry.team:
-                assign_pit_entry_values(team, entry)
-                done = True
-        if done == False:
-            newTeam = Team(entry.team)
-            print "Added Team #: " + str(entry.team)
-            assign_pit_entry_values(Team.team_list[len(Team.team_list)-1],entry)
-        
 #------------------------------------------------------------------------------
 # assign_basic_team_values function
 #   -- assigns some basic values from an entry to a team
 #   -- still needs error handling
 #------------------------------------------------------------------------------
-def assign_basic_team_values(team, entry):
+def assign_team_values(team, entry):
     team.Info.matches.append(entry.match)
-    team.Info.numOff += int(entry.offensive)
-    team.Info.numDef += int(entry.defensive)
-    team.Info.numAst += int(entry.assistive)
+    team.Info.noShow += int(entry.noShow)
 
     team.Info.autoHadAuto += int(entry.autoHadAuto)
-    team.Info.autoMobilityBonus += int(entry.autoMobilityBonus)
-    team.Info.autoGoalieZone += int(entry.autoGoalieZone)
-    team.Info.autoHighScored.append(float(entry.autoHighScored))
-    team.Info.autoLowScored.append(float(entry.autoLowScored))
-    team.Info.autoHotScored.append(float(entry.autoHotScored))
-    team.Info.autoScoredAuto += int(entry.scoredInAuto)
+    team.Info.autoTotesToZone.append(float(entry.autoTotesToZone))
+    team.Info.autoContainersToZone.append(float(entry.autoContainersToZone))
+    team.Info.autoContainersFromStep.append(float(entry.autoContainersFromStep))
+    team.Info.autoTotesFromStep.append(float(entry.autoTotesFromStep))
+    team.Info.autoStackTotalTotes.append(float(entry.autoStackTotalTotes))
+    team.Info.autoEndInZone += int(entry.autoEndInZone)
+    team.Info.autoOther += int(entry.autoOther)
 
-    team.Info.teleHadTele += int(entry.teleHadTele)
-    team.Info.teleHighScored.append(float(entry.teleHighScored))
-    team.Info.teleScoredHigh += 1 if entry.teleHighScored>=1 else 0
-    team.Info.teleLowScored.append(float(entry.teleLowScored))
-    team.Info.teleTrussScored.append(float(entry.teleTrussScored))
-    team.Info.teleScoredTruss += 1 if entry.teleTrussScored>=1 else 0
-    team.Info.teleCatchScored.append(float(entry.teleCatchScored))
-    team.Info.teleCaught += 1 if entry.teleCatchScored>=1 else 0
-    team.Info.teleAssistScored.append(float(entry.teleAssistScored))
-    team.Info.teleScoredTele += int(entry.scoredInTele)
-    times = []
-    for time in entry.teleIntakeTimes: 
-        times.append(time)
-    avgTime = sum(times)/len(times) if len(times)>=1 else 0
-    team.Info.teleIntakeTimes.append(avgTime)
-    for hotSpot in entry.teleHotSpots:
-        team.Info.teleHotSpots.append(hotSpot)
+    team.Info.teleStackTotes.append(float(entry.avgTeleStackTotes))
+    team.Info.teleStepStackTotes.append(float(entry.avgTeleStepStackTotes))
+    team.Info.teleStackHeights.append(float(entry.avgTeleStackHeights))
+    team.Info.teleStepStackHeights.append(float(entry.avgTeleStepStackHeights))
+    team.Info.teleStackContainers.append(float(entry.avgTeleStackContainers))
+    team.Info.teleStackContainerHeights.append(float(entry.avgTeleStackContainerHeights))
+    team.Info.teleStackLitter.append(float(entry.avgTeleStackLitter))
+    team.Info.teleStackKnockedOver.append(float(entry.avgTeleStackKnockedOver))
+    team.Info.teleStepStackKnockedOver.append(float(entry.avgTeleStackKnockedOver))
+    team.Info.teleStacksScored.append(float(entry.teleStacksScored))
+    team.Info.teleStepStacksScored.append(float(entry.teleStepStacksScored))
 
-    team.Info.postRegFouls.append(entry.postRegFouls)
-    team.Info.postTechFouls.append(entry.postTechFouls)
-    team.Info.postHadRegFoul += int(entry.hasRegFoul)
-    team.Info.postHadTechFoul += int(entry.hasTechFoul)
+    team.Info.teleTotesFromChute.append(float(entry.teleTotesFromChute))
+    team.Info.teleLitterFromChute.append(float(entry.teleLitterFromChute))
+    team.Info.teleTotesFromLandfill.append(float(entry.teleTotesFromLandfill))
+    team.Info.teleLitterToLandfill.append(float(entry.teleLitterToLandfill))
+
+    team.Info.postFouls.append(float(entry.postFouls))
+    team.Info.postRedCard += int(entry.postRedCard)
+    team.Info.postYellowCard += int(entry.postYellowCard)
     team.Info.postDisabled += int(entry.postDisabled)
-    team.Info.postNoShow += int(entry.postNoShow)
-    team.Info.postHadYellow += int(entry.postYellowCard)
-    team.Info.postHadRed += int(entry.postRedCard)
-    team.Info.postAggressive += int(entry.postAggressive)
+
+    team.Info.scoredInTele += int(entry.scoredInTele)
+    team.Info.scoredInAuto += int(entry.scoredInAuto)
+    team.Info.hasFoul += int(entry.hasFoul)
 
     team.Scores.oScores.append(entry.offensiveScore)
     team.Scores.autoScores.append(entry.autoScore)
+    team.Scores.autoStackScores.append(entry.autoStackScore)
+    team.Scores.autoContainerScores.append(entry.autoContainerScore)
+    team.Scores.autoRobotScores.append(entry.autoRobotScore)
     team.Scores.teleScores.append(entry.teleScore)
+    team.Scores.teleToteScores.append(entry.teleToteScore)
+    team.Scores.teleContainerScores.append(entry.teleContainerScore)
+    team.Scores.teleLitterScores.append(entry.teleLitterScore)
     team.Scores.foulScores.append(entry.foulScore)
-    
-#------------------------------------------------------------------------------
-# assign_basic_match_values function
-#   -- assigns some basic values from the entry to a match
-#   -- still needs error handling
-#------------------------------------------------------------------------------
-def assign_basic_match_values(match, entry):
-    match.teams.append(entry.team)
-    if entry.allianceColor == 0:
-        match.all0.append(entry.team)
-        match.offScore0 += entry.offensiveScore
-        match.off0 += int(entry.offensive)
-        match.def0 += int(entry.defensive)
-        match.ast0 += int(entry.assistive)
-                    
-    elif entry.allianceColor == 1:
-        match.all1.append(entry.team)
-        match.offScore1 += entry.offensiveScore
-        match.off1 += int(entry.offensive)
-        match.def1 += int(entry.defensive)
-        match.ast1 += int(entry.assistive)
-
-#------------------------------------------------------------------------------
-# assign_pit_entry_values function
-#   -- takes PitEntry values and puts them into a team
-#   -- still needs error handling
-#------------------------------------------------------------------------------
-def assign_pit_entry_values(team, entry):
-    
-    team.PitInfo.robLength = entry.robLength
-    team.PitInfo.robWidth = entry.robWidth
-    team.PitInfo.robHeight = entry.robHeight
-    team.PitInfo.robWieght = entry.robWieght
-    team.PitInfo.clearance = entry.clearance
-    team.PitInfo.wheelSpace = entry.wheelSpace
-    team.PitInfo.driveSystem = entry.driveSystem
-    team.PitInfo.shiftGear = entry.shiftGear
-    team.PitInfo.centerMass = entry.centerMass
-    team.PitInfo.driver1 = entry.driver1
-    team.PitInfo.exp1 = entry.exp1 + " Competitions"
-    team.PitInfo.driver2 = entry.driver2
-    team.PitInfo.exp2 = entry.exp2 + " Competitions"
-    team.PitInfo.driver3 = entry.driver3
-    team.PitInfo.exp3 = entry.exp3 + " Competitions"
+    team.Scores.tScores.append(entry.totalScore)
 
 #------------------------------------------------------------------------------
 # get_rank functions
@@ -239,72 +101,15 @@ def get_off_rank(sort="avg",rev=True):
     
     for team in Team.team_list:
         if sort == "avg":
-            if team.Info.numOff > 0:
-                TeamRankings.off_rank.append([team.Scores.avgOffScore,team.number])
+            TeamRankings.off_rank.append([team.Scores.avgOffScore,team.number])
         elif sort == "max":
-            if team.Info.numOff > 0:
-                TeamRankings.off_rank.append([team.Scores.maxOffScore,team.number])
+            TeamRankings.off_rank.append([team.Scores.maxOffScore,team.number])
         elif sort == "min":
-            if team.Info.numOff > 0:
-                TeamRankings.off_rank.append([team.Scores.minOffScore,team.number])
+            TeamRankings.off_rank.append([team.Scores.minOffScore,team.number])
 
     TeamRankings.off_rank.sort(reverse=rev)
 
     return TeamRankings.off_rank
-
-def get_def_rank(sort="avg",rev=True):
-
-    TeamRankings.def_rank = []
-    
-    for team in Team.team_list:
-        if sort == "avg":
-            if team.Info.numDef > 0:
-                TeamRankings.def_rank.append([team.Scores.avgDefScore,team.number])
-        elif sort == "max":
-            if team.Info.numDef > 0:
-                TeamRankings.def_rank.append([team.Scores.maxDefScore,team.number])
-        elif sort == "min":
-            if team.Info.numDef > 0:
-                TeamRankings.def_rank.append([team.Scores.minDefScore,team.number])
-
-    TeamRankings.def_rank.sort(reverse=rev)
-
-    return TeamRankings.def_rank
-
-def get_ast_rank(sort="avg",rev=True):
-
-    TeamRankings.ast_rank = []
-    
-    for team in Team.team_list:
-        if sort == "avg":
-            if team.Info.numAst > 0:
-                TeamRankings.ast_rank.append([team.Scores.avgAstScore,team.number])
-        elif sort == "max":
-            if team.Info.numAst > 0:
-                TeamRankings.ast_rank.append([team.Scores.maxAstScore,team.number])
-        elif sort == "min":
-            if team.Info.numAst > 0:
-                TeamRankings.ast_rank.append([team.Scores.minAstScore,team.number])
-
-    TeamRankings.ast_rank.sort(reverse=rev)
-
-    return TeamRankings.ast_rank
-
-def get_tot_rank(sort="avg",rev=True):
-
-    TeamRankings.tot_rank = []
-    
-    for team in Team.team_list:
-        if sort == "avg":
-                TeamRankings.tot_rank.append([team.Scores.avgTotalScore,team.number])
-        elif sort == "max":
-                TeamRankings.tot_rank.append([team.Scores.maxTotalScore,team.number])
-        elif sort == "min":
-                TeamRankings.tot_rank.append([team.Scores.minTotalScore,team.number])
-
-    TeamRankings.tot_rank.sort(reverse=rev)
-
-    return TeamRankings.tot_rank
 
 def get_auto_rank(sort="avg",rev=True):
 
@@ -325,24 +130,126 @@ def get_auto_rank(sort="avg",rev=True):
 
     return TeamRankings.auto_rank
 
-def get_tele_rank(sort="avg",rev=True):
+def get_auto_stack_rank(sort="avg",rev=True):
 
-    TeamRankings.tele_rank = []
+    TeamRankings.auto_stack_rank = []
     
     for team in Team.team_list:
         if sort == "avg":
-            if team.Info.teleHadTele > 0:
-                TeamRankings.tele_rank.append([team.Scores.avgTeleScore,team.number])
+            if team.Info.autoHadAuto > 0:
+                TeamRankings.auto_stack_rank.append([team.Scores.avgAutoStackScore,team.number])
         elif sort == "max":
-            if team.Info.teleHadTele > 0:
-                TeamRankings.tele_rank.append([team.Scores.maxTeleScore,team.number])
+            if team.Info.autoHadAuto > 0:
+                TeamRankings.auto_stack_rank.append([team.Scores.maxAutoStackScore,team.number])
         elif sort == "min":
-            if team.Info.teleHadTele > 0:
-                TeamRankings.tele_rank.append([team.Scores.minTeleScore,team.number])
+            if team.Info.autoHadAuto > 0:
+                TeamRankings.auto_stack_rank.append([team.Scores.minAutoStackScore,team.number])
+
+    TeamRankings.auto_stack_rank.sort(reverse=rev)
+
+    return TeamRankings.auto_stack_rank
+
+def get_auto_container_rank(sort="avg",rev=True):
+
+    TeamRankings.auto_container_rank = []
+    
+    for team in Team.team_list:
+        if sort == "avg":
+            if team.Info.autoHadAuto > 0:
+                TeamRankings.auto_container_rank.append([team.Scores.avgAutoContainerScore,team.number])
+        elif sort == "max":
+            if team.Info.autoHadAuto > 0:
+                TeamRankings.auto_container_rank.append([team.Scores.maxAutoContainerScore,team.number])
+        elif sort == "min":
+            if team.Info.autoHadAuto > 0:
+                TeamRankings.auto_container_rank.append([team.Scores.minAutoContainerScore,team.number])
+
+    TeamRankings.auto_container_rank.sort(reverse=rev)
+
+    return TeamRankings.auto_container_rank
+
+def get_auto_robot_rank(sort="avg",rev=True):
+
+    TeamRankings.auto_robot_rank = []
+    
+    for team in Team.team_list:
+        if sort == "avg":
+            if team.Info.autoHadAuto > 0:
+                TeamRankings.auto_robot_rank.append([team.Scores.avgAutoRobotScore,team.number])
+        elif sort == "max":
+            if team.Info.autoHadAuto > 0:
+                TeamRankings.auto_robot_rank.append([team.Scores.maxAutoRobotScore,team.number])
+        elif sort == "min":
+            if team.Info.autoHadAuto > 0:
+                TeamRankings.auto_robot_rank.append([team.Scores.minAutoRobotScore,team.number])
+
+    TeamRankings.auto_robot_rank.sort(reverse=rev)
+
+    return TeamRankings.auto_robot_rank
+
+def get_tele_rank(sort="avg",rev=True):
+
+    TeamRankings.tele_rank = []
+
+    for team in Team.team_list:
+        if sort == "avg":
+            TeamRankings.tele_rank.append([team.Scores.avgTeleScore,team.number])
+        elif sort == "max":
+            TeamRankings.tele_rank.append([team.Scores.maxTeleScore,team.number])
+        elif sort == "min":
+            TeamRankings.tele_rank.append([team.Scores.minTeleScore,team.number])
 
     TeamRankings.tele_rank.sort(reverse=rev)
 
     return TeamRankings.tele_rank
+
+def get_tele_tote_rank(sort="avg",rev=True):
+
+    TeamRankings.tele_tote_rank = []
+
+    for team in Team.team_list:
+        if sort == "avg":
+            TeamRankings.tele_tote_rank.append([team.Scores.avgTeleToteScore,team.number])
+        elif sort == "max":
+            TeamRankings.tele_tote_rank.append([team.Scores.maxTeleToteScore,team.number])
+        elif sort == "min":
+            TeamRankings.tele_tote_rank.append([team.Scores.minTeleToteScore,team.number])
+
+    TeamRankings.tele_tote_rank.sort(reverse=rev)
+
+    return TeamRankings.tele_tote_rank
+
+def get_tele_container_rank(sort="avg",rev=True):
+
+    TeamRankings.tele_container_rank = []
+
+    for team in Team.team_list:
+        if sort == "avg":
+            TeamRankings.tele_container_rank.append([team.Scores.avgTeleContainerScore,team.number])
+        elif sort == "max":
+            TeamRankings.tele_container_rank.append([team.Scores.maxTeleContainerScore,team.number])
+        elif sort == "min":
+            TeamRankings.tele_container_rank.append([team.Scores.minTeleContainerScore,team.number])
+
+    TeamRankings.tele_container_rank.sort(reverse=rev)
+
+    return TeamRankings.tele_container_rank
+
+def get_tele_litter_rank(sort="avg",rev=True):
+
+    TeamRankings.tele_litter_rank = []
+
+    for team in Team.team_list:
+        if sort == "avg":
+            TeamRankings.tele_litter_rank.append([team.Scores.avgTeleLitterScore,team.number])
+        elif sort == "max":
+            TeamRankings.tele_litter_rank.append([team.Scores.maxTeleLitterScore,team.number])
+        elif sort == "min":
+            TeamRankings.tele_litter_rank.append([team.Scores.minTeleLitterScore,team.number])
+
+    TeamRankings.tele_litter_rank.sort(reverse=rev)
+
+    return TeamRankings.tele_litter_rank
 
 def get_foul_rank(sort="avg",rev=False): # foul rank default from least points to most
 
@@ -350,116 +257,50 @@ def get_foul_rank(sort="avg",rev=False): # foul rank default from least points t
     
     for team in Team.team_list:
         if sort == "avg":
-            if team.Info.postHadRegFoul or team.Info.postHadTechFoul:
+            if team.Info.hasFoul:
                 TeamRankings.foul_rank.append([team.Scores.avgFoulScore,team.number])
         elif sort == "max":
-            if team.Info.postHadRegFoul or team.Info.postHadTechFoul:
+            if team.Info.hasFoul:
                 TeamRankings.foul_rank.append([team.Scores.maxFoulScore,team.number])
         elif sort == "min":
-            if team.Info.postHadRegFoul or team.Info.postHadTechFoul:
+            if team.Info.hasFoul:
                 TeamRankings.foul_rank.append([team.Scores.minFoulScore,team.number])
 
     TeamRankings.foul_rank.sort(reverse=rev)
 
     return TeamRankings.foul_rank
 
-def get_w_rank(sort="avg",rev=True):
+def get_tot_rank(sort="avg",rev=True):
 
-    TeamRankings.w_rank = []
+    TeamRankings.tot_rank = []
     
     for team in Team.team_list:
         if sort == "avg":
-                TeamRankings.w_rank.append([team.Scores.avgWScore,team.number])
+            TeamRankings.tot_rank.append([team.Scores.avgTotalScore,team.number])
         elif sort == "max":
-                TeamRankings.w_rank.append([team.Scores.maxWScore,team.number])
+            TeamRankings.tot_rank.append([team.Scores.maxTotalScore,team.number])
         elif sort == "min":
-                TeamRankings.w_rank.append([team.Scores.minWScore,team.number])
+            TeamRankings.tot_rank.append([team.Scores.minTotalScore,team.number])
 
-    TeamRankings.w_rank.sort(reverse=rev)
+    TeamRankings.tot_rank.sort(reverse=rev)
 
-    return TeamRankings.w_rank
-
-def get_wo_rank(sort="avg",rev=True):
-
-    TeamRankings.wo_rank = []
-    
-    for team in Team.team_list:
-        if sort == "avg":
-            if team.Info.numOff > 0:
-                TeamRankings.wo_rank.append([team.Scores.avgWOScore,team.number])
-        elif sort == "max":
-            if team.Info.numOff > 0:
-                TeamRankings.wo_rank.append([team.Scores.maxWOScore,team.number])
-        elif sort == "min":
-            if team.Info.numOff > 0:
-                TeamRankings.wo_rank.append([team.Scores.minWOScore,team.number])
-
-    TeamRankings.wo_rank.sort(reverse=rev)
-
-    return TeamRankings.wo_rank
-
-def get_wd_rank(sort="avg",rev=True):
-
-    TeamRankings.wd_rank = []
-    
-    for team in Team.team_list:
-        if sort == "avg":
-            if team.Info.numDef > 0:
-                TeamRankings.wd_rank.append([team.Scores.avgWDScore,team.number])
-        elif sort == "max":
-            if team.Info.numDef > 0:
-                TeamRankings.wd_rank.append([team.Scores.maxWDScore,team.number])
-        elif sort == "min":
-            if team.Info.numDef > 0:
-                TeamRankings.wd_rank.append([team.Scores.minWDScore,team.number])
-
-    TeamRankings.wd_rank.sort(reverse=rev)
-
-    return TeamRankings.wd_rank
-
-def get_wa_rank(sort="avg",rev=True):
-
-    TeamRankings.wa_rank = []
-    
-    for team in Team.team_list:
-        if sort == "avg":
-            if team.Info.numAst > 0:
-                TeamRankings.wa_rank.append([team.Scores.avgWAScore,team.number])
-        elif sort == "max":
-            if team.Info.numAst > 0:
-                TeamRankings.wa_rank.append([team.Scores.maxWAScore,team.number])
-        elif sort == "min":
-            if team.Info.numAst > 0:
-                TeamRankings.wa_rank.append([team.Scores.minWAScore,team.number])
-
-    TeamRankings.wa_rank.sort(reverse=rev)
-
-    return TeamRankings.wa_rank
+    return TeamRankings.tot_rank
 
 #------------------------------------------------------------------------------
 # predict functions
 #   -- calculates predicted alliance scores predicts match outcomes
 #------------------------------------------------------------------------------
 def predict_scores(team1=None,team2=None,team3=None):
-    pOff1 = float(team1.pOff.rstrip("%"))/100
-    pOff2 = float(team2.pOff.rstrip("%"))/100
-    pOff3 = float(team3.pOff.rstrip("%"))/100
-    pDef1 = float(team1.pDef.rstrip("%"))/100
-    pDef2 = float(team2.pDef.rstrip("%"))/100
-    pDef3 = float(team3.pDef.rstrip("%"))/100
-    pAst1 = float(team1.pAst.rstrip("%"))/100
-    pAst2 = float(team2.pAst.rstrip("%"))/100
-    pAst3 = float(team3.pAst.rstrip("%"))/100
     try:
-        offScore = ((team1.avgOff*pOff1)+(team2.avgOff*pOff2)+(team3.avgOff*pOff3))
-        defScore = ((team1.avgDef*pDef1)+(team2.avgDef*pDef2)+(team3.avgDef*pDef3))
-        astScore = ((team1.avgAst*pAst1)+(team2.avgAst*pAst2)+(team3.avgAst*pAst3))
+        # make each team a confidence internal over proportion means and use
+        # that confidence interval to calculate a total range of scores (from lowest
+        # theoretical to highest theoretical, then take the center of that
+        # total range and place it as the expected offensive score
+        offScore = (team1.avgOff+team2.avgOff+team3.avgOff)
     except:
         offScore = 0
-        defScore = 0
-        astScore = 0
 
-    expectedScores = [offScore, defScore, astScore]
+    expectedScores = [offScore]
 
     return expectedScores
 

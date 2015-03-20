@@ -73,52 +73,6 @@ class TeamData(Frame):
             # make an empty graph canvas to satisfy the frame
             self.graph = Canvas(self.graphFrame,width=256,height=192)
             self.graph.pack()
-
-            # make the frame to show the hotSpots on
-            self.hotSpotFrame = Frame(self,relief=RAISED,bd=1)
-            self.hotSpotFrame.pack(side=LEFT,padx=20)
-
-            # make an empty hotSpot canvas to satisfy the frame
-            self.hotSpots = Canvas(self.hotSpotFrame,width=600,height=300)
-            self.hotSpots.pack()
-
-            # make the image for the background
-            self.hotSpots.img=self.controller.get_FieldDiagram()
-            self.hotSpots.create_image(0,0,anchor=NW,image=self.hotSpots.img)
-            
-            self.hotSpotData = self.controller.data.Info.teleHotSpots
-            # create the hotSpots
-            for hotSpot in self.hotSpotData:
-                fillColor = ""
-                label = ""
-                r = 10
-                color = hotSpot[0]
-                x = hotSpot[1]*600
-                print x
-                y = hotSpot[2]*300
-                print y
-
-                if(color==1):
-                    fillColor = "blue"
-                    label = "T"
-                elif(color==2):
-                    fillColor = "red"
-                    label = "C"
-                elif(color==3):
-                    fillColor = "green"
-                    label = "G"
-                elif(color==4):
-                    fillColor = "pink"
-                    label = "GA"
-                elif(color==5):
-                    fillColor = "purple"
-                    label = "RA"
-                else:
-                    fillColor= "black"
-                    
-                self.hotSpots.create_oval(x-r,y-r,x+r,y+r,fill=fillColor)
-                self.hotSpots.create_text(x-r-10,y-r-10,anchor=NW,text=label,fill=fillColor)
-                       
             self.shown = True
 
     def hide(self):
@@ -126,7 +80,6 @@ class TeamData(Frame):
             self.dataFrame.destroy()
             self.graphFrame.destroy()
             self.photoFrame.destroy()
-            self.hotSpotFrame.destroy()
             self.shown = False
             
     def load(self, event=None):
@@ -163,7 +116,6 @@ class TeamData(Frame):
         self.teamNum.set(team)
 
         self.parent.title("TeamData")
-        #self.parent.geometry("650x750")
         Frame.__init__(self, parent)
         self.pack()
         self.startup()
