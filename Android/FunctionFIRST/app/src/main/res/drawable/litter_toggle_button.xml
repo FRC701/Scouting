@@ -12,7 +12,4 @@
     <item
         android:drawable="@drawable/litter_toggle_default"
         android:textColor="@color/Gray"/>
-    <item android:state_enabled="false" android:state_checked="false"
-        android:textColor="@color/Gray"
-        android:drawable="@drawable/litter_toggle_default_disabled"/>
 </selector>

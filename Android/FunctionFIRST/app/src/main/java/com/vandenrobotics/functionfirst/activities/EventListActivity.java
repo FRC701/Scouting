@@ -75,6 +75,12 @@ public class EventListActivity extends Activity {
                     loadEventList();
                     progressDialog.dismiss();
                 }
+                @Override
+                public void onFailure(int statusCode, Header[] headers, Throwable t, JSONObject jo){
+                    progressDialog.dismiss();
+                    // create an alert dialog to let the user know that the request failed, and load the event lists for what events we do have downloaded
+                    loadEventList();
+                }
             });
         } else {
             loadEventList();

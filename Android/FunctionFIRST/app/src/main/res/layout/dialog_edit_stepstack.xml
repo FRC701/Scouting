@@ -24,46 +24,46 @@
         android:layout_centerHorizontal="true">
 
         <ToggleButton
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
             android:id="@+id/toggleCoopStack6"
-            android:background="@drawable/tote_toggle_button" />
+            android:background="@drawable/yellow_tote_toggle_button" />
 
         <ToggleButton
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
             android:id="@+id/toggleCoopStack5"
-            android:background="@drawable/tote_toggle_button" />
+            android:background="@drawable/yellow_tote_toggle_button" />
 
         <ToggleButton
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
             android:id="@+id/toggleCoopStack4"
-            android:background="@drawable/tote_toggle_button" />
+            android:background="@drawable/yellow_tote_toggle_button" />
 
         <ToggleButton
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
             android:id="@+id/toggleCoopStack3"
-            android:background="@drawable/tote_toggle_button"/>
+            android:background="@drawable/yellow_tote_toggle_button"/>
 
         <ToggleButton
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
             android:id="@+id/toggleCoopStack2"
-            android:background="@drawable/tote_toggle_button" />
+            android:background="@drawable/yellow_tote_toggle_button" />
 
         <ToggleButton
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
             android:id="@+id/toggleCoopStack1"
-            android:background="@drawable/tote_toggle_button" />
+            android:background="@drawable/yellow_tote_toggle_button" />
 
         <TextView
             android:layout_width="wrap_content"
