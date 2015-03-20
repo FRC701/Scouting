@@ -18,11 +18,8 @@ class _TeamInfo(object):
         self.autoHadAuto = 0                # number of matches for which the team had autonomous
         self.autoTotesToZone = []           # list containing number of totes brought to zone during auto
         self.autoContainersToZone = []      # list containing number of containers brought to zone during auto
-        self.autoContainersKnockedOver = [] # list containing number of containers knocked over during auto
         self.autoContainersFromStep = []    # list containing number of containers received from step during auto
-        self.autoTotesFromLandfill = []     # list containing number of totes taken from landfill during auto
         self.autoTotesFromStep = []         # list containing the number of totes taken from the step during auto
-        self.autoTotesStacked = []          # list containing number of totes stacked that weren't auto totes during auto
         self.autoStackTotalTotes = []       # list containing number of total totes in the auto stack made by this robot
         self.autoEndInZone = 0              # number of matches for which the team ended in the auto zone
         self.autoOther = 0                  # number of matches for which the team did something else in auto
@@ -41,10 +38,7 @@ class _TeamInfo(object):
         self.teleTotesFromChute = []        # list containing the number of totes received from the chute each match
         self.teleLitterFromChute = []       # list containing the number of litter received from the chute each match
         self.teleTotesFromLandfill = []     # list containing the number of totes received from the landfill each match
-        self.teleTotesFromStep = []         # list containing the number of totes received from the step each match
         self.teleLitterToLandfill = []      # list containing the number of litter pushed to the landfill zone each match
-        self.teleContainersUpright = []     # list containing the number of containers upright each match
-        self.teleTotesUpright = []          # list containing the number of totes upright each match
 
         self.postFouls = []                 # list containing the number of fouls each match
         self.postRedCard = 0                # number of matches for which robot received red card
@@ -58,11 +52,8 @@ class _TeamInfo(object):
     def get_info(self):
         self.avgAutoTotesToZone = float(sum(self.autoTotesToZone))/float(len(self.autoTotesToZone)) if len(self.autoTotesToZone) else 0
         self.avgAutoContainersToZone = float(sum(self.autoContainersToZone))/float(len(self.autoContainersToZone)) if len(self.autoContainersToZone) else 0
-        self.avgAutoContainersKnockedOver = float(sum(self.autoContainersKnockedOver))/float(len(self.autoContainersKnockedOver)) if len(self.autoContainersKnockedOver) else 0
         self.avgAutoContainersFromStep = float(sum(self.autoContainersFromStep))/float(len(self.autoContainersFromStep)) if len(self.autoContainersFromStep) else 0
-        self.avgAutoTotesFromLandfill = float(sum(self.autoTotesFromLandfill))/float(len(self.autoTotesFromLandfill)) if len(self.autoTotesFromLandfill) else 0
         self.avgAutoTotesFromStep = float(sum(self.autoTotesFromStep))/float(len(self.autoTotesFromStep)) if len(self.autoTotesFromStep) else 0
-        self.avgAutoTotesStacked = float(sum(self.autoTotesStacked))/float(len(self.autoTotesStacked)) if len(self.autoTotesStacked) else 0
         self.avgAutoStackTotalTotes = float(sum(self.autoStackTotalTotes))/float(len(self.autoStackTotalTotes)) if len(self.autoStackTotalTotes) else 0
 
         self.avgTeleStackTotes = float(sum(self.teleStackTotes))/float(len(self.teleStackTotes)) if len(self.teleStackTotes) else 0
@@ -79,10 +70,7 @@ class _TeamInfo(object):
         self.avgTeleTotesFromChute = float(sum(self.teleTotesFromChute))/float(len(self.teleTotesFromChute)) if len(self.teleTotesFromChute) else 0
         self.avgTeleLitterFromChute = float(sum(self.teleLitterFromChute))/float(len(self.teleLitterFromChute)) if len(self.teleLitterFromChute) else 0
         self.avgTeleTotesFromLandfill = float(sum(self.teleTotesFromLandfill))/float(len(self.teleTotesFromLandfill)) if len(self.teleTotesFromLandfill) else 0
-        self.avgTeleTotesFromStep = float(sum(self.teleTotesFromStep))/float(len(self.teleTotesFromStep)) if len(self.teleTotesFromStep) else 0
         self.avgTeleLitterToLandfill = float(sum(self.teleLitterToLandfill))/float(len(self.teleLitterToLandfill)) if len(self.teleLitterToLandfill) else 0
-        self.avgTeleContainersUpright = float(sum(self.teleContainersUpright))/float(len(self.teleContainersUpright)) if len(self.teleContainersUpright) else 0
-        self.avgTeleTotesUpright = float(sum(self.teleTotesUpright))/float(len(self.teleTotesUpright)) if len(self.teleTotesUpright) else 0
         
         self.avgPostFoul = sum(self.postFouls)/len(self.postFouls) if len(self.postFouls) else 0
                 
@@ -219,11 +207,8 @@ class Team(object):
         self.avgAutoRobotScore = round(self.Scores.avgAutoRobotScore,2)
         self.avgAutoTotesToZone = round(self.Info.avgAutoTotesToZone,2)
         self.avgAutoContainersToZone = round(self.Info.avgAutoContainersToZone,2)
-        self.avgAutoContainersKnockedOver = round(self.Info.avgAutoContainersKnockedOver,2)
         self.avgAutoContainersFromStep = round(self.Info.avgAutoContainersFromStep,2)
-        self.avgAutoTotesFromLandfill = round(self.Info.avgAutoTotesFromLandfill,2)
         self.avgAutoTotesFromStep = round(self.Info.avgAutoTotesFromStep,2)
-        self.avgAutoTotesStacked = round(self.Info.avgAutoTotesStacked,2)
         self.avgAutoStackTotalTotes = round(self.Info.avgAutoStackTotalTotes,2)
         self.pEndInAuto = str(int(100*self.Info.autoEndInZone)/len(matches)) + "%"
         self.pAutoOther = str(int(100*self.Info.autoOther)/len(matches)) + "%"
@@ -246,10 +231,7 @@ class Team(object):
         self.avgTeleTotesFromChute = round(self.Info.avgTeleTotesFromChute,2)
         self.avgTeleLitterFromChute = round(self.Info.avgTeleLitterFromChute,2)
         self.avgTeleTotesFromLandfill = round(self.Info.avgTeleTotesFromLandfill,2)
-        self.avgTeleTotesFromStep = round(self.Info.avgTeleTotesFromStep,2)
         self.avgTeleLitterToLandfill = round(self.Info.avgTeleLitterToLandfill,2)
-        self.avgTeleContainersUpright = round(self.Info.avgTeleContainersUpright,2)
-        self.avgTeleTotesUpright = round(self.Info.avgTeleTotesUpright,2)
 
         self.avgFoulScore = round(self.Scores.avgFoulScore,2)
         self.avgPostFoul = round(self.Info.avgPostFoul,2)

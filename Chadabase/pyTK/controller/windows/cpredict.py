@@ -30,6 +30,7 @@ class PredictController():
                     ("avgTeleScore","T-Scr"),
                     ("avgTeleToteScore","T-Tote-Scr"),
                     ("avgTeleContainerScore","T-Cnt-Scr"),
+                    ("avgTeleStepStackTotes","T-Coop-Totes"),
                     ("avgTeleLitterScore","T-Lit-Scr"),
                     ("avgFoulScore","F-Scr"),
                     ("pFoul","Foul %")]

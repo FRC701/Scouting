@@ -34,15 +34,9 @@ class Entry(object):
         index += 1
         self.autoContainersToZone = float(data[index])
         index += 1
-        self.autoContainersKnockedOver = float(data[index])
-        index += 1
         self.autoContainersFromStep = float(data[index])
         index += 1
-        self.autoTotesFromLandfill = float(data[index])
-        index += 1
         self.autoTotesFromStep = float(data[index])
-        index += 1
-        self.autoTotesStacked = float(data[index])
         index += 1
 
         #auto stack data
@@ -61,9 +55,11 @@ class Entry(object):
         self.teleStacks = []
         self.teleStepStacks = []
 
-        numStacks = data[index]
+        numStacks = int(data[index])
         index += 1
-        
+        print "I AM NUMSTACKS"
+        print self.team
+        print numStacks
         i = 0
         while (i < numStacks):
             stackdata = []
@@ -90,9 +86,12 @@ class Entry(object):
             self.teleStacks.append(Stack(stackdata))
             i += 1
 
-        numStepStacks = data[index]
+        numStepStacks = int(data[index])
         index += 1
-
+        
+        print "I AM NUM STEPSTACKS"
+        print self.team
+        print numStepStacks
         i = 0
         while (i < numStepStacks):
             ssdata = []
@@ -119,13 +118,7 @@ class Entry(object):
         index += 1
         self.teleTotesFromLandfill = float(data[index])
         index += 1
-        self.teleTotesFromStep = float(data[index])
-        index += 1
         self.teleLitterToLandfill = float(data[index])
-        index += 1
-        self.teleContainersUpright = float(data[index])
-        index += 1
-        self.teleTotesUpright = float(data[index])        
         index += 1
 
         # post data
@@ -152,9 +145,14 @@ class Entry(object):
         self.teleStacksScored = len(self.teleStacks)
         self.teleStepStacksScored = len(self.teleStepStacks)
 
+        self.entries.append(self)
+
+    def sort(self):
+        """Calculates basic scoring and information."""
+
         for s in self.teleStacks:
             self.teleStackTotes.append(float(s.totalTotes))
-            self.teleStackHeights.append(float(s.highestTotes))
+            self.teleStackHeights.append(float(s.highestTote))
             self.teleStackContainers.append(float(int(s.container)))
             self.teleStackContainerHeights.append(float(s.containerHeight))
             self.teleStackLitter.append(float(int(s.litter)))
@@ -164,7 +162,7 @@ class Entry(object):
             self.teleStepStackTotes.append(float(s.totalTotes))
             self.teleStepStackHeights.append(float(s.highestTote))
             self.teleStepStackKnockedOver.append(float(int(s.knockedOver)))
-
+            
         self.avgTeleStackTotes = float(sum(self.teleStackTotes))/float(len(self.teleStackTotes)) if len(self.teleStackTotes) else 0
         self.avgTeleStepStackTotes = float(sum(self.teleStepStackTotes))/float(len(self.teleStepStackTotes)) if len(self.teleStepStackTotes) else 0
         self.avgTeleStackHeights = float(sum(self.teleStackHeights))/float(len(self.teleStackHeights)) if len(self.teleStackHeights) else 0
@@ -180,10 +178,6 @@ class Entry(object):
             self.autoStackTotalTotes += 1 if self.autoStack[i] else 0
             i += 1
         
-        self.entries.append(self)
-
-    def sort(self):
-        """Calculates basic scoring and information."""
         self.autoStackScore = 20 if self.autoStackTotalTotes == 3 else self.autoTotesToZone*2
         self.autoContainerScore = 8 if self.autoContainersToZone >= 3 else float(self.autoContainersToZone)*float(8.0/3.0)
         self.autoRobotScore = float(4.0/3.0) if self.autoEndInZone else 0
@@ -191,7 +185,6 @@ class Entry(object):
         self.autoScore = (self.autoStackScore + self.autoContainerScore + self.autoRobotScore)
 
         self.teleToteScore = float(sum(self.teleStackTotes))*float(2)
-        self.teleToteScore+= float(self.autoTotesStacked)*float(2)
         self.teleContainerScore = 0
         i = 0
         while (i < len(self.teleStackContainers)):
@@ -210,6 +203,6 @@ class Entry(object):
         self.hasFoul      = True if self.postFouls > 0 else False
 
         self.offensiveScore = (self.autoScore + self.teleScore)
-        self.foulScore = (4*self.postFouls)
+        self.foulScore = (6*self.postFouls)
 
         self.totalScore = (self.offensiveScore - self.foulScore)

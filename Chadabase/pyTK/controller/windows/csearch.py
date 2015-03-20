@@ -21,11 +21,8 @@ class SearchController():
                         ("avgAutoRobotScore","Auto Robot Set Score >= "),
                         ("avgAutoTotesToZone","Auto Totes Brought to Zone >= "),
                         ("avgAutoContainersToZone","Auto Containers Brought to Zone >= "),
-                        ("avgAutoContainersKnockedOver","Auto Containers Knocked Over <= "),
                         ("avgAutoContainersFromStep","Auto Containers Taken From Step >= "),
-                        ("avgAutoTotesFromLandfill","Auto Totes Taken From Landfill >= "),
                         ("avgAutoTotesFromStep","Auto Totes Taken From Step >= "),
-                        ("avgAutoTotesStacked","Auto Non-Auto Totes Stacked >= "),
                         ("avgAutoStackTotalTotes","Auto Totes Contribued to Stack >= ")]
 
     entryItemTelePost = [("avgTeleScore","Tele Score >= "),
@@ -46,10 +43,7 @@ class SearchController():
                          ("avgTeleTotesFromChute","Number of Totes Received from Chute per Match >= "),
                          ("avgTeleLitterFromChite","Number of Litter Received from Chute per Match >= "),
                          ("avgTeleTotesFromLandfill","Number of Totes Taken From Landfill per Match >= "),
-                         ("avgTeleTotesFromStep","Number of Totes Taken From Step per Match >= "),
                          ("avgTeleLitterToLandfill","Number of Litter Pushed to Landfill per Match >= "),
-                         ("avgTeleContainersUpright","Number of Containers Made Upright per Match >= "),
-                         ("avgTeleTotesUpright","Number of Totes Made Upright per Match >= "),
                          ("avgFoulScore","Foul Score <= ")]
     
     checkItemTypes = [("autoHadAuto","Had Autonomous"),
@@ -100,11 +94,8 @@ class SearchController():
                 "avgAutoRobotScore":searchGreater,
                 "avgAutoTotesToZone":searchGreater,
                 "avgAutoContainersToZone":searchGreater,
-                "avgAutoContainersKnockedOver":searchLess,
                 "avgAutoContainersFromStep":searchGreater,
-                "avgAutoTotesFromLandfill":searchGreater,
                 "avgAutoTotesFromStep":searchGreater,
-                "avgAutoTotesStacked":searchGreater,
                 "avgAutoStackTotalTotes":searchGreater,
                 "autoHadAuto":searchHas,
                 "scoredInAuto":searchHas,
@@ -128,16 +119,12 @@ class SearchController():
                 "avgTeleTotesFromChute":searchGreater,
                 "avgTeleLitterFromChute":searchGreater,
                 "avgTeleTotesFromLandfill":searchGreater,
-                "avgTeleTotesFromStep":searchGreater,
                 "avgTeleLitterToLandfill":searchGreater,
-                "avgTeleContainersUpright":searchGreater,
-                "avgTeleTotesUpright":searchGreater,
                 "scoredInTele":searchHas,
                 "avgFoulScore":searchLess,
                 "postDisabled":searchNever,
-                "postNoShow":searchNever,
-                "postHadRegFoul":searchNever,
-                "postHadTechFoul":searchNever,
+                "noShow":searchNever,
+                "hasFoul":searchNever,
                 "postHadYellow":searchNever,
                 "postHadRed":searchNever}
 

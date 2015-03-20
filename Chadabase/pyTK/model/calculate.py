@@ -47,11 +47,8 @@ def assign_team_values(team, entry):
     team.Info.autoHadAuto += int(entry.autoHadAuto)
     team.Info.autoTotesToZone.append(float(entry.autoTotesToZone))
     team.Info.autoContainersToZone.append(float(entry.autoContainersToZone))
-    team.Info.autoContainersKnockedOver.append(float(entry.autoContainersKnockedOver))
     team.Info.autoContainersFromStep.append(float(entry.autoContainersFromStep))
-    team.Info.autoTotesFromLandfill.append(float(entry.autoTotesFromStep))
     team.Info.autoTotesFromStep.append(float(entry.autoTotesFromStep))
-    team.Info.autoTotesStacked.append(float(entry.autoTotesStacked))
     team.Info.autoStackTotalTotes.append(float(entry.autoStackTotalTotes))
     team.Info.autoEndInZone += int(entry.autoEndInZone)
     team.Info.autoOther += int(entry.autoOther)
@@ -71,10 +68,7 @@ def assign_team_values(team, entry):
     team.Info.teleTotesFromChute.append(float(entry.teleTotesFromChute))
     team.Info.teleLitterFromChute.append(float(entry.teleLitterFromChute))
     team.Info.teleTotesFromLandfill.append(float(entry.teleTotesFromLandfill))
-    team.Info.teleTotesFromStep.append(float(entry.teleTotesFromStep))
     team.Info.teleLitterToLandfill.append(float(entry.teleLitterToLandfill))
-    team.Info.teleContainersUpright.append(float(entry.teleContainersUpright))
-    team.Info.teleTotesUpright.append(float(entry.teleTotesUpright))
 
     team.Info.postFouls.append(float(entry.postFouls))
     team.Info.postRedCard += int(entry.postRedCard)
@@ -263,13 +257,13 @@ def get_foul_rank(sort="avg",rev=False): # foul rank default from least points t
     
     for team in Team.team_list:
         if sort == "avg":
-            if team.Info.hasFoul or team.Info.hasTechFoul:
+            if team.Info.hasFoul:
                 TeamRankings.foul_rank.append([team.Scores.avgFoulScore,team.number])
         elif sort == "max":
-            if team.Info.hasFoul or team.Info.hasTechFoul:
+            if team.Info.hasFoul:
                 TeamRankings.foul_rank.append([team.Scores.maxFoulScore,team.number])
         elif sort == "min":
-            if team.Info.hasFoul or team.Info.hasFoul:
+            if team.Info.hasFoul:
                 TeamRankings.foul_rank.append([team.Scores.minFoulScore,team.number])
 
     TeamRankings.foul_rank.sort(reverse=rev)

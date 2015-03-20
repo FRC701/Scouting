@@ -53,7 +53,7 @@ def parse_data(info):
     data = []
     new = ""
     for character in info:
-        if character != "\n" and character !="," and character != "$":
+        if character != "\n" and character !="," and character != "$" and character != "/r":
             new += str(character)
         else:  
             try:
@@ -62,4 +62,5 @@ def parse_data(info):
             except:
                 break
             if "\n" in character: break
+            if "\r" in character: break
     return data
