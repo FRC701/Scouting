@@ -9,11 +9,8 @@ public class AutoData implements Parcelable {
 
     public int totesToAuto;
     public int containersToAuto;
-    public int containersKnockedOver;
     public int containersFromStep;
-    public int totesFromLandfill;
     public int totesFromStep;
-    public int totesStacked;
 
     public boolean[] autoStack;
 
@@ -25,11 +22,8 @@ public class AutoData implements Parcelable {
         hadAuto = false;
         totesToAuto = 0;
         containersToAuto = 0;
-        containersKnockedOver = 0;
         containersFromStep = 0;
-        totesFromLandfill = 0;
         totesFromStep = 0;
-        totesStacked = 0;
 
         autoStack = new boolean[3];
         for(int i =0; i < autoStack.length; i++)
@@ -60,15 +54,9 @@ public class AutoData implements Parcelable {
             index += 1;
             containersToAuto = data[index];
             index += 1;
-            containersKnockedOver = data[index];
-            index += 1;
             containersFromStep = data[index];
             index += 1;
-            totesFromLandfill = data[index];
-            index += 1;
             totesFromStep = data[index];
-            index += 1;
-            totesStacked = data[index];
             index += 1;
 
             for(int i = 0; i < autoStack.length; i++) {
@@ -90,11 +78,8 @@ public class AutoData implements Parcelable {
         hadAuto = autoData.hadAuto;
         totesToAuto = autoData.totesToAuto;
         containersToAuto = autoData.containersToAuto;
-        containersKnockedOver = autoData.containersKnockedOver;
         containersFromStep = autoData.containersFromStep;
-        totesFromLandfill = autoData.totesFromLandfill;
         totesFromStep = autoData.totesFromStep;
-        totesStacked = autoData.totesStacked;
         autoStack = new boolean[3];
         for(int i = 0; i < autoData.autoStack.length; i++){
             autoStack[i] = autoData.autoStack[i];
@@ -113,8 +98,7 @@ public class AutoData implements Parcelable {
         int tempOther = hadOther? 1 : 0;
 
         return tempAuto+","+totesToAuto+","+containersToAuto+","+
-                containersKnockedOver+","+containersFromStep+","+
-                totesFromLandfill+","+totesFromStep+","+totesStacked+","+
+                containersFromStep+","+totesFromStep+","+
                 tempStackBase+","+tempStackMid+","+tempStackTop+","+
                 tempEndAuto+","+tempOther;
     }

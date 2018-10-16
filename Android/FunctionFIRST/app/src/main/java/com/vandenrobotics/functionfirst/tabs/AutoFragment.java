@@ -26,11 +26,8 @@ public class AutoFragment extends Fragment {
     private CheckBox hadAuto;
     private NumberPicker totesToAuto;
     private NumberPicker containersToAuto;
-    private NumberPicker containersKnockedOver;
     private NumberPicker containersFromStep;
-    private NumberPicker totesFromLandfill;
     private NumberPicker totesFromStep;
-    private NumberPicker totesStacked;
     private ToggleButton[] autoStack;
     private CheckBox endInAuto;
     private CheckBox hadOther;
@@ -74,11 +71,8 @@ public class AutoFragment extends Fragment {
         hadAuto.setChecked(autoData.hadAuto);
         totesToAuto.setValue(autoData.totesToAuto);
         containersToAuto.setValue(autoData.containersToAuto);
-        containersKnockedOver.setValue(autoData.containersKnockedOver);
         containersFromStep.setValue(autoData.containersFromStep);
-        totesFromLandfill.setValue(autoData.totesFromLandfill);
         totesFromStep.setValue(autoData.totesFromStep);
-        totesStacked.setValue(autoData.totesStacked);
         for(int i = 0; i < autoStack.length; i++){
             autoStack[i].setChecked(autoData.autoStack[i]);
         }
@@ -97,11 +91,8 @@ public class AutoFragment extends Fragment {
             autoData.hadAuto = hadAuto.isChecked();
             autoData.totesToAuto = totesToAuto.getValue();
             autoData.containersToAuto = containersToAuto.getValue();
-            autoData.containersKnockedOver = containersKnockedOver.getValue();
             autoData.containersFromStep = containersFromStep.getValue();
-            autoData.totesFromLandfill = totesFromLandfill.getValue();
             autoData.totesFromStep = totesFromStep.getValue();
-            autoData.totesStacked = totesStacked.getValue();
             for(int i = 0; i < autoData.autoStack.length; i++){
                 autoData.autoStack[i] = autoStack[i].isChecked();
             }
@@ -118,11 +109,8 @@ public class AutoFragment extends Fragment {
             hadAuto = (CheckBox)view.findViewById(R.id.cb_hadAuto);
             totesToAuto = (NumberPicker)view.findViewById(R.id.pickerTotesToAuto);
             containersToAuto = (NumberPicker)view.findViewById(R.id.pickerContainersToAuto);
-            containersKnockedOver = (NumberPicker)view.findViewById(R.id.pickerContainersKnockedOver);
             containersFromStep = (NumberPicker)view.findViewById(R.id.pickerContainersFromStep);
-            totesFromLandfill = (NumberPicker)view.findViewById(R.id.pickerTotesFromLandfill);
             totesFromStep = (NumberPicker)view.findViewById(R.id.pickerTotesFromStep);
-            totesStacked = (NumberPicker)view.findViewById(R.id.pickerTotesStacked);
             autoStack = new ToggleButton[3];
             autoStack[0] = (ToggleButton)view.findViewById(R.id.toggleAutoStackBase);
             autoStack[1] = (ToggleButton)view.findViewById(R.id.toggleAutoStackMid);
@@ -144,16 +132,10 @@ public class AutoFragment extends Fragment {
             totesToAuto.setMaxValue(3);
             containersToAuto.setMinValue(0);
             containersToAuto.setMaxValue(7);
-            containersKnockedOver.setMinValue(0);
-            containersKnockedOver.setMaxValue(7);
             containersFromStep.setMinValue(0);
             containersFromStep.setMaxValue(4);
-            totesFromLandfill.setMinValue(0);
-            totesFromLandfill.setMaxValue(28);
             totesFromStep.setMinValue(0);
             totesFromStep.setMaxValue(12);
-            totesStacked.setMinValue(0);
-            totesStacked.setMaxValue(40);
 
             viewsAssigned = true;
         } catch (Exception e){
@@ -165,11 +147,8 @@ public class AutoFragment extends Fragment {
     private void enableAutoViews(){
         totesToAuto.setEnabled(true);
         containersToAuto.setEnabled(true);
-        containersKnockedOver.setEnabled(true);
         containersFromStep.setEnabled(true);
-        totesFromLandfill.setEnabled(true);
         totesFromStep.setEnabled(true);
-        totesStacked.setEnabled(true);
         for(ToggleButton tb : autoStack){
             tb.setEnabled(true);
         }
@@ -182,16 +161,10 @@ public class AutoFragment extends Fragment {
         totesToAuto.setEnabled(false);
         containersToAuto.setValue(0);
         containersToAuto.setEnabled(false);
-        containersKnockedOver.setValue(0);
-        containersKnockedOver.setEnabled(false);
         containersFromStep.setValue(0);
         containersFromStep.setEnabled(false);
-        totesFromLandfill.setValue(0);
-        totesFromLandfill.setEnabled(false);
         totesFromStep.setValue(0);
         totesFromStep.setEnabled(false);
-        totesStacked.setValue(0);
-        totesStacked.setEnabled(false);
         for(ToggleButton tb : autoStack){
             tb.setChecked(false);
             tb.setEnabled(false);

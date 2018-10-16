@@ -34,10 +34,7 @@ public class TeleFragment extends Fragment {
     private NumberPicker totesFromChute;
     private NumberPicker litterFromChute;
     private NumberPicker totesFromLandfill;
-    private NumberPicker totesFromStep;
     private NumberPicker litterToLandfill;
-    private NumberPicker containersUpright;
-    private NumberPicker totesUpright;
 
     private long then;
     private final int longClickDuration = 1000;
@@ -100,10 +97,7 @@ public class TeleFragment extends Fragment {
         totesFromChute.setValue(teleData.totesFromChute);
         litterFromChute.setValue(teleData.litterFromChute);
         totesFromLandfill.setValue(teleData.totesFromLandfill);
-        totesFromStep.setValue(teleData.totesFromStep);
         litterToLandfill.setValue(teleData.litterToLandfill);
-        containersUpright.setValue(teleData.containersUpright);
-        totesUpright.setValue(teleData.totesUpright);
         fieldDiagram.mStacks = teleData.stacks;
         fieldDiagram.mStepStacks = teleData.stepStacks;
         fieldDiagram.invalidate();
@@ -115,10 +109,7 @@ public class TeleFragment extends Fragment {
         teleData.totesFromChute = totesFromChute.getValue();
         teleData.litterFromChute = litterFromChute.getValue();
         teleData.totesFromLandfill = totesFromLandfill.getValue();
-        teleData.totesFromStep = totesFromStep.getValue();
         teleData.litterToLandfill = litterToLandfill.getValue();
-        teleData.containersUpright = containersUpright.getValue();
-        teleData.totesUpright = totesUpright.getValue();
         teleData.stacks = fieldDiagram.mStacks;
         teleData.stepStacks = fieldDiagram.mStepStacks;
 
@@ -131,10 +122,7 @@ public class TeleFragment extends Fragment {
             totesFromChute = (NumberPicker)view.findViewById(R.id.pickerTotesFromChute);
             litterFromChute = (NumberPicker)view.findViewById(R.id.pickerLitterFromChute);
             totesFromLandfill = (NumberPicker)view.findViewById(R.id.pickerTotesFromLandfillTele);
-            totesFromStep = (NumberPicker)view.findViewById(R.id.pickerTotesFromStepTele);
             litterToLandfill = (NumberPicker)view.findViewById(R.id.pickerLitterToLandfill);
-            containersUpright = (NumberPicker)view.findViewById(R.id.pickerContainersUpright);
-            totesUpright = (NumberPicker)view.findViewById(R.id.pickerTotesUpright);
 
             totesFromChute.setMinValue(0);
             totesFromChute.setMaxValue(30);
@@ -142,14 +130,8 @@ public class TeleFragment extends Fragment {
             litterFromChute.setMaxValue(10);
             totesFromLandfill.setMinValue(0);
             totesFromLandfill.setMaxValue(28);
-            totesFromStep.setMinValue(0);
-            totesFromStep.setMaxValue(12);
             litterToLandfill.setMinValue(0);
             litterToLandfill.setMaxValue(20);
-            containersUpright.setMinValue(0);
-            containersUpright.setMaxValue(999);
-            totesUpright.setMinValue(0);
-            totesUpright.setMaxValue(999);
 
             fieldDiagram = (FieldDiagram)view.findViewById(R.id.fieldDiagram);
             fieldDiagram.setImageDrawable((mActivity.mDeviceNumber > 0 && mActivity.mDeviceNumber < 4) ?

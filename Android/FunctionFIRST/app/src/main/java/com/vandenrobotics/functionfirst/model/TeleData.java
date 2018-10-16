@@ -16,10 +16,7 @@ public class TeleData implements Parcelable {
     public int totesFromChute;
     public int litterFromChute;
     public int totesFromLandfill;
-    public int totesFromStep;
     public int litterToLandfill;
-    public int containersUpright;
-    public int totesUpright;
 
     public TeleData(){
         stacks = new ArrayList<>();
@@ -27,10 +24,7 @@ public class TeleData implements Parcelable {
         totesFromChute = 0;
         litterFromChute = 0;
         totesFromLandfill = 0;
-        totesFromStep = 0;
         litterToLandfill = 0;
-        containersUpright = 0;
-        totesUpright = 0;
     }
 
     public TeleData(String string){
@@ -87,16 +81,7 @@ public class TeleData implements Parcelable {
             totesFromLandfill = (int)data[index];
 
             index++;
-            totesFromStep = (int)data[index];
-
-            index++;
             litterToLandfill = (int)data[index];
-
-            index++;
-            containersUpright = (int)data[index];
-
-            index++;
-            totesUpright = (int)data[index];
 
 
         } catch (Exception e){
@@ -110,12 +95,9 @@ public class TeleData implements Parcelable {
         stacks = teleData.stacks;
         stepStacks = teleData.stepStacks;
         totesFromChute = teleData.totesFromChute;
-        litterFromChute = teleData.totesFromLandfill;
+        litterFromChute = teleData.litterFromChute;
         totesFromLandfill = teleData.totesFromLandfill;
-        totesFromStep = teleData.totesFromStep;
         litterToLandfill = teleData.litterToLandfill;
-        containersUpright = teleData.containersUpright;
-        totesUpright = teleData.totesUpright;
     }
 
     @Override
@@ -138,9 +120,8 @@ public class TeleData implements Parcelable {
             returnText+=",";
         }
 
-        String finalText = totesFromChute+","+litterFromChute+","+totesFromLandfill+","+
-                           totesFromStep+","+litterToLandfill+","+containersUpright+","+
-                           totesUpright;
+        String finalText = totesFromChute+","+litterFromChute+","+
+                           totesFromLandfill+","+litterToLandfill;
 
         returnText+=finalText;
 

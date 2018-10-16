@@ -50,10 +50,11 @@
         <activity
             android:name=".activities.MatchActivity"
             android:label="@string/title_activity_match"
-            android:parentActivityName=".activities.ScoutActivity" >
+            android:parentActivityName=".activities.ScoutActivity"
+            android:screenOrientation="landscape">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.vandenrobotics.functionfirst.activities.ScoutActivity" />
+                android:value="com.vandenrobotics.functionfirst.activities.ScoutActivity"/>
         </activity>
     </application>
 

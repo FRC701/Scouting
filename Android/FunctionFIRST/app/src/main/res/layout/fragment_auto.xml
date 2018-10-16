@@ -31,19 +31,19 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:id="@+id/toggleAutoStackTop"
-            android:background="@drawable/tote_toggle_button"/>
+            android:background="@drawable/yellow_tote_toggle_button"/>
 
         <ToggleButton
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:id="@+id/toggleAutoStackMid"
-            android:background="@drawable/tote_toggle_button" />
+            android:background="@drawable/yellow_tote_toggle_button" />
 
         <ToggleButton
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:id="@+id/toggleAutoStackBase"
-            android:background="@drawable/tote_toggle_button" />
+            android:background="@drawable/yellow_tote_toggle_button" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -53,11 +53,11 @@
             android:textColor="@color/Gold" />
 
     </LinearLayout>
-
+    
     <ScrollView
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:id="@+id/scrollViewAuto"
+        android:id="@+id/pickerViewAuto"
         android:layout_below="@+id/cb_hadAuto"
         android:layout_above="@+id/cb_endInAuto"
         android:layout_toLeftOf="@+id/autoStackLayout"
@@ -67,10 +67,10 @@
 
         <LinearLayout
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="fill_parent">
 
             <RelativeLayout
-                android:layout_width="match_parent"
+                android:layout_width="fill_parent"
                 android:layout_height="fill_parent">
 
                 <TextView
@@ -113,28 +113,9 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/text_containersKnockedOver"
-                    android:id="@+id/textContainersKnockedOver"
-                    android:layout_below="@+id/pickerContainersToAuto"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true"
-                    android:textColor="@color/Gold" />
-
-                <com.vandenrobotics.functionfirst.views.NumberPicker
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/pickerContainersKnockedOver"
-                    android:layout_below="@+id/textContainersKnockedOver"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true"
-                    android:orientation="horizontal" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
                     android:text="@string/text_containersFromStep"
                     android:id="@+id/textContainersFromStep"
-                    android:layout_below="@+id/pickerContainersKnockedOver"
+                    android:layout_below="@+id/pickerContainersToAuto"
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentStart="true"
                     android:textColor="@color/Gold" />
@@ -151,28 +132,9 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/text_totesFromLandfill"
-                    android:id="@+id/textTotesFromLandfill"
-                    android:layout_below="@+id/pickerContainersFromStep"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true"
-                    android:textColor="@color/Gold" />
-
-                <com.vandenrobotics.functionfirst.views.NumberPicker
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/pickerTotesFromLandfill"
-                    android:layout_below="@+id/textTotesFromLandfill"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true"
-                    android:orientation="horizontal" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
                     android:text="@string/text_totesFromStep"
                     android:id="@+id/textTotesFromStep"
-                    android:layout_below="@+id/pickerTotesFromLandfill"
+                    android:layout_below="@+id/pickerContainersFromStep"
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentStart="true"
                     android:textColor="@color/Gold" />
@@ -186,28 +148,8 @@
                     android:layout_alignParentStart="true"
                     android:orientation="horizontal" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/text_totesStacked"
-                    android:id="@+id/textTotesStacked"
-                    android:layout_below="@+id/pickerTotesFromStep"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true"
-                    android:textColor="@color/Gold" />
-
-                <com.vandenrobotics.functionfirst.views.NumberPicker
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/pickerTotesStacked"
-                    android:layout_below="@+id/textTotesStacked"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true"
-                    android:orientation="horizontal" />
-
             </RelativeLayout>
         </LinearLayout>
-
     </ScrollView>
 
     <CheckBox
