@@ -1,0 +1,32 @@
+package com.vandenrobotics.tyr2018.tools;
+
+import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.view.ViewGroup;
+
+/**
+ * Created by Programming701-A on 4/9/2018.
+ */
+
+public class MatchDataAdapter extends RecyclerView.Adapter<MatchDataAdapter.ViewHolder> {
+    @Override
+    public MatchDataAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        return null;
+    }
+
+    @Override
+    public void onBindViewHolder(MatchDataAdapter.ViewHolder holder, int position) {
+
+    }
+
+    @Override
+    public int getItemCount() {
+        return 0;
+    }
+
+    public class ViewHolder extends RecyclerView.ViewHolder {
+        public ViewHolder(View itemView) {
+            super(itemView);
+        }
+    }
+}

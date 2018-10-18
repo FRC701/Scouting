@@ -1,0 +1,7 @@
+Rewrite code to use controller to get data using the strings
+	-use string to get all columns needed and to put labels with data
+Remove old frames
+	-mainly heatmap frame
+Add new frames with functionality 
+	-new graph types
+	-find out where we should put these

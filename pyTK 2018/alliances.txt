@@ -1,0 +1,32 @@
+Alliance 1
+3310
+16
+7123
+Alliance 2
+3937
+364
+4576
+Alliance 3
+4635
+3616
+6131
+Alliance 4
+6055
+323
+3337
+Alliance 5
+2992
+4400
+4523
+Alliance 6
+701
+5006
+5437
+Alliance 7
+5550
+1764
+6474
+Alliance 8
+3039
+6647
+2183
