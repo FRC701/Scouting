@@ -3,7 +3,6 @@
     <color name="BackGroundGreen">#0b3404</color>
     <color name="DarkGrey">#797979</color>
     <color name="Goldish">#ddcc12</color>
-    <color name="Black">#000000</color>
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
@@ -148,5 +147,4 @@
     <color name="MediumBlue">#0000CD</color>
     <color name="DarkBlue">#00008B</color>
     <color name="Navy">#000080</color>
-
-</resources>
+    <color name="Black">#000000</color></resources>
