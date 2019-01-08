@@ -204,4 +204,27 @@
     <string name="rocket">Rocket</string>
     <string name="hello">hello</string>
     <string name="cargo_ship">Cargo Ship</string>
+    <string name="during_sandstorm_what_do_you_use">During Sandstorm what do you use?</string>
+    <string name="drive_blindly">Drive Blindly</string>
+    <string name="auto">Auto</string>
+    <string name="vision">Vision</string>
+    <string name="camera">Camera</string>
+    <string name="other">other</string>
+    <string name="during_sandstorm_where_do_you_start">During sandstorm where do you start?</string>
+    <string name="_1st_level">1st level</string>
+    <string name="_2nd_level">2nd level</string>
+    <string name="what_preloads_does_your_robot_have_during_sandstorm">What preloads does your robot have during sandstorm?</string>
+    <string name="robot_cargo">Robot cargo</string>
+    <string name="robot_hatch">Robot Hatch</string>
+    <string name="cargo_ship_cargo">Cargo ship cargo</string>
+    <string name="cargo_ship_hatch">Cargo ship hatch</string>
+    <string name="during_sandstorm_what_does_your_robot_score">During Sandstorm what does your robot score?</string>
+    <string name="hatch_in_rocketship">Hatch in rocketship</string>
+    <string name="hatch_in_cargo_ship">Hatch in cargo ship</string>
+    <string name="cargo_in_rocketship">Cargo in rocketship</string>
+    <string name="cargo_in_cargo_ship">Cargo in cargo ship</string>
+    <string name="tele_period">Tele Period</string>
+    <string name="can_your_robot_intake_from_the_ground">Can your robot intake from the ground?</string>
+    <string name="hatch">Hatch</string>
+    <string name="cargo">Cargo</string>
 </resources>

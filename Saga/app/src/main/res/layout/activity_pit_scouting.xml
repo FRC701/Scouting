@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:orientation="vertical"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -25,11 +25,11 @@
                 />
 
             <TextView
-                android:id="@+id/pitTv_auto"
+                android:id="@+id/duringSandstormMethod_Tv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/TextView_autoType"
-                android:textColor="@color/White" />
+                android:text="@string/during_sandstorm_what_do_you_use"
+                android:textColor="@color/Goldish" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -37,262 +37,212 @@
                 android:orientation="horizontal">
 
                 <CheckBox
-                    android:id="@+id/pitCb_autoCrossesBaseline"
-                    android:layout_width="76dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight=".5"
-                    android:text="@string/CheckBox_crossBaseline"
-                    android:textColor="@color/Goldish" />
-
-                <CheckBox
-                    android:id="@+id/pitCb_autoCubeInSwitch"
-                    android:layout_width="107dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight=".5"
-                    android:text="@string/CheckBox_cube_in_switch"
-                    android:textColor="@color/Goldish" />
-
-                <CheckBox
-                    android:id="@+id/pitCb_autoCubeInScale"
-                    android:layout_width="96dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight=".5"
-                    android:text="@string/CheckBox_cube_in_scale"
-                    android:textColor="@color/Goldish" />
-
-                <CheckBox
-                    android:id="@+id/pitCb_autoCubeInExchange"
+                    android:id="@+id/pitDriveBlindly_Cb"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight=".5"
-                    android:text="@string/CheckBox_cube_in_exchange"
-                    android:textColor="@color/Goldish" />
+                    android:layout_weight="1"
+                    android:text="@string/drive_blindly"
+                    android:textColor="@color/White" />
 
                 <CheckBox
-                    android:id="@+id/pitCb_autoOther"
+                    android:id="@+id/pitAuto_Cb"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight=".5"
-                    android:text="@string/CheckBox_other_auto"
-                    android:textColor="@color/Goldish" />
+                    android:layout_weight="1"
+                    android:text="@string/auto"
+                    android:textColor="@color/White" />
+
+                <CheckBox
+                    android:id="@+id/pitVision_Cb"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/vision"
+                    android:textColor="@color/White" />
+
+                <CheckBox
+                    android:id="@+id/pitCamera_Cb"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/camera"
+                    android:textColor="@color/White" />
+
+                <CheckBox
+                    android:id="@+id/pitOther_Cb"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/other"
+                    android:textColor="@color/White" />
 
             </LinearLayout>
 
             <TextView
-                android:id="@+id/textView10"
+                android:id="@+id/textView1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/TextView_switch_or_scale"
-                android:textColor="@color/White" />
+                android:text="@string/during_sandstorm_where_do_you_start"
+                android:textColor="@color/Goldish" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal">
 
-                <CheckBox
-                    android:id="@+id/pitCb_canGetScale"
+                <RadioButton
+                    android:id="@+id/pitLevel1_Rb"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="@string/CheckBox_scale"
-                    android:textColor="@color/Goldish" />
+                    android:text="@string/_1st_level"
+                    android:textColor="@color/White" />
 
-                <CheckBox
-                    android:id="@+id/pitCb_canGetSwitch"
+                <RadioButton
+                    android:id="@+id/pitLevel2_Rb"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="@string/CheckBox_switch"
-                    android:textColor="@color/Goldish" />
+                    android:text="@string/_2nd_level"
+                    android:textColor="@color/White" />
             </LinearLayout>
 
             <TextView
-                android:id="@+id/textView12"
+                android:id="@+id/textView7"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/TextView_averageSpeed"
-                android:textColor="@color/White"  />
-
-            <EditText
-                android:id="@+id/pitEt_averageSpeed"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="number"
-                android:textColor="@color/Goldish"  />
-
-            <TextView
-                android:id="@+id/textView13"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/TextView_cycleAreas"
-                android:textColor="@color/White"  />
+                android:text="@string/what_preloads_does_your_robot_have_during_sandstorm"
+                android:textColor="@color/Goldish" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal">
 
-                <CheckBox
-                    android:id="@+id/pitCb_cycleGround"
+                <RadioButton
+                    android:id="@+id/pitRobotCargo_Rb"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="@string/CheckBox_ground"
-                    android:textColor="@color/Goldish" />
+                    android:text="@string/robot_cargo"
+                    android:textColor="@color/White" />
 
-                <CheckBox
-                    android:id="@+id/pitCb_cyclePortal"
+                <RadioButton
+                    android:id="@+id/pitRobotHatch_Rb"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="@string/CheckBox_portal"
-                    android:textColor="@color/Goldish" />
+                    android:text="@string/robot_hatch"
+                    android:textColor="@color/White" />
 
-                <CheckBox
-                    android:id="@+id/pitCb_cycleSwitches"
+                <RadioButton
+                    android:id="@+id/pitCargoShipCargo_Rb"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="@string/CheckBox_switch2"
-                    android:textColor="@color/Goldish" />
+                    android:text="@string/cargo_ship_cargo"
+                    android:textColor="@color/White" />
+
+                <RadioButton
+                    android:id="@+id/pitCargoShipHatch_Rb"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/cargo_ship_hatch"
+                    android:textColor="@color/White" />
+
             </LinearLayout>
 
             <TextView
                 android:id="@+id/textView8"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/TextView_climb"
-                android:textColor="@color/White"  />
+                android:text="@string/during_sandstorm_what_does_your_robot_score"
+                android:textColor="@color/Goldish" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal">
 
-                <EditText
-                    android:id="@+id/pitEt_canClimb"
-                    android:layout_width="0dp"
+                <CheckBox
+                    android:id="@+id/pitHatchInRocket_Cb"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:ems="10"
-                    android:inputType="textPersonName"
-                    android:textColor="@color/Goldish"  />
+                    android:text="@string/hatch_in_rocketship"
+                    android:textColor="@color/White" />
+
+                <CheckBox
+                    android:id="@+id/pitHatchInCargoship_Cb"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/hatch_in_cargo_ship"
+                    android:textColor="@color/White" />
+
+                <CheckBox
+                    android:id="@+id/pitCargoInRocketship_Cb"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/cargo_in_rocketship"
+                    android:textColor="@color/White" />
+
+                <CheckBox
+                    android:id="@+id/pitCargoInCargoship_Cb"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/cargo_in_cargo_ship"
+                    android:textColor="@color/White" />
             </LinearLayout>
 
             <TextView
                 android:id="@+id/textView9"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/TextView_floorPickup"
-                android:textColor="@color/White" />
+                android:text="@string/tele_period"
+                android:textColor="@color/Goldish" />
+
+            <TextView
+                android:id="@+id/textView10"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/can_your_robot_intake_from_the_ground"
+                android:textColor="@color/Goldish" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal">
 
-                <RadioButton
-                    android:id="@+id/pitRb_yes"
-                    android:layout_width="0dp"
+                <CheckBox
+                    android:id="@+id/pitHatch_Cb"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="@string/RadioButton_yes"
-                    android:textColor="@color/Goldish" />
+                    android:text="@string/hatch"
+                    android:textColor="@color/White" />
 
-                <RadioButton
-                    android:id="@+id/pitRb_no"
-                    android:layout_width="0dp"
+                <CheckBox
+                    android:id="@+id/cargo_Cb"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="@string/RadioButton_no"
-                    android:textColor="@color/Goldish"/>
+                    android:text="@string/cargo"
+                    android:textColor="@color/White" />
             </LinearLayout>
-
-            <TextView
-                android:id="@+id/textView15"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/TextView_driveTrain"
-                android:textColor="@color/White"  />
-
-            <EditText
-                android:id="@+id/pitEt_driveTrain"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="textPersonName"
-                android:textColor="@color/Goldish"  />
-
-            <TextView
-                android:id="@+id/TextView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/TextView_intakeShooterType"
-                android:textColor="@color/White" />
-
-            <EditText
-                android:id="@+id/pitEt_intakeLift"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="textPersonName"
-                android:textColor="@color/Goldish"  />
-
-            <TextView
-                android:id="@+id/PragLang"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Programming Language:"
-                android:textColor="@color/White" />
-
-            <EditText
-                android:id="@+id/pitEt_progLang"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="textPersonName"
-                android:textColor="@color/Goldish"  />
-            <TextView
-                android:id="@+id/Comments"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Comments:"
-                android:textColor="@color/White" />
-
-            <EditText
-                android:id="@+id/pitEt_comments"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="textPersonName"
-                android:textColor="@color/Goldish"  />
-
-            <TextView
-                android:id="@+id/textView7"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/additional_comments" />
-
-            <EditText
-                android:id="@+id/editText2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="textPersonName"
-                android:text="Name" />
-
-            <Button
-                android:id="@+id/pitB_savebutton"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Save"
-                android:onClick="save"/>
 
 
         </LinearLayout>
 
+        <TextView
+            android:id="@+id/textView17"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="TextView" />
+
     </ScrollView>
 
-</RelativeLayout>
+</LinearLayout>
