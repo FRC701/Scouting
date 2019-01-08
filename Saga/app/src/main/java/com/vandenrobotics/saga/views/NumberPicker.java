@@ -40,7 +40,7 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.vandenrobotics.saga2018.R;
+import com.vandenrobotics.saga.R;
 
 /**
  * A simple layout group that provides a numeric text area with two buttons to

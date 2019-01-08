@@ -1,4 +1,4 @@
-<RelativeLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -6,19 +6,87 @@
     android:paddingRight="16dp"
     android:paddingTop="16dp"
     android:paddingBottom="16dp"
+    android:orientation="vertical"
     android:background="@color/BackGroundGreen">
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/White"
+        android:text="@string/starting_level"/>
+
+    <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <RadioButton
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/_1st"
+                android:id="@+id/level1_Rb"
+                android:textColor="@color/Yellow"/>
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/_2st"
+                android:id="@+id/level2_Rb"
+                android:textColor="@color/Yellow"/>
+        </LinearLayout>
 
 
+    </RadioGroup>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/White"
+        android:text="@string/robot_preload"/>
+    <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <RadioButton
+                android:id="@+id/preloadCargo_Rb"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/Yellow"
+                android:text="@string/cargo"/>
+            <RadioButton
+                android:id="@+id/preloadHatch_Rb"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/Yellow"
+                android:text="@string/hatch"/>
+        </LinearLayout>
+    </RadioGroup>
+    <TextView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:textColor="@color/White"
+    android:text="@string/sandstorm_comments"/>
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/White"
+        android:id="@+id/ssComments_Et"
+        android:hint="@string/whatever_you_notice_about_the_team"/>
     <CheckBox
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/cb_noShow"
-        android:id="@+id/cb_noShow"
+        android:id="@+id/noShow_Cb"
         android:textColor="@color/Goldish"
         android:typeface="serif"
         android:onClick="dialog_noShow"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"/>
 
-</RelativeLayout>
+
+</LinearLayout>

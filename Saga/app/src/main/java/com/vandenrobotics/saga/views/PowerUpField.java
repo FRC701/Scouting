@@ -13,7 +13,7 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
-import com.vandenrobotics.saga2018.R;
+import com.vandenrobotics.saga.R;
 
 
 /**

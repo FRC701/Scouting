@@ -63,10 +63,6 @@ public class MainActivity extends AppCompatActivity implements DialogListener {
     private MatchInfoRepo matchInfoRepo;
     private TeamsRepo teamsRepo;
     private StatsRepo statsRepo;
-    private OwnershipRepo ownershipRepo;
-    private CubesRepo cubesRepo;
-    private VaultRepo vaultRepo;
-
     public AddEventDialogFragment addEventDialogFragment;
 
     @Override
@@ -187,12 +183,6 @@ public class MainActivity extends AppCompatActivity implements DialogListener {
                                 matchInfoRepo.deleteForComp(event);
                                 statsRepo = new StatsRepo();
                                 statsRepo.deleteForComp(event);
-                                ownershipRepo = new OwnershipRepo();
-                                ownershipRepo.deleteForComp(event);
-                                cubesRepo = new CubesRepo();
-                                cubesRepo.deleteForComp(event);
-                                vaultRepo = new VaultRepo();
-                                vaultRepo.deleteForComp(event);
                                 downloadedAdapter.clear();
                                 downloadedAdapter.addAll(competitionsRepo.getAllCompetitions());
 

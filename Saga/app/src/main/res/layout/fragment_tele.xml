@@ -4,6 +4,84 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="horizontal">
+    android:orientation="vertical"
+    android:background="@color/BackGroundGreen">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/White"
+        android:text="Platform:"
+        />
+    <RadioGroup
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/Yellow"
+                android:text="@string/_1st"
+                android:id="@+id/platform1st_Rb"
+                />
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/Yellow"
+                android:text="@string/_2nd"
+                android:id="@+id/platform12nd_Rb"
+                />
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/Yellow"
+                android:text="@string/_3rd"
+                android:id="@+id/platform3rd_Rb"
+                />
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/Yellow"
+                android:text="@string/none"
+                android:id="@+id/platformNone_Rb"
+                />
 
+        </LinearLayout>
+    </RadioGroup>
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/White"
+        android:text="@string/disabled"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/foul"
+        android:textColor="@color/Yellow"
+        />
+    <com.vandenrobotics.saga2018.views.NumberPicker
+        android:id="@+id/foul_Np"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </com.vandenrobotics.saga2018.views.NumberPicker>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/tech_foul"
+        android:textColor="@color/Yellow"/>
+    <com.vandenrobotics.saga2018.views.NumberPicker
+        android:id="@+id/techFoul_Np"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </com.vandenrobotics.saga2018.views.NumberPicker>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text = "@string/finish_match"
+        android:id="@+id/finishMatch_Btn"/>
 </LinearLayout>
