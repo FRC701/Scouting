@@ -25,7 +25,7 @@ import java.util.Locale;
 
 import static android.content.ContentValues.TAG;
 
-public class TeleFragment extends Fragment {
+public class PostMatchFragment extends Fragment {
 
     private MatchActivity mActivity;
     private boolean viewAssigned = false;

@@ -42,7 +42,7 @@ public class OptionScreenActivity extends AppCompatActivity implements DialogLis
 
     }
     public void match_scout(View view){
-        Intent intent2 = new Intent(this, TypeActivity.class);
+        Intent intent2 = new Intent(this, ScoutActivity.class);
         intent2.putExtra("event", mEvent);
         startActivity(intent2);
     }

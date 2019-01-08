@@ -213,8 +213,6 @@
     <string name="remove_game_piece">Remove Game Piece</string>
     <string name="cross_hub_line">Cross HUB Line</string>
     <string name="starting_level">Starting Level</string>
-    <string name="_1st">1st</string>
-    <string name="_2st">2st</string>
     <string name="robot_preload">Robot Preload</string>
     <string name="cargo">Cargo</string>
     <string name="hatch">Hatch</string>
@@ -250,6 +248,4 @@
     <string name="cargo_in_cargo_ship">Cargo in cargo ship</string>
     <string name="tele_period">Tele Period</string>
     <string name="can_your_robot_intake_from_the_ground">Can your robot intake from the ground?</string>
-    <string name="hatch">Hatch</string>
-    <string name="cargo">Cargo</string>
 </resources>

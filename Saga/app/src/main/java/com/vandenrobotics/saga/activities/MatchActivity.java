@@ -15,9 +15,9 @@ import com.vandenrobotics.saga.data.repo.MatchInfoRepo;
 import com.vandenrobotics.saga.data.repo.StatsRepo;
 import com.vandenrobotics.saga.data.repo.TeamsRepo;
 import com.vandenrobotics.saga.dialogs.DialogListener;
-import com.vandenrobotics.saga.tabs.AutoFragment;
-import com.vandenrobotics.saga.tabs.InitFragment;
-import com.vandenrobotics.saga.tabs.TeleFragment;
+import com.vandenrobotics.saga.tabs.MidMatchFragment;
+import com.vandenrobotics.saga.tabs.PreMatchFragment;
+import com.vandenrobotics.saga.tabs.PostMatchFragment;
 import com.vandenrobotics.saga.tools.ExternalStorageTools;
 
 //import com.vandenrobotics.saga2018.adapters.MatchPagerAdapter;
@@ -25,9 +25,9 @@ import com.vandenrobotics.saga.tools.ExternalStorageTools;
 public class MatchActivity extends FragmentActivity implements DialogListener{
 
     private FragmentTabHost mTabHost;
-    private InitFragment mInitFrag;
-    private AutoFragment mAutoFrag;
-    private TeleFragment mTeleFrag;
+    private PreMatchFragment mInitFrag;
+    private MidMatchFragment mAutoFrag;
+    private PostMatchFragment mTeleFrag;
 
     public String mEvent;
     public String mType;
@@ -80,11 +80,11 @@ public class MatchActivity extends FragmentActivity implements DialogListener{
         mTabHost.setup(this, getSupportFragmentManager(), android.R.id.tabcontent);
 
         mTabHost.addTab(mTabHost.newTabSpec("tab_init")
-                .setIndicator(getResources().getString(R.string.title_initTab), null), InitFragment.class, null);
+                .setIndicator(getResources().getString(R.string.title_initTab), null), PreMatchFragment.class, null);
         mTabHost.addTab(mTabHost.newTabSpec("tab_auto")
-                .setIndicator(getResources().getString(R.string.title_autoTab), null), AutoFragment.class, null);
+                .setIndicator(getResources().getString(R.string.title_autoTab), null), MidMatchFragment.class, null);
         mTabHost.addTab(mTabHost.newTabSpec("tab_tele")
-                .setIndicator(getResources().getString(R.string.title_teleTab), null), TeleFragment.class, null);
+                .setIndicator(getResources().getString(R.string.title_teleTab), null), PostMatchFragment.class, null);
     }
 
     private void setupInfoBar() {
@@ -113,7 +113,7 @@ public class MatchActivity extends FragmentActivity implements DialogListener{
 
     public void dialog_noShow(View view) {
         if (mInitFrag == null)
-            mInitFrag = (InitFragment) getSupportFragmentManager().findFragmentByTag("tab_init");
+            mInitFrag = (PreMatchFragment) getSupportFragmentManager().findFragmentByTag("tab_init");
         mInitFrag.command_noShow(view);
     }
 
@@ -148,7 +148,6 @@ public class MatchActivity extends FragmentActivity implements DialogListener{
 
         MatchInfo matchInfo =  new MatchInfo();
         matchInfo.setCompId(mEvent);
-        matchInfo.setScoutType(mType);
         matchInfo.setCurrentMatch(mMatchNumber+1);
         matchInfo.setDeviceNum(mDeviceNumber);
         matchInfoRepo.update(matchInfo);
@@ -166,7 +165,6 @@ public class MatchActivity extends FragmentActivity implements DialogListener{
 
         MatchInfo matchInfo =  new MatchInfo();
         matchInfo.setCompId(mEvent);
-        matchInfo.setScoutType(mType);
         matchInfo.setCurrentMatch(mMatchNumber+1);
         matchInfo.setDeviceNum(mDeviceNumber);
         matchInfoRepo.update(matchInfo);

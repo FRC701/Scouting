@@ -29,7 +29,7 @@ import static android.content.ContentValues.TAG;
  * Created by Programming701-A on 1/14/2017.
  */
 
-public class AutoFragment extends Fragment {
+public class MidMatchFragment extends Fragment {
 
     private MatchActivity mActivity;
     private boolean viewAssigned = false;

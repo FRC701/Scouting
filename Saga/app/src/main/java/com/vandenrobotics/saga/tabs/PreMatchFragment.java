@@ -6,7 +6,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RadioButton;
 
 import com.vandenrobotics.saga.R;
 import com.vandenrobotics.saga.activities.MatchActivity;
@@ -16,12 +18,16 @@ import com.vandenrobotics.saga.tools.ImageTools;
 
 //import com.vandenrobotics.saga2018.model.;
 
-public class InitFragment extends Fragment {
+public class PreMatchFragment extends Fragment {
 
     private MatchActivity mActivity;
 
     private CheckBox noShow;
-    private ImageView robotPic;
+    private RadioButton level1_Rb;
+    private RadioButton level2_Rb;
+    private RadioButton preloadCargo_Rb;
+    private RadioButton preloadHatch_Rb;
+    private EditText ssComments_Et;
 
     private StatsRepo statsRepo;
 
@@ -31,7 +37,9 @@ public class InitFragment extends Fragment {
 
     private int noShowValue;
 
+
     public NoShowDialogFragment noShowDF;
+
 
     private boolean viewsAssigned = false;
 
@@ -72,9 +80,8 @@ public class InitFragment extends Fragment {
 
     private void assignViews(View view){
         try{
-            noShow = (CheckBox) view.findViewById(R.id.cb_noShow);
-            robotPic = (ImageView) view.findViewById(R.id.img_teamPic);
-            ImageTools.placeImage(getActivity(), mActivity.mTeamNumber, robotPic);
+            noShow = (CheckBox) view.findViewById(R.id.noShow_Cb);
+            level1_Rb = (RadioButton) view.findViewById(R.id.level1_Rb);
 
             viewsAssigned = true;
         } catch (Exception e){

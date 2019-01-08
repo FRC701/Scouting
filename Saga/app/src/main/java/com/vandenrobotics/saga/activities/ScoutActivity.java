@@ -74,14 +74,11 @@ public class ScoutActivity extends Activity {
         statsRepo = new StatsRepo();
 
         matchInfoRepo =  new MatchInfoRepo();
-        if(matchInfoRepo.getMatchInfo(mEvent, mType).getScoutType() == "None"){
-            MatchInfo matchInfo = new MatchInfo();
-            matchInfo.setCompId(mEvent);
-            matchInfo.setScoutType(mType);
-            matchInfo.setCurrentMatch(1);
-            matchInfo.setDeviceNum(1);
-            matchInfoRepo.insert(matchInfo);
-        }
+        MatchInfo matchInfo = new MatchInfo();
+        matchInfo.setCompId(mEvent);
+        matchInfo.setCurrentMatch(1);
+        matchInfo.setDeviceNum(1);
+        matchInfoRepo.insert(matchInfo);
 
         mMatchInfo = matchInfoRepo.getMatchInfoNext(mEvent, mType);
         mCurMatch = mMatchInfo.getCurrentMatch();
@@ -167,7 +164,6 @@ public class ScoutActivity extends Activity {
         mCurMatch = pickerMatches.getValue();
         MatchInfo matchInfo = new MatchInfo();
         matchInfo.setCompId(mEvent);
-        matchInfo.setScoutType(mType);
         matchInfo.setCurrentMatch(mCurMatch);
         matchInfo.setDeviceNum(mDeviceNumber);
         matchInfoRepo.update(matchInfo);
