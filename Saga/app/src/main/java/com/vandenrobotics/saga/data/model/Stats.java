@@ -15,8 +15,7 @@ public class Stats {
     public static final String KEY_MatchNum = "MatchNumber";
     public static final String KEY_TeamNum = "TeamNumber";
     public static final String KEY_MatchPosition = "MatchPosition";
-                                                                                                                                                                                                                                                                       public static final String KEY_NoShow = "NoShow";
-    public static final String KEY_HadAuto = "HadAuto";
+                                                             
     public static final String KEY_RobotDisabled = "RobotDisabled";
     public static final String KEY_RedCard = "RedCard";
     public static final String KEY_YellowCard = "YellowCard";

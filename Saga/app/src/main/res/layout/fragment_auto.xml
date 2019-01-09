@@ -184,7 +184,7 @@
             android:orientation="vertical">
 
             <CheckBox
-                android:id="@+id/RemoveGP_CB"
+                android:id="@+id/removeGP_Cb"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -192,7 +192,7 @@
                 android:textColor="@color/White" />
 
             <CheckBox
-                android:id="@+id/CrossHubLine_CB"
+                android:id="@+id/crossHubLine_Cb"
                 android:layout_width="288dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"

@@ -36,7 +36,17 @@ public class MidMatchFragment extends Fragment {
 
     private ConstraintLayout autoField;
 
-    private CheckBox autoFragCb_hadAuto;
+    private Button rocketTopC_Bt;
+    private Button rocketTopH_Bt;
+    private Button rocketMiddleC_Bt;
+    private Button rocketMiddleH_Bt;
+    private Button rocketBottomC_Bt;
+    private Button rocketBottomH_Bt;
+    private Button cargoShipC_Bt;
+    private Button cargoShipH_Bt;
+    private CheckBox removeGP_Cb;
+    private CheckBox crossHubLine_Cb;
+
 
     private String mEvent;
     private int mMatchNum;
@@ -106,25 +116,16 @@ public class MidMatchFragment extends Fragment {
 
     public void assignViews(View view){
         try {
-            autoField = (ConstraintLayout) view.findViewById(R.id.field_view);
-            if (mAlliance.equals("RED")){
-                autoField.setBackground(getResources().getDrawable(R.drawable.field2018red));
-            }else{
-                autoField.setBackground(getResources().getDrawable(R.drawable.field2018blue));
-            }
-
-            autoFragCb_hadAuto = (CheckBox) view.findViewById(R.id.autoCb_hadAuto);
-
-            autoFragCb_hadAuto.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (autoFragCb_hadAuto.isChecked()){
-                        enableViews();
-                    }else
-                        disableViews();
-                }
-            });
-
+            rocketTopC_Bt = (Button) view.findViewById(R.id.rocketTopC_Bt);
+            rocketTopH_Bt = (Button) view.findViewById(R.id.rocketTopH_Bt);
+            rocketMiddleC_Bt = (Button) view.findViewById(R.id.rocketMiddleC_Bt);
+            rocketMiddleH_Bt = (Button) view.findViewById(R.id.rocketMiddleH_Bt);
+            rocketBottomC_Bt = (Button) view.findViewById(R.id.rocketBottomC_Bt);
+            rocketBottomH_Bt = (Button) view.findViewById(R.id.rocketBottomH_Bt);
+            cargoShipC_Bt = (Button) view.findViewById(R.id.cargoShipC_Bt);
+            cargoShipH_Bt = (Button) view.findViewById(R.id.cargoShipH_Bt);
+            removeGP_Cb = (CheckBox) view.findViewById(R.id.removeGP_Cb);
+            crossHubLine_Cb = (CheckBox) view.findViewById(R.id.crossHubLine_Cb);
             viewAssigned = true;
         }catch(Exception e){
             e.printStackTrace();
@@ -132,14 +133,6 @@ public class MidMatchFragment extends Fragment {
         }
     }
 
-
-    public void enableViews(){
-
-    }
-
-    public void disableViews(){
-
-    }
 
 
 }
