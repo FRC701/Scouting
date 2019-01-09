@@ -1,6 +1,7 @@
 package com.vandenrobotics.saga.tabs;
 
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +13,7 @@ import android.widget.RadioButton;
 
 import com.vandenrobotics.saga.R;
 import com.vandenrobotics.saga.activities.MatchActivity;
+import com.vandenrobotics.saga.data.model.Stats;
 import com.vandenrobotics.saga.data.repo.StatsRepo;
 import com.vandenrobotics.saga.dialogs.NoShowDialogFragment;
 import com.vandenrobotics.saga.tools.ImageTools;
@@ -63,25 +65,57 @@ public class PreMatchFragment extends Fragment {
         //if(viewsAssigned) loadData(mInitData);
     }
 
-    @Override
+//    @Override
+//    public void onPause(){
+//        super.onPause();
+//        noShowValue = (noShow.isChecked() == true ? 1 : 0);
+//        statsRepo.setInitStats(mEvent, mMatchNum, mTeamNum, noShowValue);
+//        viewsAssigned=false;
+//    }
+//
+//    @Override
+//    public void onResume(){
+//        super.onResume();
+//        assignViews(getView());
+//        //if(viewsAssigned) loadData(mInitData);
+//    }
+//
+//@Override
     public void onPause(){
         super.onPause();
-        noShowValue = (noShow.isChecked() == true ? 1 : 0);
-        statsRepo.setInitStats(mEvent, mMatchNum, mTeamNum, noShowValue);
-        viewsAssigned=false;
+        Stats stats = saveData();
+        statsRepo.setAutoStats(stats);
+    }
+
+    public Stats saveData(){
+        Stats stat = new Stats();
+        stat.setCompId(mEvent);
+        stat.setMatchNum(mMatchNum);
+        stat.setTeamNum(mTeamNum);
+        int hA = (autoFragCb_hadAuto.isChecked() ? 1 : 0);
+        stat.setHadAuto(hA);
+        return stat;
     }
 
     @Override
     public void onResume(){
         super.onResume();
         assignViews(getView());
-        //if(viewsAssigned) loadData(mInitData);
+        if(viewAssigned) loadData();
     }
 
+    private void loadData() {
+        Stats stats = statsRepo.getAutoStats(mEvent, mMatchNum, mMatchPos);
+        autoFragCb_hadAuto.setChecked(stats.getHadAuto() == 1);
+    }
     private void assignViews(View view){
         try{
             noShow = (CheckBox) view.findViewById(R.id.noShow_Cb);
             level1_Rb = (RadioButton) view.findViewById(R.id.level1_Rb);
+            level2_Rb = (RadioButton) view.findViewById(R.id.level2_Rb);
+            preloadCargo_Rb = (RadioButton) view.findViewById(R.id.preloadCargo_Rb);
+            preloadHatch_Rb = (RadioButton) view.findViewById(R.id.preloadHatch_Rb);
+            ssComments_Et = (EditText) view.findViewById(R.id.ssComments_Et);
 
             viewsAssigned = true;
         } catch (Exception e){
@@ -95,6 +129,7 @@ public class PreMatchFragment extends Fragment {
             noShowDF.show(getChildFragmentManager(), "NoShowDialogFragment");
         }
     }
+
 
     public void setNoShow(boolean b){
         noShow.setChecked(b);

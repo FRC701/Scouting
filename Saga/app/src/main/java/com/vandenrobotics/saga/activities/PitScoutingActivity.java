@@ -97,88 +97,88 @@ public class PitScoutingActivity extends AppCompatActivity {
             }
         });
 
-        pitCb_autoCrossBasline = (CheckBox)findViewById(R.id.pitCb_autoCrossesBaseline);
-        pitCb_autoCubeInExchange = (CheckBox)findViewById(R.id.pitCb_autoCubeInExchange);
-        pitCb_autoCubeInScale = (CheckBox)findViewById(R.id.pitCb_autoCubeInScale);
-        pitCb_autoCubeInSwitch = (CheckBox)findViewById(R.id.pitCb_autoCubeInSwitch);
-        pitCb_autoOther = (CheckBox)findViewById(R.id.pitCb_autoOther);
-        pitCb_canGetScale = (CheckBox)findViewById(R.id.pitCb_canGetScale);
-        pitCb_canGetSwitch = (CheckBox)findViewById(R.id.pitCb_canGetSwitch);
-        pitEt_averageSpeed = (EditText)findViewById(R.id.pitEt_averageSpeed);
-        pitEt_canClimb = (EditText)findViewById(R.id.pitEt_canClimb);
-        pitRb_yes = (RadioButton)findViewById(R.id.pitRb_yes);
-        pitCb_cycleGround = (CheckBox)findViewById(R.id.pitCb_cycleGround);
-        pitCb_cyclePortal = (CheckBox)findViewById(R.id.pitCb_cyclePortal);
-        pitCb_cycleSwitches = (CheckBox)findViewById(R.id.pitCb_cycleSwitches);
-        pitEt_driveTrain = (EditText)findViewById(R.id.pitEt_driveTrain);
-        pitEt_intakeLift = (EditText)findViewById(R.id.pitEt_intakeLift);
-        pitB_saveButton = (Button)findViewById(R.id.pitB_savebutton);
-        pitEt_progLang = (EditText)findViewById(R.id.pitEt_progLang);
-        pitEt_comments = (EditText) findViewById(R.id.pitEt_comments);
+//        pitCb_autoCrossBasline = (CheckBox)findViewById(R.id.pitCb_autoCrossesBaseline);
+//        pitCb_autoCubeInExchange = (CheckBox)findViewById(R.id.pitCb_autoCubeInExchange);
+//        pitCb_autoCubeInScale = (CheckBox)findViewById(R.id.pitCb_autoCubeInScale);
+//        pitCb_autoCubeInSwitch = (CheckBox)findViewById(R.id.pitCb_autoCubeInSwitch);
+//        pitCb_autoOther = (CheckBox)findViewById(R.id.pitCb_autoOther);
+//        pitCb_canGetScale = (CheckBox)findViewById(R.id.pitCb_canGetScale);
+//        pitCb_canGetSwitch = (CheckBox)findViewById(R.id.pitCb_canGetSwitch);
+//        pitEt_averageSpeed = (EditText)findViewById(R.id.pitEt_averageSpeed);
+//        pitEt_canClimb = (EditText)findViewById(R.id.pitEt_canClimb);
+//        pitRb_yes = (RadioButton)findViewById(R.id.pitRb_yes);
+//        pitCb_cycleGround = (CheckBox)findViewById(R.id.pitCb_cycleGround);
+//        pitCb_cyclePortal = (CheckBox)findViewById(R.id.pitCb_cyclePortal);
+//        pitCb_cycleSwitches = (CheckBox)findViewById(R.id.pitCb_cycleSwitches);
+//        pitEt_driveTrain = (EditText)findViewById(R.id.pitEt_driveTrain);
+//        pitEt_intakeLift = (EditText)findViewById(R.id.pitEt_intakeLift);
+//        pitB_saveButton = (Button)findViewById(R.id.pitB_savebutton);
+//        pitEt_progLang = (EditText)findViewById(R.id.pitEt_progLang);
+//        pitEt_comments = (EditText) findViewById(R.id.pitEt_comments);
 
     }
 
    public void save(View view){
        PitData pitdata = new PitData(mTeamNumber);
-
-       int aCB = (pitCb_autoCrossBasline.isChecked()?1:0);
-       pitdata.setAutoBaseline(aCB);
-       int aCE = (pitCb_autoCubeInExchange.isChecked()?1:0);
-       pitdata.setAutoCubeInExchange(aCE);
-       int aCSC = (pitCb_autoCubeInScale.isChecked()?1:0);
-       pitdata.setAutoCubeInScale(aCSC);
-       int aCSW = (pitCb_autoCubeInSwitch.isChecked()?1:0);
-       pitdata.setAutoCubeInSwitch(aCSW);
-       int aO = (pitCb_autoOther.isChecked()?1:0);
-       pitdata.setAutoOther(aO);
-       int cGSC = (pitCb_canGetScale.isChecked()?1:0);
-       pitdata.setGetScale(cGSC);
-       int cGSW = (pitCb_canGetSwitch.isChecked()?1:0);
-       pitdata.setGetSwitch(cGSW);
-
-       pitdata.setSpeed(pitEt_averageSpeed.getText().toString());
-       pitdata.setClimb(pitEt_canClimb.getText().toString());
-       pitdata.setDriveTrain(pitEt_driveTrain.getText().toString());
-       pitdata.setIntakeAndMech(pitEt_intakeLift.getText().toString());
-       pitdata.setLang(pitEt_progLang.getText().toString());
-       pitdata.setComments(pitEt_comments.getText().toString());
-
-       int yes = (pitRb_yes.isChecked()?1:0);
-       pitdata.setFloorPickUp(yes);
-       int cG = (pitCb_cycleGround.isChecked()?1:0);
-       pitdata.setCycleGround(cG);
-       int cP = (pitCb_cyclePortal.isChecked()?1:0);
-       pitdata.setCyclePortal(cP);
-       int cS = (pitCb_cycleSwitches.isChecked()?1:0);
-       pitdata.setCycleSwitches(cS);
-
-       if (pitDataRepo.insert(pitdata) == -1){
-           pitDataRepo.update(pitdata);
-       }
-
-       Toast.makeText(this, "Saved Data", Toast.LENGTH_LONG).show();
-       ExternalStorageTools.writeDatabaseToES();
+//
+//       int aCB = (pitCb_autoCrossBasline.isChecked()?1:0);
+//       pitdata.setAutoBaseline(aCB);
+//       int aCE = (pitCb_autoCubeInExchange.isChecked()?1:0);
+//       pitdata.setAutoCubeInExchange(aCE);
+//       int aCSC = (pitCb_autoCubeInScale.isChecked()?1:0);
+//       pitdata.setAutoCubeInScale(aCSC);
+//       int aCSW = (pitCb_autoCubeInSwitch.isChecked()?1:0);
+//       pitdata.setAutoCubeInSwitch(aCSW);
+//       int aO = (pitCb_autoOther.isChecked()?1:0);
+//       pitdata.setAutoOther(aO);
+//       int cGSC = (pitCb_canGetScale.isChecked()?1:0);
+//       pitdata.setGetScale(cGSC);
+//       int cGSW = (pitCb_canGetSwitch.isChecked()?1:0);
+//       pitdata.setGetSwitch(cGSW);
+//
+//       pitdata.setSpeed(pitEt_averageSpeed.getText().toString());
+//       pitdata.setClimb(pitEt_canClimb.getText().toString());
+//       pitdata.setDriveTrain(pitEt_driveTrain.getText().toString());
+//       pitdata.setIntakeAndMech(pitEt_intakeLift.getText().toString());
+//       pitdata.setLang(pitEt_progLang.getText().toString());
+//       pitdata.setComments(pitEt_comments.getText().toString());
+//
+//       int yes = (pitRb_yes.isChecked()?1:0);
+//       pitdata.setFloorPickUp(yes);
+//       int cG = (pitCb_cycleGround.isChecked()?1:0);
+//       pitdata.setCycleGround(cG);
+//       int cP = (pitCb_cyclePortal.isChecked()?1:0);
+//       pitdata.setCyclePortal(cP);
+//       int cS = (pitCb_cycleSwitches.isChecked()?1:0);
+//       pitdata.setCycleSwitches(cS);
+//
+//       if (pitDataRepo.insert(pitdata) == -1){
+//           pitDataRepo.update(pitdata);
+//       }
+//
+//       Toast.makeText(this, "Saved Data", Toast.LENGTH_LONG).show();
+//       ExternalStorageTools.writeDatabaseToES();
 
    }
 
    public void loadData(PitData pitdata){
-
-       pitCb_autoCrossBasline.setChecked(pitdata.getAutoBaseline()==1);
-       pitCb_autoCubeInExchange.setChecked(pitdata.getAutoCubeInExchange()==1);
-       pitCb_autoCubeInScale.setChecked(pitdata.getAutoCubeInScale()==1);
-       pitCb_autoCubeInSwitch.setChecked(pitdata.getAutoCubeInSwitch()==1);
-       pitCb_autoOther.setChecked(pitdata.getAutoOther()==1);
-       pitCb_canGetScale.setChecked(pitdata.getGetScale()==1);
-       pitCb_canGetSwitch.setChecked(pitdata.getGetSwitch()==1);
-       pitCb_cycleSwitches.setChecked(pitdata.getCycleSwitches()==1);
-       pitCb_cycleGround.setChecked(pitdata.getCycleGround()==1);
-       pitCb_cyclePortal.setChecked(pitdata.getCyclePortal()==1);
-       pitEt_averageSpeed.setText(pitdata.getSpeed());
-       pitEt_canClimb.setText(pitdata.getClimb());
-       pitEt_driveTrain.setText(pitdata.getDriveTrain());
-       pitEt_intakeLift.setText(pitdata.getIntakeAndMech());
-       pitEt_progLang.setText(pitdata.getLang());
-       pitEt_comments.setText(pitdata.getComments());
+//
+//       pitCb_autoCrossBasline.setChecked(pitdata.getAutoBaseline()==1);
+//       pitCb_autoCubeInExchange.setChecked(pitdata.getAutoCubeInExchange()==1);
+//       pitCb_autoCubeInScale.setChecked(pitdata.getAutoCubeInScale()==1);
+//       pitCb_autoCubeInSwitch.setChecked(pitdata.getAutoCubeInSwitch()==1);
+//       pitCb_autoOther.setChecked(pitdata.getAutoOther()==1);
+//       pitCb_canGetScale.setChecked(pitdata.getGetScale()==1);
+//       pitCb_canGetSwitch.setChecked(pitdata.getGetSwitch()==1);
+//       pitCb_cycleSwitches.setChecked(pitdata.getCycleSwitches()==1);
+//       pitCb_cycleGround.setChecked(pitdata.getCycleGround()==1);
+//       pitCb_cyclePortal.setChecked(pitdata.getCyclePortal()==1);
+//       pitEt_averageSpeed.setText(pitdata.getSpeed());
+//       pitEt_canClimb.setText(pitdata.getClimb());
+//       pitEt_driveTrain.setText(pitdata.getDriveTrain());
+//       pitEt_intakeLift.setText(pitdata.getIntakeAndMech());
+//       pitEt_progLang.setText(pitdata.getLang());
+//       pitEt_comments.setText(pitdata.getComments());
 
    }
 
