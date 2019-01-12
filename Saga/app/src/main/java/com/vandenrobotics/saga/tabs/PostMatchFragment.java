@@ -1,7 +1,6 @@
 package com.vandenrobotics.saga.tabs;
 
 import android.os.Bundle;
-import android.os.CountDownTimer;
 import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -10,20 +9,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.TextView;
-import android.widget.Toast;
-import android.widget.ToggleButton;
+import android.widget.RadioButton;
 
 import com.vandenrobotics.saga.R;
 import com.vandenrobotics.saga.activities.MatchActivity;
 import com.vandenrobotics.saga.data.model.Stats;
 import com.vandenrobotics.saga.data.repo.StatsRepo;
 import com.vandenrobotics.saga.views.NumberPicker;
-
-import java.util.ArrayList;
-import java.util.Locale;
-
-import static android.content.ContentValues.TAG;
 
 public class PostMatchFragment extends Fragment {
 
@@ -32,9 +24,16 @@ public class PostMatchFragment extends Fragment {
 
     private ConstraintLayout teleField;
 
-    private CheckBox teleFragCb_disabled;
-    private CheckBox teleFragCb_redCard;
-    private CheckBox teleFragCb_yellowCard;
+    private RadioButton endLevel1_Rb;
+    private RadioButton endLevel2_Rb;
+    private RadioButton endLevel3_Rb;
+    private RadioButton endNone_Rb;
+    private CheckBox diasbled_Cb;
+    private NumberPicker foul_Np;
+    private NumberPicker techFoul_Np;
+    private CheckBox redCard_Cb;
+    private CheckBox yellowCard_Cb;
+    private Button finishMatch_Btn;
 
     private NumberPicker teleFragNp_foulNum;
     private NumberPicker teleFragNp_techFoulNum;
@@ -45,16 +44,11 @@ public class PostMatchFragment extends Fragment {
     private int mMatchPos;
     private String mAlliance;
 
-    private final String mSwitch1 = "Sw1";
-    private final String mScale = "Scl";
-    private final String mSwitch2 = "Sw2";
-    private final String mExchange = "Ex";
-
     private StatsRepo statsRepo;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
-        View rootView = inflater.inflate(R.layout.fragment_tele, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_post, container, false);
         mActivity = (MatchActivity)getActivity();
         mEvent = mActivity.mEvent;
         mMatchNum = mActivity.mMatchNumber;

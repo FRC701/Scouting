@@ -54,7 +54,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/White"
-        android:text="@string/disabled"/>
+        android:text="@string/disabled"
+        android:id="@+id/disabled_Cb"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -79,6 +80,20 @@
         android:layout_height="wrap_content">
 
     </com.vandenrobotics.saga2018.views.NumberPicker>
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/White"
+        android:id="@+id/redCard_Cb"
+        android:text="@string/CheckBox_redCard"
+        />
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/White"
+        android:id="@+id/yellowCard_Cb"
+        android:text="@string/CheckBox_yellowCard"
+        />
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

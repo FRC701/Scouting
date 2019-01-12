@@ -1,14 +1,12 @@
 package com.vandenrobotics.saga.tabs;
 
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.RadioButton;
 
 import com.vandenrobotics.saga.R;
@@ -16,7 +14,6 @@ import com.vandenrobotics.saga.activities.MatchActivity;
 import com.vandenrobotics.saga.data.model.Stats;
 import com.vandenrobotics.saga.data.repo.StatsRepo;
 import com.vandenrobotics.saga.dialogs.NoShowDialogFragment;
-import com.vandenrobotics.saga.tools.ImageTools;
 
 //import com.vandenrobotics.saga2018.model.;
 
@@ -47,7 +44,7 @@ public class PreMatchFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
-        View rootView = inflater.inflate(R.layout.fragment_init, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_pre, container, false);
         mActivity = (MatchActivity) getActivity();
         mEvent = mActivity.mEvent;
         mMatchNum = mActivity.mMatchNumber;
