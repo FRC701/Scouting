@@ -21,6 +21,7 @@ public class PreMatchFragment extends Fragment {
 
     private MatchActivity mActivity;
 
+    private boolean viewAssigned = false;
     private CheckBox noShow;
     private RadioButton level1_Rb;
     private RadioButton level2_Rb;
@@ -33,6 +34,7 @@ public class PreMatchFragment extends Fragment {
     private String mEvent;
     private int mMatchNum;
     private int mTeamNum;
+    private int mMatchPos;
 
     private int noShowValue;
 
@@ -49,39 +51,31 @@ public class PreMatchFragment extends Fragment {
         mEvent = mActivity.mEvent;
         mMatchNum = mActivity.mMatchNumber;
         mTeamNum = mActivity.mTeamNumber;
+        mMatchPos =mActivity.mDeviceNumber;
         statsRepo = new StatsRepo();
 
         noShowDF = new NoShowDialogFragment();
+
+        if(!viewAssigned) assignViews(rootView);
+        if (viewAssigned)loadData();
+
         return rootView;
+
+
     }
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState){
         super.onViewCreated(view, savedInstanceState);
         assignViews(view);
-        //if(viewsAssigned) loadData(mInitData);
+        if(viewsAssigned) loadData();
     }
 
-//    @Override
-//    public void onPause(){
-//        super.onPause();
-//        noShowValue = (noShow.isChecked() == true ? 1 : 0);
-//        statsRepo.setInitStats(mEvent, mMatchNum, mTeamNum, noShowValue);
-//        viewsAssigned=false;
-//    }
-//
-//    @Override
-//    public void onResume(){
-//        super.onResume();
-//        assignViews(getView());
-//        //if(viewsAssigned) loadData(mInitData);
-//    }
-//
-//@Override
+@Override
     public void onPause(){
         super.onPause();
         Stats stats = saveData();
-        statsRepo.setAutoStats(stats);
+        statsRepo.setPreStats(stats);
     }
 
     public Stats saveData(){
@@ -89,8 +83,18 @@ public class PreMatchFragment extends Fragment {
         stat.setCompId(mEvent);
         stat.setMatchNum(mMatchNum);
         stat.setTeamNum(mTeamNum);
-        int hA = (autoFragCb_hadAuto.isChecked() ? 1 : 0);
-        stat.setHadAuto(hA);
+        int nS = (noShow.isChecked() ? 1 : 0);
+        stat.setHadAuto(nS);
+        int l1 = (level1_Rb.isChecked() ? 1 : 0);
+        stat.setStartLevel1(l1);
+        int l2 = (level2_Rb.isChecked() ? 1 : 0);
+        stat.setStartLevel2(l2);
+        int pC = (preloadCargo_Rb.isChecked() ? 1 : 0);
+        stat.setPreloadCargo(pC);
+        int pH = (preloadHatch_Rb.isChecked() ? 1 : 0);
+        stat.setPreloadHatch(pH);
+        String sS = (ssComments_Et.getText().toString());
+        stat.setSscomments(sS);
         return stat;
     }
 
@@ -102,8 +106,13 @@ public class PreMatchFragment extends Fragment {
     }
 
     private void loadData() {
-        Stats stats = statsRepo.getAutoStats(mEvent, mMatchNum, mMatchPos);
-        autoFragCb_hadAuto.setChecked(stats.getHadAuto() == 1);
+        Stats stats = statsRepo.getPreStats(mEvent, mMatchNum, mMatchPos);
+        noShow.setChecked(stats.getNoShow() == 1);
+        level1_Rb.setChecked(stats.getStartLevel1() == 1);
+        level2_Rb.setChecked(stats.getStartLevel2() == 1);
+        preloadCargo_Rb.setChecked(stats.getPreloadCargo() == 1);
+        preloadHatch_Rb.setChecked(stats.getPreloadHatch() == 1);
+        ssComments_Et.setText(stats.getSsComments());
     }
     private void assignViews(View view){
         try{
