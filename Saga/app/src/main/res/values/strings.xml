@@ -228,8 +228,8 @@
     <string name="_2nd">2nd</string>
     <string name="_1st">1st</string>
     <string name="during_sandstorm_what_do_you_use">During Sandstorm what do you use?</string>
-    <string name="drive_blindly">Drive Blindly</string>
-    <string name="auto">Auto</string>
+    <string name="drive_blindly">Drive Blindly in Sandstorm</string>
+    <string name="auto">Auto in Sandstorm</string>
     <string name="vision">Vision</string>
     <string name="camera">Camera</string>
     <string name="other">other</string>
@@ -257,9 +257,5 @@
     <string name="speed">Speed</string>
     <string name="programming_language">Programming Language</string>
     <string name="comments">Comments</string>
-    <string name="mechanism_answer">Mechanism Answer</string>
-    <string name="drive_train_answer">Drive Train Answer</string>
-    <string name="speed_answer">Speed Answer</string>
-    <string name="programming_language_answer">Programming Language Answer</string>
-    <string name="comments_answer">Comments Answer</string>
+   <string name="hint">type here</string>
 </resources>
