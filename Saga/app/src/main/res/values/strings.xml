@@ -228,8 +228,8 @@
     <string name="_2nd">2nd</string>
     <string name="_1st">1st</string>
     <string name="during_sandstorm_what_do_you_use">During Sandstorm what do you use?</string>
-    <string name="drive_blindly">Drive Blindly</string>
-    <string name="auto">Auto</string>
+    <string name="drive_blindly">Drive Blindly in Sandstorm</string>
+    <string name="auto">Auto in Sandstorm</string>
     <string name="vision">Vision</string>
     <string name="camera">Camera</string>
     <string name="other">other</string>
@@ -248,4 +248,14 @@
     <string name="cargo_in_cargo_ship">Cargo in cargo ship</string>
     <string name="tele_period">Tele Period</string>
     <string name="can_your_robot_intake_from_the_ground">Can your robot intake from the ground?</string>
+    <string name="_1st_platform">1st Platform</string>
+    <string name="_2nd_platform">2nd Platform</string>
+    <string name="_3rd_platform">3rd Platform</string>
+    <string name="which_platforms_can_your_robot_reach">Which platforms can your robot reach?</string>
+    <string name="mechanism">Mechanism</string>
+    <string name="drive_train">Drive Train</string>
+    <string name="speed">Speed</string>
+    <string name="programming_language">Programming Language</string>
+    <string name="comments">Comments</string>
+   <string name="hint">type here</string>
 </resources>

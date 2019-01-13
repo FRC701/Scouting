@@ -38,14 +38,21 @@ public class MidMatchFragment extends Fragment {
     private CheckBox crossHubLine_Cb;
 
 
+    private int rocketTopC = 0;
+    private int rocketTopH = 0;
+    private int rocketMiddleC = 0;
+    private int rocketMiddleH = 0;
+    private int rocketBottomC = 0;
+    private int rocketBottomH = 0;
+    private int cargoC = 0;
+    private int cargoH = 0;
+
     private String mEvent;
     private int mMatchNum;
     private int mTeamNum;
     private int mMatchPos;
     private String mAlliance;
 
-
-    private final String mPhase = "Auto";
 
     private StatsRepo statsRepo;
 
@@ -79,7 +86,7 @@ public class MidMatchFragment extends Fragment {
     public void onPause(){
         super.onPause();
         Stats stats = saveData();
-        statsRepo.setAutoStats(stats);
+        statsRepo.setMidStats(stats);
     }
 
     public Stats saveData(){
@@ -87,8 +94,16 @@ public class MidMatchFragment extends Fragment {
         stat.setCompId(mEvent);
         stat.setMatchNum(mMatchNum);
         stat.setTeamNum(mTeamNum);
-        int hA = (autoFragCb_hadAuto.isChecked() ? 1 : 0);
-        stat.setHadAuto(hA);
+        stat.setRocketTopC(rocketTopC);
+        stat.setRocketTopH(rocketTopH);
+        stat.setRocketMiddleC(rocketMiddleC);
+        stat.setRocketMiddleH(rocketMiddleH);
+        stat.setRocketBottomC(rocketBottomC);
+        stat.setRocketBottomH(rocketBottomH);
+        stat.setCargoShipC(cargoC);
+        stat.setCargoShipH(cargoH);
+        int ch = (crossHubLine_Cb.isChecked() ? 0:1);
+        stat.setCrossHubLine(ch);
         return stat;
     }
 
@@ -100,8 +115,14 @@ public class MidMatchFragment extends Fragment {
     }
 
     private void loadData() {
-        Stats stats = statsRepo.getAutoStats(mEvent, mMatchNum, mMatchPos);
-        autoFragCb_hadAuto.setChecked(stats.getHadAuto() == 1);
+        Stats stats = statsRepo.getMidStats(mEvent, mMatchNum, mMatchPos);
+        rocketTopC = stats.getRocketTopC();
+        rocketTopH = stats.getRocketTopH();
+        rocketMiddleC = stats.getRocketMiddleC();
+        rocketMiddleH = stats.getRocketMiddleH();
+        rocketBottomC = stats.getRocketMBottomC();
+        rocketBottomH = stats.getRocketMBottomH();
+        crossHubLine_Cb.setChecked(stats.getCrossHubLine() == 1);
     }
 
     public void assignViews(View view){
@@ -121,8 +142,75 @@ public class MidMatchFragment extends Fragment {
             e.printStackTrace();
             viewAssigned = false;
         }
-    }
 
+//        rocketTopC_Bt.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                rocketTopC++;
+//                rocketTopC_Bt.setText(rocketTopC);
+//            }
+//        });
+    }
+   public void OnClick(View view){
+        switch (view.getId()){
+            case R.id.rocketTopC_Bt:
+                rocketTopC++;
+                if(removeGP_Cb.isChecked()){
+                    rocketTopC--;
+                }
+                rocketTopC_Bt.setText(rocketTopC);
+                break;
+            case R.id.rocketTopH_Bt:
+                rocketTopH++;
+                if(removeGP_Cb.isChecked()){
+                    rocketTopH--;
+                }
+                rocketTopH_Bt.setText(rocketTopH);
+                break;
+            case R.id.rocketMiddleC_Bt:
+                rocketMiddleC++;
+                if(removeGP_Cb.isChecked()){
+                    rocketMiddleC--;
+                }
+                rocketMiddleC_Bt.setText(rocketMiddleC);
+                break;
+            case R.id.rocketMiddleH_Bt:
+                rocketMiddleH++;
+                if(removeGP_Cb.isChecked()){
+                    rocketMiddleH--;
+                }
+                rocketMiddleH_Bt.setText(rocketMiddleH);
+                break;
+            case R.id.rocketBottomC_Bt:
+                rocketBottomC++;
+                if(removeGP_Cb.isChecked()){
+                    rocketBottomC--;
+                }
+                rocketBottomC_Bt.setText(rocketBottomC);
+                break;
+            case R.id.rocketBottomH_Bt:
+                rocketBottomH++;
+                if(removeGP_Cb.isChecked()){
+                    rocketBottomH--;
+                }
+                rocketBottomH_Bt.setText(rocketBottomH);
+                break;
+            case R.id.cargoShipC_Bt:
+                cargoC++;
+                if(removeGP_Cb.isChecked()){
+                    cargoC--;
+                }
+                cargoShipC_Bt.setText(cargoC);
+                break;
+            case R.id.cargoShipH_Bt:
+                cargoH++;
+                if(removeGP_Cb.isChecked()){
+                    cargoH--;
+                }
+                cargoShipH_Bt.setText(cargoH);
+                break;
+        }
+   }
 
 
 }
