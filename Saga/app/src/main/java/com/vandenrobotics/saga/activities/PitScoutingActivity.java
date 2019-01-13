@@ -50,16 +50,16 @@ public class PitScoutingActivity extends AppCompatActivity {
 
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_pit_scouting);
+//    protected void onCreate(Bundle savedInstanceState) {
+//        super.onCreate(savedInstanceState);
+//        setContentView(R.layout.activity_pit_scouting);
 
         pitDataRepo = new PitDataRepo();
 
         teamsRepo = new TeamsRepo();
         team_numbers = teamsRepo.getAllTeamNums();
         Collections.sort(team_numbers);
-        spinnerTeams = (Spinner) findViewById(R.id.pit_spinnerTeamNum);
+//        spinnerTeams = (Spinner) findViewById(R.id.pit_spinnerTeamNum);
         teamAdapter = new ArrayAdapter<>(this, R.layout.spinner_base, team_numbers);
         teamAdapter.setDropDownViewResource(R.layout.spinner_dropdown);
         spinnerTeams.setSelection(teamAdapter.getPosition(mTeamNumber));

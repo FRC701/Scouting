@@ -28,7 +28,7 @@ public class PostMatchFragment extends Fragment {
     private RadioButton endLevel2_Rb;
     private RadioButton endLevel3_Rb;
     private RadioButton endNone_Rb;
-    private CheckBox diasbled_Cb;
+    private CheckBox disabled_Cb;
     private NumberPicker foul_Np;
     private NumberPicker techFoul_Np;
     private CheckBox redCard_Cb;
@@ -77,19 +77,27 @@ public class PostMatchFragment extends Fragment {
         //gets data from teleTab when clicked out/ paused
         super.onPause();
         Stats stats = saveData();
-        statsRepo.setTeleStats(stats);
+        statsRepo.setPostStats(stats);
     }
     public Stats saveData(){
         Stats stats = new Stats();
         stats.setCompId(mEvent);
         stats.setMatchNum(mMatchNum);
         stats.setTeamNum(mTeamNum);
-        int disabled = (teleFragCb_disabled.isChecked() ? 1 : 0);
+        int eL1 = (endLevel1_Rb.isChecked() ? 1 : 0);
+        stats.setEndLevel1(eL1);
+        int eL2 = (endLevel2_Rb.isChecked() ? 1 : 0);
+        stats.setEndLevel2(eL2);
+        int eL3 = (endLevel3_Rb.isChecked() ? 1 : 0);
+        stats.setEndLevel3(eL3);
+        int eNone = (endNone_Rb.isChecked() ? 1 : 0);
+        stats.setYellowCard(eNone);
+        int disabled = (disabled_Cb.isChecked() ? 1 : 0);
         stats.setDisabled(disabled);
-        int redCard = (teleFragCb_redCard.isChecked() ? 1 : 0);
-        stats.setRedCard(redCard);
-        int yellowCard = (teleFragCb_yellowCard.isChecked() ? 1 : 0);
-        stats.setYellowCard(yellowCard);
+        int rC = (redCard_Cb.isChecked() ? 1 : 0);
+        stats.setRedCard(rC);
+        int yC = (yellowCard_Cb.isChecked() ? 1 : 0);
+        stats.setYellowCard(yC);
         int foul = (teleFragNp_foulNum.getValue());
         stats.setFoul(foul);
         int techFoul = (teleFragNp_techFoulNum.getValue());
@@ -106,27 +114,27 @@ public class PostMatchFragment extends Fragment {
     }
     private void loadData() {
         Stats stats = statsRepo.getTeleStats(mEvent, mMatchNum, mMatchPos);
-        teleFragCb_disabled.setChecked(stats.getDisabled() == 1);
-        teleFragCb_redCard.setChecked(stats.getRedCard() == 1);
-        teleFragCb_yellowCard.setChecked(stats.getYellowCard() == 1);
-
-        teleFragNp_techFoulNum.setValue(stats.getTechFoul());
-        teleFragNp_techFoulNum.setValue(stats.getFoul());
+        endLevel1_Rb.setChecked(stats.getEndLevel1() == 1);
+        endLevel2_Rb.setChecked(stats.getEndLevel2() == 1);
+        endLevel3_Rb.setChecked(stats.getEndLevel3() == 1);
+        endNone_Rb.setChecked(stats.getEndNone() == 1);
+        disabled_Cb.setChecked(stats.getDisabled() == 1);
+        redCard_Cb.setChecked(stats.getRedCard() == 1);
+        yellowCard_Cb.setChecked(stats.getYellowCard() == 1);
+        foul_Np.setValue(stats.getFoul());
+        techFoul_Np.setValue(stats.getTechFoul());
     }
     public void assignViews(View view){
         try {
-            teleField = (ConstraintLayout) view.findViewById(R.id.field_view2);
-            if (mAlliance.equals("RED")){
-                teleField.setBackground(getResources().getDrawable(R.drawable.field2018red));
-            }else{
-                teleField.setBackground(getResources().getDrawable(R.drawable.field2018blue));
-            }
-            teleFragCb_disabled = (CheckBox) view.findViewById(R.id.teleCb_disabled);
-            teleFragCb_redCard = (CheckBox) view.findViewById(R.id.teleCb_redCard);
-            teleFragCb_yellowCard = (CheckBox) view.findViewById(R.id.teleCb_yellowCard);
-            teleFragNp_foulNum = (NumberPicker) view.findViewById(R.id.teleNp_foulNum);
-            teleFragNp_techFoulNum = (NumberPicker) view.findViewById(R.id.teleNp_techFoulNum);
-
+            endLevel1_Rb = (RadioButton)view.findViewById(R.id.platform1st_Rb);
+            endLevel2_Rb = (RadioButton)view.findViewById(R.id.platform2nd_Rb);
+            endLevel3_Rb = (RadioButton)view.findViewById(R.id.platform3rd_Rb);
+            endNone_Rb = (RadioButton)view.findViewById(R.id.platformNone_Rb);
+            disabled_Cb = (CheckBox) view.findViewById(R.id.disabled_Cb);
+            foul_Np = (NumberPicker) view.findViewById(R.id.foul_Np);
+            techFoul_Np = (NumberPicker) view.findViewById(R.id.techFoul_Np);
+            redCard_Cb = (CheckBox) view.findViewById(R.id.redCard_Cb);
+            yellowCard_Cb = (CheckBox) view.findViewById(R.id.yellowCard_Cb);
             viewAssigned = true;
         }catch(Exception e){
             e.printStackTrace();

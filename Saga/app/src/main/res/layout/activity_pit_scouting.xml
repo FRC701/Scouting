@@ -166,7 +166,7 @@
                 android:orientation="horizontal">
 
                 <CheckBox
-                    android:id="@+id/pitHatchInRocket_Cb"
+                    android:id="@+id/pitHatchInRocketShip_Cb"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -174,7 +174,7 @@
                     android:textColor="@color/White" />
 
                 <CheckBox
-                    android:id="@+id/pitHatchInCargoship_Cb"
+                    android:id="@+id/pitHatchInCargoShip_Cb"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -182,7 +182,7 @@
                     android:textColor="@color/White" />
 
                 <CheckBox
-                    android:id="@+id/pitCargoInRocketship_Cb"
+                    android:id="@+id/pitCargoInRocketShip_Cb"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -190,7 +190,7 @@
                     android:textColor="@color/White" />
 
                 <CheckBox
-                    android:id="@+id/pitCargoInCargoship_Cb"
+                    android:id="@+id/pitCargoInCargoShip_Cb"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"

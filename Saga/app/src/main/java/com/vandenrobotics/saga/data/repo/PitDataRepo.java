@@ -18,7 +18,23 @@ public class PitDataRepo {
     public static String createTable() {
         return "CREATE TABLE " + PitData.TABLE + " ( "
                 + PitData.KEY_TeamNum + " INTEGER PRIMARY KEY , "
-                + PitData.KEY_AutoOther + " INTEGER , "
+                + PitData.KEY_Auto + " INTEGER , "
+                + PitData.KEY_DriveBlindly + " INTEGER , "
+                + PitData.KEY_Vision + " INTEGER , "
+                + PitData.KEY_Camera + " INTEGER , "
+                + PitData.KEY_Other + " INTEGER , "
+                + PitData.KEY_StartLevel1 + " INTEGER , "
+                + PitData.KEY_StartLevel2 + " INTEGER , "
+                + PitData.KEY_RobotCargo + " INTEGER , "
+                + PitData.KEY_RobotHatch + " INTEGER , "
+                + PitData.KEY_CargoShipCargo + " INTEGER , "
+                + PitData.KEY_CargoShipHatch + " INTEGER , "
+                + PitData.KEY_HatchInCargoShip + " INTEGER , "
+                + PitData.KEY_CargoInCargoShip + " INTEGER , "
+                + PitData.KEY_HatchInRocket + " INTEGER , "
+                + PitData.KEY_CargoInRocket + " INTEGER , "
+                + PitData.KEY_IntakeHatch + " INTEGER , "
+                + PitData.KEY_IntakeCargo + " INTEGER , "
                 + PitData.KEY_IntakeAndMech + " TEXT , "
                 + PitData.KEY_DriveTrain + " TEXT , "
                 + PitData.KEY_Lang + " TEXT , "
@@ -31,12 +47,28 @@ public class PitDataRepo {
         SQLiteDatabase db = DatabaseManager.getInstance().openDatabase();
         ContentValues values = new ContentValues();
         values.put(PitData.KEY_TeamNum, pitData.getTeamNum());
-        values.put(PitData.KEY_AutoOther, pitData.getAutoOther());
         values.put(PitData.KEY_IntakeAndMech, pitData.getIntakeAndMech());
         values.put(PitData.KEY_DriveTrain, pitData.getDriveTrain());
         values.put(PitData.KEY_Lang, pitData.getLang());
         values.put(PitData.KEY_Comments, pitData.getComments());
         values.put(PitData.KEY_Speed, pitData.getSpeed());
+        values.put(PitData.KEY_DriveBlindly, pitData.getDriveBlindly());
+        values.put(PitData.KEY_Auto, pitData.getAuto());
+        values.put(PitData.KEY_Vision, pitData.getVision());
+        values.put(PitData.KEY_Camera, pitData.getCamera());
+        values.put(PitData.KEY_Other, pitData.getOther());
+        values.put(PitData.KEY_StartLevel1, pitData.getStartLevel1());
+        values.put(PitData.KEY_StartLevel2, pitData.getStartLevel2());
+        values.put(PitData.KEY_RobotCargo, pitData.getRobotCargo());
+        values.put(PitData.KEY_RobotHatch, pitData.getRobotHatch());
+        values.put(PitData.KEY_CargoShipCargo, pitData.getCargoShipCargo());
+        values.put(PitData.KEY_CargoShipHatch, pitData.getCargoShipHatch());
+        values.put(PitData.KEY_HatchInCargoShip, pitData.getHatchInCargoShip());
+        values.put(PitData.KEY_CargoInCargoShip, pitData.getCargoInCargoShip());
+        values.put(PitData.KEY_HatchInRocket, pitData.getHatchInRocket());
+        values.put(PitData.KEY_CargoInRocket, pitData.getCargoInRocket());
+        values.put(PitData.KEY_IntakeHatch, pitData.getIntakeHatch());
+        values.put(PitData.KEY_IntakeCargo, pitData.getIntakeCargo());
 
         pitDataId = (int)db.insertWithOnConflict(PitData.TABLE, null, values, SQLiteDatabase.CONFLICT_IGNORE);
         DatabaseManager.getInstance().closeDatabase();
@@ -46,12 +78,28 @@ public class PitDataRepo {
         int pitDataId;
         SQLiteDatabase db = DatabaseManager.getInstance().openDatabase();
         ContentValues values = new ContentValues();
-        values.put(PitData.KEY_AutoOther, pitData.getAutoOther());
         values.put(PitData.KEY_IntakeAndMech, pitData.getIntakeAndMech());
         values.put(PitData.KEY_DriveTrain, pitData.getDriveTrain());
         values.put(PitData.KEY_Lang, pitData.getLang());
         values.put(PitData.KEY_Comments, pitData.getComments());
         values.put(PitData.KEY_Speed, pitData.getSpeed());
+        values.put(PitData.KEY_DriveBlindly, pitData.getDriveBlindly());
+        values.put(PitData.KEY_Auto, pitData.getAuto());
+        values.put(PitData.KEY_Vision, pitData.getVision());
+        values.put(PitData.KEY_Camera, pitData.getCamera());
+        values.put(PitData.KEY_Other, pitData.getOther());
+        values.put(PitData.KEY_StartLevel1, pitData.getStartLevel1());
+        values.put(PitData.KEY_StartLevel2, pitData.getStartLevel2());
+        values.put(PitData.KEY_RobotCargo, pitData.getRobotCargo());
+        values.put(PitData.KEY_RobotHatch, pitData.getRobotHatch());
+        values.put(PitData.KEY_CargoShipCargo, pitData.getCargoShipCargo());
+        values.put(PitData.KEY_CargoShipHatch, pitData.getCargoShipHatch());
+        values.put(PitData.KEY_HatchInCargoShip, pitData.getHatchInCargoShip());
+        values.put(PitData.KEY_CargoInCargoShip, pitData.getCargoInCargoShip());
+        values.put(PitData.KEY_HatchInRocket, pitData.getHatchInRocket());
+        values.put(PitData.KEY_CargoInRocket, pitData.getCargoInRocket());
+        values.put(PitData.KEY_IntakeHatch, pitData.getIntakeHatch());
+        values.put(PitData.KEY_IntakeCargo, pitData.getIntakeCargo());
 
         pitDataId = (int)db.update(PitData.TABLE, values, PitData.KEY_TeamNum + " = " + pitData.getTeamNum(),null);
         DatabaseManager.getInstance().closeDatabase();
@@ -79,22 +127,55 @@ public class PitDataRepo {
         PitData pitData = new PitData(teamNum);
 
         SQLiteDatabase db = DatabaseManager.getInstance().openDatabase();
-        String selectQuery = " SELECT PitData." +  PitData.KEY_AutoOther
+        String selectQuery = " SELECT PitData." +  PitData.KEY_Auto
                 + ", PitData." + PitData.KEY_IntakeAndMech
                 + ", PitData." + PitData.KEY_DriveTrain
                 + ", PitData." + PitData.KEY_Lang
                 + ", PitData." + PitData.KEY_Comments
                 + ", PitData." + PitData.KEY_Speed
+                + ", PitData." + PitData.KEY_DriveBlindly
+                + ", PitData." + PitData.KEY_Auto
+                + ", PitData." + PitData.KEY_Vision
+                + ", PitData." + PitData.KEY_Camera
+                + ", PitData." + PitData.KEY_Other
+                + ", PitData." + PitData.KEY_StartLevel1
+                + ", PitData." + PitData.KEY_StartLevel2
+                + ", PitData." + PitData.KEY_RobotCargo
+                + ", PitData." + PitData.KEY_RobotHatch
+                + ", PitData." + PitData.KEY_CargoShipCargo
+                + ", PitData." + PitData.KEY_CargoShipHatch
+                + ", PitData." + PitData.KEY_HatchInCargoShip
+                + ", PitData." + PitData.KEY_CargoInCargoShip
+                + ", PitData." + PitData.KEY_HatchInRocket
+                + ", PitData." + PitData.KEY_CargoInRocket
+                + ", PitData." + PitData.KEY_IntakeHatch
+                + ", PitData." + PitData.KEY_IntakeCargo
                 + " FROM " + PitData.TABLE
                 + " WHERE PitData." + PitData.KEY_TeamNum + " = " + teamNum;
         Cursor cursor = db.rawQuery(selectQuery, null);
         if(cursor.moveToFirst()){
-            pitData.setAutoOther(cursor.getInt(cursor.getColumnIndex(PitData.KEY_AutoOther)));
+            pitData.setAuto(cursor.getInt(cursor.getColumnIndex(PitData.KEY_Auto)));
             pitData.setIntakeAndMech(cursor.getString(cursor.getColumnIndex(PitData.KEY_IntakeAndMech)));
             pitData.setDriveTrain(cursor.getString(cursor.getColumnIndex(PitData.KEY_DriveTrain)));
             pitData.setLang(cursor.getString(cursor.getColumnIndex(PitData.KEY_Lang)));
             pitData.setComments(cursor.getString(cursor.getColumnIndex(PitData.KEY_Comments)));
             pitData.setSpeed(cursor.getString(cursor.getColumnIndex(PitData.KEY_Speed)));
+            pitData.setDriveBlindly(cursor.getInt(cursor.getColumnIndex(PitData.KEY_DriveBlindly)));
+            pitData.setVision(cursor.getInt(cursor.getColumnIndex(PitData.KEY_Vision)));
+            pitData.setCamera(cursor.getInt(cursor.getColumnIndex(PitData.KEY_Camera)));
+            pitData.setOther(cursor.getInt(cursor.getColumnIndex(PitData.KEY_Other)));
+            pitData.setStartLevel1(cursor.getInt(cursor.getColumnIndex(PitData.KEY_StartLevel1)));
+            pitData.setStartLevel2(cursor.getInt(cursor.getColumnIndex(PitData.KEY_StartLevel2)));
+            pitData.setRobotCargo(cursor.getInt(cursor.getColumnIndex(PitData.KEY_RobotCargo)));
+            pitData.setRobotHatch(cursor.getInt(cursor.getColumnIndex(PitData.KEY_RobotHatch)));
+            pitData.setCargoShipCargo(cursor.getInt(cursor.getColumnIndex(PitData.KEY_CargoShipCargo)));
+            pitData.setCargoShipHatch(cursor.getInt(cursor.getColumnIndex(PitData.KEY_CargoShipHatch)));
+            pitData.setHatchInCargoShip(cursor.getInt(cursor.getColumnIndex(PitData.KEY_HatchInCargoShip)));
+            pitData.setCargoInCargoShip(cursor.getInt(cursor.getColumnIndex(PitData.KEY_CargoInCargoShip)));
+            pitData.setHatchInRocket(cursor.getInt(cursor.getColumnIndex(PitData.KEY_HatchInRocket)));
+            pitData.setCargoInRocket(cursor.getInt(cursor.getColumnIndex(PitData.KEY_CargoInRocket)));
+            pitData.setIntakeHatch(cursor.getInt(cursor.getColumnIndex(PitData.KEY_IntakeHatch)));
+            pitData.setIntakeCargo(cursor.getInt(cursor.getColumnIndex(PitData.KEY_IntakeCargo)));
         }
         cursor.close();
         DatabaseManager.getInstance().closeDatabase();

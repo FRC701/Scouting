@@ -31,7 +31,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="@color/Yellow"
                 android:text="@string/_2nd"
-                android:id="@+id/platform12nd_Rb"
+                android:id="@+id/platform2nd_Rb"
                 />
             <RadioButton
                 android:layout_width="wrap_content"
