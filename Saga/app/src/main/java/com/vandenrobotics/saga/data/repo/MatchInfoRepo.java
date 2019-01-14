@@ -23,7 +23,7 @@ public class MatchInfoRepo {
                 + MatchInfo.KEY_CurrentMatch + " INTEGER not null , "
                 + MatchInfo.KEY_DeviceNum + " INTEGER not null ,"
                 + "PRIMARY KEY ( '" + MatchInfo.KEY_CompId
-                + "'" + MatchInfo.KEY_CurrentMatch + "' ),"
+                + "', '" + MatchInfo.KEY_CurrentMatch + "' ),"
                 + "FOREIGN KEY ( " + MatchInfo.KEY_CompId + " ) REFERENCES " + Competitions.TABLE
                 + " ( " + Competitions.KEY_CompId + " ))";
     }

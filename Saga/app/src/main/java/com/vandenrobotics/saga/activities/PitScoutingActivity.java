@@ -23,24 +23,34 @@ import java.util.Collections;
 
 public class PitScoutingActivity extends AppCompatActivity {
 
-    private CheckBox pitCb_autoCrossBasline;
-    private CheckBox pitCb_autoCubeInSwitch;
-    private CheckBox pitCb_autoCubeInScale;
-    private CheckBox pitCb_autoCubeInExchange;
-    private CheckBox pitCb_autoOther;
-    private CheckBox pitCb_canGetSwitch;
-    private CheckBox pitCb_canGetScale;
-    private EditText pitEt_canClimb;
-    private EditText pitEt_progLang;
-    private RadioButton pitRb_yes;
-    private EditText pitEt_averageSpeed;
-    private CheckBox pitCb_cycleGround;
-    private CheckBox pitCb_cyclePortal;
-    private CheckBox pitCb_cycleSwitches;
-    private EditText pitEt_driveTrain;
-    private EditText pitEt_intakeLift;
-    private EditText pitEt_comments;
-    private Button pitB_saveButton;
+    private EditText intakeAndMech;
+    private EditText driveTrain;
+    private EditText speed;
+    private EditText lang;
+    private EditText comments;
+    private CheckBox driveBlindly;
+    private CheckBox auto;
+    private CheckBox vision;
+    private CheckBox camera;
+    private CheckBox other;
+    private RadioButton startLevel1;
+    private RadioButton startLevel2;
+    private RadioButton robotCargo;
+    private RadioButton robotHatch;
+    private RadioButton cargoShipCargo;
+    private RadioButton cargoShipHatch;
+    private CheckBox hatchInRocket;
+    private CheckBox cargoInRocket;
+    private CheckBox hatchInCargoShip;
+    private CheckBox cargoInCargoShip;
+    private CheckBox intakeHatch;
+    private CheckBox intakeCargo;
+    private CheckBox reachFirstPlatform;
+    private CheckBox reachSecondPlatform;
+    private CheckBox reachThirdPlatform;
+    private CheckBox scoreBottom;
+    private CheckBox scoreMiddle;
+    private CheckBox scoreTop;
     private ArrayList<Integer> team_numbers;
     private TeamsRepo teamsRepo;
     private PitDataRepo pitDataRepo;
@@ -50,16 +60,16 @@ public class PitScoutingActivity extends AppCompatActivity {
 
 
     @Override
-//    protected void onCreate(Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//        setContentView(R.layout.activity_pit_scouting);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_pit_scouting);
 
         pitDataRepo = new PitDataRepo();
 
         teamsRepo = new TeamsRepo();
         team_numbers = teamsRepo.getAllTeamNums();
         Collections.sort(team_numbers);
-//        spinnerTeams = (Spinner) findViewById(R.id.pit_spinnerTeamNum);
+        spinnerTeams = (Spinner) findViewById(R.id.pit_spinnerTeamNum);
         teamAdapter = new ArrayAdapter<>(this, R.layout.spinner_base, team_numbers);
         teamAdapter.setDropDownViewResource(R.layout.spinner_dropdown);
         spinnerTeams.setSelection(teamAdapter.getPosition(mTeamNumber));
@@ -97,88 +107,137 @@ public class PitScoutingActivity extends AppCompatActivity {
             }
         });
 
-//        pitCb_autoCrossBasline = (CheckBox)findViewById(R.id.pitCb_autoCrossesBaseline);
-//        pitCb_autoCubeInExchange = (CheckBox)findViewById(R.id.pitCb_autoCubeInExchange);
-//        pitCb_autoCubeInScale = (CheckBox)findViewById(R.id.pitCb_autoCubeInScale);
-//        pitCb_autoCubeInSwitch = (CheckBox)findViewById(R.id.pitCb_autoCubeInSwitch);
-//        pitCb_autoOther = (CheckBox)findViewById(R.id.pitCb_autoOther);
-//        pitCb_canGetScale = (CheckBox)findViewById(R.id.pitCb_canGetScale);
-//        pitCb_canGetSwitch = (CheckBox)findViewById(R.id.pitCb_canGetSwitch);
-//        pitEt_averageSpeed = (EditText)findViewById(R.id.pitEt_averageSpeed);
-//        pitEt_canClimb = (EditText)findViewById(R.id.pitEt_canClimb);
-//        pitRb_yes = (RadioButton)findViewById(R.id.pitRb_yes);
-//        pitCb_cycleGround = (CheckBox)findViewById(R.id.pitCb_cycleGround);
-//        pitCb_cyclePortal = (CheckBox)findViewById(R.id.pitCb_cyclePortal);
-//        pitCb_cycleSwitches = (CheckBox)findViewById(R.id.pitCb_cycleSwitches);
-//        pitEt_driveTrain = (EditText)findViewById(R.id.pitEt_driveTrain);
-//        pitEt_intakeLift = (EditText)findViewById(R.id.pitEt_intakeLift);
-//        pitB_saveButton = (Button)findViewById(R.id.pitB_savebutton);
-//        pitEt_progLang = (EditText)findViewById(R.id.pitEt_progLang);
-//        pitEt_comments = (EditText) findViewById(R.id.pitEt_comments);
+        intakeAndMech = (EditText)findViewById(R.id.mechanismAnswer);
+        driveTrain = (EditText)findViewById(R.id.driveTrainAnswer);
+        speed = (EditText)findViewById(R.id.speedAnswer);
+        lang = (EditText)findViewById(R.id.programmingLanguageAnswer);
+        comments = (EditText)findViewById(R.id.commentsAnswer);
+        driveBlindly = (CheckBox)findViewById(R.id.pitDriveBlindly_Cb);
+        auto = (CheckBox)findViewById(R.id.pitAuto_Cb);
+        vision = (CheckBox)findViewById(R.id.pitVision_Cb);
+        camera = (CheckBox)findViewById(R.id.pitCamera_Cb);
+        other = (CheckBox)findViewById(R.id.pitOther_Cb);
+        startLevel1 = (RadioButton) findViewById(R.id.pitLevel1_Rb);
+        startLevel2 = (RadioButton) findViewById(R.id.pitLevel2_Rb);
+        robotCargo = (RadioButton) findViewById(R.id.pitRobotCargo_Rb);
+        robotHatch = (RadioButton) findViewById(R.id.pitRobotHatch_Rb);
+        cargoShipCargo = (RadioButton) findViewById(R.id.pitCargoShipCargo_Rb);
+        cargoShipHatch = (RadioButton) findViewById(R.id.pitCargoShipHatch_Rb);
+        hatchInRocket = (CheckBox) findViewById(R.id.pitHatchInRocketShip_Cb);
+        cargoInRocket = (CheckBox) findViewById(R.id.pitCargoInRocketShip_Cb);
+        hatchInCargoShip = (CheckBox) findViewById(R.id.pitHatchInCargoShip_Cb);
+        cargoInCargoShip = (CheckBox) findViewById(R.id.pitCargoInCargoShip_Cb);
+        intakeHatch = (CheckBox) findViewById(R.id.pitHatch_Cb);
+        intakeCargo = (CheckBox) findViewById(R.id.cargo_Cb);
+        reachFirstPlatform = (CheckBox) findViewById(R.id.reachFirstPlatform_Cb);
+        reachSecondPlatform = (CheckBox) findViewById(R.id.reachSecondPlatform_Cb);
+        reachThirdPlatform = (CheckBox) findViewById(R.id.reachThirdPlatform_Cb);
+        scoreBottom = (CheckBox) findViewById(R.id.scoreBottom_Cb);
+        scoreMiddle = (CheckBox) findViewById(R.id.scoreMiddle_Cb);
+        scoreTop = (CheckBox) findViewById(R.id.scoreTop_Cb);
 
     }
 
    public void save(View view){
        PitData pitdata = new PitData(mTeamNumber);
-//
-//       int aCB = (pitCb_autoCrossBasline.isChecked()?1:0);
-//       pitdata.setAutoBaseline(aCB);
-//       int aCE = (pitCb_autoCubeInExchange.isChecked()?1:0);
-//       pitdata.setAutoCubeInExchange(aCE);
-//       int aCSC = (pitCb_autoCubeInScale.isChecked()?1:0);
-//       pitdata.setAutoCubeInScale(aCSC);
-//       int aCSW = (pitCb_autoCubeInSwitch.isChecked()?1:0);
-//       pitdata.setAutoCubeInSwitch(aCSW);
-//       int aO = (pitCb_autoOther.isChecked()?1:0);
-//       pitdata.setAutoOther(aO);
-//       int cGSC = (pitCb_canGetScale.isChecked()?1:0);
-//       pitdata.setGetScale(cGSC);
-//       int cGSW = (pitCb_canGetSwitch.isChecked()?1:0);
-//       pitdata.setGetSwitch(cGSW);
-//
-//       pitdata.setSpeed(pitEt_averageSpeed.getText().toString());
-//       pitdata.setClimb(pitEt_canClimb.getText().toString());
-//       pitdata.setDriveTrain(pitEt_driveTrain.getText().toString());
-//       pitdata.setIntakeAndMech(pitEt_intakeLift.getText().toString());
-//       pitdata.setLang(pitEt_progLang.getText().toString());
-//       pitdata.setComments(pitEt_comments.getText().toString());
-//
-//       int yes = (pitRb_yes.isChecked()?1:0);
-//       pitdata.setFloorPickUp(yes);
-//       int cG = (pitCb_cycleGround.isChecked()?1:0);
-//       pitdata.setCycleGround(cG);
-//       int cP = (pitCb_cyclePortal.isChecked()?1:0);
-//       pitdata.setCyclePortal(cP);
-//       int cS = (pitCb_cycleSwitches.isChecked()?1:0);
-//       pitdata.setCycleSwitches(cS);
-//
-//       if (pitDataRepo.insert(pitdata) == -1){
-//           pitDataRepo.update(pitdata);
-//       }
-//
-//       Toast.makeText(this, "Saved Data", Toast.LENGTH_LONG).show();
-//       ExternalStorageTools.writeDatabaseToES();
+       pitdata.setIntakeAndMech(intakeAndMech.getText().toString());
+       pitdata.setDriveTrain(driveTrain.getText().toString());
+       pitdata.setSpeed(speed.getText().toString());
+       pitdata.setLang(lang.getText().toString());
+       pitdata.setComments(comments.getText().toString());
+
+       int db = (driveBlindly.isChecked() ? 1:0);
+       pitdata.setDriveBlindly(db);
+       int a = (auto.isChecked() ? 1:0);
+       pitdata.setAuto(a);
+       int v = (vision.isChecked() ? 1:0);
+       pitdata.setVision(v);
+       int cam = (camera.isChecked() ? 1:0);
+       pitdata.setCamera(cam);
+       int oth = (other.isChecked() ? 1:0);
+       pitdata.setOther(oth);
+       int sl1 = (startLevel1.isChecked() ? 1:0);
+       pitdata.setStartLevel1(sl1);
+       int sl2 = (startLevel2.isChecked() ? 1:0);
+       pitdata.setStartLevel2(sl2);
+       int rc = (robotCargo.isChecked() ? 1:0);
+       pitdata.setRobotCargo(rc);
+       int rh = (robotHatch.isChecked() ? 1:0);
+       pitdata.setRobotHatch(rh);
+       int csc = (cargoShipCargo.isChecked() ? 1:0);
+       pitdata.setCargoShipCargo(csc);
+       int csh = (cargoShipHatch.isChecked() ? 1:0);
+       pitdata.setCargoShipHatch(csh);
+       int hr = (hatchInRocket.isChecked() ? 1:0);
+       pitdata.setHatchInRocket(hr);
+       int cr = (cargoInRocket.isChecked() ? 1:0);
+       pitdata.setCargoInRocket(cr);
+       int hcs = (hatchInCargoShip.isChecked() ? 1:0);
+       pitdata.setHatchInCargoShip(hcs);
+       int ccs = (cargoInCargoShip.isChecked() ? 1:0);
+       pitdata.setCargoInCargoShip(ccs);
+       int ih = (intakeHatch.isChecked() ? 1:0);
+       pitdata.setIntakeHatch(ih);
+       int ic = (intakeCargo.isChecked() ? 1:0);
+       pitdata.setIntakeCargo(ic);
+       int rfp = (reachFirstPlatform.isChecked() ? 1:0);
+       pitdata.setReachFirstPlatform(rfp);
+       int rsp = (reachSecondPlatform.isChecked() ? 1:0);
+       pitdata.setReachSecondPlatform(rsp);
+       int rtp = (reachThirdPlatform.isChecked() ? 1:0);
+       pitdata.setReachThirdPlatform(rtp);
+       int sb = (scoreBottom.isChecked() ? 1:0);
+       pitdata.setScoreBottom(sb);
+       int sm = (scoreMiddle.isChecked() ? 1:0);
+       pitdata.setScoreMiddle(sm);
+       int st = (scoreTop.isChecked() ? 1:0);
+       pitdata.setScoreTop(st);
+
+
+
+
+
+
+
+
+       Toast.makeText(this, "Saved Data", Toast.LENGTH_LONG).show();
+       ExternalStorageTools.writeDatabaseToES();
 
    }
 
-   public void loadData(PitData pitdata){
-//
-//       pitCb_autoCrossBasline.setChecked(pitdata.getAutoBaseline()==1);
-//       pitCb_autoCubeInExchange.setChecked(pitdata.getAutoCubeInExchange()==1);
-//       pitCb_autoCubeInScale.setChecked(pitdata.getAutoCubeInScale()==1);
-//       pitCb_autoCubeInSwitch.setChecked(pitdata.getAutoCubeInSwitch()==1);
-//       pitCb_autoOther.setChecked(pitdata.getAutoOther()==1);
-//       pitCb_canGetScale.setChecked(pitdata.getGetScale()==1);
-//       pitCb_canGetSwitch.setChecked(pitdata.getGetSwitch()==1);
-//       pitCb_cycleSwitches.setChecked(pitdata.getCycleSwitches()==1);
-//       pitCb_cycleGround.setChecked(pitdata.getCycleGround()==1);
-//       pitCb_cyclePortal.setChecked(pitdata.getCyclePortal()==1);
-//       pitEt_averageSpeed.setText(pitdata.getSpeed());
-//       pitEt_canClimb.setText(pitdata.getClimb());
-//       pitEt_driveTrain.setText(pitdata.getDriveTrain());
-//       pitEt_intakeLift.setText(pitdata.getIntakeAndMech());
-//       pitEt_progLang.setText(pitdata.getLang());
-//       pitEt_comments.setText(pitdata.getComments());
+   public void loadData(PitData pitData){
+        intakeAndMech.setText(pitData.getIntakeAndMech());
+        driveTrain.setText(pitData.getDriveTrain());
+        speed.setText(pitData.getSpeed());
+        lang.setText(pitData.getLang());
+        comments.setText(pitData.getComments());
+        driveBlindly.setChecked(pitData.getDriveBlindly() == 1);
+        auto.setChecked(pitData.getAuto() == 1);
+        vision.setChecked(pitData.getVision() == 1);
+        camera.setChecked(pitData.getCamera() == 1);
+        other.setChecked(pitData.getOther() == 1);
+        startLevel1.setChecked(pitData.getStartLevel1() == 1);
+        startLevel2.setChecked(pitData.getStartLevel2() == 1);
+        robotCargo.setChecked(pitData.getRobotCargo() == 1);
+        robotHatch.setChecked(pitData.getRobotHatch() == 1);
+        cargoShipCargo.setChecked(pitData.getCargoShipCargo() == 1);
+        cargoShipHatch.setChecked(pitData.getCargoShipCargo() == 1);
+        hatchInRocket.setChecked(pitData.getHatchInRocket() == 1);
+        cargoInRocket.setChecked(pitData.getCargoInRocket() == 1);
+        hatchInCargoShip.setChecked(pitData.getHatchInCargoShip() == 1);
+        cargoInCargoShip.setChecked(pitData.getCargoInCargoShip() == 1);
+        intakeHatch.setChecked(pitData.getIntakeHatch() == 1);
+        intakeCargo.setChecked(pitData.getIntakeCargo() == 1);
+        reachFirstPlatform.setChecked(pitData.getReachFirstPlatform() == 1);
+        reachSecondPlatform.setChecked(pitData.getReachSecondPlatform() == 1);
+        reachThirdPlatform.setChecked(pitData.getReachThirdPlatform() == 1);
+        scoreBottom.setChecked(pitData.getScoreBottom() == 1);
+        scoreMiddle.setChecked(pitData.getScoreMiddle() == 1);
+        scoreTop.setChecked(pitData.getScoreTop() == 1);
+
+
+
+
 
    }
 

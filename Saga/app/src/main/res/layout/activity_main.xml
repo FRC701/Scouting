@@ -43,7 +43,7 @@
             android:textStyle="bold"
             android:typeface="serif" />
 
-        <com.vandenrobotics.saga2018.views.EventListView
+        <com.vandenrobotics.saga.views.EventListView
             android:layout_width="wrap_content"
             android:layout_height="fill_parent"
             android:id="@+id/tbaEventListView"

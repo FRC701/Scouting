@@ -31,7 +31,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-//import com.vandenrobotics.saga2018.data.model.MatchData;
+//import com.vandenrobotics.saga.data.model.MatchData;
 
 public class ScoutActivity extends Activity {
 

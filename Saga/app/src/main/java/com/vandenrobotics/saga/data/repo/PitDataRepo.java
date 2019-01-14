@@ -35,6 +35,12 @@ public class PitDataRepo {
                 + PitData.KEY_CargoInRocket + " INTEGER , "
                 + PitData.KEY_IntakeHatch + " INTEGER , "
                 + PitData.KEY_IntakeCargo + " INTEGER , "
+                + PitData.KEY_ReachFirstPlatform + " INTEGER , "
+                + PitData.KEY_ReachSecondPlatform+ " INTEGER , "
+                + PitData.KEY_ReachThirdPlatform + " INTEGER , "
+                + PitData.KEY_ScoreBottom + " INTEGER , "
+                + PitData.KEY_ScoreMiddle + " INTEGER , "
+                + PitData.KEY_ScoreTop + " INTEGER , "
                 + PitData.KEY_IntakeAndMech + " TEXT , "
                 + PitData.KEY_DriveTrain + " TEXT , "
                 + PitData.KEY_Lang + " TEXT , "
@@ -69,6 +75,12 @@ public class PitDataRepo {
         values.put(PitData.KEY_CargoInRocket, pitData.getCargoInRocket());
         values.put(PitData.KEY_IntakeHatch, pitData.getIntakeHatch());
         values.put(PitData.KEY_IntakeCargo, pitData.getIntakeCargo());
+        values.put(PitData.KEY_ReachFirstPlatform, pitData.getReachFirstPlatform());
+        values.put(PitData.KEY_ReachSecondPlatform, pitData.getReachSecondPlatform());
+        values.put(PitData.KEY_ReachThirdPlatform, pitData.getReachThirdPlatform());
+        values.put(PitData.KEY_ScoreBottom, pitData.getScoreBottom());
+        values.put(PitData.KEY_ScoreMiddle, pitData.getScoreMiddle());
+        values.put(PitData.KEY_ScoreTop, pitData.getScoreTop());
 
         pitDataId = (int)db.insertWithOnConflict(PitData.TABLE, null, values, SQLiteDatabase.CONFLICT_IGNORE);
         DatabaseManager.getInstance().closeDatabase();
@@ -100,6 +112,12 @@ public class PitDataRepo {
         values.put(PitData.KEY_CargoInRocket, pitData.getCargoInRocket());
         values.put(PitData.KEY_IntakeHatch, pitData.getIntakeHatch());
         values.put(PitData.KEY_IntakeCargo, pitData.getIntakeCargo());
+        values.put(PitData.KEY_ReachFirstPlatform, pitData.getReachFirstPlatform());
+        values.put(PitData.KEY_ReachSecondPlatform, pitData.getReachSecondPlatform());
+        values.put(PitData.KEY_ReachThirdPlatform, pitData.getReachThirdPlatform());
+        values.put(PitData.KEY_ScoreBottom, pitData.getScoreBottom());
+        values.put(PitData.KEY_ScoreMiddle, pitData.getScoreMiddle());
+        values.put(PitData.KEY_ScoreTop, pitData.getScoreTop());
 
         pitDataId = (int)db.update(PitData.TABLE, values, PitData.KEY_TeamNum + " = " + pitData.getTeamNum(),null);
         DatabaseManager.getInstance().closeDatabase();
@@ -150,6 +168,12 @@ public class PitDataRepo {
                 + ", PitData." + PitData.KEY_CargoInRocket
                 + ", PitData." + PitData.KEY_IntakeHatch
                 + ", PitData." + PitData.KEY_IntakeCargo
+                + ", PitData." + PitData.KEY_ReachFirstPlatform
+                + ", PitData." + PitData.KEY_ReachSecondPlatform
+                + ", PitData." + PitData.KEY_ReachThirdPlatform
+                + ", PitData." + PitData.KEY_ScoreBottom
+                + ", PitData." + PitData.KEY_ScoreMiddle
+                + ", PitData." + PitData.KEY_ScoreTop
                 + " FROM " + PitData.TABLE
                 + " WHERE PitData." + PitData.KEY_TeamNum + " = " + teamNum;
         Cursor cursor = db.rawQuery(selectQuery, null);
@@ -176,6 +200,12 @@ public class PitDataRepo {
             pitData.setCargoInRocket(cursor.getInt(cursor.getColumnIndex(PitData.KEY_CargoInRocket)));
             pitData.setIntakeHatch(cursor.getInt(cursor.getColumnIndex(PitData.KEY_IntakeHatch)));
             pitData.setIntakeCargo(cursor.getInt(cursor.getColumnIndex(PitData.KEY_IntakeCargo)));
+            pitData.setReachFirstPlatform(cursor.getInt(cursor.getColumnIndex(PitData.KEY_ReachFirstPlatform)));
+            pitData.setReachSecondPlatform(cursor.getInt(cursor.getColumnIndex(PitData.KEY_ReachSecondPlatform)));
+            pitData.setReachThirdPlatform(cursor.getInt(cursor.getColumnIndex(PitData.KEY_ReachThirdPlatform)));
+            pitData.setScoreBottom(cursor.getInt(cursor.getColumnIndex(PitData.KEY_ScoreBottom)));
+            pitData.setScoreMiddle(cursor.getInt(cursor.getColumnIndex(PitData.KEY_ScoreMiddle)));
+            pitData.setScoreTop(cursor.getInt(cursor.getColumnIndex(PitData.KEY_ScoreTop)));
         }
         cursor.close();
         DatabaseManager.getInstance().closeDatabase();

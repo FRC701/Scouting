@@ -92,6 +92,9 @@
                 android:layout_height="match_parent"
                 android:orientation="horizontal">
 
+                <RadioGroup
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
                 <RadioButton
                     android:id="@+id/pitLevel1_Rb"
                     android:layout_width="wrap_content"
@@ -106,7 +109,9 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="@string/_2nd_level"
-                    android:textColor="@color/White" />
+                    android:textColor="@color/White"/>
+                </RadioGroup>
+
             </LinearLayout>
 
             <TextView
@@ -121,37 +126,49 @@
                 android:layout_height="match_parent"
                 android:orientation="horizontal">
 
-                <RadioButton
-                    android:id="@+id/pitRobotCargo_Rb"
+                <RadioGroup
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/robot_cargo"
-                    android:textColor="@color/White" />
+                    android:layout_height="wrap_content">
 
-                <RadioButton
-                    android:id="@+id/pitRobotHatch_Rb"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/robot_hatch"
-                    android:textColor="@color/White" />
+                    <RadioButton
+                        android:id="@+id/pitRobotCargo_Rb"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/robot_cargo"
+                        android:textColor="@color/White" />
 
-                <RadioButton
-                    android:id="@+id/pitCargoShipCargo_Rb"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/cargo_ship_cargo"
-                    android:textColor="@color/White" />
+                    <RadioButton
+                        android:id="@+id/pitRobotHatch_Rb"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/robot_hatch"
+                        android:textColor="@color/White" />
 
-                <RadioButton
-                    android:id="@+id/pitCargoShipHatch_Rb"
+
+                </RadioGroup>
+
+                <RadioGroup
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/cargo_ship_hatch"
-                    android:textColor="@color/White" />
+                    android:layout_height="wrap_content">
+
+                    <RadioButton
+                        android:id="@+id/pitCargoShipCargo_Rb"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/cargo_ship_cargo"
+                        android:textColor="@color/White" />
+
+                    <RadioButton
+                        android:id="@+id/pitCargoShipHatch_Rb"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/cargo_ship_hatch"
+                        android:textColor="@color/White" />
+                </RadioGroup>
 
             </LinearLayout>
 
@@ -249,7 +266,7 @@
                 android:orientation="horizontal">
 
                 <CheckBox
-                    android:id="@+id/checkBox"
+                    android:id="@+id/reachFirstPlatform_Cb"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -257,7 +274,7 @@
                     android:textColor="@color/White" />
 
                 <CheckBox
-                    android:id="@+id/checkBox2"
+                    android:id="@+id/reachSecondPlatform_Cb"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -265,13 +282,48 @@
                     android:textColor="@color/White" />
 
                 <CheckBox
-                    android:id="@+id/checkBox3"
+                    android:id="@+id/reachThirdPlatform_Cb"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="@string/_3rd_platform"
                     android:textColor="@color/White" />
             </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Where can your robot score on the rocket?"
+                android:textColor="@color/Goldish" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <CheckBox
+                    android:id="@+id/scoreBottom_Cb"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/bottom"
+                    android:textColor="@color/White"
+                    android:layout_weight="1"/>
+                <CheckBox
+                    android:id="@+id/scoreMiddle_Cb"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/middle"
+                    android:textColor="@color/White"
+                    android:layout_weight="1"/>
+                <CheckBox
+                    android:id="@+id/scoreTop_Cb"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/top"
+                    android:textColor="@color/White"
+                    android:layout_weight="1"/>
+
+                </LinearLayout>
 
             <TextView
                 android:id="@+id/textView5"
@@ -345,7 +397,8 @@
                 android:id="@+id/button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Save" />
+                android:text="Save"
+                android:onClick="save"/>
 
 
         </LinearLayout>

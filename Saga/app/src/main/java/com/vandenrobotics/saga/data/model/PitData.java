@@ -10,6 +10,7 @@ public class PitData {
 
     public static final String TABLE = "PitData";
     public static final String KEY_TeamNum = "TeamNumber";
+    // start here
     public static final String KEY_IntakeAndMech = "TypeOfIntakeAndMech";
     public static final String KEY_DriveTrain = "TypeOfDriveTrain";
     public static final String KEY_Speed = "AverageSpeed";
@@ -33,10 +34,17 @@ public class PitData {
     public static final String KEY_CargoInRocket = "CargoInRocket";
     public static final String KEY_IntakeHatch = "IntakeHatch";
     public static final String KEY_IntakeCargo = "IntakeCargo";
+    public static final String KEY_ReachFirstPlatform = "ReachFirstPlatform";
+    public static final String KEY_ReachSecondPlatform = "ReachSecondPlatform";
+    public static final String KEY_ReachThirdPlatform = "ReachThirdPlatform";
+    public static final String KEY_ScoreBottom = "ScoreBottom";
+    public static final String KEY_ScoreMiddle = "ScoreMiddle";
+    public static final String KEY_ScoreTop = "ScoreTop";
 
 
 
     private int teamNum;
+    //start here
     private String intakeAndMech;
     private String driveTrain;
     private String speed;
@@ -60,6 +68,12 @@ public class PitData {
     private int cargoInCargoShip;
     private int intakeHatch;
     private int intakeCargo;
+    private int reachFirstPlatform;
+    private int reachSecondPlatform;
+    private int reachThirdPlatform;
+    private int scoreBottom;
+    private int scoreMiddle;
+    private int scoreTop;
 
 
 
@@ -86,6 +100,12 @@ public class PitData {
         cargoInCargoShip = 0;
         intakeHatch = 0;
         intakeCargo = 0;
+        reachFirstPlatform = 0;
+        reachSecondPlatform = 0;
+        reachThirdPlatform = 0;
+        scoreBottom = 0;
+        scoreMiddle = 0;
+        scoreTop = 0;
 
     }
 
@@ -182,6 +202,24 @@ public class PitData {
 
     public int getIntakeCargo(){return intakeCargo; }
     public void setIntakeCargo(int b) { intakeCargo = b; }
+
+    public int getReachFirstPlatform(){return reachFirstPlatform ; }
+    public void setReachFirstPlatform(int b) { reachFirstPlatform = b; }
+
+    public int getReachSecondPlatform(){return reachSecondPlatform ; }
+    public void setReachSecondPlatform(int b) { reachSecondPlatform = b; }
+
+    public int getReachThirdPlatform(){return reachThirdPlatform; }
+    public void setReachThirdPlatform(int b) { reachThirdPlatform = b; }
+
+    public int getScoreBottom(){return scoreBottom ; }
+    public void setScoreBottom(int b) { scoreBottom = b; }
+
+    public int getScoreMiddle(){return scoreMiddle ; }
+    public void setScoreMiddle(int b) { scoreMiddle = b; }
+
+    public int getScoreTop(){return scoreTop ; }
+    public void setScoreTop(int b) { scoreTop = b; }
 
 
 
