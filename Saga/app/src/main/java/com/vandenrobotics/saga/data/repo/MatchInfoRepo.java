@@ -56,7 +56,7 @@ public class MatchInfoRepo {
         values.put(MatchInfo.KEY_CurrentMatch, matchInfo.getCurrentMatch());
         values.put(MatchInfo.KEY_DeviceNum, matchInfo.getDeviceNum());
 
-        db.updateWithOnConflict(MatchInfo.TABLE, values, MatchInfo.KEY_CompId + " = '" + matchInfo.getCompId(), null, SQLiteDatabase.CONFLICT_IGNORE);
+        db.updateWithOnConflict(MatchInfo.TABLE, values, MatchInfo.KEY_CompId + " = " + matchInfo.getCompId(), null, SQLiteDatabase.CONFLICT_IGNORE);
         DatabaseManager.getInstance().closeDatabase();
     }
 
@@ -70,7 +70,7 @@ public class MatchInfoRepo {
         db.delete(MatchInfo.TABLE, MatchInfo.KEY_CompId + " = '" + event + "'", null);
     }
 
-    public MatchInfo getMatchInfo(String event, String type){
+    public MatchInfo getMatchInfo(String event){
          MatchInfo matchInfo = new MatchInfo();
          matchInfo.setCompId(event);
 

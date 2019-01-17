@@ -195,14 +195,13 @@ public class PitScoutingActivity extends AppCompatActivity {
 
 
 
-
+        pitDataRepo.insert(pitdata);
 
 
 
 
        Toast.makeText(this, "Saved Data", Toast.LENGTH_LONG).show();
        ExternalStorageTools.writeDatabaseToES();
-
    }
 
    public void loadData(PitData pitData){

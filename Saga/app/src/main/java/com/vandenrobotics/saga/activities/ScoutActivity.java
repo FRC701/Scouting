@@ -70,6 +70,13 @@ public class ScoutActivity extends Activity {
         setContentView(R.layout.activity_scout);
         mEvent = getIntent().getStringExtra("event");
         mType = getIntent().getStringExtra("type");
+//
+//        matchInfoRepo = new MatchInfoRepo();
+//        MatchInfo matchInfo = new MatchInfo();
+//        matchInfo.setCompId(mEvent);
+//        matchInfo.setCurrentMatch(1);
+//        matchInfo.setDeviceNum(1);
+//        matchInfoRepo.insert(matchInfo);
 
         statsRepo = new StatsRepo();
 
