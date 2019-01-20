@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">SAGA 2018</string>
+    <string name="app_name">SAGA 2019</string>
     <string name="button_scout">SCOUT</string>
     <string name="button_about">ABOUT APP</string>
     <string name="text_appTitle">SAGA</string>
-    <string name="text_appSubtitle">For the 2018 FRC Season: Power Up</string>
+    <string name="text_appSubtitle">For the 2019 FRC Season: Destination Deep Space</string>
 
     <string name="text_appVersion">Deployment Version 4</string>
     <string name="text_developerInfo">Designed by FIRST Team 701</string>
 
-    <string name="text_tbaEventListTitle">2018 FRC Events</string>
+    <string name="text_tbaEventListTitle">2019 FRC Events</string>
     <string name="text_downloadEventListTitle">Downloaded Events</string>
 
     <string name="text_titleAbout">ABOUT SAGA</string>
     <string name="text_messageAbout">SAGA is an electronic FRC scouting application designed
         to analyze real statistical data on teams as they compete.  This version is designed for use with
-        the 2018 FRC Season: Power Up \nDesigned by Ben Aldrich and Sarah Bergendahl  . \n- FIRST Team 701 </string>
+        the 2019 FRC Season: Power Up \nDesigned by The Scouting Team  . \n- FIRST Team 701 </string>
 
     <string name="title_activity_main">Choose a FRC Event</string>
     <string name="text_titleConfirmDelete">Delete Event Data?</string>
@@ -56,9 +56,8 @@
     <string name="button_startMatch">Start Match</string>
 
     <string name="title_activity_match">MatchActivity</string>
-    <string name="title_initTab">Init Info</string>
-    <string name="title_autoTab">Autonomous</string>
-    <string name="title_teleTab">Tele-Op</string>
+    <string name="title_preTab">Pre-match</string>
+    <string name="title_midTab">Mid-match</string>
     <string name="title_postTab">Post Match</string>
 
     <string name="text_teamNumber">Team #</string>

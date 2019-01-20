@@ -1,5 +1,6 @@
 package com.vandenrobotics.saga.tabs;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.Fragment;
@@ -11,6 +12,7 @@ import android.widget.CheckBox;
 
 import com.vandenrobotics.saga.R;
 import com.vandenrobotics.saga.activities.MatchActivity;
+import com.vandenrobotics.saga.activities.PitScoutingActivity;
 import com.vandenrobotics.saga.data.model.Stats;
 import com.vandenrobotics.saga.data.repo.StatsRepo;
 
@@ -52,7 +54,7 @@ public class MidMatchFragment extends Fragment {
     private int mTeamNum;
     private int mMatchPos;
     private String mAlliance;
-
+    private OnClickStuff onClickStuff ;
 
     private StatsRepo statsRepo;
 
@@ -138,6 +140,37 @@ public class MidMatchFragment extends Fragment {
             removeGP_Cb = (CheckBox) view.findViewById(R.id.removeGP_Cb);
             crossHubLine_Cb = (CheckBox) view.findViewById(R.id.crossHubLine_Cb);
             viewAssigned = true;
+
+            onClickStuff = new MidMatchFragment.OnClickStuff();
+
+            rocketTopC_Bt.setOnClickListener(onClickStuff);
+            rocketTopH_Bt.setOnClickListener(onClickStuff);
+            rocketMiddleC_Bt.setOnClickListener(onClickStuff);
+            rocketMiddleH_Bt.setOnClickListener(onClickStuff);
+            rocketBottomC_Bt.setOnClickListener(onClickStuff);
+            rocketBottomH_Bt.setOnClickListener(onClickStuff);
+            cargoShipC_Bt.setOnClickListener(onClickStuff);
+            cargoShipH_Bt.setOnClickListener(onClickStuff);
+
+            if(rocketTopC>0){
+                rocketTopC_Bt.setText(rocketTopC);
+            }
+            if(rocketTopH>0){
+                rocketTopH_Bt.setText(rocketTopH);
+            }
+            if(rocketMiddleH>0){
+                rocketMiddleH_Bt.setText(rocketMiddleH);
+            }
+            if(rocketMiddleC>0){
+                rocketMiddleC_Bt.setText(rocketMiddleC);
+            }
+            if(rocketBottomC>0){
+                rocketBottomC_Bt.setText(rocketBottomC);
+            }
+            if(rocketBottomH>0){
+                rocketBottomH_Bt.setText(rocketBottomH);
+            }
+
         }catch(Exception e){
             e.printStackTrace();
             viewAssigned = false;
@@ -151,65 +184,85 @@ public class MidMatchFragment extends Fragment {
 //            }
 //        });
     }
-   public void OnClick(View view){
+   public class OnClickStuff implements Button.OnClickListener{
+        @Override
+     public void onClick(View view ){
         switch (view.getId()){
+
             case R.id.rocketTopC_Bt:
-                rocketTopC++;
-                if(removeGP_Cb.isChecked()){
+                if(removeGP_Cb.isChecked()&& rocketTopC >0){
                     rocketTopC--;
                 }
-                rocketTopC_Bt.setText(rocketTopC);
+                else{
+                    rocketTopC++;
+                }
+                rocketTopC_Bt.setText(rocketTopC+"");
                 break;
             case R.id.rocketTopH_Bt:
-                rocketTopH++;
-                if(removeGP_Cb.isChecked()){
+                if(removeGP_Cb.isChecked()&& rocketTopH >0){
                     rocketTopH--;
                 }
-                rocketTopH_Bt.setText(rocketTopH);
+                else{
+                    rocketTopH++;
+                }
+                rocketTopH_Bt.setText(rocketTopH+"");
                 break;
             case R.id.rocketMiddleC_Bt:
-                rocketMiddleC++;
-                if(removeGP_Cb.isChecked()){
+                if(removeGP_Cb.isChecked()&& rocketMiddleC >0){
                     rocketMiddleC--;
                 }
-                rocketMiddleC_Bt.setText(rocketMiddleC);
+                else{
+                    rocketMiddleC++;
+                }
+                rocketMiddleC_Bt.setText(rocketMiddleC+"");
                 break;
             case R.id.rocketMiddleH_Bt:
-                rocketMiddleH++;
-                if(removeGP_Cb.isChecked()){
+                if(removeGP_Cb.isChecked()&& rocketMiddleH >0 ){
                     rocketMiddleH--;
                 }
-                rocketMiddleH_Bt.setText(rocketMiddleH);
+                else {
+                    rocketMiddleH++;
+                }
+                rocketMiddleH_Bt.setText(rocketMiddleH+"");
                 break;
             case R.id.rocketBottomC_Bt:
-                rocketBottomC++;
-                if(removeGP_Cb.isChecked()){
+                if(removeGP_Cb.isChecked()&& rocketBottomC >0){
                     rocketBottomC--;
                 }
-                rocketBottomC_Bt.setText(rocketBottomC);
+                else{
+                    rocketBottomC++;
+                }
+                rocketBottomC_Bt.setText(rocketBottomC+"");
                 break;
             case R.id.rocketBottomH_Bt:
-                rocketBottomH++;
-                if(removeGP_Cb.isChecked()){
+                if(removeGP_Cb.isChecked()&& rocketBottomH >0){
                     rocketBottomH--;
                 }
-                rocketBottomH_Bt.setText(rocketBottomH);
+                else{
+                    rocketBottomH++;
+                }
+                rocketBottomH_Bt.setText(rocketBottomH+"");
                 break;
             case R.id.cargoShipC_Bt:
-                cargoC++;
-                if(removeGP_Cb.isChecked()){
+                if(removeGP_Cb.isChecked()&& cargoC >0){
                     cargoC--;
                 }
-                cargoShipC_Bt.setText(cargoC);
+                else{
+                    cargoC++;
+                }
+                cargoShipC_Bt.setText(cargoC+"");
                 break;
             case R.id.cargoShipH_Bt:
-                cargoH++;
-                if(removeGP_Cb.isChecked()){
+                if(removeGP_Cb.isChecked()&& cargoH >0){
                     cargoH--;
                 }
-                cargoShipH_Bt.setText(cargoH);
+                else{
+                    cargoH++;
+                }
+                cargoShipH_Bt.setText(cargoH+"");
                 break;
         }
+     }
    }
 
 

@@ -17,11 +17,8 @@
 
     <RadioGroup
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
             <RadioButton
 
                 android:layout_width="wrap_content"
@@ -36,7 +33,6 @@
                 android:text="@string/_2st"
                 android:id="@+id/level2_Rb"
                 android:textColor="@color/Yellow"/>
-        </LinearLayout>
 
 
     </RadioGroup>
@@ -47,11 +43,8 @@
         android:text="@string/robot_preload"/>
     <RadioGroup
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
             <RadioButton
                 android:id="@+id/preloadCargo_Rb"
                 android:layout_width="wrap_content"
@@ -64,7 +57,6 @@
                 android:layout_height="wrap_content"
                 android:textColor="@color/Yellow"
                 android:text="@string/hatch"/>
-        </LinearLayout>
     </RadioGroup>
     <TextView
     android:layout_width="match_parent"

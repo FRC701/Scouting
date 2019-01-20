@@ -145,7 +145,8 @@ public class PitDataRepo {
         PitData pitData = new PitData(teamNum);
 
         SQLiteDatabase db = DatabaseManager.getInstance().openDatabase();
-        String selectQuery = " SELECT PitData." +  PitData.KEY_Auto
+        String selectQuery = " SELECT PitData." +PitData.KEY_TeamNum
+                + ", PitData." + PitData.KEY_Auto
                 + ", PitData." + PitData.KEY_IntakeAndMech
                 + ", PitData." + PitData.KEY_DriveTrain
                 + ", PitData." + PitData.KEY_Lang

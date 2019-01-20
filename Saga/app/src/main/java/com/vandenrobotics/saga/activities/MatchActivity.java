@@ -79,12 +79,12 @@ public class MatchActivity extends FragmentActivity implements DialogListener{
         mTabHost = (FragmentTabHost) findViewById(R.id.tabHost);
         mTabHost.setup(this, getSupportFragmentManager(), android.R.id.tabcontent);
 
-        mTabHost.addTab(mTabHost.newTabSpec("tab_init")
-                .setIndicator(getResources().getString(R.string.title_initTab), null), PreMatchFragment.class, null);
-        mTabHost.addTab(mTabHost.newTabSpec("tab_auto")
-                .setIndicator(getResources().getString(R.string.title_autoTab), null), MidMatchFragment.class, null);
-        mTabHost.addTab(mTabHost.newTabSpec("tab_tele")
-                .setIndicator(getResources().getString(R.string.title_teleTab), null), PostMatchFragment.class, null);
+        mTabHost.addTab(mTabHost.newTabSpec("tab_pre")
+                .setIndicator(getResources().getString(R.string.title_preTab), null), PreMatchFragment.class, null);
+        mTabHost.addTab(mTabHost.newTabSpec("tab_mid")
+                .setIndicator(getResources().getString(R.string.title_midTab), null), MidMatchFragment.class, null);
+        mTabHost.addTab(mTabHost.newTabSpec("tab_post")
+                .setIndicator(getResources().getString(R.string.title_postTab), null), PostMatchFragment.class, null);
     }
 
     private void setupInfoBar() {
@@ -114,7 +114,7 @@ public class MatchActivity extends FragmentActivity implements DialogListener{
     public void dialog_noShow(View view) {
         if (mInitFrag == null)
             mInitFrag = (PreMatchFragment) getSupportFragmentManager().findFragmentByTag("tab_init");
-        mInitFrag.command_noShow(view);
+        //mInitFrag.command_noShow(view);
     }
 
     @Override
@@ -144,7 +144,7 @@ public class MatchActivity extends FragmentActivity implements DialogListener{
     }
 
     public void finishMatch(View view) {
-        getSupportFragmentManager().findFragmentByTag("tab_tele").onPause();
+        getSupportFragmentManager().findFragmentByTag("tab_post").onPause();
 
         MatchInfo matchInfo =  new MatchInfo();
         matchInfo.setCompId(mEvent);

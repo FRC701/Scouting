@@ -70,13 +70,6 @@ public class ScoutActivity extends Activity {
         setContentView(R.layout.activity_scout);
         mEvent = getIntent().getStringExtra("event");
         mType = getIntent().getStringExtra("type");
-//
-//        matchInfoRepo = new MatchInfoRepo();
-//        MatchInfo matchInfo = new MatchInfo();
-//        matchInfo.setCompId(mEvent);
-//        matchInfo.setCurrentMatch(1);
-//        matchInfo.setDeviceNum(1);
-//        matchInfoRepo.insert(matchInfo);
 
         statsRepo = new StatsRepo();
 
@@ -153,7 +146,7 @@ public class ScoutActivity extends Activity {
         spinnerTeams.setOnItemSelectedListener(new Spinner.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapter, View v, int position, long arg3) {
-                mTeamNumber = Integer.parseInt(spinnerTeams.getItemAtPosition(position).toString());
+                mTeamNumber = Integer.parseInt(spinnerTeams.getItemAtPosition(position-1).toString());
                 Log.d("ScoutActivity", "Setting mteam number in OnItemSelected" + mTeamNumber);
             }
 

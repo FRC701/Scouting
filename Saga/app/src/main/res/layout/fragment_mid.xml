@@ -52,14 +52,16 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:backgroundTint="@color/Yellow"
-                android:text="@string/top"/>
+                android:text="@string/top"
+                android:onClick="OnClickStuff"/>
             <Button
                 android:id="@+id/rocketTopH_Bt"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:backgroundTint="@color/YellowGreen"
-                android:text="@string/top"/>
+                android:text="@string/top"
+                android:onClick="OnClickStuff"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
@@ -73,14 +75,16 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:backgroundTint="@color/Yellow"
-                android:text="@string/middle"/>
+                android:text="@string/middle"
+                android:onClick="OnClickStuff"/>
             <Button
                 android:id="@+id/rocketMiddleH_Bt"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:backgroundTint="@color/YellowGreen"
-                android:text="@string/middle"/>
+                android:text="@string/middle"
+                android:onClick="OnClickStuff"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
@@ -93,33 +97,29 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:backgroundTint="@color/Yellow"
-                android:text="@string/bottom"/>
+                android:text="@string/bottom"
+                android:onClick="OnClickStuff"/>
             <Button
                 android:id="@+id/rocketBottomH_Bt"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:backgroundTint="@color/YellowGreen"
-                android:text="@string/bottom"/>
+                android:text="@string/bottom"
+                android:onClick="OnClickStuff"/>
         </LinearLayout>
 
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1">
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-            <Button
-                android:id="@+id/goToPostGame_Bt"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:text="@string/go_to_post_game"
-                />
-        </LinearLayout>
+        android:layout_weight="2">
+        <!--<LinearLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:orientation="vertical">-->
+                <!--/>-->
+        <!--</LinearLayout>-->
 
     </LinearLayout>
     <LinearLayout
@@ -169,13 +169,15 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:backgroundTint="@color/Yellow" />
+                android:backgroundTint="@color/Yellow"
+                android:onClick="OnClickStuff" />
             <Button
                 android:id="@+id/cargoShipH_Bt"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:backgroundTint="@color/YellowGreen"/>
+                android:backgroundTint="@color/YellowGreen"
+                android:onClick="OnClickStuff"/>
         </LinearLayout>
 
         <LinearLayout

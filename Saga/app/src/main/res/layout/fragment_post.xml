@@ -19,34 +19,40 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
-            <RadioButton
+            <RadioGroup
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/Yellow"
-                android:text="@string/_1st"
-                android:id="@+id/platform1st_Rb"
-                />
-            <RadioButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/Yellow"
-                android:text="@string/_2nd"
-                android:id="@+id/platform2nd_Rb"
-                />
-            <RadioButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/Yellow"
-                android:text="@string/_3rd"
-                android:id="@+id/platform3rd_Rb"
-                />
-            <RadioButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/Yellow"
-                android:text="@string/none"
-                android:id="@+id/platformNone_Rb"
-                />
+                android:orientation="horizontal">
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/Yellow"
+                    android:text="@string/_1st"
+                    android:id="@+id/platform1st_Rb"
+                    />
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/Yellow"
+                    android:text="@string/_2nd"
+                    android:id="@+id/platform2nd_Rb"
+                    />
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/Yellow"
+                    android:text="@string/_3rd"
+                    android:id="@+id/platform3rd_Rb"
+                    />
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/Yellow"
+                    android:text="@string/none"
+                    android:id="@+id/platformNone_Rb"
+                    />
+            </RadioGroup>
+
 
         </LinearLayout>
     </RadioGroup>
@@ -62,24 +68,24 @@
         android:text="@string/foul"
         android:textColor="@color/Yellow"
         />
-    <com.vandenrobotics.saga2018.views.NumberPicker
+    <com.vandenrobotics.saga.views.NumberPicker
         android:id="@+id/foul_Np"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-    </com.vandenrobotics.saga2018.views.NumberPicker>
+    </com.vandenrobotics.saga.views.NumberPicker>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/tech_foul"
         android:textColor="@color/Yellow"/>
-    <com.vandenrobotics.saga2018.views.NumberPicker
+    <com.vandenrobotics.saga.views.NumberPicker
         android:id="@+id/techFoul_Np"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-    </com.vandenrobotics.saga2018.views.NumberPicker>
+    </com.vandenrobotics.saga.views.NumberPicker>
     <CheckBox
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -98,5 +104,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text = "@string/finish_match"
-        android:id="@+id/finishMatch_Btn"/>
+        android:id="@+id/finishMatch_Btn"
+        android:onClick="finishMatch"/>
 </LinearLayout>

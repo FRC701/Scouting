@@ -24,8 +24,8 @@ public class ExternalStorageTools {
 
 
             if (isExternalStorageWritable()) {
-                String currentDBPath = "//data//com.vandenrobotics.saga2018//databases//ScoutingData.db";
-                String backupDBPath = "ScoutingData.db";
+                String currentDBPath = "//data//com.vandenrobotics.saga//databases//TabletData.db";
+                String backupDBPath = "TabletData.db";
                 File currentDB = new File(DATA_DIR, currentDBPath);
                 File backupDB = new File(BASE_DIR, backupDBPath);
                 Log.d(TAG, "Can Save database");

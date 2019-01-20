@@ -98,9 +98,9 @@ public class PostMatchFragment extends Fragment {
         stats.setRedCard(rC);
         int yC = (yellowCard_Cb.isChecked() ? 1 : 0);
         stats.setYellowCard(yC);
-        int foul = (teleFragNp_foulNum.getValue());
+        int foul = (foul_Np.getValue());
         stats.setFoul(foul);
-        int techFoul = (teleFragNp_techFoulNum.getValue());
+        int techFoul = (foul_Np.getValue());
         stats.setTechFoul(techFoul);
         Log.d("TeleFrag saveData", "team id " + stats.getTeamNum());
         return stats;

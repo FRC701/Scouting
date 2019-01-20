@@ -56,7 +56,7 @@ public class MatchInfoRepo {
         values.put(MatchInfo.KEY_CurrentMatch, matchInfo.getCurrentMatch());
         values.put(MatchInfo.KEY_DeviceNum, matchInfo.getDeviceNum());
 
-        db.updateWithOnConflict(MatchInfo.TABLE, values, MatchInfo.KEY_CompId + " = " + matchInfo.getCompId(), null, SQLiteDatabase.CONFLICT_IGNORE);
+        db.updateWithOnConflict(MatchInfo.TABLE, values, MatchInfo.KEY_CompId + " = '" + matchInfo.getCompId()+ "' ", null, SQLiteDatabase.CONFLICT_IGNORE);
         DatabaseManager.getInstance().closeDatabase();
     }
 
@@ -70,29 +70,29 @@ public class MatchInfoRepo {
         db.delete(MatchInfo.TABLE, MatchInfo.KEY_CompId + " = '" + event + "'", null);
     }
 
-    public MatchInfo getMatchInfo(String event){
-         MatchInfo matchInfo = new MatchInfo();
-         matchInfo.setCompId(event);
-
-         SQLiteDatabase db = DatabaseManager.getInstance().openDatabase();
-         String selectQuery = " SELECT MatchInfo." + MatchInfo.KEY_CurrentMatch
-                 + " , MatchInfo." + MatchInfo.KEY_DeviceNum
-                 + " FROM " + MatchInfo.TABLE
-                 + " WHERE " + MatchInfo.KEY_CompId + " = '" + event + "'";
-
-        Log.d(TAG, selectQuery);
-        Cursor cursor = db.rawQuery(selectQuery, null);
-
-        if(cursor.moveToFirst()){
-            matchInfo.setCurrentMatch(cursor.getInt(cursor.getColumnIndex(MatchInfo.KEY_CurrentMatch)));
-            matchInfo.setDeviceNum(cursor.getInt(cursor.getColumnIndex(MatchInfo.KEY_DeviceNum)));
-        }
-
-        cursor.close();
-        DatabaseManager.getInstance().closeDatabase();
-
-        return matchInfo;
-    }
+//    public MatchInfo getMatchInfo(String event){
+//         MatchInfo matchInfo = new MatchInfo();
+//         matchInfo.setCompId(event);
+//
+//         SQLiteDatabase db = DatabaseManager.getInstance().openDatabase();
+//         String selectQuery = " SELECT MatchInfo." + MatchInfo.KEY_CurrentMatch
+//                 + " , MatchInfo." + MatchInfo.KEY_DeviceNum
+//                 + " FROM " + MatchInfo.TABLE
+//                 + " WHERE " + MatchInfo.KEY_CompId + " = '" + event + "'";
+//
+//        Log.d(TAG, selectQuery);
+//        Cursor cursor = db.rawQuery(selectQuery, null);
+//
+//        if(cursor.moveToFirst()){
+//            matchInfo.setCurrentMatch(cursor.getInt(cursor.getColumnIndex(MatchInfo.KEY_CurrentMatch)));
+//            matchInfo.setDeviceNum(cursor.getInt(cursor.getColumnIndex(MatchInfo.KEY_DeviceNum)));
+//        }
+//
+//        cursor.close();
+//        DatabaseManager.getInstance().closeDatabase();
+//
+//        return matchInfo;
+//    }
 
     public MatchInfo getMatchInfoNext(String event, String type){
         MatchInfo matchInfo = new MatchInfo();
