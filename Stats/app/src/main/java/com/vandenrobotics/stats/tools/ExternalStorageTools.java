@@ -21,11 +21,41 @@ public class ExternalStorageTools {
     private static final String TAG = ExternalStorageTools.class.getSimpleName();
 
 
+    public static void writeDatabaseToES(){
+        try {
+            Log.d(TAG, "Starting saving database");
+
+
+            if (isExternalStorageWritable()) {
+                String currentDBPath = "//data//com.vandenrobotics.saga//databases//stats.db";
+                String backupDBPath = "stats.db";
+                File currentDB = new File(DATA_DIR, currentDBPath);
+                File backupDB = new File(BASE_DIR, backupDBPath);
+                Log.d(TAG, "Can Save database");
+
+
+                if (currentDB.exists()) {
+                    FileChannel src = new FileInputStream(currentDB).getChannel();
+                    FileChannel dst = new FileOutputStream(backupDB).getChannel();
+                    dst.transferFrom(src, 0, src.size());
+                    Log.d(TAG, "Saving database");
+                    src.close();
+                    dst.close();
+                }
+            }
+            else
+            {
+                Log.d(TAG, "Can not write database");
+
+            }
+        } catch (Exception e) {
+        }
+    }
     public static void readDatabaseFromES(int device){
         try {
             if (isExternalStorageReadable()) {
-                String currentDBPath = "//data//com.vandenrobotics.saga2018//databases//ScoutingData.db";
-                String backupDBPath = "ScoutingData"+device+".db";
+                String currentDBPath = "//data//com.vandenrobotics.saga//databases//TabletData"+device+".db";
+                String backupDBPath = "TabletData"+device+".db";
 //                File currentDB = new File(DATA_DIR, currentDBPath);
                 Log.d(TAG, "Can get from database");
                 File sd = Environment.getExternalStorageDirectory();

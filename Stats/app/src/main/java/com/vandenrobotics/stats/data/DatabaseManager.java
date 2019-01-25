@@ -21,6 +21,7 @@ public class DatabaseManager {
             instance = new DatabaseManager();
             mDatabaseHelper = helper;
         }
+
     }
 
     public static synchronized DatabaseManager getInstance(){
@@ -34,7 +35,7 @@ public class DatabaseManager {
     public synchronized SQLiteDatabase openDatabase(){
         mOpenCounter++;
         if(mOpenCounter == 1){
-            mDatabase = SQLiteDatabase.openDatabase(Environment.getExternalStorageDirectory() + "/data/Tyr2018/scouting.db", null, SQLiteDatabase.OPEN_READONLY);
+            mDatabase = mDatabaseHelper.getWritableDatabase();
         }
         return mDatabase;
     }

@@ -12,7 +12,7 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SectionIndexer;
 
-import com.vandenrobotics.tyr2018.R;
+import com.vandenrobotics.stats.R;
 
 public class EventListView extends ListView {
 

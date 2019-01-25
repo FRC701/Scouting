@@ -2,13 +2,22 @@ package com.vandenrobotics.stats.data;
 
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.service.autofill.FieldClassification;
 import android.util.Log;
 
 import com.vandenrobotics.stats.app.App;
+import com.vandenrobotics.stats.data.model.Competitions;
+import com.vandenrobotics.stats.data.model.MatchInfo;
+import com.vandenrobotics.stats.data.model.Matches;
 import com.vandenrobotics.stats.data.model.PitData;
+import com.vandenrobotics.stats.data.model.Stats;
 import com.vandenrobotics.stats.data.model.TeamInfo;
 import com.vandenrobotics.stats.data.model.Teams;
+import com.vandenrobotics.stats.data.repo.CompetitionsRepo;
+import com.vandenrobotics.stats.data.repo.MatchInfoRepo;
+import com.vandenrobotics.stats.data.repo.MatchesRepo;
 import com.vandenrobotics.stats.data.repo.PitDataRepo;
+import com.vandenrobotics.stats.data.repo.StatsRepo;
 import com.vandenrobotics.stats.data.repo.TeamInfoRepo;
 import com.vandenrobotics.stats.data.repo.TeamsRepo;
 
@@ -20,7 +29,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
     //update when making any changes to tables or indexes
     private static final int DATABASE_VERSION = 45;
-    private static final String DATABASE_NAME = "TyrData.db";
+    private static final String DATABASE_NAME = "stats.db";
     private static final String TAG = DataBaseHelper.class.getSimpleName();
 
     public DataBaseHelper(){
@@ -34,6 +43,12 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         db.execSQL(PitDataRepo.createTable());
         db.execSQL(TeamInfoRepo.createTable());
         db.execSQL(TeamInfoRepo.createIndex());
+        db.execSQL(CompetitionsRepo.createTable());
+        db.execSQL(MatchesRepo.createTable());
+        db.execSQL(MatchInfoRepo.createTable());
+        db.execSQL(MatchInfoRepo.createIndex());
+        db.execSQL(StatsRepo.createTable());
+        db.execSQL(StatsRepo.createIndex());
 
 }
     @Override
@@ -41,9 +56,13 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         Log.d(TAG, String.format("SQLiteDatabase.onUpgrade(%d -> %d)", oldVersion, newVersion));
 
-        db.execSQL("Drop Table if Exists "+ Teams.TABLE);
-        db.execSQL("Drop Table if Exists "+ TeamInfo.TABLE);
+        db.execSQL("Drop Table if Exists "+ Competitions.TABLE);
+        db.execSQL("Drop Table if Exists "+ Matches.TABLE);
+        db.execSQL("Drop Table if Exists "+ MatchInfo.TABLE);
         db.execSQL("Drop Table if Exists "+ PitData.TABLE);
+        db.execSQL("Drop Table if Exists "+ Stats.TABLE);
+        db.execSQL("Drop Table if Exists "+ TeamInfo.TABLE);
+        db.execSQL("Drop Table if Exists "+ Teams.TABLE);
         onCreate(db);
     }
 }
