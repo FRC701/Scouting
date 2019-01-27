@@ -39,6 +39,7 @@ public class Stats {
     public static final String KEY_YellowCard = "YellowCard";
     public static final String KEY_Fouls = "Fouls";
     public static final String KEY_TechFouls = "TechFouls";
+    public static final String KEY_Defense = "Defense";
 
     private String compId;
     private int matchNum;
@@ -69,6 +70,7 @@ public class Stats {
     private int endLevel2;
     private int endLevel3;
     private int endNone;
+    private int defense;
 
 
     public Stats(){
@@ -101,6 +103,7 @@ public class Stats {
         endLevel2 = 0;
         endLevel3 = 0;
         endNone = 0;
+        defense = 0;
     }
 
     public String getCompId(){
@@ -269,6 +272,12 @@ public class Stats {
         return endNone;
     }
     public void setEndNone(int b){endNone = b;}
+
+    public int getDefense() {
+        return defense;
+    }
+    public void setDefense(int b){defense = b;}
+
 
 }
 

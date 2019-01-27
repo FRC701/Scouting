@@ -54,7 +54,8 @@ public class StatsRepo {
                 + Stats.KEY_RedCard + " INTEGER , "
                 + Stats.KEY_YellowCard + " INTEGER , "
                 + Stats.KEY_Fouls + " INTEGER , "
-                + Stats.KEY_TechFouls + " INTEGER , " +
+                + Stats.KEY_TechFouls + " INTEGER , "
+                + Stats.KEY_Defense + " BOOL , " +
                 //makes the CompId, MatchNum and MatchPos Primary Key so there needs
                 //to be a unique combination of these attributes in each row in the Stats table
                 "PRIMARY KEY ( '" + Stats.KEY_CompId
@@ -111,6 +112,7 @@ public class StatsRepo {
         values.put(Stats.KEY_YellowCard, stats.getYellowCard());
         values.put(Stats.KEY_Fouls, stats.getFoul());
         values.put(Stats.KEY_TechFouls, stats.getTechFoul());
+        values.put(Stats.KEY_Defense, stats.getDefense());
 
         //check if there is a conflict. It should return -1 if there is a copy of the exact combination of the Primary Keys
         statsId=(int)db.insertWithOnConflict(Stats.TABLE, null, values, SQLiteDatabase.CONFLICT_IGNORE);
@@ -183,6 +185,7 @@ public class StatsRepo {
         values.put(Stats.KEY_CargoShipC , stats.getCargoShipC());
         values.put(Stats.KEY_CargoShipH , stats.getCargoShipH());
         values.put(Stats.KEY_CrossHubLine , stats.getCrossHubLine());
+        values.put(Stats.KEY_Defense , stats.getDefense());
 
         db.update(Stats.TABLE, values, Stats.KEY_CompId + " =  '" + stats.getCompId() + "' AND "
                 + Stats.KEY_MatchNum + " = " + stats.getMatchNum() + " AND "
