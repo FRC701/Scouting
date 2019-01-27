@@ -34,6 +34,23 @@ public class TeamInfoRepo {
                 + TeamInfo.KEY_AvgDef + " REAL , "
                 + TeamInfo.KEY_AvgTotal + " REAL , "
                 + TeamInfo.KEY_AvgNeg + " REAL , "
+                + TeamInfo.KEY_AvgAuto + " REAL , "
+                + TeamInfo.KEY_PHadAuto + " REAL , "
+                + TeamInfo.KEY_PCrossAutoLine + " REAL , "
+                + TeamInfo.KEY_PAutoPickedUpCube + " REAL , "
+                + TeamInfo.KEY_AvgAutoCubesInSw1 + " REAL , "
+                + TeamInfo.KEY_AvgAutoCubesInSw2 + " REAL , "
+                + TeamInfo.KEY_AvgAutoCubesInScl + " REAL , "
+                + TeamInfo.KEY_AvgAutoCubesInEx + " REAL , "
+                + TeamInfo.KEY_AvgAutoOwnGainSw1 + " REAL , "
+                + TeamInfo.KEY_AvgAutoOwnedSw1 + " REAL , "
+                + TeamInfo.KEY_AvgAutoOwnGainSw2 + " REAL , "
+                + TeamInfo.KEY_AvgAutoOwnedSw2 + " REAL , "
+                + TeamInfo.KEY_AvgAutoOwnGainScl + " REAL , "
+                + TeamInfo.KEY_AvgAutoOwnedScl + " REAL , "
+                + TeamInfo.KEY_AvgAutoNumOwnChangesSw1 + " REAL , "
+                + TeamInfo.KEY_AvgAutoNumOwnChangesSw2 + " REAL , "
+                + TeamInfo.KEY_AvgAutoNumOwnChangesScl + " REAL , "
                 + TeamInfo.KEY_AvgTele + " REAL , "
                 + TeamInfo.KEY_PTelePickedUpCube + " REAL , "
                 + TeamInfo.KEY_AvgTeleCubesInSw1 + " REAL , "
@@ -159,6 +176,23 @@ public class TeamInfoRepo {
         values.put(TeamInfo.KEY_AvgDef, teamInfo.getDefensiveWS());
         values.put(TeamInfo.KEY_AvgTotal, teamInfo.getTotalWS());
         values.put(TeamInfo.KEY_AvgNeg, teamInfo.getNegWS());
+        values.put(TeamInfo.KEY_AvgAuto, teamInfo.getAutoWS());
+        values.put(TeamInfo.KEY_PHadAuto, teamInfo.getPHadAuto());
+        values.put(TeamInfo.KEY_PCrossAutoLine, teamInfo.getPCrossAutoLine());
+        values.put(TeamInfo.KEY_PAutoPickedUpCube, teamInfo.getPAutoPickedUpCube());
+        values.put(TeamInfo.KEY_AvgAutoCubesInSw1, teamInfo.getAvgAutoCubesInSw1());
+        values.put(TeamInfo.KEY_AvgAutoCubesInScl, teamInfo.getAvgAutoCubesInScl());
+        values.put(TeamInfo.KEY_AvgAutoCubesInSw2, teamInfo.getAvgAutoCubesInSw2());
+        values.put(TeamInfo.KEY_AvgAutoCubesInEx, teamInfo.getAvgAutoCubesInEx());
+        values.put(TeamInfo.KEY_AvgAutoOwnGainSw1, teamInfo.getAvgAutoOwnGainSw1());
+        values.put(TeamInfo.KEY_AvgAutoOwnedSw1, teamInfo.getAvgAutoOwnedSw1());
+        values.put(TeamInfo.KEY_AvgAutoOwnGainSw2, teamInfo.getAvgAutoOwnGainSw2());
+        values.put(TeamInfo.KEY_AvgAutoOwnedSw2, teamInfo.getAvgAutoOwnedSw2());
+        values.put(TeamInfo.KEY_AvgAutoOwnGainScl, teamInfo.getAvgAutoOwnGainScl());
+        values.put(TeamInfo.KEY_AvgAutoOwnedScl, teamInfo.getAvgAutoOwnedScl());
+        values.put(TeamInfo.KEY_AvgAutoNumOwnChangesSw1, teamInfo.getAvgAutoNumOwnChangesSw1());
+        values.put(TeamInfo.KEY_AvgAutoNumOwnChangesSw2, teamInfo.getAvgAutoNumOwnChangesSw2());
+        values.put(TeamInfo.KEY_AvgAutoNumOwnChangesScl, teamInfo.getAvgAutoNumOwnChangesScl());
         values.put(TeamInfo.KEY_AvgTele, teamInfo.getTeleWS());
         values.put(TeamInfo.KEY_PTelePickedUpCube, teamInfo.getPTelePickedUpCube());
         values.put(TeamInfo.KEY_AvgTeleCubesInSw1, teamInfo.getAvgTeleCubesInSw1());
@@ -325,6 +359,23 @@ public class TeamInfoRepo {
                 + ", TeamInfo." + TeamInfo.KEY_AvgDef
                 + ", TeamInfo." + TeamInfo.KEY_AvgTotal
                 + ", TeamInfo." + TeamInfo.KEY_AvgNeg
+                + ", TeamInfo." + TeamInfo.KEY_AvgAuto
+                + ", TeamInfo." + TeamInfo.KEY_PHadAuto
+                + ", TeamInfo." + TeamInfo.KEY_PCrossAutoLine
+                + ", TeamInfo." + TeamInfo.KEY_PAutoPickedUpCube
+                + ", TeamInfo." + TeamInfo.KEY_AvgAutoCubesInSw1
+                + ", TeamInfo." + TeamInfo.KEY_AvgAutoCubesInSw2
+                + ", TeamInfo." + TeamInfo.KEY_AvgAutoCubesInScl
+                + ", TeamInfo." + TeamInfo.KEY_AvgAutoCubesInEx
+                + ", TeamInfo." + TeamInfo.KEY_AvgAutoOwnGainSw1
+                + ", TeamInfo." + TeamInfo.KEY_AvgAutoOwnedSw1
+                + ", TeamInfo." + TeamInfo.KEY_AvgAutoOwnGainSw2
+                + ", TeamInfo." + TeamInfo.KEY_AvgAutoOwnedSw2
+                + ", TeamInfo." + TeamInfo.KEY_AvgAutoOwnGainScl
+                + ", TeamInfo." + TeamInfo.KEY_AvgAutoOwnedScl
+                + ", TeamInfo." + TeamInfo.KEY_AvgAutoNumOwnChangesSw1
+                + ", TeamInfo." + TeamInfo.KEY_AvgAutoNumOwnChangesSw2
+                + ", TeamInfo." + TeamInfo.KEY_AvgAutoNumOwnChangesScl
                 + ", TeamInfo." + TeamInfo.KEY_AvgTele
                 + ", TeamInfo." + TeamInfo.KEY_PTelePickedUpCube
                 + ", TeamInfo." + TeamInfo.KEY_AvgTeleCubesInSw1
@@ -371,6 +422,23 @@ public class TeamInfoRepo {
             teamInfo.setDefensiveWS(cursor.getDouble(cursor.getColumnIndex(TeamInfo.KEY_AvgDef)));
             teamInfo.setTotalWS(cursor.getDouble(cursor.getColumnIndex(TeamInfo.KEY_AvgTotal)));
             teamInfo.setNegWS(cursor.getDouble(cursor.getColumnIndex(TeamInfo.KEY_AvgNeg)));
+            teamInfo.setAutoWS(cursor.getDouble(cursor.getColumnIndex(TeamInfo.KEY_AvgAuto)));
+            teamInfo.setPHadAuto(cursor.getDouble(cursor.getColumnIndex(TeamInfo.KEY_PHadAuto)));
+            teamInfo.setPCrossAutoLine(cursor.getDouble(cursor.getColumnIndex(TeamInfo.KEY_PCrossAutoLine)));
+            teamInfo.setPAutoPickedUpCube(cursor.getDouble(cursor.getColumnIndex(TeamInfo.KEY_PAutoPickedUpCube)));
+            teamInfo.setAvgAutoCubesInSw1(cursor.getDouble(cursor.getColumnIndex(TeamInfo.KEY_AvgAutoCubesInSw1)));
+            teamInfo.setAvgAutoCubesInScl(cursor.getDouble(cursor.getColumnIndex(TeamInfo.KEY_AvgAutoCubesInScl)));
+            teamInfo.setAvgAutoCubesInSw2(cursor.getDouble(cursor.getColumnIndex(TeamInfo.KEY_AvgAutoCubesInSw2)));
+            teamInfo.setAvgAutoCubesInEx(cursor.getDouble(cursor.getColumnIndex(TeamInfo.KEY_AvgAutoCubesInEx)));
+            teamInfo.setAvgAutoOwnGainSw1(cursor.getDouble(cursor.getColumnIndex(TeamInfo.KEY_AvgAutoOwnGainSw1)));
+            teamInfo.setAvgAutoOwnedSw1(cursor.getDouble(cursor.getColumnIndex(TeamInfo.KEY_AvgAutoOwnedSw1)));
+            teamInfo.setAvgAutoOwnGainSw2(cursor.getDouble(cursor.getColumnIndex(TeamInfo.KEY_AvgAutoOwnGainSw2)));
+            teamInfo.setAvgAutoOwnedSw2(cursor.getDouble(cursor.getColumnIndex(TeamInfo.KEY_AvgAutoOwnedSw2)));
+            teamInfo.setAvgAutoOwnGainScl(cursor.getDouble(cursor.getColumnIndex(TeamInfo.KEY_AvgAutoOwnGainScl)));
+            teamInfo.setAvgAutoOwnedScl(cursor.getDouble(cursor.getColumnIndex(TeamInfo.KEY_AvgAutoOwnedScl)));
+            teamInfo.setAvgAutoNumOwnChangesSw1(cursor.getDouble(cursor.getColumnIndex(TeamInfo.KEY_AvgAutoNumOwnChangesSw1)));
+            teamInfo.setAvgAutoNumOwnChangesSw2(cursor.getDouble(cursor.getColumnIndex(TeamInfo.KEY_AvgAutoNumOwnChangesSw2)));
+            teamInfo.setAvgAutoNumOwnChangesScl(cursor.getDouble(cursor.getColumnIndex(TeamInfo.KEY_AvgAutoNumOwnChangesScl)));
             teamInfo.setTeleWS(cursor.getDouble(cursor.getColumnIndex(TeamInfo.KEY_AvgTele)));
             teamInfo.setPTelePickedUpCube(cursor.getDouble(cursor.getColumnIndex(TeamInfo.KEY_PTelePickedUpCube)));
             teamInfo.setAvgTeleCubesInSw1(cursor.getDouble(cursor.getColumnIndex(TeamInfo.KEY_AvgTeleCubesInSw1)));
