@@ -34,7 +34,6 @@ public class AvgWeights {
     public static final String KEY_PYellowCard = "PercentageYellowCard";
     public static final String KEY_AvgFouls = "AvgFouls";
     public static final String KEY_AvgTechFouls = "AvgTechFouls";
-<<<<<<< HEAD
     public static final String KEY_PDefense = "PercentDefense";
 
     private int teamNum;
@@ -245,8 +244,4 @@ public class AvgWeights {
     public void setPercentDisabled(double b){percentDisabled = b;}
 
 
-
-
-=======
->>>>>>> Layouts
 }

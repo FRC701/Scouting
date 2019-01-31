@@ -168,77 +168,78 @@ import com.vandenrobotics.stats.data.model.Teams;
             DatabaseManager.getInstance().closeDatabase();
         }
 
-        public AvgWeights getAvgWeights(int team){
-                AvgWeights avgWeights = new AvgWeights();
+        public AvgWeights getAvgWeights(int team) {
+            AvgWeights avgWeights = new AvgWeights();
 
-                SQLiteDatabase db = DatabaseManager.getInstance().openDatabase();
-                //makes the selection query for the avgWeights table to get the auto avgWeights
-                String selectQuery = " SELECT AvgWeights." + AvgWeights.KEY_PNoShow
-                        + ", AvgWeights." + AvgWeights.KEY_PStartLevel1
-                        + ", AvgWeights." + AvgWeights.KEY_PStartLevel2
-                        + ", AvgWeights." + AvgWeights.KEY_PPreloadCargo
-                        + ", AvgWeights." + AvgWeights.KEY_PPreloadHatch
-                        + ", AvgWeights." + AvgWeights.KEY_AvgRocketTC
-                        + ", AvgWeights." + AvgWeights.KEY_AvgRocketTH
-                        + ", AvgWeights." + AvgWeights.KEY_AvgRocketMC
-                        + ", AvgWeights." + AvgWeights.KEY_AvgRocketMH
-                        + ", AvgWeights." + AvgWeights.KEY_AvgRocketBC
-                        + ", AvgWeights." + AvgWeights.KEY_AvgRocketBH
-                        + ", AvgWeights." + AvgWeights.KEY_AvgCargoShipC
-                        + ", AvgWeights." + AvgWeights.KEY_AvgCargoShipH
-                        + ", AvgWeights." + AvgWeights.KEY_PCrossHubline
-                        + ", AvgWeights." + AvgWeights.KEY_PEndLevel1
-                        + ", AvgWeights." + AvgWeights.KEY_PEndLevel2
-                        + ", AvgWeights." + AvgWeights.KEY_PEndLevel3
-                        + ", AvgWeights." + AvgWeights.KEY_PEndNone
-                        + ", AvgWeights." + AvgWeights.KEY_PRobotDisabled
-                        + ", AvgWeights." + AvgWeights.KEY_PRedCard
-                        + ", AvgWeights." + AvgWeights.KEY_PYellowCard
-                        + ", AvgWeights." + AvgWeights.KEY_AvgFouls
-                        + ", AvgWeights." + AvgWeights.KEY_AvgTechFouls
-                        + ", AvgWeights." + AvgWeights.KEY_AvgOff
-                        + ", AvgWeights." + AvgWeights.KEY_AvgDef
-                        + ", AvgWeights." + AvgWeights.KEY_AvgTotal
-                        + ", AvgWeights." + AvgWeights.KEY_AvgNeg
-                        + ", AvgWeights." + AvgWeights.KEY_PDefense
-                        + " FROM " + AvgWeights.TABLE
-                        + " WHERE AvgWeights." + AvgWeights.KEY_TeamNum + " = \"" + team + "\"";
+            SQLiteDatabase db = DatabaseManager.getInstance().openDatabase();
+            //makes the selection query for the avgWeights table to get the auto avgWeights
+            String selectQuery = " SELECT AvgWeights." + AvgWeights.KEY_PNoShow
+                    + ", AvgWeights." + AvgWeights.KEY_PStartLevel1
+                    + ", AvgWeights." + AvgWeights.KEY_PStartLevel2
+                    + ", AvgWeights." + AvgWeights.KEY_PPreloadCargo
+                    + ", AvgWeights." + AvgWeights.KEY_PPreloadHatch
+                    + ", AvgWeights." + AvgWeights.KEY_AvgRocketTC
+                    + ", AvgWeights." + AvgWeights.KEY_AvgRocketTH
+                    + ", AvgWeights." + AvgWeights.KEY_AvgRocketMC
+                    + ", AvgWeights." + AvgWeights.KEY_AvgRocketMH
+                    + ", AvgWeights." + AvgWeights.KEY_AvgRocketBC
+                    + ", AvgWeights." + AvgWeights.KEY_AvgRocketBH
+                    + ", AvgWeights." + AvgWeights.KEY_AvgCargoShipC
+                    + ", AvgWeights." + AvgWeights.KEY_AvgCargoShipH
+                    + ", AvgWeights." + AvgWeights.KEY_PCrossHubline
+                    + ", AvgWeights." + AvgWeights.KEY_PEndLevel1
+                    + ", AvgWeights." + AvgWeights.KEY_PEndLevel2
+                    + ", AvgWeights." + AvgWeights.KEY_PEndLevel3
+                    + ", AvgWeights." + AvgWeights.KEY_PEndNone
+                    + ", AvgWeights." + AvgWeights.KEY_PRobotDisabled
+                    + ", AvgWeights." + AvgWeights.KEY_PRedCard
+                    + ", AvgWeights." + AvgWeights.KEY_PYellowCard
+                    + ", AvgWeights." + AvgWeights.KEY_AvgFouls
+                    + ", AvgWeights." + AvgWeights.KEY_AvgTechFouls
+                    + ", AvgWeights." + AvgWeights.KEY_AvgOff
+                    + ", AvgWeights." + AvgWeights.KEY_AvgDef
+                    + ", AvgWeights." + AvgWeights.KEY_AvgTotal
+                    + ", AvgWeights." + AvgWeights.KEY_AvgNeg
+                    + ", AvgWeights." + AvgWeights.KEY_PDefense
+                    + " FROM " + AvgWeights.TABLE
+                    + " WHERE AvgWeights." + AvgWeights.KEY_TeamNum + " = \"" + team + "\"";
 
-                Log.d(TAG, selectQuery);
-                //uses the selection query to get rows from the database one at a time
-                Cursor cursor = db.rawQuery(selectQuery, null);
-                //gets the first row that matches the specifications from the selection query
-                if (cursor.moveToFirst()) {
-                    avgWeights.setNoShow(cursor.getDouble(cursor.getColumnIndex(AvgWeights.KEY_PNoShow)));
-                    avgWeights.setPercentStartLevel1(cursor.getDouble(cursor.getColumnIndex(AvgWeights.KEY_PStartLevel1)));
-                    avgWeights.setPercentStartLevel2(cursor.getDouble(cursor.getColumnIndex(AvgWeights.KEY_PStartLevel2)));
-                    avgWeights.getPercentPreLoadC(cursor.getDouble(cursor.getColumnIndex(AvgWeights.KEY_PPreloadCargo)));
-                    avgWeights.getPercentPreLoadH(cursor.getDouble(cursor.getColumnIndex(AvgWeights.KEY_PPreloadHatch)));
-                    avgWeights.getAvgRocketTopC(cursor.getDouble(cursor.getColumnIndex(AvgWeights.KEY_AvgRocketTC)));
-                    avgWeights.getAvgRocketTopH(cursor.getDouble(cursor.getColumnIndex(AvgWeights.KEY_AvgRocketTH)));
-                    avgWeights.getAvgRocketMiddleC(cursor.getDouble(cursor.getColumnIndex(AvgWeights.KEY_AvgRocketMC)));
-                    avgWeights.getAvgRocketMiddleH(cursor.getDouble(cursor.getColumnIndex(AvgWeights.KEY_AvgRocketMH)));
-                    avgWeights.getAvgRocketBottomC(cursor.getDouble(cursor.getColumnIndex(AvgWeights.KEY_AvgRocketBC)));
-                    avgWeights.getAvgRocketBottomH(cursor.getDouble(cursor.getColumnIndex(AvgWeights.KEY_AvgRocketBH)));
-                    avgWeights.getAvgCargoShipC(cursor.getDouble(cursor.getColumnIndex(AvgWeights.KEY_AvgCargoShipC)));
-                    avgWeights.getAvgCargoShipH(cursor.getDouble(cursor.getColumnIndex(AvgWeights.KEY_AvgCargoShipH)));
-                    avgWeights.getPercentCrossHubLine(cursor.getDouble(cursor.getColumnIndex(AvgWeights.KEY_PCrossHubline)));
-                    avgWeights.getPercentDisabled(cursor.getDouble(cursor.getColumnIndex(AvgWeights.KEY_PRobotDisabled)));
-                    avgWeights.getPercentRedCard(cursor.getDouble(cursor.getColumnIndex(AvgWeights.KEY_PRedCard)));
-                    avgWeights.getPercentYellowCard(cursor.getDouble(cursor.getColumnIndex(AvgWeights.KEY_PYellowCard)));
-                    avgWeights.getAvgFouls(cursor.getDouble(cursor.getColumnIndex(AvgWeights.KEY_AvgFouls)));
-                    avgWeights.getAvgTechFouls(cursor.getDouble(cursor.getColumnIndex(AvgWeights.KEY_AvgTechFouls)));
-                    avgWeights.getPercentEndLevel1(cursor.getDouble(cursor.getColumnIndex(AvgWeights.KEY_PEndLevel1)));
-                    avgWeights.getPercentEndLevel2(cursor.getDouble(cursor.getColumnIndex(AvgWeights.KEY_PEndLevel2)));
-                    avgWeights.getPercentEndLevel3(cursor.getDouble(cursor.getColumnIndex(AvgWeights.KEY_PEndLevel3)));
-                    avgWeights.getPercentEndNone(cursor.getDouble(cursor.getColumnIndex(AvgWeights.KEY_PEndNone)));
-                    avgWeights.setAvgOffWS(cursor.getDouble(cursor.getColumnIndex(AvgWeights.KEY_AvgOff)));
-                    avgWeights.setAvgDefWS(cursor.getDouble(cursor.getColumnIndex(AvgWeights.KEY_AvgDef)));
-                    avgWeights.getAvgTotalWS(cursor.getDouble(cursor.getColumnIndex(AvgWeights.KEY_AvgTotal)));
-                    avgWeights.getAvgNegWS(cursor.getDouble(cursor.getColumnIndex(AvgWeights.KEY_AvgNeg)));
-                    avgWeights.getPercentDefense(cursor.getDouble(cursor.getColumnIndex(AvgWeights.KEY_PDefense)));
-                    
-                }
-            } 
-        } 
-}
+            Log.d(TAG, selectQuery);
+            //uses the selection query to get rows from the database one at a time
+            Cursor cursor = db.rawQuery(selectQuery, null);
+            //gets the first row that matches the specifications from the selection query
+            if (cursor.moveToFirst()) {
+                avgWeights.setNoShow(cursor.getDouble(cursor.getColumnIndex(AvgWeights.KEY_PNoShow)));
+                avgWeights.setPercentStartLevel1(cursor.getDouble(cursor.getColumnIndex(AvgWeights.KEY_PStartLevel1)));
+                avgWeights.setPercentStartLevel2(cursor.getDouble(cursor.getColumnIndex(AvgWeights.KEY_PStartLevel2)));
+                avgWeights.setPercentPreLoadC(cursor.getDouble(cursor.getColumnIndex(AvgWeights.KEY_PPreloadCargo)));
+                avgWeights.setPercentPreLoadH(cursor.getDouble(cursor.getColumnIndex(AvgWeights.KEY_PPreloadHatch)));
+                avgWeights.setAvgRocketTopC(cursor.getDouble(cursor.getColumnIndex(AvgWeights.KEY_AvgRocketTC)));
+                avgWeights.setAvgRocketTopH(cursor.getDouble(cursor.getColumnIndex(AvgWeights.KEY_AvgRocketTH)));
+                avgWeights.setAvgRocketMiddleC(cursor.getDouble(cursor.getColumnIndex(AvgWeights.KEY_AvgRocketMC)));
+                avgWeights.setAvgRocketMiddleH(cursor.getDouble(cursor.getColumnIndex(AvgWeights.KEY_AvgRocketMH)));
+                avgWeights.setAvgRocketBottomC(cursor.getDouble(cursor.getColumnIndex(AvgWeights.KEY_AvgRocketBC)));
+                avgWeights.setAvgRocketBottomH(cursor.getDouble(cursor.getColumnIndex(AvgWeights.KEY_AvgRocketBH)));
+                avgWeights.setAvgCargoShipC(cursor.getDouble(cursor.getColumnIndex(AvgWeights.KEY_AvgCargoShipC)));
+                avgWeights.setAvgCargoShipH(cursor.getDouble(cursor.getColumnIndex(AvgWeights.KEY_AvgCargoShipH)));
+                avgWeights.setPercentCrossHubLine(cursor.getDouble(cursor.getColumnIndex(AvgWeights.KEY_PCrossHubline)));
+                avgWeights.setPercentDisabled(cursor.getDouble(cursor.getColumnIndex(AvgWeights.KEY_PRobotDisabled)));
+                avgWeights.setPercentRedCard(cursor.getDouble(cursor.getColumnIndex(AvgWeights.KEY_PRedCard)));
+                avgWeights.setPercentYellowCard(cursor.getDouble(cursor.getColumnIndex(AvgWeights.KEY_PYellowCard)));
+                avgWeights.setAvgFouls(cursor.getDouble(cursor.getColumnIndex(AvgWeights.KEY_AvgFouls)));
+                avgWeights.setAvgTechFouls(cursor.getDouble(cursor.getColumnIndex(AvgWeights.KEY_AvgTechFouls)));
+                avgWeights.setPercentEndLevel1(cursor.getDouble(cursor.getColumnIndex(AvgWeights.KEY_PEndLevel1)));
+                avgWeights.setPercentEndLevel2(cursor.getDouble(cursor.getColumnIndex(AvgWeights.KEY_PEndLevel2)));
+                avgWeights.setPercentEndLevel3(cursor.getDouble(cursor.getColumnIndex(AvgWeights.KEY_PEndLevel3)));
+                avgWeights.setPercentEndNone(cursor.getDouble(cursor.getColumnIndex(AvgWeights.KEY_PEndNone)));
+                avgWeights.setAvgOffWS(cursor.getDouble(cursor.getColumnIndex(AvgWeights.KEY_AvgOff)));
+                avgWeights.setAvgDefWS(cursor.getDouble(cursor.getColumnIndex(AvgWeights.KEY_AvgDef)));
+                avgWeights.setAvgTotalWS(cursor.getDouble(cursor.getColumnIndex(AvgWeights.KEY_AvgTotal)));
+                avgWeights.setAvgNegWS(cursor.getDouble(cursor.getColumnIndex(AvgWeights.KEY_AvgNeg)));
+                avgWeights.setPercentDefense(cursor.getDouble(cursor.getColumnIndex(AvgWeights.KEY_PDefense)));
+
+            }
+
+
+            return avgWeights;
+        }    }
