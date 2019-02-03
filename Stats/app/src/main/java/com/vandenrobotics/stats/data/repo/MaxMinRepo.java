@@ -1,4 +1,4 @@
-package com.vandenrobotics.maxMin.data.repo;
+package com.vandenrobotics.stats.data.repo;
 
 import android.content.ContentValues;
 import android.database.Cursor;
@@ -80,7 +80,7 @@ public class MaxMinRepo {
     //Is a unique combination of CompId, Match# and Team# in every row in the maxMin table
     public static String createIndex(){
         return "CREATE UNIQUE INDEX '" + MaxMin.INDEX + "' ON "
-                + Stats.TABLE
+                + MaxMin.TABLE
                 + " ( " + MaxMin.KEY_TeamNum + " )";
     }
 
@@ -98,8 +98,8 @@ public class MaxMinRepo {
         values.put(MaxMin.KEY_MaxRocketTopH , maxMin.getMaxRocketTopH());
         values.put(MaxMin.KEY_MaxRocketMiddleC , maxMin.getMaxRocketMiddleC());
         values.put(MaxMin.KEY_MaxRocketMiddleH , maxMin.getMaxRocketMiddleH());
-        values.put(MaxMin.KEY_MaxRocketBottomC , maxMin.getMaxRocketMBottomC());
-        values.put(MaxMin.KEY_MaxRocketBottomH , maxMin.getMaxRocketMBottomH());
+        values.put(MaxMin.KEY_MaxRocketBottomC , maxMin.getMaxRocketBottomC());
+        values.put(MaxMin.KEY_MaxRocketBottomH , maxMin.getMaxRocketBottomH());
         values.put(MaxMin.KEY_MaxCargoShipC , maxMin.getMaxCargoShipC());
         values.put(MaxMin.KEY_MaxCargoShipH , maxMin.getMaxCargoShipH());
         values.put(MaxMin.KEY_MaxCrossHubLine , maxMin.getMaxCrossHubLine());
@@ -146,20 +146,6 @@ public class MaxMinRepo {
         return maxMinId;
     }
 
-    //updates the first part of the row with a new team
-    public int updatePart(MaxMin maxMin){
-        int maxMinId;
-        SQLiteDatabase db = DatabaseManager.getInstance().openDatabase();
-        ContentValues values = new ContentValues();
-        values.put(MaxMin.KEY_TeamNum, maxMin.getTeamNum());
-
-        //updates row with the same CompId, Match# and Match Position
-        maxMinId = db.update(MaxMin.TABLE, values,MaxMin.KEY_CompId + " =  '" + maxMin.getCompId() + "' AND "
-                + MaxMin.KEY_MatchNum + " = " + maxMin.getMatchNum() + " AND "
-                + MaxMin.KEY_MatchPosition + " = " + maxMin.getMatchPos(), null);
-        DatabaseManager.getInstance().closeDatabase();
-        return maxMinId;
-    }
 
     //deletes all rows in the maxMin table
     public void delete( ) {
@@ -168,12 +154,6 @@ public class MaxMinRepo {
         DatabaseManager.getInstance().closeDatabase();
     }
 
-    //deletes all rows in the maxMin table for the specified comp
-    public void deleteForComp(String event) {
-        SQLiteDatabase db = DatabaseManager.getInstance().openDatabase();
-        db.delete(MaxMin.TABLE, MaxMin.KEY_CompId + " =  '" + event + "'",null);
-        DatabaseManager.getInstance().closeDatabase();
-    }
 
     /*
      * All set functions save each part of a single row for each phase of the match
@@ -185,58 +165,57 @@ public class MaxMinRepo {
         SQLiteDatabase db = DatabaseManager.getInstance().openDatabase();
         ContentValues values = new ContentValues();
         Log.d("MaxMinRepo auto", "team id " + maxMin.getTeamNum());
-        values.put(MaxMin.KEY_MaxNoShow, maxMin.getNoShow());
-        values.put(MaxMin.KEY_MaxStartLevel1 , maxMin.getStartLevel1());
-        values.put(MaxMin.KEY_MaxStartLevel2, maxMin.getStartLevel2());
-        values.put(MaxMin.KEY_MaxPreloadCargo , maxMin.getPreloadCargo());
-        values.put(MaxMin.KEY_MaxPreloadHatch , maxMin.getPreloadHatch());
-        values.put(MaxMin.KEY_MaxRocketTopC , maxMin.getRocketTopC());
-        values.put(MaxMin.KEY_MaxRocketTopH , maxMin.getRocketTopH());
-        values.put(MaxMin.KEY_MaxRocketMiddleC , maxMin.getRocketMiddleC());
-        values.put(MaxMin.KEY_MaxRocketMiddleH , maxMin.getRocketMiddleH());
-        values.put(MaxMin.KEY_MaxRocketBottomC , maxMin.getRocketMBottomC());
-        values.put(MaxMin.KEY_MaxRocketBottomH , maxMin.getRocketMBottomH());
-        values.put(MaxMin.KEY_MaxCargoShipC , maxMin.getCargoShipC());
-        values.put(MaxMin.KEY_MaxCargoShipH , maxMin.getCargoShipH());
-        values.put(MaxMin.KEY_MaxCrossHubLine , maxMin.getCrossHubLine());
-        values.put(MaxMin.KEY_MaxDefense , maxMin.getDefense());
-        values.put(MaxMin.KEY_MaxEndLevel1, maxMin.getEndLevel1());
-        values.put(MaxMin.KEY_MaxEndLevel2 , maxMin.getEndLevel2());
-        values.put(MaxMin.KEY_MaxEndLevel3 , maxMin.getEndLevel3());
-        values.put(MaxMin.KEY_MaxEndNone , maxMin.getEndNone());
-        values.put(MaxMin.KEY_MaxRobotDisabled, maxMin.getDisabled());
-        values.put(MaxMin.KEY_MaxRedCard, maxMin.getRedCard());
-        values.put(MaxMin.KEY_MaxYellowCard, maxMin.getYellowCard());
-        values.put(MaxMin.KEY_MaxFouls, maxMin.getFoul());
-        values.put(MaxMin.KEY_MaxTechFouls, maxMin.getTechFoul());
+        values.put(MaxMin.KEY_MaxNoShow, maxMin.getMaxNoShow());
+        values.put(MaxMin.KEY_MaxStartLevel1 , maxMin.getMaxStartLevel1());
+        values.put(MaxMin.KEY_MaxStartLevel2, maxMin.getMaxStartLevel2());
+        values.put(MaxMin.KEY_MaxPreloadCargo , maxMin.getMaxPreloadCargo());
+        values.put(MaxMin.KEY_MaxPreloadHatch , maxMin.getMaxPreloadHatch());
+        values.put(MaxMin.KEY_MaxRocketTopC , maxMin.getMaxRocketTopC());
+        values.put(MaxMin.KEY_MaxRocketTopH , maxMin.getMaxRocketTopH());
+        values.put(MaxMin.KEY_MaxRocketMiddleC , maxMin.getMaxRocketMiddleC());
+        values.put(MaxMin.KEY_MaxRocketMiddleH , maxMin.getMaxRocketMiddleH());
+        values.put(MaxMin.KEY_MaxRocketBottomC , maxMin.getMaxRocketBottomC());
+        values.put(MaxMin.KEY_MaxRocketBottomH , maxMin.getMaxRocketBottomH());
+        values.put(MaxMin.KEY_MaxCargoShipC , maxMin.getMaxCargoShipC());
+        values.put(MaxMin.KEY_MaxCargoShipH , maxMin.getMaxCargoShipH());
+        values.put(MaxMin.KEY_MaxCrossHubLine , maxMin.getMaxCrossHubLine());
+        values.put(MaxMin.KEY_MaxDefense , maxMin.getMaxDefense());
+        values.put(MaxMin.KEY_MaxEndLevel1, maxMin.getMaxEndLevel1());
+        values.put(MaxMin.KEY_MaxEndLevel2 , maxMin.getMaxEndLevel2());
+        values.put(MaxMin.KEY_MaxEndLevel3 , maxMin.getMaxEndLevel3());
+        values.put(MaxMin.KEY_MaxEndNone , maxMin.getMaxEndNone());
+        values.put(MaxMin.KEY_MaxRobotDisabled, maxMin.getMaxDisabled());
+        values.put(MaxMin.KEY_MaxRedCard, maxMin.getMaxRedCard());
+        values.put(MaxMin.KEY_MaxYellowCard, maxMin.getMaxYellowCard());
+        values.put(MaxMin.KEY_MaxFouls, maxMin.getMaxFoul());
+        values.put(MaxMin.KEY_MaxTechFouls, maxMin.getMaxTechFoul());
 
-        values.put(MaxMin.KEY_MinNoShow, maxMin.getNoShow());
-        values.put(MaxMin.KEY_MinStartLevel1 , maxMin.getStartLevel1());
-        values.put(MaxMin.KEY_MinStartLevel2, maxMin.getStartLevel2());
-        values.put(MaxMin.KEY_MinPreloadCargo , maxMin.getPreloadCargo());
-        values.put(MaxMin.KEY_MinPreloadHatch , maxMin.getPreloadHatch());
-        values.put(MaxMin.KEY_MinRocketTopC , maxMin.getRocketTopC());
-        values.put(MaxMin.KEY_MinRocketTopH , maxMin.getRocketTopH());
-        values.put(MaxMin.KEY_MinRocketMiddleC , maxMin.getRocketMiddleC());
-        values.put(MaxMin.KEY_MinRocketMiddleH , maxMin.getRocketMiddleH());
-        values.put(MaxMin.KEY_MinRocketBottomC , maxMin.getRocketMBottomC());
-        values.put(MaxMin.KEY_MinRocketBottomH , maxMin.getRocketMBottomH());
-        values.put(MaxMin.KEY_MinCargoShipC , maxMin.getCargoShipC());
-        values.put(MaxMin.KEY_MinCargoShipH , maxMin.getCargoShipH());
-        values.put(MaxMin.KEY_MinCrossHubLine , maxMin.getCrossHubLine());
-        values.put(MaxMin.KEY_MinDefense , maxMin.getDefense());
-        values.put(MaxMin.KEY_MinEndLevel1, maxMin.getEndLevel1());
-        values.put(MaxMin.KEY_MinEndLevel2 , maxMin.getEndLevel2());
-        values.put(MaxMin.KEY_MinEndLevel3 , maxMin.getEndLevel3());
-        values.put(MaxMin.KEY_MinEndNone , maxMin.getEndNone());
-        values.put(MaxMin.KEY_MinRobotDisabled, maxMin.getDisabled());
-        values.put(MaxMin.KEY_MinRedCard, maxMin.getRedCard());
-        values.put(MaxMin.KEY_MinYellowCard, maxMin.getYellowCard());
-        values.put(MaxMin.KEY_MinFouls, maxMin.getFoul());
-        values.put(MaxMin.KEY_MinTechFouls, maxMin.getTechFoul());
+        values.put(MaxMin.KEY_MinNoShow, maxMin.getMinNoShow());
+        values.put(MaxMin.KEY_MinStartLevel1 , maxMin.getMinStartLevel1());
+        values.put(MaxMin.KEY_MinStartLevel2, maxMin.getMinStartLevel2());
+        values.put(MaxMin.KEY_MinPreloadCargo , maxMin.getMinPreloadCargo());
+        values.put(MaxMin.KEY_MinPreloadHatch , maxMin.getMinPreloadHatch());
+        values.put(MaxMin.KEY_MinRocketTopC , maxMin.getMinRocketTopC());
+        values.put(MaxMin.KEY_MinRocketTopH , maxMin.getMinRocketTopH());
+        values.put(MaxMin.KEY_MinRocketMiddleC , maxMin.getMinRocketMiddleC());
+        values.put(MaxMin.KEY_MinRocketMiddleH , maxMin.getMinRocketMiddleH());
+        values.put(MaxMin.KEY_MinRocketBottomC , maxMin.getMinRocketMBottomC());
+        values.put(MaxMin.KEY_MinRocketBottomH , maxMin.getMinRocketMBottomH());
+        values.put(MaxMin.KEY_MinCargoShipC , maxMin.getMinCargoShipC());
+        values.put(MaxMin.KEY_MinCargoShipH , maxMin.getMinCargoShipH());
+        values.put(MaxMin.KEY_MinCrossHubLine , maxMin.getMinCrossHubLine());
+        values.put(MaxMin.KEY_MinDefense , maxMin.getMinDefense());
+        values.put(MaxMin.KEY_MinEndLevel1, maxMin.getMinEndLevel1());
+        values.put(MaxMin.KEY_MinEndLevel2 , maxMin.getMinEndLevel2());
+        values.put(MaxMin.KEY_MinEndLevel3 , maxMin.getMinEndLevel3());
+        values.put(MaxMin.KEY_MinEndNone , maxMin.getMinEndNone());
+        values.put(MaxMin.KEY_MinRobotDisabled, maxMin.getMinDisabled());
+        values.put(MaxMin.KEY_MinRedCard, maxMin.getMinRedCard());
+        values.put(MaxMin.KEY_MinYellowCard, maxMin.getMinYellowCard());
+        values.put(MaxMin.KEY_MinFouls, maxMin.getMinFoul());
+        values.put(MaxMin.KEY_MinTechFouls, maxMin.getMinTechFoul());
 
-        db.update(MaxMin.TABLE, values, MaxMin.KEY_CompId + " =  '" + maxMin.getCompId() + "' AND "
-                + MaxMin.KEY_MatchNum + " = " + maxMin.getMatchNum() + " AND "
+        db.update(MaxMin.TABLE, values,  " AND "
                 + MaxMin.KEY_TeamNum + " = " + maxMin.getTeamNum(), null);
         DatabaseManager.getInstance().closeDatabase();
     }
@@ -307,53 +286,53 @@ public class MaxMinRepo {
         Cursor cursor = db.rawQuery(selectQuery, null);
         //gets the first row that matches the specifications from the selection query
         if (cursor.moveToFirst()){
-            maxMin.setNoShow(cursor.getInt(cursor.getColumnIndex(MaxMin.KEY_NoShow)));
-            maxMin.setStartLevel1(cursor.getInt(cursor.getColumnIndex(MaxMin.KEY_StartLevel1)));
-            maxMin.setStartLevel2(cursor.getInt(cursor.getColumnIndex(MaxMin.KEY_StartLevel2)));
-            maxMin.setPreloadCargo(cursor.getInt(cursor.getColumnIndex(MaxMin.KEY_PreloadCargo)));
-            maxMin.setPreloadHatch(cursor.getInt(cursor.getColumnIndex(MaxMin.KEY_PreloadHatch)));
-            maxMin.setRocketTopC(cursor.getInt(cursor.getColumnIndex(MaxMin.KEY_RocketTopC)));
-            maxMin.setRocketTopH(cursor.getInt(cursor.getColumnIndex(MaxMin.KEY_RocketTopH)));
-            maxMin.setRocketMiddleC(cursor.getInt(cursor.getColumnIndex(MaxMin.KEY_RocketMiddleC)));
-            maxMin.setRocketMiddleH(cursor.getInt(cursor.getColumnIndex(MaxMin.KEY_RocketMiddleH)));
-            maxMin.setRocketBottomC(cursor.getInt(cursor.getColumnIndex(MaxMin.KEY_RocketBottomC)));
-            maxMin.setRocketBottomH(cursor.getInt(cursor.getColumnIndex(MaxMin.KEY_RocketBottomH)));
-            maxMin.setCargoShipC(cursor.getInt(cursor.getColumnIndex(MaxMin.KEY_CargoShipC)));
-            maxMin.setCargoShipH(cursor.getInt(cursor.getColumnIndex(MaxMin.KEY_CargoShipH)));
-            maxMin.setCrossHubLine(cursor.getInt(cursor.getColumnIndex(MaxMin.KEY_CrossHubLine)));
-            maxMin.setDisabled(cursor.getInt(cursor.getColumnIndex(MaxMin.KEY_RobotDisabled)));
-            maxMin.setRedCard(cursor.getInt(cursor.getColumnIndex(MaxMin.KEY_RedCard)));
-            maxMin.setYellowCard(cursor.getInt(cursor.getColumnIndex(MaxMin.KEY_YellowCard)));
-            maxMin.setFoul(cursor.getInt(cursor.getColumnIndex(MaxMin.KEY_Fouls)));
-            maxMin.setTechFoul(cursor.getInt(cursor.getColumnIndex(MaxMin.KEY_TechFouls)));
-            maxMin.setEndLevel1(cursor.getInt(cursor.getColumnIndex(MaxMin.KEY_EndLevel1)));
-            maxMin.setEndLevel2(cursor.getInt(cursor.getColumnIndex(MaxMin.KEY_EndLevel2)));
-            maxMin.setEndLevel3(cursor.getInt(cursor.getColumnIndex(MaxMin.KEY_EndLevel3)));
-            maxMin.setEndNone(cursor.getInt(cursor.getColumnIndex(MaxMin.KEY_EndNone)));
+            maxMin.setMaxNoShow(cursor.getInt(cursor.getColumnIndex(MaxMin.KEY_MaxNoShow)));
+            maxMin.setMaxStartLevel1(cursor.getInt(cursor.getColumnIndex(MaxMin.KEY_MaxStartLevel1)));
+            maxMin.setMaxStartLevel2(cursor.getInt(cursor.getColumnIndex(MaxMin.KEY_MaxStartLevel2)));
+            maxMin.setMaxPreloadCargo(cursor.getInt(cursor.getColumnIndex(MaxMin.KEY_MaxPreloadCargo)));
+            maxMin.setMaxPreloadHatch(cursor.getInt(cursor.getColumnIndex(MaxMin.KEY_MaxPreloadHatch)));
+            maxMin.setMaxRocketTopC(cursor.getInt(cursor.getColumnIndex(MaxMin.KEY_MaxRocketTopC)));
+            maxMin.setMaxRocketTopH(cursor.getInt(cursor.getColumnIndex(MaxMin.KEY_MaxRocketTopH)));
+            maxMin.setMaxRocketMiddleC(cursor.getInt(cursor.getColumnIndex(MaxMin.KEY_MaxRocketMiddleC)));
+            maxMin.setMaxRocketMiddleH(cursor.getInt(cursor.getColumnIndex(MaxMin.KEY_MaxRocketMiddleH)));
+            maxMin.setMaxRocketBottomC(cursor.getInt(cursor.getColumnIndex(MaxMin.KEY_MaxRocketBottomC)));
+            maxMin.setMaxRocketBottomH(cursor.getInt(cursor.getColumnIndex(MaxMin.KEY_MaxRocketBottomH)));
+            maxMin.setMaxCargoShipC(cursor.getInt(cursor.getColumnIndex(MaxMin.KEY_MaxCargoShipC)));
+            maxMin.setMaxCargoShipH(cursor.getInt(cursor.getColumnIndex(MaxMin.KEY_MaxCargoShipH)));
+            maxMin.setMaxCrossHubLine(cursor.getInt(cursor.getColumnIndex(MaxMin.KEY_MaxCrossHubLine)));
+            maxMin.setMaxDisabled(cursor.getInt(cursor.getColumnIndex(MaxMin.KEY_MaxRobotDisabled)));
+            maxMin.setMaxRedCard(cursor.getInt(cursor.getColumnIndex(MaxMin.KEY_MaxRedCard)));
+            maxMin.setMaxYellowCard(cursor.getInt(cursor.getColumnIndex(MaxMin.KEY_MaxYellowCard)));
+            maxMin.setMaxFoul(cursor.getInt(cursor.getColumnIndex(MaxMin.KEY_MaxFouls)));
+            maxMin.setMaxTechFoul(cursor.getInt(cursor.getColumnIndex(MaxMin.KEY_MaxTechFouls)));
+            maxMin.setMaxEndLevel1(cursor.getInt(cursor.getColumnIndex(MaxMin.KEY_MaxEndLevel1)));
+            maxMin.setMaxEndLevel2(cursor.getInt(cursor.getColumnIndex(MaxMin.KEY_MaxEndLevel2)));
+            maxMin.setMaxEndLevel3(cursor.getInt(cursor.getColumnIndex(MaxMin.KEY_MaxEndLevel3)));
+            maxMin.setMaxEndNone(cursor.getInt(cursor.getColumnIndex(MaxMin.KEY_MaxEndNone)));
 
-            maxMin.setNoShow(cursor.getInt(cursor.getColumnIndex(MaxMin.KEY_NoShow)));
-            maxMin.setStartLevel1(cursor.getInt(cursor.getColumnIndex(MaxMin.KEY_StartLevel1)));
-            maxMin.setStartLevel2(cursor.getInt(cursor.getColumnIndex(MaxMin.KEY_StartLevel2)));
-            maxMin.setPreloadCargo(cursor.getInt(cursor.getColumnIndex(MaxMin.KEY_PreloadCargo)));
-            maxMin.setPreloadHatch(cursor.getInt(cursor.getColumnIndex(MaxMin.KEY_PreloadHatch)));
-            maxMin.setRocketTopC(cursor.getInt(cursor.getColumnIndex(MaxMin.KEY_RocketTopC)));
-            maxMin.setRocketTopH(cursor.getInt(cursor.getColumnIndex(MaxMin.KEY_RocketTopH)));
-            maxMin.setRocketMiddleC(cursor.getInt(cursor.getColumnIndex(MaxMin.KEY_RocketMiddleC)));
-            maxMin.setRocketMiddleH(cursor.getInt(cursor.getColumnIndex(MaxMin.KEY_RocketMiddleH)));
-            maxMin.setRocketBottomC(cursor.getInt(cursor.getColumnIndex(MaxMin.KEY_RocketBottomC)));
-            maxMin.setRocketBottomH(cursor.getInt(cursor.getColumnIndex(MaxMin.KEY_RocketBottomH)));
-            maxMin.setCargoShipC(cursor.getInt(cursor.getColumnIndex(MaxMin.KEY_CargoShipC)));
-            maxMin.setCargoShipH(cursor.getInt(cursor.getColumnIndex(MaxMin.KEY_CargoShipH)));
-            maxMin.setCrossHubLine(cursor.getInt(cursor.getColumnIndex(MaxMin.KEY_CrossHubLine)));
-            maxMin.setDisabled(cursor.getInt(cursor.getColumnIndex(MaxMin.KEY_RobotDisabled)));
-            maxMin.setRedCard(cursor.getInt(cursor.getColumnIndex(MaxMin.KEY_RedCard)));
-            maxMin.setYellowCard(cursor.getInt(cursor.getColumnIndex(MaxMin.KEY_YellowCard)));
-            maxMin.setFoul(cursor.getInt(cursor.getColumnIndex(MaxMin.KEY_Fouls)));
-            maxMin.setTechFoul(cursor.getInt(cursor.getColumnIndex(MaxMin.KEY_TechFouls)));
-            maxMin.setEndLevel1(cursor.getInt(cursor.getColumnIndex(MaxMin.KEY_EndLevel1)));
-            maxMin.setEndLevel2(cursor.getInt(cursor.getColumnIndex(MaxMin.KEY_EndLevel2)));
-            maxMin.setEndLevel3(cursor.getInt(cursor.getColumnIndex(MaxMin.KEY_EndLevel3)));
-            maxMin.setEndNone(cursor.getInt(cursor.getColumnIndex(MaxMin.KEY_EndNone)));
+            maxMin.setMinNoShow(cursor.getInt(cursor.getColumnIndex(MaxMin.KEY_MinNoShow)));
+            maxMin.setMinStartLevel1(cursor.getInt(cursor.getColumnIndex(MaxMin.KEY_MinStartLevel1)));
+            maxMin.setMinStartLevel2(cursor.getInt(cursor.getColumnIndex(MaxMin.KEY_MinStartLevel2)));
+            maxMin.setMinPreloadCargo(cursor.getInt(cursor.getColumnIndex(MaxMin.KEY_MinPreloadCargo)));
+            maxMin.setMinPreloadHatch(cursor.getInt(cursor.getColumnIndex(MaxMin.KEY_MinPreloadHatch)));
+            maxMin.setMinRocketTopC(cursor.getInt(cursor.getColumnIndex(MaxMin.KEY_MinRocketTopC)));
+            maxMin.setMinRocketTopH(cursor.getInt(cursor.getColumnIndex(MaxMin.KEY_MinRocketTopH)));
+            maxMin.setMinRocketMiddleC(cursor.getInt(cursor.getColumnIndex(MaxMin.KEY_MinRocketMiddleC)));
+            maxMin.setMinRocketMiddleH(cursor.getInt(cursor.getColumnIndex(MaxMin.KEY_MinRocketMiddleH)));
+            maxMin.setMinRocketBottomC(cursor.getInt(cursor.getColumnIndex(MaxMin.KEY_MinRocketBottomC)));
+            maxMin.setMinRocketBottomH(cursor.getInt(cursor.getColumnIndex(MaxMin.KEY_MinRocketBottomH)));
+            maxMin.setMinCargoShipC(cursor.getInt(cursor.getColumnIndex(MaxMin.KEY_MinCargoShipC)));
+            maxMin.setMinCargoShipH(cursor.getInt(cursor.getColumnIndex(MaxMin.KEY_MinCargoShipH)));
+            maxMin.setMinCrossHubLine(cursor.getInt(cursor.getColumnIndex(MaxMin.KEY_MinCrossHubLine)));
+            maxMin.setMinDisabled(cursor.getInt(cursor.getColumnIndex(MaxMin.KEY_MinRobotDisabled)));
+            maxMin.setMinRedCard(cursor.getInt(cursor.getColumnIndex(MaxMin.KEY_MinRedCard)));
+            maxMin.setMinYellowCard(cursor.getInt(cursor.getColumnIndex(MaxMin.KEY_MinYellowCard)));
+            maxMin.setMinFoul(cursor.getInt(cursor.getColumnIndex(MaxMin.KEY_MinFouls)));
+            maxMin.setMinTechFoul(cursor.getInt(cursor.getColumnIndex(MaxMin.KEY_MinTechFouls)));
+            maxMin.setMinEndLevel1(cursor.getInt(cursor.getColumnIndex(MaxMin.KEY_MinEndLevel1)));
+            maxMin.setMinEndLevel2(cursor.getInt(cursor.getColumnIndex(MaxMin.KEY_MinEndLevel2)));
+            maxMin.setMinEndLevel3(cursor.getInt(cursor.getColumnIndex(MaxMin.KEY_MinEndLevel3)));
+            maxMin.setMinEndNone(cursor.getInt(cursor.getColumnIndex(MaxMin.KEY_MinEndNone)));
         }
 
         cursor.close();

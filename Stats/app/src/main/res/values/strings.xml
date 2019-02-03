@@ -163,6 +163,18 @@
     <string name="had_foul">Had Foul:</string>
     <string name="min_s_and_max_s">Min\'s and Max\'s</string>
     <string name="title_activity_match_data">MatchData</string>
+    <string name="offws">OffWS:</string>
+    <string name="start_level_percentages">START LEVEL PERCENTAGES</string>
+    <string name="start_level_1">Start Level 1:</string>
+    <string name="start_level_2">Start Level 2:</string>
+    <string name="negws">NegWS</string>
+    <string name="totalws">TotalWS:</string>
+    <string name="defws">DefWS:</string>
+    <string name="preload_percentages">PRELOAD PERCENTAGES</string>
+    <string name="preload_cargo">Preload Cargo:</string>
+    <string name="preload_hatch">Preload Hatch</string>
+    <string name="_0">0</string>
+    <string name="_0">0</string>
 
 
 </resources>

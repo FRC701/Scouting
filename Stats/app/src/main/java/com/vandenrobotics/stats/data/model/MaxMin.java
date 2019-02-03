@@ -58,6 +58,7 @@ public class MaxMin {
     public static final String KEY_MaxDefense = "MaxDefense";
 
 
+    private String teamNum;
     private int minNoShow;
     private int minHadAuto;
     private int minRedCard;
@@ -112,6 +113,7 @@ public class MaxMin {
     private int maxDefense;
 
     public MaxMin(){
+        teamNum = "";
         minNoShow = 0;
         minHadAuto = 0;
         minRedCard = 0;
@@ -165,6 +167,11 @@ public class MaxMin {
         maxDefense = 0;
     }
 
+    public String getTeamNum(){
+        return teamNum;
+    }
+    public void setKEY_TeamNum(String i){ teamNum= i;
+    }
 
     public int getMinNoShow(){
         return minNoShow;
@@ -396,12 +403,12 @@ public class MaxMin {
     }
     public void setMaxRocketMiddleH(int b){maxRocketMiddleH= b;}
 
-    public int getMaxRocketMBottomC() {
+    public int getMaxRocketBottomC() {
         return maxRocketBottomC;
     }
     public void setMaxRocketBottomC(int b){maxRocketBottomC= b;}
 
-    public int getMaxRocketMBottomH() {
+    public int getMaxRocketBottomH() {
         return maxRocketBottomH;
     }
     public void setMaxRocketBottomH(int b){maxRocketBottomH= b;}
