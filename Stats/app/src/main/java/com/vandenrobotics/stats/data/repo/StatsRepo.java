@@ -10,6 +10,8 @@ import com.vandenrobotics.stats.data.model.Competitions;
 import com.vandenrobotics.stats.data.model.Stats;
 import com.vandenrobotics.stats.data.model.Teams;
 
+import java.util.ArrayList;
+
 /**
  * Created by Programming701-A on 12/18/2017.
  */
@@ -78,7 +80,24 @@ public class StatsRepo {
                 + " , " + Stats.KEY_MatchNum
                 + " , " + Stats.KEY_TeamNum + " )";
     }
+    public ArrayList<Integer> getTeams(){
+        ArrayList<Integer> teams = new ArrayList<>();
+        teams.add(0);
+        SQLiteDatabase db = DatabaseManager.getInstance().openDatabase();
+        String selectQuery = " SELECT Stats." + Stats.KEY_TeamNum
+                + " FROM " +Stats.TABLE;
+        Cursor cursor = db.rawQuery(selectQuery, null);
 
+        if(cursor.moveToFirst()){
+            do{
+                teams.add(cursor.getInt(cursor.getColumnIndex(Stats.KEY_TeamNum)));
+            }
+            while(cursor.moveToNext());
+        }
+        cursor.close();
+        DatabaseManager.getInstance().closeDatabase();
+        return teams;
+    }
     //inserts all values of a stats row object into the sql database
     public int insertAll(Stats stats){
         int statsId;
@@ -155,70 +174,42 @@ public class StatsRepo {
     * using the initial insert that adds the comp, match, team and match pos
     * used for saving data
     * */
-
-    public void setPreStats(Stats stats){
-        SQLiteDatabase db = DatabaseManager.getInstance().openDatabase();
-        ContentValues values = new ContentValues();
-        Log.d("StatsRepo auto", "team id " + stats.getTeamNum());
-        values.put(Stats.KEY_NoShow, stats.getNoShow());
-        values.put(Stats.KEY_StartLevel1 , stats.getStartLevel1());
-        values.put(Stats.KEY_StartLevel2, stats.getStartLevel2());
-        values.put(Stats.KEY_PreloadCargo , stats.getPreloadCargo());
-        values.put(Stats.KEY_PreloadHatch , stats.getPreloadHatch());
-        values.put(Stats.KEY_SsComments, stats.getSsComments());
-
-        db.update(Stats.TABLE, values, Stats.KEY_CompId + " =  '" + stats.getCompId() + "' AND "
-                + Stats.KEY_MatchNum + " = " + stats.getMatchNum() + " AND "
-                + Stats.KEY_TeamNum + " = " + stats.getTeamNum(), null);
-        DatabaseManager.getInstance().closeDatabase();
-    }
-    public void setMidStats(Stats stats){
-        SQLiteDatabase db = DatabaseManager.getInstance().openDatabase();
-        ContentValues values = new ContentValues();
-        Log.d("StatsRepo auto", "team id " + stats.getTeamNum());
-        values.put(Stats.KEY_RocketTopC , stats.getRocketTopC());
-        values.put(Stats.KEY_RocketTopH , stats.getRocketTopH());
-        values.put(Stats.KEY_RocketMiddleC , stats.getRocketMiddleC());
-        values.put(Stats.KEY_RocketMiddleH , stats.getRocketMiddleH());
-        values.put(Stats.KEY_RocketBottomC , stats.getRocketMBottomC());
-        values.put(Stats.KEY_RocketBottomH , stats.getRocketMBottomH());
-        values.put(Stats.KEY_CargoShipC , stats.getCargoShipC());
-        values.put(Stats.KEY_CargoShipH , stats.getCargoShipH());
-        values.put(Stats.KEY_CrossHubLine , stats.getCrossHubLine());
-        values.put(Stats.KEY_Defense , stats.getDefense());
-
-        db.update(Stats.TABLE, values, Stats.KEY_CompId + " =  '" + stats.getCompId() + "' AND "
-                + Stats.KEY_MatchNum + " = " + stats.getMatchNum() + " AND "
-                + Stats.KEY_TeamNum + " = " + stats.getTeamNum(), null);
-        DatabaseManager.getInstance().closeDatabase();
-    }
-
-    //save the Tele Stats to the database for the current comp, match and team
-    public void setPostStats(Stats stats) {
-        SQLiteDatabase db = DatabaseManager.getInstance().openDatabase();
-        ContentValues values = new ContentValues();
-        Log.d("StatsRepo", "Team id " + stats.getTeamNum());
-        values.put(Stats.KEY_EndLevel1, stats.getEndLevel1());
-        values.put(Stats.KEY_EndLevel2 , stats.getEndLevel2());
-        values.put(Stats.KEY_EndLevel3 , stats.getEndLevel3());
-        values.put(Stats.KEY_EndNone , stats.getEndNone());
-        values.put(Stats.KEY_RobotDisabled, stats.getDisabled());
-        values.put(Stats.KEY_RedCard, stats.getRedCard());
-        values.put(Stats.KEY_YellowCard, stats.getYellowCard());
-        values.put(Stats.KEY_Fouls, stats.getFoul());
-        values.put(Stats.KEY_TechFouls, stats.getTechFoul());
-        Log.d("StatsRepo", "updating table"+values.toString());
-        try {
-            db.update(Stats.TABLE, values, Stats.KEY_CompId + " =  \"" + stats.getCompId() + "\" AND "
-                    + Stats.KEY_MatchNum + " = " + stats.getMatchNum() + " AND "
-                    + Stats.KEY_TeamNum + " = " + stats.getTeamNum(), null);
-        }catch(Exception e){
-            Log.e("StatsRepo", "Exception updating database" + e.getMessage());
-
-        }
-        DatabaseManager.getInstance().closeDatabase();
-    }
-
+//
+//    public void setPreStats(Stats stats){
+//        SQLiteDatabase db = DatabaseManager.getInstance().openDatabase();
+//        ContentValues values = new ContentValues();
+//        Log.d("StatsRepo auto", "team id " + stats.getTeamNum());
+//        values.put(Stats.KEY_NoShow, stats.getNoShow());
+//        values.put(Stats.KEY_StartLevel1 , stats.getStartLevel1());
+//        values.put(Stats.KEY_StartLevel2, stats.getStartLevel2());
+//        values.put(Stats.KEY_PreloadCargo , stats.getPreloadCargo());
+//        values.put(Stats.KEY_PreloadHatch , stats.getPreloadHatch());
+//        values.put(Stats.KEY_SsComments, stats.getSsComments());
+//        values.put(Stats.KEY_RocketTopC , stats.getRocketTopC());
+//        values.put(Stats.KEY_RocketTopH , stats.getRocketTopH());
+//        values.put(Stats.KEY_RocketMiddleC , stats.getRocketMiddleC());
+//        values.put(Stats.KEY_RocketMiddleH , stats.getRocketMiddleH());
+//        values.put(Stats.KEY_RocketBottomC , stats.getRocketMBottomC());
+//        values.put(Stats.KEY_RocketBottomH , stats.getRocketMBottomH());
+//        values.put(Stats.KEY_CargoShipC , stats.getCargoShipC());
+//        values.put(Stats.KEY_CargoShipH , stats.getCargoShipH());
+//        values.put(Stats.KEY_CrossHubLine , stats.getCrossHubLine());
+//        values.put(Stats.KEY_Defense , stats.getDefense());
+//        values.put(Stats.KEY_EndLevel1, stats.getEndLevel1());
+//        values.put(Stats.KEY_EndLevel2 , stats.getEndLevel2());
+//        values.put(Stats.KEY_EndLevel3 , stats.getEndLevel3());
+//        values.put(Stats.KEY_EndNone , stats.getEndNone());
+//        values.put(Stats.KEY_RobotDisabled, stats.getDisabled());
+//        values.put(Stats.KEY_RedCard, stats.getRedCard());
+//        values.put(Stats.KEY_YellowCard, stats.getYellowCard());
+//        values.put(Stats.KEY_Fouls, stats.getFoul());
+//        values.put(Stats.KEY_TechFouls, stats.getTechFoul());
+//
+//        db.update(Stats.TABLE, values, Stats.KEY_CompId + " =  '" + stats.getCompId() + "' AND "
+//                + Stats.KEY_MatchNum + " = " + stats.getMatchNum() + " AND "
+//                + Stats.KEY_TeamNum + " = " + stats.getTeamNum(), null);
+//        DatabaseManager.getInstance().closeDatabase();
+//    }
     /*
     * get functions gets their phase from part of the row with the current comp, match, and position
     * used for loading data
@@ -226,7 +217,7 @@ public class StatsRepo {
 
     //get the Auto stats from the row with the current comp, match and match position
 
-    public Stats getPreStats(String event, int match, int matchPos){
+    public Stats getStats(int team){
         Stats stats = new Stats();
 
         SQLiteDatabase db = DatabaseManager.getInstance().openDatabase();
@@ -237,10 +228,26 @@ public class StatsRepo {
                 + ", Stats." + Stats.KEY_PreloadCargo
                 + ", Stats." + Stats.KEY_PreloadHatch
                 + ", Stats." + Stats.KEY_SsComments
+                + ", Stats." + Stats.KEY_RocketTopC
+                + ", Stats." + Stats.KEY_RocketTopH
+                + ", Stats." + Stats.KEY_RocketMiddleC
+                + ", Stats." + Stats.KEY_RocketMiddleH
+                + ", Stats." + Stats.KEY_RocketBottomC
+                + ", Stats." + Stats.KEY_RocketBottomH
+                + ", Stats." + Stats.KEY_CargoShipC
+                + ", Stats." + Stats.KEY_CargoShipH
+                + ", Stats." + Stats.KEY_CrossHubLine
+                + ", Stats." + Stats.KEY_EndLevel1
+                + ", Stats." + Stats.KEY_EndLevel2
+                + ", Stats." + Stats.KEY_EndLevel3
+                + ", Stats." + Stats.KEY_EndNone
+                + ", Stats." + Stats.KEY_RobotDisabled
+                + ", Stats." + Stats.KEY_RedCard
+                + ", Stats." + Stats.KEY_YellowCard
+                + ", Stats." + Stats.KEY_Fouls
+                + ", Stats." + Stats.KEY_TechFouls
                 + " FROM " + Stats.TABLE
-                + " WHERE Stats." + Stats.KEY_CompId + " = \"" + event + "\""
-                + " AND Stats." + Stats.KEY_MatchNum + " = " + match
-                + " AND Stats." + Stats.KEY_MatchPosition + " = " + matchPos;
+                + " WHERE Stats." + Stats.KEY_TeamNum + " = " + team;
 
         Log.d(TAG, selectQuery);
         //uses the selection query to get rows from the database one at a time
@@ -253,37 +260,6 @@ public class StatsRepo {
             stats.setPreloadCargo(cursor.getInt(cursor.getColumnIndex(Stats.KEY_PreloadCargo)));
             stats.setPreloadHatch(cursor.getInt(cursor.getColumnIndex(Stats.KEY_PreloadHatch)));
             stats.setSscomments(cursor.getString(cursor.getColumnIndex(Stats.KEY_SsComments)));
-        }
-
-        cursor.close();
-        DatabaseManager.getInstance().closeDatabase();
-        //returns a stats row object with the values from the database
-        return stats;
-    }
-    public Stats getMidStats(String event, int match, int matchPos){
-        Stats stats = new Stats();
-
-        SQLiteDatabase db = DatabaseManager.getInstance().openDatabase();
-        //makes the selection query for the stats table to get the auto stats
-        String selectQuery = " SELECT Stats." + Stats.KEY_RocketTopC
-                + ", Stats." + Stats.KEY_RocketTopH
-                + ", Stats." + Stats.KEY_RocketMiddleC
-                + ", Stats." + Stats.KEY_RocketMiddleH
-                + ", Stats." + Stats.KEY_RocketBottomC
-                + ", Stats." + Stats.KEY_RocketBottomH
-                + ", Stats." + Stats.KEY_CargoShipC
-                + ", Stats." + Stats.KEY_CargoShipH
-                + ", Stats." + Stats.KEY_CrossHubLine
-                + " FROM " + Stats.TABLE
-                + " WHERE Stats." + Stats.KEY_CompId + " = \"" + event + "\""
-                + " AND Stats." + Stats.KEY_MatchNum + " = " + match
-                + " AND Stats." + Stats.KEY_MatchPosition + " = " + matchPos;
-
-        Log.d(TAG, selectQuery);
-        //uses the selection query to get rows from the database one at a time
-        Cursor cursor = db.rawQuery(selectQuery, null);
-        //gets the first row that matches the specifications from the selection query
-        if (cursor.moveToFirst()){
             stats.setRocketTopC(cursor.getInt(cursor.getColumnIndex(Stats.KEY_RocketTopC)));
             stats.setRocketTopH(cursor.getInt(cursor.getColumnIndex(Stats.KEY_RocketTopH)));
             stats.setRocketMiddleC(cursor.getInt(cursor.getColumnIndex(Stats.KEY_RocketMiddleC)));
@@ -293,38 +269,6 @@ public class StatsRepo {
             stats.setCargoShipC(cursor.getInt(cursor.getColumnIndex(Stats.KEY_CargoShipC)));
             stats.setCargoShipH(cursor.getInt(cursor.getColumnIndex(Stats.KEY_CargoShipH)));
             stats.setCrossHubLine(cursor.getInt(cursor.getColumnIndex(Stats.KEY_CrossHubLine)));
-        }
-
-        cursor.close();
-        DatabaseManager.getInstance().closeDatabase();
-        //returns a stats row object with the values from the database
-        return stats;
-    }
-    //get the Tele stats from the row with the current comp, match and match position
-    public Stats getTeleStats (String event, int match, int matchPos) {
-        Stats stats = new Stats();
-
-        //makes the selection query for the stats table to get the tele stats
-        SQLiteDatabase db = DatabaseManager.getInstance().openDatabase();
-        String selectQuery = " SELECT Stats." + Stats.KEY_EndLevel1
-                + ", Stats." + Stats.KEY_EndLevel2
-                + ", Stats." + Stats.KEY_EndLevel3
-                + ", Stats." + Stats.KEY_EndNone
-                + ", Stats." + Stats.KEY_RobotDisabled
-                + ", Stats." + Stats.KEY_RedCard
-                + ", Stats." + Stats.KEY_YellowCard
-                + ", Stats." + Stats.KEY_Fouls
-                + ", Stats." + Stats.KEY_TechFouls
-                + " FROM " + Stats.TABLE
-                + " WHERE Stats." + Stats.KEY_CompId + " = \"" + event + "\""
-                + " AND Stats." + Stats.KEY_MatchNum + " = " + match
-                + " AND Stats." + Stats.KEY_MatchPosition + " = " + matchPos;
-
-        Log.d(TAG, selectQuery);
-        //uses the selection query to get rows from the database one at a time
-        Cursor cursor = db.rawQuery(selectQuery, null);
-        //gets the first row that matches the specifications from the selection query
-        if (cursor.moveToFirst()){
             stats.setDisabled(cursor.getInt(cursor.getColumnIndex(Stats.KEY_RobotDisabled)));
             stats.setRedCard(cursor.getInt(cursor.getColumnIndex(Stats.KEY_RedCard)));
             stats.setYellowCard(cursor.getInt(cursor.getColumnIndex(Stats.KEY_YellowCard)));
@@ -341,4 +285,5 @@ public class StatsRepo {
         //returns a stats row object with the values from the database
         return stats;
     }
+    //get the Tele stats from the row with the current comp, match and match position
 }

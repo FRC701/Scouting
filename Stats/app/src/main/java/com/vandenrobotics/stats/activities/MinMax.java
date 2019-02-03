@@ -1,5 +1,6 @@
 package com.vandenrobotics.stats.activities;
 
+
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -21,35 +22,60 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 
-public class avgWeight extends AppCompatActivity {
+public class MinMax extends AppCompatActivity{
 
-    private Text startLevel1_tv;
-    private Text startLevel2_tv;
-    private Text noShow_tv;
-    private Text redCard_tv;
-    private Text yellowCard_tv;
-    private Text foul_tv;
-    private Text techFoul_tv;
-    private Text disabled_tv;
-    private Text preloadCargo_tv;
-    private Text preloadHatch_tv;
-    private Button rocketTopC_tv;
-    private Button rocketTopH_tv;
-    private Button rocketMiddleC_tv;
-    private Button rocketMiddleH_tv;
-    private Button rocketBottomC_tv;
-    private Button rocketBottomH_tv;
-    private Button cargoShipC_tv;
-    private Button cargoShipH_tv;
-    private Text crossHubLine_tv;
-    private Text endLevel1_tv;
-    private Text endLevel2_tv;
-    private Text endLevel3_tv;
-    private Text endNone_tv;
-    private Text defense_tv;
+    private Text minstartLevel1_tv;
+    private Text minstartLevel2_tv;
+    private Text minnoShow_tv;
+    private Text minredCard_tv;
+    private Text minyellowCard_tv;
+    private Text minfoul_tv;
+    private Text mintechFoul_tv;
+    private Text mindisabled_tv;
+    private Text minpreloadCargo_tv;
+    private Text minpreloadHatch_tv;
+    private Text mincrossHubLine_tv;
+    private Text minendLevel1_tv;
+    private Text minendLevel2_tv;
+    private Text minendLevel3_tv;
+    private Text minendNone_tv;
+    private Text mindefense_tv;
+    private Button minrocketTopC_tv;
+    private Button minrocketTopH_tv;
+    private Button minrocketMiddleC_tv;
+    private Button minrocketMiddleH_tv;
+    private Button minrocketBottomC_tv;
+    private Button minrocketBottomH_tv;
+    private Button mincargoShipC_tv;
+    private Button mincargoShipH_tv;
 
 
-    private int matchNum;
+    private Text maxstartLevel1_tv;
+    private Text maxstartLevel2_tv;
+    private Text maxnoShow_tv;
+    private Text maxredCard_tv;
+    private Text maxyellowCard_tv;
+    private Text maxfoul_tv;
+    private Text maxtechFoul_tv;
+    private Text maxdisabled_tv;
+    private Text maxpreloadCargo_tv;
+    private Text maxpreloadHatch_tv;
+    private Text maxcrossHubLine_tv;
+    private Text maxendLevel1_tv;
+    private Text maxendLevel2_tv;
+    private Text maxendLevel3_tv;
+    private Text maxendNone_tv;
+    private Text maxdefense_tv;
+    private Button maxrocketTopC_tv;
+    private Button maxrocketTopH_tv;
+    private Button maxrocketMiddleC_tv;
+    private Button maxrocketMiddleH_tv;
+    private Button maxrocketBottomC_tv;
+    private Button maxrocketBottomH_tv;
+    private Button maxcargoShipC_tv;
+    private Button maxcargoShipH_tv;
+
+
     private int noShow;
     private int redCard;
     private int yellowCard;
@@ -74,6 +100,7 @@ public class avgWeight extends AppCompatActivity {
     private int endLevel3;
     private int endNone;
     private int defense;
+
 
     private StatsRepo statsRepo;
 
@@ -112,32 +139,7 @@ public class avgWeight extends AppCompatActivity {
                         loadData(stats);
                         matches++;
                     }
-                    int a = noShow/matches*100 ;
-                    int b = redCard / matches*100;
-                    int c = yellowCard / matches*100;
-                    int d = disabled / matches*100;
-                    int e = startLevel1 / matches*100;
-                    int f = startLevel2 / matches*100;
-                    int g = preloadCargo / matches*100;
-                    int h = preloadHatch / matches*100;
-                    int j = crossHubLine / matches*100;
-                    int k = endLevel1 / matches*100;
-                    int l = endLevel2 / matches*100;
-                    int m = endLevel3 / matches*100;
-                    int n = endNone / matches*100;
-                    int o = defense / matches*100;
-                    int p = foul / matches;
-                    int q = techFoul / matches;
-                    int r = rocketTopC / matches;
-                    int s = rocketTopH / matches;
-                    int t = rocketMiddleC / matches;
-                    int u = rocketMiddleH / matches;
-                    int w = rocketBottomC / matches;
-                    int x = rocketBottomH / matches;
-                    int y = cargoShipC / matches;
-                    int z = cargoShipH / matches;
 
-                    //noShow_tv.setText("");
                 }
             }
 
@@ -174,10 +176,4 @@ public class avgWeight extends AppCompatActivity {
         endNone += stats.getEndNone();
         defense += stats.getDefense();
     }
-
-
-
-
-
-
 }

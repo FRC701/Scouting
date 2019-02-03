@@ -2,7 +2,6 @@ package com.vandenrobotics.stats.data;
 
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.service.autofill.FieldClassification;
 import android.util.Log;
 
 import com.vandenrobotics.stats.app.App;
@@ -11,7 +10,6 @@ import com.vandenrobotics.stats.data.model.MatchInfo;
 import com.vandenrobotics.stats.data.model.Matches;
 import com.vandenrobotics.stats.data.model.PitData;
 import com.vandenrobotics.stats.data.model.Stats;
-import com.vandenrobotics.stats.data.model.TeamInfo;
 import com.vandenrobotics.stats.data.model.Teams;
 import com.vandenrobotics.stats.data.repo.CompetitionsRepo;
 import com.vandenrobotics.stats.data.repo.MatchInfoRepo;

@@ -7,7 +7,6 @@ import android.util.Log;
 
 import com.vandenrobotics.stats.data.DatabaseManager;
 import com.vandenrobotics.stats.data.model.Teams;
-import com.vandenrobotics.stats.data.model.TeamInfo;
 
 import java.util.ArrayList;
 
