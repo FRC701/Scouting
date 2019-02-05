@@ -40,12 +40,12 @@ public class AvgWeights {
     private double avgOffWS;
     private double avgDefWS;
     private double avgTotalWS;
-    private double avgNegWS;
     private double percentNoShow;
     private double percentStartLevel1;
     private double percentStartLevel2;
     private double percentPreLoadC;
     private double percentPreLoadH;
+    private double avgNegWS;
     private double avgRocketTopC;
     private double avgRocketTopH;
     private double avgRocketMiddleC;
