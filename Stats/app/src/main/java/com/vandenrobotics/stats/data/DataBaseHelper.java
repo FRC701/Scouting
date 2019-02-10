@@ -16,7 +16,6 @@ import com.vandenrobotics.stats.data.repo.MatchInfoRepo;
 import com.vandenrobotics.stats.data.repo.MatchesRepo;
 import com.vandenrobotics.stats.data.repo.PitDataRepo;
 import com.vandenrobotics.stats.data.repo.StatsRepo;
-import com.vandenrobotics.stats.data.repo.TeamInfoRepo;
 import com.vandenrobotics.stats.data.repo.TeamsRepo;
 
 /**
@@ -39,8 +38,6 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(TeamsRepo.createTable());
         db.execSQL(PitDataRepo.createTable());
-        db.execSQL(TeamInfoRepo.createTable());
-        db.execSQL(TeamInfoRepo.createIndex());
         db.execSQL(CompetitionsRepo.createTable());
         db.execSQL(MatchesRepo.createTable());
         db.execSQL(MatchInfoRepo.createTable());
@@ -59,7 +56,6 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         db.execSQL("Drop Table if Exists "+ MatchInfo.TABLE);
         db.execSQL("Drop Table if Exists "+ PitData.TABLE);
         db.execSQL("Drop Table if Exists "+ Stats.TABLE);
-        db.execSQL("Drop Table if Exists "+ TeamInfo.TABLE);
         db.execSQL("Drop Table if Exists "+ Teams.TABLE);
         onCreate(db);
     }

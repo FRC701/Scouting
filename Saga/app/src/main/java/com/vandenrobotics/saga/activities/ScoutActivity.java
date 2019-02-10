@@ -178,9 +178,9 @@ public class ScoutActivity extends Activity {
         stats.setMatchPos(mDeviceNumber);
 
         Log.d(TAG, "" + stats.getTeamNum());
-//        if(statsRepo.insertAll(stats) == -1){
-//            statsRepo.updatePart(stats);
-//        }
+        if(statsRepo.insertAll(stats) == -1){
+            statsRepo.updatePart(stats);
+        }
 
         Intent intent = new Intent(this, MatchActivity.class);
         try {

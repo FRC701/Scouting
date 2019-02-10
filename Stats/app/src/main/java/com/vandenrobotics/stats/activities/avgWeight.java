@@ -12,11 +12,8 @@ import android.widget.TextView;
 import com.vandenrobotics.stats.R;
 import com.vandenrobotics.stats.data.model.Stats;
 import com.vandenrobotics.stats.data.repo.StatsRepo;
-import com.vandenrobotics.stats.data.repo.TeamInfoRepo;
 import com.vandenrobotics.stats.data.repo.TeamsRepo;
 
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -88,7 +85,6 @@ public class avgWeight extends AppCompatActivity {
 
     private ArrayList<Integer> team_numbers;
     private TeamsRepo teamsRepo;
-    private TeamInfoRepo teamInfoRepo;
     private Spinner spinnerTeams;
     private ArrayAdapter<Integer> teamAdapter;
     private int mTeamNumber;
@@ -107,7 +103,6 @@ public class avgWeight extends AppCompatActivity {
         teamAdapter.setDropDownViewResource(R.layout.spinner_dropdown);
         spinnerTeams.setSelection(teamAdapter.getPosition(mTeamNumber));
         spinnerTeams.setAdapter(teamAdapter);
-        teamInfoRepo = new TeamInfoRepo();
 
         noShow_tv = (TextView) findViewById(R.id.percentNoShow);
         startLevel1_tv = (TextView) findViewById(R.id.percentStartLevel1);

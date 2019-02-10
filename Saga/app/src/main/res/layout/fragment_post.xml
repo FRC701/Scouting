@@ -102,7 +102,7 @@
         />
 
     <CheckBox
-        android:id="@+id/checkBox"
+        android:id="@+id/disqualified_Cb"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/disqualified_Cb"

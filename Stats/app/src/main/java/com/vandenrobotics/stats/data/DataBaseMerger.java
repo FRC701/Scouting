@@ -21,7 +21,7 @@ public class DataBaseMerger {
 
         while(toMerge<=6) {
             try {
-                Class.forName("org.sqlite.JDBC");
+//                Class.forName("org.sqlite.JDBC");
                 c = DriverManager.getConnection(Environment.getExternalStorageDirectory() + "/data/Stats/stats.db");
                 log.d(tag,"Opened stats.db database successfully");
                 c.setAutoCommit(false);

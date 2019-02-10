@@ -36,8 +36,9 @@ public class MidMatchFragment extends Fragment {
     private Button rocketBottomH_Bt;
     private Button cargoShipC_Bt;
     private Button cargoShipH_Bt;
-    private CheckBox removeGP_Cb;
     private CheckBox crossHubLine_Cb;
+
+    private CheckBox removeGP_Cb;
 
 
     private int rocketTopC = 0;
@@ -48,6 +49,7 @@ public class MidMatchFragment extends Fragment {
     private int rocketBottomH = 0;
     private int cargoC = 0;
     private int cargoH = 0;
+    private boolean crossHubline = false;
 
     private String mEvent;
     private int mMatchNum;
@@ -104,7 +106,7 @@ public class MidMatchFragment extends Fragment {
         stat.setRocketBottomH(rocketBottomH);
         stat.setCargoShipC(cargoC);
         stat.setCargoShipH(cargoH);
-        int ch = (crossHubLine_Cb.isChecked() ? 0:1);
+        int ch = (crossHubLine_Cb.isChecked() ? 1:0);
         stat.setCrossHubLine(ch);
         return stat;
     }
@@ -112,8 +114,8 @@ public class MidMatchFragment extends Fragment {
     @Override
     public void onResume(){
         super.onResume();
+        loadData();
         assignViews(getView());
-        if(viewAssigned) loadData();
     }
 
     private void loadData() {
@@ -124,11 +126,14 @@ public class MidMatchFragment extends Fragment {
         rocketMiddleH = stats.getRocketMiddleH();
         rocketBottomC = stats.getRocketMBottomC();
         rocketBottomH = stats.getRocketMBottomH();
-        crossHubLine_Cb.setChecked(stats.getCrossHubLine() == 1);
+        crossHubline = stats.getCrossHubLine() == 1;
     }
 
     public void assignViews(View view){
+        viewAssigned = true;
+
         try {
+            // Assigning views
             rocketTopC_Bt = (Button) view.findViewById(R.id.rocketTopC_Bt);
             rocketTopH_Bt = (Button) view.findViewById(R.id.rocketTopH_Bt);
             rocketMiddleC_Bt = (Button) view.findViewById(R.id.rocketMiddleC_Bt);
@@ -139,8 +144,8 @@ public class MidMatchFragment extends Fragment {
             cargoShipH_Bt = (Button) view.findViewById(R.id.cargoShipH_Bt);
             removeGP_Cb = (CheckBox) view.findViewById(R.id.removeGP_Cb);
             crossHubLine_Cb = (CheckBox) view.findViewById(R.id.crossHubLine_Cb);
-            viewAssigned = true;
 
+            // Setting click listners
             onClickStuff = new MidMatchFragment.OnClickStuff();
 
             rocketTopC_Bt.setOnClickListener(onClickStuff);
@@ -152,38 +157,34 @@ public class MidMatchFragment extends Fragment {
             cargoShipC_Bt.setOnClickListener(onClickStuff);
             cargoShipH_Bt.setOnClickListener(onClickStuff);
 
+            // Setting data
             if(rocketTopC>0){
-                rocketTopC_Bt.setText(rocketTopC);
+                rocketTopC_Bt.setText(rocketTopC + "");
             }
             if(rocketTopH>0){
-                rocketTopH_Bt.setText(rocketTopH);
+                rocketTopH_Bt.setText(rocketTopH + "");
             }
             if(rocketMiddleH>0){
-                rocketMiddleH_Bt.setText(rocketMiddleH);
+                rocketMiddleH_Bt.setText(rocketMiddleH + "");
             }
             if(rocketMiddleC>0){
-                rocketMiddleC_Bt.setText(rocketMiddleC);
+                rocketMiddleC_Bt.setText(rocketMiddleC + "");
             }
             if(rocketBottomC>0){
-                rocketBottomC_Bt.setText(rocketBottomC);
+                rocketBottomC_Bt.setText(rocketBottomC + "");
             }
             if(rocketBottomH>0){
-                rocketBottomH_Bt.setText(rocketBottomH);
+                rocketBottomH_Bt.setText(rocketBottomH + "");
             }
+
+            crossHubLine_Cb.setChecked(crossHubline);
 
         }catch(Exception e){
             e.printStackTrace();
             viewAssigned = false;
         }
-
-//        rocketTopC_Bt.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                rocketTopC++;
-//                rocketTopC_Bt.setText(rocketTopC);
-//            }
-//        });
     }
+
    public class OnClickStuff implements Button.OnClickListener{
         @Override
      public void onClick(View view ){
