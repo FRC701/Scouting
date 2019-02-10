@@ -34,10 +34,6 @@ public class PostMatchFragment extends Fragment {
     private CheckBox redCard_Cb;
     private CheckBox yellowCard_Cb;
     private CheckBox disqualified_Cb;
-    private Button finishMatch_Btn;
-
-    private NumberPicker teleFragNp_foulNum;
-    private NumberPicker teleFragNp_techFoulNum;
 
     private String mEvent;
     private int mMatchNum;
@@ -101,7 +97,7 @@ public class PostMatchFragment extends Fragment {
         stats.setYellowCard(yC);
         int foul = (foul_Np.getValue());
         stats.setFoul(foul);
-        int techFoul = (foul_Np.getValue());
+        int techFoul = (techFoul_Np.getValue());
         stats.setTechFoul(techFoul);
         int disqualified = (disqualified_Cb.isChecked() ? 1 : 0);
         stats.setDisqualified(disqualified);
@@ -143,10 +139,10 @@ public class PostMatchFragment extends Fragment {
             disqualified_Cb = (CheckBox) view.findViewById(R.id.disqualified_Cb);
 
             viewAssigned = true;
-        }catch(Exception e){
-            e.printStackTrace();
-            viewAssigned = false;
-        }
+       }catch(Exception e){
+           e.printStackTrace();
+           viewAssigned = false;
+       }
 
     }
 

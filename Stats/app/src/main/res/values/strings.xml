@@ -207,6 +207,24 @@
     <string name="bottom_hatch">Bottom H</string>
     <string name="cs_hatch">Hatch</string>
     <string name="cs_cargo">Cargo</string>
+    <string name="platform_end_none">Platform End None:</string>
+    <string name="disabled">Disabled:</string>
+    <string name="red_card">Red Card:</string>
+    <string name="yellow_card">Yellow Card:</string>
+    <string name="defense">Defense:</string>
+    <string name="level_end_1">End level 1:</string>
+    <string name="max">Max</string>
+    <string name="prematch_max">PREMATCH MAX</string>
+    <string name="no_show">No Show:</string>
+    <string name="top_c">Top C</string>
+    <string name="top_h">Top H</string>
+    <string name="max_post_match">MAX POST MATCH</string>
+    <string name="min">Min</string>
+    <string name="prematch_min">PREMATCH MIN</string>
+    <string name="min_post_match">MIN POST MATCH</string>
+    <string name="hubline_cross2">Hubline Cross:</string>
+    <string name="end_level_32">End Level 3:</string>
+    <string name="end_level_22">End Level 2:</string>
 
 
 </resources>

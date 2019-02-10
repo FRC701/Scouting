@@ -51,6 +51,7 @@ public class avgWeight extends AppCompatActivity {
     private TextView endLevel3_tv;
     private TextView endNone_tv;
     private TextView defense_tv;
+    private TextView redCard_tv;
 
 
     private int matchNum;
@@ -121,21 +122,22 @@ public class avgWeight extends AppCompatActivity {
         negWS_tv = (TextView) findViewById(R.id.negWS_tv);
         rocketMiddleC_btn = (Button) findViewById(R.id.rocketMiddleC_btn);
         rocketMiddleH_btn = (Button) findViewById(R.id.rocketMiddleH_btn);
-        noShow_tv = (TextView) findViewById(R.id.hatch_1);
-        noShow_tv = (TextView) findViewById(R.id.cargo_1);
-        noShow_tv = (TextView) findViewById(R.id.cargo_Ship_Hatch);
-        noShow_tv = (TextView) findViewById(R.id.cargo_Ship_Cargo);
-        noShow_tv = (TextView) findViewById(R.id.hubline_cross);
-        noShow_tv = (TextView) findViewById(R.id.end_level_1);
-        noShow_tv = (TextView) findViewById(R.id.end_level_2);
-        noShow_tv = (TextView) findViewById(R.id.end_level_3);
-        noShow_tv = (TextView) findViewById(R.id.platform_end);
-        noShow_tv = (TextView) findViewById(R.id.disabled_percent);
-        noShow_tv = (TextView) findViewById(R.id.red_card_percent);
-        noShow_tv = (TextView) findViewById(R.id.average_fouls);
-        noShow_tv = (TextView) findViewById(R.id.average_tech_fouls);
-        noShow_tv = (TextView) findViewById(R.id.defence_percent);
-        noShow_tv = (TextView) findViewById(R.id.yellow_card_percent);
+        yellowCard_tv = (TextView) findViewById(R.id.yellowCard_tv);
+        foul_tv = (TextView) findViewById(R.id.foul_tv);
+        disabled_tv = (TextView) findViewById(R.id.disabled_tv);
+        techFoul_tv = (TextView) findViewById(R.id.techFouls_tv);
+        rocketBottomC_btn = (Button) findViewById(R.id.rocketBottomC_btn);
+        rocketBottomH_btn = (Button) findViewById(R.id.rocketBottomH_btn);
+        cargoShipC_btn = (Button) findViewById(R.id.cargoShipC_btn);
+        cargoShipH_btn = (Button) findViewById(R.id.cargoShipH_btn);
+        crossHubLine_tv = (TextView) findViewById(R.id.crossHubLine_tv);
+        endLevel1_tv = (TextView) findViewById(R.id.endLevel1_tv);
+        endLevel2_tv = (TextView) findViewById(R.id.endLevel2_tv);
+        endLevel3_tv = (TextView) findViewById(R.id.endLevel3_tv);
+        endNone_tv = (TextView) findViewById(R.id.endNone_tv);
+        defense_tv = (TextView) findViewById(R.id.defense_tv);
+
+
 
         spinnerTeams.setOnItemSelectedListener(new Spinner.OnItemSelectedListener(){
             @Override
@@ -182,21 +184,21 @@ public class avgWeight extends AppCompatActivity {
                     int q = techFoul / matches;
                     techFoul_tv.setText(q+"");
                     int r = rocketTopC / matches;
-                    rocketTopC_tv.setText(r+"");
+                    rocketTopC_btn.setText(r+"");
                     int s = rocketTopH / matches;
-                    rocketBottomH_tv.setText(s+"");
+                    rocketTopH_btn.setText(s+"");
                     int t = rocketMiddleC / matches;
-                    rocketMiddleC_tv.setText(t+"");
+                    rocketMiddleC_btn.setText(t+"");
                     int u = rocketMiddleH / matches;
-                    rocketBottomH_tv.setText(u+"");
+                    rocketMiddleH_btn.setText(u+"");
                     int w = rocketBottomC / matches;
-                    rocketBottomC_tv.setText(u+"");
+                    rocketBottomC_btn.setText(u+"");
                     int x = rocketBottomH / matches;
-                    rocketBottomH_tv.setText(x+"");
+                    rocketBottomH_btn.setText(x+"");
                     int y = cargoShipC / matches;
-                    cargoShipC_tv.setText(y+"");
+                    cargoShipC_btn.setText(y+"");
                     int z = cargoShipH / matches;
-                    cargoShipH_tv.setText(z+"");
+                    cargoShipH_btn.setText(z+"");
 
                 }
             }
