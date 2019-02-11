@@ -229,8 +229,8 @@ public class ScoutActivity extends Activity {
             Intent intent = new Intent();
             intent.setAction(Intent.ACTION_SEND);
             intent.setType("text/plain");
-            File f = new File(Environment.getExternalStorageDirectory().toString(), "ScoutingData.db");
-            Log.d(TAG, "Getting data from " + Environment.getExternalStorageDirectory().toString() + "/ScoutingData.db");
+            File f = new File(Environment.getExternalStorageDirectory().toString(), "TabletData.db");
+            Log.d(TAG, "Getting data from " + Environment.getExternalStorageDirectory().toString() + "/TabletData.db");
             intent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(f));
 
             PackageManager pm = getPackageManager();
