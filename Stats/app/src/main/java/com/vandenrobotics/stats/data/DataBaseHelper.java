@@ -25,7 +25,7 @@ import com.vandenrobotics.stats.data.repo.TeamsRepo;
 public class DataBaseHelper extends SQLiteOpenHelper {
 
     //update when making any changes to tables or indexes
-    private static final int DATABASE_VERSION = 46;
+    private static final int DATABASE_VERSION = 49;
     private static final String DATABASE_NAME = "stats.db";
     private static final String TAG = DataBaseHelper.class.getSimpleName();
 

@@ -15,6 +15,8 @@ public class Matches {
     public static final String KEY_TeamNumber = "TeamNumber";
     public static final String KEY_MatchPosition = "MatchPosition";
 
+    public static final String KEY_COLUMNS = KEY_CompId+", "+KEY_TeamNumber+", "+KEY_MatchNumber+", "+KEY_MatchPosition;
+
     private String compId;
     private int matchNum;
     private int teamNum;

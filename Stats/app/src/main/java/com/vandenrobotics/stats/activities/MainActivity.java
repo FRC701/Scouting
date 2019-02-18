@@ -22,8 +22,9 @@ import com.vandenrobotics.stats.data.repo.MatchesRepo;
 import java.io.File;
 
 public class MainActivity extends AppCompatActivity {
-    private SQLiteDatabase db1;
-    private SQLiteDatabase db2;
+    private SQLiteDatabase db1;     // Data in table called 'table1'
+    private SQLiteDatabase db2;     // NOTE: data is in table named 'tabel1'. This is misspelled!!!
+                                    // shouldn't matter since when doing our db they will be uniform
 
     private final File DOWNLOADS_FILE = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
 
@@ -67,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
 
         Cursor cursor = db1.rawQuery("SELECT * FROM table1", null, null);
         while (cursor.moveToNext()) {
-            newDisplay += "Team: " + cursor.getString(1) + " Match: " + cursor.getString(2) + " Score: " + cursor.getString(3) + "\n";
+            newDisplay += "Team: "+cursor.getString(1)+" Match: "+cursor.getString(2)+" Score: "+cursor.getString(3)+" Comp: "+cursor.getString(4)+"\n";
         }
         cursor.close();
 
@@ -87,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
 
         Cursor cursor = db2.rawQuery("SELECT * FROM tabel1", null, null);
         while (cursor.moveToNext()) {
-            newDisplay += "Team: " + cursor.getString(1) + " Match: " + cursor.getString(2) + " Score: " + cursor.getString(3) + "\n";
+            newDisplay += "Team: " + cursor.getString(1) + " Match: " + cursor.getString(2) + " Score: " + cursor.getString(3) + " Comp: "+ cursor.getString(4) + "\n";
         }
         cursor.close();
 
@@ -103,6 +104,31 @@ public class MainActivity extends AppCompatActivity {
         if (db1 == null) openDB1(null);
         if (db2 == null) openDB2(null);
 
+        merge2();
+    }
+    public void showMerge(View view) {
+        String newDisplay = "";
+
+        SQLiteDatabase statsDB = DatabaseManager.getInstance().openDatabase();
+        try {
+            Cursor cursor = statsDB.rawQuery("SELECT * FROM Matches", null, null);
+            while (cursor.moveToNext()) {
+                newDisplay += "Team: " + cursor.getString(2) + " Match: " + cursor.getString(1) + " Score: " + cursor.getString(3) + "\n";
+            }
+            cursor.close();
+        } catch (Exception e) {
+            Log.d("Test", "showMerge: error " + e);
+        }
+
+        // Display data
+        if (newDisplay.length() == 0) {
+            mergeDisplay.setText("No mergedDB data to display");
+        } else {
+            mergeDisplay.setText(newDisplay);
+        }
+    }
+
+    public void merge1() {
         Cursor db1Cursor = db1.rawQuery("SELECT * FROM table1", null, null);
         while (db1Cursor.moveToNext()) {
             Matches match = new Matches();
@@ -130,25 +156,52 @@ public class MainActivity extends AppCompatActivity {
         db2Cursor.close();
     }
 
-    public void showMerge(View view) {
-        String newDisplay = "";
+    public void merge2() {
 
-        SQLiteDatabase statsDB = DatabaseManager.getInstance().openDatabase();
+        // Notes:
+        //          In order for this method to work, matchNumber cannot be primary key since
+        //          multiple matches will be going in that are the same number but different teams
+        //
+        //          These strings can be place inside of match repo or elsewhere, probably making a function
+        //          to generate them. Doing both manually because of differences in names
+
         try {
-            Cursor cursor = statsDB.rawQuery("SELECT * FROM Matches", null, null);
-            while (cursor.moveToNext()) {
-                newDisplay += "Team: " + cursor.getString(2) + " Match: " + cursor.getString(1) + " Score: " + cursor.getString(3) + "\n";
-            }
-            cursor.close();
-        } catch (Exception e) {
-            Log.d("Test", "showMerge: error " + e);
-        }
+            SQLiteDatabase stats = DatabaseManager.getInstance().openDatabase();
 
-        // Display data
-        if (newDisplay.length() == 0) {
-            mergeDisplay.setText("No mergedDB data to display");
-        } else {
-            mergeDisplay.setText(newDisplay);
+            String attachDB1 = "ATTACH DATABASE '" + DOWNLOADS_FILE.getAbsolutePath() + "/db1.db" + "' as db1";
+            String attachDB2 = "ATTACH DATABASE '" + DOWNLOADS_FILE.getAbsolutePath() + "/db2.db" + "' as db2";
+
+            String addDB1Data = "" +
+                    "INSERT INTO " + Matches.TABLE + "( "+ Matches.KEY_COLUMNS+ ") " +
+                    "SELECT " + "S.comp, S.team, S.match, S.score " +
+                    "FROM db1.table1 S " +
+                    "WHERE NOT EXISTS ("+
+                        "SELECT T."+Matches.KEY_TeamNumber+", T."+Matches.KEY_MatchNumber + " " +
+                        "FROM "+Matches.TABLE+" T " +
+                        "WHERE T."+Matches.KEY_TeamNumber+" = S.team AND T."+Matches.KEY_MatchNumber+" = S.match" +
+                    ")";
+
+            String addDB2Data = "" +
+                    "INSERT INTO " + Matches.TABLE + "( "+ Matches.KEY_COLUMNS+ ") " +
+                    "SELECT " + "S.comp, S.team, S.match, S.score " +
+                    "FROM db2.tabel1 S " +
+                    "WHERE NOT EXISTS ("+
+                    "SELECT T."+Matches.KEY_TeamNumber+", T."+Matches.KEY_MatchNumber + " " +
+                    "FROM "+Matches.TABLE+" T " +
+                    "WHERE T."+Matches.KEY_TeamNumber+" = S.team AND T."+Matches.KEY_MatchNumber+" = S.match" +
+                    ")";
+
+            String detachDB1 = "DETACH db1";
+            String detachDB2 = "DETACH db2";
+
+            stats.execSQL(attachDB1);
+            stats.execSQL(attachDB2);
+            stats.execSQL(addDB1Data);
+            stats.execSQL(addDB2Data);
+            stats.execSQL(detachDB1);
+            stats.execSQL(detachDB2);
+        } catch (Exception e) {
+            Log.d("Test", "Merge: error " + e);
         }
     }
 }
