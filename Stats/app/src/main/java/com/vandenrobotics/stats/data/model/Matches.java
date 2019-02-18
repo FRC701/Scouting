@@ -51,4 +51,9 @@ public class Matches {
     public void setMatchPos(int i){
         matchPos = i;
     }
+
+    @Override
+    public String toString() {
+        return compId + "team: " + teamNum + "match: " + matchNum + "pos: " + matchPos;
+    }
 }

@@ -12,19 +12,24 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.vandenrobotics.stats.R;
+import com.vandenrobotics.stats.app.App;
+import com.vandenrobotics.stats.data.DataBaseHelper;
 import com.vandenrobotics.stats.data.DataBaseMerger;
+import com.vandenrobotics.stats.data.DatabaseManager;
+import com.vandenrobotics.stats.data.model.Matches;
+import com.vandenrobotics.stats.data.repo.MatchesRepo;
 
 import java.io.File;
 
 public class MainActivity extends AppCompatActivity {
     private SQLiteDatabase db1;
     private SQLiteDatabase db2;
-    private SQLiteDatabase mergedDB;
 
     private final File DOWNLOADS_FILE = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
 
-    private SQLiteDatabase merge;
+    private MatchesRepo matchrepo = new MatchesRepo();
 
+    // View elements
     TextView db1Display;
     TextView db2Display;
     TextView mergeDisplay;
@@ -95,47 +100,49 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void Merge(View view) {
-        // open dbs
-        try {
-            mergedDB = SQLiteDatabase.openOrCreateDatabase(DOWNLOADS_FILE.getAbsolutePath() + "/mergedDB.db", null);
-        } catch (SQLiteException e) {
-            Toast.makeText(this, "Could not open mergedDB: " + e, Toast.LENGTH_LONG).show();
+        if (db1 == null) openDB1(null);
+        if (db2 == null) openDB2(null);
+
+        Cursor db1Cursor = db1.rawQuery("SELECT * FROM table1", null, null);
+        while (db1Cursor.moveToNext()) {
+            Matches match = new Matches();
+            match.setCompId("test");
+            match.setTeamNum(db1Cursor.getInt(1));
+            match.setMatchNum(db1Cursor.getInt(2));
+            match.setMatchPos(db1Cursor.getInt(3));
+
+            matchrepo.insert(match);
+            Log.d("Test", "Merge: adding match" + match);
         }
+        db1Cursor.close();
 
-        // Create table if not exist
-        String getTableName = "SELECT DISTINCT tbl_name FROM sqlite_master WHERE tbl_name = 'matches'";
-        Cursor cursor = mergedDB.rawQuery(getTableName, null, null);
-        Log.d("test", "tables found: " + cursor.getCount());
-        boolean doesTabelExist = cursor.getCount() > 0;
-        cursor.close();
+        Cursor db2Cursor = db2.rawQuery("SELECT * FROM tabel1", null, null);
+        while (db2Cursor.moveToNext()) {
+            Matches match = new Matches();
+            match.setCompId("test");
+            match.setTeamNum(db2Cursor.getInt(1));
+            match.setMatchNum(db2Cursor.getInt(2));
+            match.setMatchPos(db2Cursor.getInt(3));
 
-        String createTable = "CREATE TABLE IF NOT EXISTS matches(" +
-                "\"id\" INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE, " +
-                "\"team\" INTEGER, " +
-                "\"match\" INTEGER, " +
-                "\"score\" INTEGER" +
-                ")";
-        mergedDB.rawQuery(createTable, null, null);
-
-        cursor = mergedDB.rawQuery(getTableName, null, null);
-        Log.d("test", "tables found: " + cursor.getCount());
-        cursor.close();
-
-        // load data
-//        mergeData();
+            matchrepo.insert(match);
+            Log.d("Test", "Merge: adding match" + match);
+        }
+        db2Cursor.close();
     }
 
     public void showMerge(View view) {
         String newDisplay = "";
 
-        // Get data
-        if (mergedDB == null) Merge(null);
-
-        Cursor cursor = mergedDB.rawQuery("SELECT * FROM matches", null, null);
-        while (cursor.moveToNext()) {
-            newDisplay += "Team: " + cursor.getString(1) + " Match: " + cursor.getString(2) + " Score: " + cursor.getString(3) + "\n";
+        SQLiteDatabase statsDB = DatabaseManager.getInstance().openDatabase();
+        try {
+            Cursor cursor = statsDB.rawQuery("SELECT * FROM Matches", null, null);
+            while (cursor.moveToNext()) {
+                newDisplay += "Team: " + cursor.getString(2) + " Match: " + cursor.getString(1) + " Score: " + cursor.getString(3) + "\n";
+            }
+            cursor.close();
+        } catch (Exception e) {
+            Log.d("Test", "showMerge: error " + e);
         }
-        cursor.close();
 
         // Display data
         if (newDisplay.length() == 0) {
@@ -144,38 +151,4 @@ public class MainActivity extends AppCompatActivity {
             mergeDisplay.setText(newDisplay);
         }
     }
-
-    private void mergeData() {
-        if (db1 == null) openDB1(null);
-        if (db2 == null) openDB2(null);
-
-        if (mergedDB == null) {
-            Toast.makeText(this, "MergeDB not open", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        Cursor db1Cursor = db1.rawQuery("SELECT * FROM table1", null, null);
-        while (db1Cursor.moveToNext()) {
-            int team = db1Cursor.getInt(1);
-            int match = db1Cursor.getInt(2);
-            int score = db1Cursor.getInt(3);
-
-            String addOrUpdateRow = "INSERT OR replace INTO matches(id, score) VALUES((SELECT DISTINCT id FROM matches WHERE team = '" + team + "' AND match = '" + match +"'), " + score + ")";
-            mergedDB.rawQuery(addOrUpdateRow, null, null);
-        }
-        db1Cursor.close();
-
-
-        Cursor db2Cursor = db2.rawQuery("SELECT * FROM tabel1", null, null);
-        while (db2Cursor.moveToNext()) {
-            int team = db2Cursor.getInt(1);
-            int match = db2Cursor.getInt(2);
-            int score = db2Cursor.getInt(3);
-
-            String addOrUpdateRow = "INSERT OR replace INTO matches(id, score) VALUES((SELECT DISTINCT id FROM matches WHERE team = '" + team + "' AND match = '" + match +"'), " + score + ")";
-            mergedDB.rawQuery(addOrUpdateRow, null, null);
-        }
-        db2Cursor.close();
-    }
-
 }
