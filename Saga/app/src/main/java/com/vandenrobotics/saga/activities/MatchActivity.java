@@ -144,7 +144,9 @@ public class MatchActivity extends FragmentActivity implements DialogListener{
     }
 
     public void finishMatch(View view) {
-        getSupportFragmentManager().findFragmentByTag("tab_post").onPause();
+//        getSupportFragmentManager().findFragmentByTag("tab_post").onPause();
+//        getSupportFragmentManager().findFragmentByTag("tab_mid").onPause();
+//        getSupportFragmentManager().findFragmentByTag("tab_pre").onPause();
 
         MatchInfo matchInfo =  new MatchInfo();
         matchInfo.setCompId(mEvent);

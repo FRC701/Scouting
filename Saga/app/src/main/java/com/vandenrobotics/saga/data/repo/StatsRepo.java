@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.vandenrobotics.saga.data.DatabaseManager;
 import com.vandenrobotics.saga.data.model.Competitions;
@@ -168,9 +169,11 @@ public class StatsRepo {
         values.put(Stats.KEY_PreloadHatch , stats.getPreloadHatch());
         values.put(Stats.KEY_SsComments, stats.getSsComments());
 
-        db.update(Stats.TABLE, values, Stats.KEY_CompId + " =  '" + stats.getCompId() + "' AND "
+        int row = db.update(Stats.TABLE, values, Stats.KEY_CompId + " =  '" + stats.getCompId() + "' AND "
                 + Stats.KEY_MatchNum + " = " + stats.getMatchNum() + " AND "
                 + Stats.KEY_TeamNum + " = " + stats.getTeamNum(), null);
+
+        Log.d("Sarah", row + "");
         DatabaseManager.getInstance().closeDatabase();
     }
     public void setMidStats(Stats stats){

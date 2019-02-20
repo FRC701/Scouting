@@ -223,6 +223,13 @@
     <string name="hubline_cross2">Hubline Cross:</string>
     <string name="end_level_32">End Level 3:</string>
     <string name="end_level_22">End Level 2:</string>
+    <string name="red_Alliance">Red</string>
+    <string name="blue">Blue</string>
+    <string name="match_predictions">Match Predictions</string>
+    <string name="red">Red</string>
+    <string name="match_winner">Match Winner</string>
+    <string name="predicted_score">Predicted Score</string>
+    <string name="ranking_points">Ranking Points</string>
 
 
 </resources>

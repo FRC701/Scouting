@@ -88,7 +88,7 @@ public class PostMatchFragment extends Fragment {
         int eL3 = (endLevel3_Rb.isChecked() ? 1 : 0);
         stats.setEndLevel3(eL3);
         int eNone = (endNone_Rb.isChecked() ? 1 : 0);
-        stats.setYellowCard(eNone);
+        stats.setEndNone(eNone);
         int disabled = (disabled_Cb.isChecked() ? 1 : 0);
         stats.setDisabled(disabled);
         int rC = (redCard_Cb.isChecked() ? 1 : 0);

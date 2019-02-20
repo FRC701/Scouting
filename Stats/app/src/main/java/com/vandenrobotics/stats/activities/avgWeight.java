@@ -10,6 +10,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.vandenrobotics.stats.R;
+import com.vandenrobotics.stats.data.model.AvgWeights;
 import com.vandenrobotics.stats.data.model.Stats;
 import com.vandenrobotics.stats.data.repo.StatsRepo;
 import com.vandenrobotics.stats.data.repo.TeamsRepo;
@@ -118,6 +119,7 @@ public class avgWeight extends AppCompatActivity {
         rocketMiddleC_btn = (Button) findViewById(R.id.rocketMiddleC_btn);
         rocketMiddleH_btn = (Button) findViewById(R.id.rocketMiddleH_btn);
         yellowCard_tv = (TextView) findViewById(R.id.yellowCard_tv);
+        redCard_tv = (TextView) findViewById(R.id.redCard_tv);
         foul_tv = (TextView) findViewById(R.id.foul_tv);
         disabled_tv = (TextView) findViewById(R.id.disabled_tv);
         techFoul_tv = (TextView) findViewById(R.id.techFouls_tv);
@@ -195,6 +197,20 @@ public class avgWeight extends AppCompatActivity {
                     int z = cargoShipH / matches;
                     cargoShipH_btn.setText(z+"");
 
+                    AvgWeights weights = new AvgWeights();
+                    weights.setTeamNum(mTeamNumber);
+                    offWS = (f/100*3)+(r/4*3)+(s/4*2)+(t/4*3)+(u/4*2)+(w/4*3)+(x/4*2)+(y/8*3)+(z/8*2)+(j/100*3)+(k/100*3)+(l/100*6)+(m/100*12);
+                    offWS_tv.setText(offWS);
+                    weights.setAvgOffWS(offWS);
+                    negWS = (b/100*(-10))+(c/100*(-3))+(p/100*(-2))+(q/100*(-11))+(d/100*(-5));
+                    negWS_tv.setText(negWS);
+                    weights.setAvgNegWS(negWS);
+                    defWS = (o/100*5);
+                    defWS_tv.setText(defWS);
+                    weights.setAvgDefWS(defWS);
+                    totalWS = offWS + negWS + defWS;
+                    totalWS_tv.setText(totalWS);
+                    weights.setAvgTotalWS(totalWS);
                 }
             }
 
@@ -231,10 +247,4 @@ public class avgWeight extends AppCompatActivity {
         endNone += stats.getEndNone();
         defense += stats.getDefense();
     }
-
-
-
-
-
-
 }

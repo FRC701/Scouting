@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.vandenrobotics.stats.R;
 import com.vandenrobotics.stats.data.model.Stats;
+import com.vandenrobotics.stats.data.repo.MaxMinRepo;
 import com.vandenrobotics.stats.data.repo.StatsRepo;
 import com.vandenrobotics.stats.data.repo.TeamsRepo;
 
@@ -99,7 +100,7 @@ public class MinMax extends AppCompatActivity{
     private int minendNone;
     private int mindefense;
 
-    private int maxnoShow= -1;
+    private int maxnoShow;
     private int maxredCard;
     private int maxyellowCard;
     private int maxfoul;
@@ -126,6 +127,7 @@ public class MinMax extends AppCompatActivity{
 
 
     private StatsRepo statsRepo;
+    private MaxMinRepo maxMinRepo;
 
     private ArrayList<Integer> team_numbers;
     private TeamsRepo teamsRepo;
@@ -147,6 +149,7 @@ public class MinMax extends AppCompatActivity{
         teamAdapter.setDropDownViewResource(R.layout.spinner_dropdown);
         spinnerTeams.setSelection(teamAdapter.getPosition(mTeamNumber));
         spinnerTeams.setAdapter(teamAdapter);
+        maxMinRepo = new MaxMinRepo();
 
         minstartLevel1_tv = (TextView) findViewById(R.id.startLevel1Min);
         minstartLevel2_tv = (TextView) findViewById(R.id.startLevel2Min);
@@ -222,10 +225,59 @@ public class MinMax extends AppCompatActivity{
     }
 
     private void loadData(Stats stats) {
-        if(minnoShow == -1){
-            init(stats);
+        if(minnoShow == -1){init(stats);}
+        if(minnoShow > stats.getNoShow()){minnoShow = stats.getNoShow();}
+        if(minstartLevel1 > stats.getStartLevel1()){minstartLevel1 = stats.getStartLevel1();}
+        if(minredCard > stats.getRedCard()){minredCard = stats.getRedCard();}
+        if(minyellowCard > stats.getYellowCard()){minyellowCard = stats.getYellowCard();}
+        if(minfoul > stats.getFoul()){minfoul = stats.getFoul();}
+        if(mintechFoul > stats.getTechFoul()){mintechFoul = stats.getTechFoul();}
+        if(mindisabled > stats.getDisabled()){mindisabled = stats.getDisabled();}
+        if(minstartLevel1 > stats.getStartLevel1()){minstartLevel1 = stats.getStartLevel1();}
+        if(minstartLevel2 > stats.getStartLevel2()){minstartLevel2 = stats.getStartLevel2();}
+        if(minpreloadCargo > stats.getPreloadCargo()){minpreloadCargo = stats.getPreloadCargo();}
+        if(minpreloadHatch > stats.getPreloadHatch()){minpreloadHatch = stats.getPreloadHatch();}
+        if(minrocketTopC > stats.getRocketTopC()){minrocketTopC = stats.getRocketTopC();}
+        if(minrocketTopH > stats.getRocketTopH()){minrocketTopH = stats.getRocketTopH();}
+        if(minrocketMiddleC > stats.getRocketMiddleC()){minrocketMiddleC = stats.getRocketMiddleC();}
+        if(minrocketMiddleH > stats.getRocketMiddleH()){minrocketMiddleH = stats.getRocketMiddleH();}
+        if(minrocketBottomC > stats.getRocketMBottomC()){minrocketBottomC = stats.getRocketMBottomC();}
+        if(minrocketBottomH > stats.getRocketMBottomH()){minrocketBottomH = stats.getRocketMBottomH();}
+        if(mincargoShipC > stats.getCargoShipC()){mincargoShipC = stats.getCargoShipC();}
+        if(mincargoShipH > stats.getCargoShipH()){mincargoShipH = stats.getCargoShipH();}
+        if(mincrossHubLine > stats.getCrossHubLine()){mincrossHubLine = stats.getCrossHubLine();}
+        if(minendLevel1 > stats.getEndLevel1()){minendLevel1 = stats.getEndLevel1();}
+        if(minendLevel2 > stats.getEndLevel2()){minendLevel2 = stats.getEndLevel2();}
+        if(minendLevel3 > stats.getEndLevel3()){minendLevel3 = stats.getEndLevel3();}
+        if(minendNone > stats.getEndNone()){minendNone = stats.getEndNone();}
+        if(mindefense > stats.getDefense()){mindefense = stats.getDefense();}
+
+        if(maxnoShow > stats.getNoShow()){maxnoShow = stats.getNoShow();}
+        if(maxstartLevel1 > stats.getStartLevel1()){maxstartLevel1 = stats.getStartLevel1();}
+        if(maxredCard > stats.getRedCard()){maxredCard = stats.getRedCard();}
+        if(maxyellowCard > stats.getYellowCard()){maxyellowCard = stats.getYellowCard();}
+        if(maxfoul > stats.getFoul()){maxfoul = stats.getFoul();}
+        if(maxtechFoul > stats.getTechFoul()){maxtechFoul = stats.getTechFoul();}
+        if(maxdisabled > stats.getDisabled()){maxdisabled = stats.getDisabled();}
+        if(maxstartLevel1 > stats.getStartLevel1()){maxstartLevel1 = stats.getStartLevel1();}
+        if(maxstartLevel2 > stats.getStartLevel2()){maxstartLevel2 = stats.getStartLevel2();}
+        if(maxpreloadCargo > stats.getPreloadCargo()){maxpreloadCargo = stats.getPreloadCargo();}
+        if(maxpreloadHatch > stats.getPreloadHatch()){maxpreloadHatch = stats.getPreloadHatch();}
+        if(maxrocketTopC > stats.getRocketTopC()){maxrocketTopC = stats.getRocketTopC();}
+        if(maxrocketTopH > stats.getRocketTopH()){maxrocketTopH = stats.getRocketTopH();}
+        if(maxrocketMiddleC > stats.getRocketMiddleC()){maxrocketMiddleC = stats.getRocketMiddleC();}
+        if(maxrocketMiddleH > stats.getRocketMiddleH()){maxrocketMiddleH = stats.getRocketMiddleH();}
+        if(maxrocketBottomC > stats.getRocketMBottomC()){maxrocketBottomC = stats.getRocketMBottomC();}
+        if(maxrocketBottomH > stats.getRocketMBottomH()){maxrocketBottomH = stats.getRocketMBottomH();}
+        if(maxcargoShipC > stats.getCargoShipC()){maxcargoShipC = stats.getCargoShipC();}
+        if(maxcargoShipH > stats.getCargoShipH()){maxcargoShipH = stats.getCargoShipH();}
+        if(maxcrossHubLine > stats.getCrossHubLine()){maxcrossHubLine = stats.getCrossHubLine();}
+        if(maxendLevel1 > stats.getEndLevel1()){maxendLevel1 = stats.getEndLevel1();}
+        if(maxendLevel2 > stats.getEndLevel2()){maxendLevel2 = stats.getEndLevel2();}
+        if(maxendLevel3 > stats.getEndLevel3()){maxendLevel3 = stats.getEndLevel3();}
+        if(maxendNone > stats.getEndNone()){maxendNone = stats.getEndNone();}
+        if(maxdefense > stats.getDefense()){maxdefense = stats.getDefense();}
         }
-    }
     private void init(Stats stats){
         minstartLevel1 = stats.getStartLevel1();
         minredCard = stats.getRedCard();
@@ -239,6 +291,40 @@ public class MinMax extends AppCompatActivity{
         minrocketTopC = stats.getRocketTopC();
         minrocketTopH = stats.getRocketTopH();
         minrocketMiddleC = stats.getRocketMiddleC();
-        
+        minrocketMiddleH = stats.getRocketMiddleH();
+        minrocketBottomC = stats.getRocketMBottomC();
+        minrocketBottomH = stats.getRocketMBottomH();
+        mincargoShipC = stats.getCargoShipC();
+        mincargoShipH = stats.getCargoShipH();
+        mincrossHubLine = stats.getCrossHubLine();
+        minendLevel1 = stats.getEndLevel1();
+        minendLevel2 = stats.getEndLevel2();
+        minendLevel3 = stats.getEndLevel3();
+        minendNone = stats.getEndNone();
+        mindefense = stats.getDefense();
+
+        maxstartLevel1 = stats.getStartLevel1();
+        maxredCard = stats.getRedCard();
+        maxyellowCard = stats.getYellowCard();
+        maxfoul = stats.getFoul();
+        maxtechFoul = stats.getTechFoul();
+        maxdisabled = stats.getDisabled();
+        maxstartLevel2 = stats.getStartLevel2();
+        maxpreloadCargo = stats.getPreloadCargo();
+        maxpreloadHatch = stats.getPreloadHatch();
+        maxrocketTopC = stats.getRocketTopC();
+        maxrocketTopH = stats.getRocketTopH();
+        maxrocketMiddleC = stats.getRocketMiddleC();
+        maxrocketMiddleH = stats.getRocketMiddleH();
+        maxrocketBottomC = stats.getRocketMBottomC();
+        maxrocketBottomH = stats.getRocketMBottomH();
+        maxcargoShipC = stats.getCargoShipC();
+        maxcargoShipH = stats.getCargoShipH();
+        maxcrossHubLine = stats.getCrossHubLine();
+        maxendLevel1 = stats.getEndLevel1();
+        maxendLevel2 = stats.getEndLevel2();
+        maxendLevel3 = stats.getEndLevel3();
+        maxendNone = stats.getEndNone();
+        maxdefense = stats.getDefense();
     }
 }

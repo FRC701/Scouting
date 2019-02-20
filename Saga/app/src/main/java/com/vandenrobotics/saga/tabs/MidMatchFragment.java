@@ -81,9 +81,32 @@ public class MidMatchFragment extends Fragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState){
         super.onViewCreated(view, savedInstanceState);
-        assignViews(view);
-        if (viewAssigned)loadData();
 
+        viewAssigned = true;
+
+        // Assigning views
+        rocketTopC_Bt = (Button) view.findViewById(R.id.rocketTopC_Bt);
+        rocketTopH_Bt = (Button) view.findViewById(R.id.rocketTopH_Bt);
+        rocketMiddleC_Bt = (Button) view.findViewById(R.id.rocketMiddleC_Bt);
+        rocketMiddleH_Bt = (Button) view.findViewById(R.id.rocketMiddleH_Bt);
+        rocketBottomC_Bt = (Button) view.findViewById(R.id.rocketBottomC_Bt);
+        rocketBottomH_Bt = (Button) view.findViewById(R.id.rocketBottomH_Bt);
+        cargoShipC_Bt = (Button) view.findViewById(R.id.cargoShipC_Bt);
+        cargoShipH_Bt = (Button) view.findViewById(R.id.cargoShipH_Bt);
+        removeGP_Cb = (CheckBox) view.findViewById(R.id.removeGP_Cb);
+        crossHubLine_Cb = (CheckBox) view.findViewById(R.id.crossHubLine_Cb);
+
+        // Setting click listners
+        onClickStuff = new MidMatchFragment.OnClickStuff();
+
+        rocketTopC_Bt.setOnClickListener(onClickStuff);
+        rocketTopH_Bt.setOnClickListener(onClickStuff);
+        rocketMiddleC_Bt.setOnClickListener(onClickStuff);
+        rocketMiddleH_Bt.setOnClickListener(onClickStuff);
+        rocketBottomC_Bt.setOnClickListener(onClickStuff);
+        rocketBottomH_Bt.setOnClickListener(onClickStuff);
+        cargoShipC_Bt.setOnClickListener(onClickStuff);
+        cargoShipH_Bt.setOnClickListener(onClickStuff);
     }
 
     @Override
@@ -130,33 +153,7 @@ public class MidMatchFragment extends Fragment {
     }
 
     public void assignViews(View view){
-        viewAssigned = true;
-
         try {
-            // Assigning views
-            rocketTopC_Bt = (Button) view.findViewById(R.id.rocketTopC_Bt);
-            rocketTopH_Bt = (Button) view.findViewById(R.id.rocketTopH_Bt);
-            rocketMiddleC_Bt = (Button) view.findViewById(R.id.rocketMiddleC_Bt);
-            rocketMiddleH_Bt = (Button) view.findViewById(R.id.rocketMiddleH_Bt);
-            rocketBottomC_Bt = (Button) view.findViewById(R.id.rocketBottomC_Bt);
-            rocketBottomH_Bt = (Button) view.findViewById(R.id.rocketBottomH_Bt);
-            cargoShipC_Bt = (Button) view.findViewById(R.id.cargoShipC_Bt);
-            cargoShipH_Bt = (Button) view.findViewById(R.id.cargoShipH_Bt);
-            removeGP_Cb = (CheckBox) view.findViewById(R.id.removeGP_Cb);
-            crossHubLine_Cb = (CheckBox) view.findViewById(R.id.crossHubLine_Cb);
-
-            // Setting click listners
-            onClickStuff = new MidMatchFragment.OnClickStuff();
-
-            rocketTopC_Bt.setOnClickListener(onClickStuff);
-            rocketTopH_Bt.setOnClickListener(onClickStuff);
-            rocketMiddleC_Bt.setOnClickListener(onClickStuff);
-            rocketMiddleH_Bt.setOnClickListener(onClickStuff);
-            rocketBottomC_Bt.setOnClickListener(onClickStuff);
-            rocketBottomH_Bt.setOnClickListener(onClickStuff);
-            cargoShipC_Bt.setOnClickListener(onClickStuff);
-            cargoShipH_Bt.setOnClickListener(onClickStuff);
-
             // Setting data
             if(rocketTopC>0){
                 rocketTopC_Bt.setText(rocketTopC + "");
@@ -176,9 +173,14 @@ public class MidMatchFragment extends Fragment {
             if(rocketBottomH>0){
                 rocketBottomH_Bt.setText(rocketBottomH + "");
             }
+            if(cargoH>0){
+                cargoShipH_Bt.setText(cargoH + "");
+            }
+            if(cargoC>0){
+                cargoShipC_Bt.setText(cargoC + "");
+            }
 
             crossHubLine_Cb.setChecked(crossHubline);
-
         }catch(Exception e){
             e.printStackTrace();
             viewAssigned = false;
