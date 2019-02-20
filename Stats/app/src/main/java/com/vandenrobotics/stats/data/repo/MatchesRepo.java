@@ -21,7 +21,7 @@ public class MatchesRepo {
     public static String createTable(){
         return "CREATE TABLE " + Matches.TABLE + "("
                 + Matches.KEY_CompId + " TEXT not null , "
-                + Matches.KEY_MatchNumber + " INTEGER not null PRIMARY KEY , "
+                + Matches.KEY_MatchNumber + " INTEGER not null, "
                 + Matches.KEY_TeamNumber + " INTEGER not null , "
                 + Matches.KEY_MatchPosition + " INTEGER not null , "
                 + " FOREIGN KEY ( " + Matches.KEY_CompId + " ) REFERENCES " + Competitions.TABLE
