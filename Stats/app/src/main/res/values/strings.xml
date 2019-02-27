@@ -1,9 +1,9 @@
 <resources>
     <string name="app_name">Tyr2018</string>
-    <string name="ok">Ok</string>
+    <string name="ok">OK</string>
     <string name="cancel">Cancel</string>
     <string name="downloaded_events">Downloaded Events</string>
-    <string name="_2018_frc_events">2018 FRC Events</string>
+    <string name="_2018_frc_events">2019 FRC Events</string>
 
     <string name="title_activity_main">Choose a FRC Event</string>
     <string name="text_titleConfirmDelete">Delete Event Data?</string>
@@ -230,6 +230,17 @@
     <string name="match_winner">Match Winner</string>
     <string name="predicted_score">Predicted Score</string>
     <string name="ranking_points">Ranking Points</string>
+    <string name="averages_and_weights">Averages and Weights</string>
+    <string name="prematch_percentages">PREMATCH PERCENTAGES</string>
+    <string name="db1_data">db1 data</string>
+    <string name="merge_data">merge data</string>
+    <string name="db2_data">db2 data</string>
+    <string name="open_db_1">Open DB 1</string>
+    <string name="show_merge">Show Merge</string>
+    <string name="show_db_2">Show DB 2</string>
+    <string name="post_match">POST MATCH</string>
+    <string name="top_c">Top C</string>
+    <string name="top_h">Top H</string>
 
 
 </resources>

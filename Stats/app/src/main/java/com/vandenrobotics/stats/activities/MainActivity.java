@@ -12,9 +12,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.vandenrobotics.stats.R;
-import com.vandenrobotics.stats.app.App;
-import com.vandenrobotics.stats.data.DataBaseHelper;
-import com.vandenrobotics.stats.data.DataBaseMerger;
 import com.vandenrobotics.stats.data.DatabaseManager;
 import com.vandenrobotics.stats.data.model.Matches;
 import com.vandenrobotics.stats.data.repo.MatchesRepo;
