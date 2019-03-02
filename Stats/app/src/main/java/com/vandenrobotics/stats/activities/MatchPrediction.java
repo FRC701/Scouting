@@ -3,12 +3,14 @@ package com.vandenrobotics.stats.activities;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.EditText;
-import org.apache.commons.math3.distribution.NormalDistribution;
+//import org.apache.commons.math3.distribution.NormalDistribution;
 
 import android.widget.TextView;
 
 import com.vandenrobotics.stats.R;
 import com.vandenrobotics.stats.data.model.AvgWeights;
+
+import org.apache.commons.math3.distribution.NormalDistribution;
 
 public class MatchPrediction extends AppCompatActivity {
     private EditText red1_et;

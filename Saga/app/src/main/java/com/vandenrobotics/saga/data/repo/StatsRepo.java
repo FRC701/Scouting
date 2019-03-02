@@ -55,8 +55,7 @@ public class StatsRepo {
                 + Stats.KEY_RedCard + " INTEGER , "
                 + Stats.KEY_YellowCard + " INTEGER , "
                 + Stats.KEY_Fouls + " INTEGER , "
-                + Stats.KEY_TechFouls + " INTEGER , "
-                + Stats.KEY_Disqualified + " INTEGER , " +
+                + Stats.KEY_TechFouls + " INTEGER , " +
                 //makes the CompId, MatchNum and MatchPos Primary Key so there needs
                 //to be a unique combination of these attributes in each row in the Stats table
                 "PRIMARY KEY ( '" + Stats.KEY_CompId
@@ -113,7 +112,6 @@ public class StatsRepo {
         values.put(Stats.KEY_YellowCard, stats.getYellowCard());
         values.put(Stats.KEY_Fouls, stats.getFoul());
         values.put(Stats.KEY_TechFouls, stats.getTechFoul());
-        values.put(Stats.KEY_Disqualified, stats.getDisqualified());
 
         //check if there is a conflict. It should return -1 if there is a copy of the exact combination of the Primary Keys
         statsId=(int)db.insertWithOnConflict(Stats.TABLE, null, values, SQLiteDatabase.CONFLICT_IGNORE);
@@ -210,7 +208,6 @@ public class StatsRepo {
         values.put(Stats.KEY_YellowCard, stats.getYellowCard());
         values.put(Stats.KEY_Fouls, stats.getFoul());
         values.put(Stats.KEY_TechFouls, stats.getTechFoul());
-        values.put(Stats.KEY_Disqualified, stats.getDisqualified());
         Log.d("StatsRepo", "updating table"+values.toString());
         try {
             db.update(Stats.TABLE, values, Stats.KEY_CompId + " =  \"" + stats.getCompId() + "\" AND "
@@ -319,7 +316,6 @@ public class StatsRepo {
                 + ", Stats." + Stats.KEY_YellowCard
                 + ", Stats." + Stats.KEY_Fouls
                 + ", Stats." + Stats.KEY_TechFouls
-                + ", Stats." + Stats.KEY_Disqualified
                 + " FROM " + Stats.TABLE
                 + " WHERE Stats." + Stats.KEY_CompId + " = \"" + event + "\""
                 + " AND Stats." + Stats.KEY_MatchNum + " = " + match
@@ -339,7 +335,6 @@ public class StatsRepo {
             stats.setEndLevel2(cursor.getInt(cursor.getColumnIndex(Stats.KEY_EndLevel2)));
             stats.setEndLevel3(cursor.getInt(cursor.getColumnIndex(Stats.KEY_EndLevel3)));
             stats.setEndNone(cursor.getInt(cursor.getColumnIndex(Stats.KEY_EndNone)));
-            stats.setDisqualified(cursor.getInt(cursor.getColumnIndex(Stats.KEY_Disqualified)));
         }
 
         cursor.close();

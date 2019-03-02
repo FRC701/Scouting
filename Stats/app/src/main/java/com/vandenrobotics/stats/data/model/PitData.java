@@ -38,7 +38,11 @@ public class PitData {
     public static final String KEY_ScoreMiddle = "ScoreMiddle";
     public static final String KEY_ScoreTop = "ScoreTop";
 
-
+    public static final String KEY_Columns = "S."+ KEY_TeamNum + ", S." + KEY_Auto + ", S." + KEY_DriveBlindly + ", S." + KEY_Vision + ", S." + KEY_Camera + ", S." + KEY_Other + ", S." + KEY_StartLevel1
+            + ", S." + KEY_StartLevel1 + ", S." + KEY_RobotCargo + ", S." + KEY_RobotHatch + ", S." + KEY_CargoShipCargo + ", S." + KEY_CargoShipHatch + ", S." + KEY_HatchInCargoShip + ", S." + KEY_CargoInCargoShip
+            + ", S." + KEY_HatchInRocket + ", S." + KEY_CargoInRocket + ", S." + KEY_IntakeHatch + ", S." + KEY_IntakeCargo + ", S." + KEY_ReachFirstPlatform + ", S." + KEY_ReachSecondPlatform + ", S." + KEY_ReachThirdPlatform
+            + ", S." + KEY_ScoreBottom + ", S." + KEY_ScoreMiddle + ", S." + KEY_ScoreTop + ", S." + KEY_IntakeAndMech + ", S." + KEY_DriveTrain + ", S." + KEY_DriveTrain + ", S." + KEY_Lang + ", S." + KEY_Comments
+            + ", S." + KEY_Speed;
 
     private int teamNum;
     //start here

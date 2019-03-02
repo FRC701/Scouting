@@ -32,6 +32,7 @@ import com.vandenrobotics.saga.data.repo.StatsRepo;
 import com.vandenrobotics.saga.data.repo.TeamsRepo;
 import com.vandenrobotics.saga.dialogs.AddEventDialogFragment;
 import com.vandenrobotics.saga.dialogs.DialogListener;
+import com.vandenrobotics.saga.tools.ExternalStorageTools;
 import com.vandenrobotics.saga.tools.JSONTools;
 import com.vandenrobotics.saga.tools.TheBlueAllianceRestClient;
 import com.vandenrobotics.saga.views.EventArrayAdapter;
@@ -47,7 +48,7 @@ import cz.msebera.android.httpclient.Header;
 
 import static com.vandenrobotics.saga.tools.JSONTools.sortJSONArray;
 
-public class MainActivity extends AppCompatActivity implements DialogListener {
+public class      MainActivity extends AppCompatActivity implements DialogListener {
 
     private final String TAG = MainActivity.class.getSimpleName();
 
@@ -284,29 +285,29 @@ public class MainActivity extends AppCompatActivity implements DialogListener {
         final ProgressDialog progressDialog = ProgressDialog.show(this, getResources().getString(R.string.text_titleProgress), getResources().getString(R.string.text_messageProgressDownload));
         progressDialog.setCancelable(true);
 
-//        boolean newEvent = true;
+        boolean newEvent = true;
 //
 //        // check to make sure the event is new
        //TODO check if this works, maybe to compile. Not sure if correct
-//        for (int i = 0; i < downloadedAdapter.getCount(); i++) {
-//            if (downloadedAdapter.getItem(i).getCompName().equals(event.getCompName())) {
-//                newEvent = false;
-//                break;
-//            }
-//        }
+        for (int i = 0; i < downloadedAdapter.getCount(); i++) {
+            if (downloadedAdapter.getItem(i).getCompName().equals(event.getCompName())) {
+                newEvent = false;
+                break;
+            }
+        }
 
 
-//        if (newEvent) {
-            if(TheBlueAllianceRestClient.isOnline(MainActivity.this)) {
+        if (newEvent) {
+            if (TheBlueAllianceRestClient.isOnline(MainActivity.this)) {
                 TheBlueAllianceRestClient.get(MainActivity.this, "event/" + event.getCompId() + "/matches", new JsonHttpResponseHandler() {
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, JSONArray teams) {
                         // handle the incoming JSONArray of teams and write them to a file
                         try {
                             final ArrayList<JSONObject> matchlist = JSONTools.sortJSonArrayMatchList(JSONTools.parseJSONArray(teams));
-                            Log.d(TAG, matchlist.size()+"");
+                            Log.d(TAG, matchlist.size() + "");
 
-                            for (int i = 0; i < matchlist.size(); i++){
+                            for (int i = 0; i < matchlist.size(); i++) {
 
                                 //save the same match num to be used for all team in this match
                                 int matchNum = matchlist.get(i).getInt("match_number");
@@ -318,25 +319,25 @@ public class MainActivity extends AppCompatActivity implements DialogListener {
                                 JSONObject blue = alliances.getJSONObject("blue");
                                 JSONArray teamB = blue.getJSONArray("teams");
 
-                                for(int j = 0; j < 3; j++){
+                                for (int j = 0; j < 3; j++) {
 
-                                    Matches matches =  new Matches();
+                                    Matches matches = new Matches();
                                     matches.setCompId(event.getCompId());
                                     matches.setMatchNum(matchNum);
                                     //save position 1-3 for Red Teams
-                                    matches.setMatchPos(j+1);
+                                    matches.setMatchPos(j + 1);
                                     //get each team while removing formatting (frc#)
                                     matches.setTeamNum(Integer.parseInt(teamR.getString(j).substring(3)));
                                     matchesRepo.insert(matches);
                                 }
 
-                                for (int j = 0; j < 3; j++){
+                                for (int j = 0; j < 3; j++) {
 
-                                    Matches matches =  new Matches();
+                                    Matches matches = new Matches();
                                     matches.setCompId(event.getCompId());
                                     matches.setMatchNum(matchNum);
                                     //save position 4-6 for Blue Teams
-                                    matches.setMatchPos(j+4);
+                                    matches.setMatchPos(j + 4);
                                     //get each team while removing formatting (frc#)
                                     matches.setTeamNum(Integer.parseInt(teamB.getString(j).substring(3)));
                                     matchesRepo.insert(matches);
@@ -357,22 +358,22 @@ public class MainActivity extends AppCompatActivity implements DialogListener {
                         try {
                             final ArrayList<JSONObject> teamlist = JSONTools.sortJSONArray(JSONTools.parseJSONArray(teams), "team_number");
 
-                            teamsRepo =  new TeamsRepo();
+                            teamsRepo = new TeamsRepo();
 
-                            for (int i = 0; i < teamlist.size(); i++){
+                            for (int i = 0; i < teamlist.size(); i++) {
                                 Teams teamsInfo = new Teams();
                                 teamsInfo.setTeamNum(teamlist.get(i).getInt("team_number"));
                                 teamsInfo.setTeamName(teamlist.get(i).getString("nickname"));
 
                                 Log.d(TAG, "Adding Team: " + teamsInfo.getTeamNum());
 
-                                if (teamsInfo != null){
-                                    int j  = teamsRepo.insert(teamsInfo);
+                                if (teamsInfo != null) {
+                                    int j = teamsRepo.insert(teamsInfo);
 
-                                    if (j == -1){
+                                    if (j == -1) {
                                         Log.d(TAG, teamsInfo.getTeamNum() + " has already been added");
                                     }
-                                }else{
+                                } else {
                                     Log.d(TAG, "No Teams for the event: " + event.getCompName());
                                     teamsInfo.setTeamNum(0);
                                     teamsInfo.setTeamName("DefaultTeam");
@@ -382,11 +383,11 @@ public class MainActivity extends AppCompatActivity implements DialogListener {
 
 
                             //TODO determine what this does
-//                                downloadedEvents.add(event);
-//                                downloadedEvents = sortJSONArray(downloadedEvents, "start_date", "name");
-//                                downloadedAdapter.notifyDataSetChanged();
+                                downloadedEvents.add(event);
+                                downloadedEvents = sortJSONArray(downloadedEvents, "start_date", "name");
+                                downloadedAdapter.notifyDataSetChanged();
 
-                            //ExternalStorageTools.writeEvents(downloadedEvents);
+                            ExternalStorageTools.writeEvents(downloadedEvents);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -406,6 +407,7 @@ public class MainActivity extends AppCompatActivity implements DialogListener {
                         })
                         .show();
             }
+        }
     }
 
     private Intent loadEventToScout(Competitions event){

@@ -149,6 +149,8 @@ public class MidMatchFragment extends Fragment {
         rocketMiddleH = stats.getRocketMiddleH();
         rocketBottomC = stats.getRocketMBottomC();
         rocketBottomH = stats.getRocketMBottomH();
+        cargoC = stats.getCargoShipC();
+        cargoH = stats.getCargoShipH();
         crossHubline = stats.getCrossHubLine() == 1;
     }
 

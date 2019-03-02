@@ -99,7 +99,7 @@ public class avgWeight extends AppCompatActivity {
         TeamsRepo teamsRepo = new TeamsRepo();
         team_numbers = teamsRepo.getTeams();
         Collections.sort(team_numbers);
-        spinnerTeams = (Spinner) findViewById(R.id.spinner3);
+         spinnerTeams = (Spinner) findViewById(R.id.spinner3);
         teamAdapter = new ArrayAdapter<>(this, R.layout.spinner_base, team_numbers);
         teamAdapter.setDropDownViewResource(R.layout.spinner_dropdown);
         spinnerTeams.setSelection(teamAdapter.getPosition(mTeamNumber));

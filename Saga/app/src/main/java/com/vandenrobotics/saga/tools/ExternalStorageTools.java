@@ -4,11 +4,20 @@ import android.graphics.Bitmap;
 import android.os.Environment;
 import android.util.Log;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.nio.channels.FileChannel;
+import java.util.ArrayList;
 
 
 public class ExternalStorageTools {
@@ -120,5 +129,48 @@ public class ExternalStorageTools {
 
     private static String getDeviceString(int device){
         return ((device<4) ? "Red"+device : "Blue"+(device-3));
+    }
+    // writes all events currently downloaded to the file (as a JSONDocument)
+    public static void writeEvents(ArrayList<JSONObject> events) {
+        JSONArray downloadedEvents = new JSONArray(events);
+        if (isExternalStorageWritable()) {
+            try {
+                FileWriter fileWriter = new FileWriter(createFile("ScoutData", "events.json"));
+                fileWriter.write(downloadedEvents.toString());
+                fileWriter.flush();
+                fileWriter.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    // reads the JSONDocument and returns a JSONArray of events (BASE_DIR)
+    public static ArrayList<JSONObject> readEvents() {
+        ArrayList<JSONObject> downloadedEvents = new ArrayList<>();
+
+        if (isExternalStorageReadable()) {
+            try {
+                String fileContents = "";
+                String line;
+                FileInputStream fileInputStream = new FileInputStream(createFile("ScoutData", "events.json"));
+                BufferedReader br = new BufferedReader(new InputStreamReader(fileInputStream));
+                while ((line = br.readLine()) != null)
+                    fileContents += line;
+                br.close();
+                fileInputStream.close();
+
+                JSONArray events = new JSONArray(fileContents);
+                downloadedEvents = JSONTools.parseJSONArray(events);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return downloadedEvents;
     }
 }
