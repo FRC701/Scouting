@@ -54,7 +54,7 @@ public class ExternalStorageTools {
     public static void readDatabaseFromES(int device){
         try {
             if (isExternalStorageReadable()) {
-                String currentDBPath = "//data//com.vandenrobotics.saga//databases//TabletData"+device+".db";
+                String currentDBPath = "//data//TabletData"+device+".db";
                 String backupDBPath = "TabletData"+device+".db";
 //                File currentDB = new File(DATA_DIR, currentDBPath);
                 Log.d(TAG, "Can get from database");
@@ -66,21 +66,21 @@ public class ExternalStorageTools {
 
 
                 if (currentDB.exists()) {
-//                    String stringArray[] = currentDBPath.split(":");
-//                    FileInputStream fis = null;
-//                    OutputStream os = null;
-//                    String selectedFile = Environment.getExternalStorageDirectory() + "/" + stringArray[1];
-//                    File file = new File(selectedFile);
-//                    fis = new FileInputStream(file);
-//                    os = new FileOutputStream(currentDB);
-//                    byte[] buffer = new byte[1024];
-//                    int length= fis.read(buffer);
-//                    while (length > 0) {
-//                        os.write(buffer, 0, length);
-//                    }
-//                    os.flush();
-//                    os.close();`
-//                    fis.close();
+                    String stringArray[] = currentDBPath.split(":");
+                    FileInputStream fis = null;
+                    OutputStream os = null;
+                    String selectedFile = Environment.getExternalStorageDirectory() + "/" + stringArray[1];
+                    File file = new File(selectedFile);
+                    fis = new FileInputStream(file);
+                    os = new FileOutputStream(currentDB);
+                    byte[] buffer = new byte[1024];
+                    int length= fis.read(buffer);
+                    while (length > 0) {
+                        os.write(buffer, 0, length);
+                    }
+                    os.flush();
+                    os.close();
+                    fis.close();
 
                     if (sd.canWrite()) {
 

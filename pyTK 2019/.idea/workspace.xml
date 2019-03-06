@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="a01cf454-5174-414d-93d1-3d71fe25c063" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../Saga/.idea/caches/build_file_checksums.ser" beforeDir="false" afterPath="$PROJECT_DIR$/../Saga/.idea/caches/build_file_checksums.ser" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Saga/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Saga/.idea/gradle.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Saga/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Saga/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Saga/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Saga/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Saga/.idea/runConfigurations.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Saga/.idea/runConfigurations.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Saga/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Saga/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Saga/app/src/main/java/com/vandenrobotics/saga/activities/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Saga/app/src/main/java/com/vandenrobotics/saga/activities/MainActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Saga/app/src/main/res/layout/activity_scout.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Saga/app/src/main/res/layout/activity_scout.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Saga/app/src/main/res/layout/fragment_post.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Saga/app/src/main/res/layout/fragment_post.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Stats/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Stats/.idea/gradle.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Stats/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Stats/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Stats/.idea/runConfigurations.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Stats/.idea/runConfigurations.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Stats/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Stats/app/src/main/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Stats/app/src/main/java/com/vandenrobotics/stats/activities/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Stats/app/src/main/java/com/vandenrobotics/stats/activities/MainActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Stats/app/src/main/java/com/vandenrobotics/stats/data/DataBaseHelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Stats/app/src/main/java/com/vandenrobotics/stats/data/DataBaseHelper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Stats/app/src/main/java/com/vandenrobotics/stats/tools/ExternalStorageTools.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Stats/app/src/main/java/com/vandenrobotics/stats/tools/ExternalStorageTools.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Stats/app/src/main/res/layout/activity_option_screen.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Stats/app/src/main/res/layout/activity_option_screen.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Stats/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Stats/app/src/main/res/values/strings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Tyr2018/.idea/compiler.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Tyr2018/.idea/encodings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Tyr2018/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Tyr2018/.idea/gradle.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Tyr2018/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Tyr2018/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Tyr2018/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Tyr2018/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Tyr2018/.idea/runConfigurations.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Tyr2018/.idea/runConfigurations.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Tyr2018/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/../Tyr2018/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Tyr2018/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../Tyr2018/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pyTK 2018/Images/nopic.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pyTK 2018/Sqlite Database/ScoutingData01.db" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pyTK 2018/Sqlite Database/ScoutingData02.db" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pyTK 2018/Sqlite Database/ScoutingData03.db" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pyTK 2018/Sqlite Database/ScoutingData04.db" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pyTK 2018/Sqlite Database/ScoutingData05.db" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pyTK 2018/Sqlite Database/ScoutingData06.db" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pyTK 2018/Sqlite Database/ScoutingData07.db" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pyTK 2018/Sqlite Database/ScoutingData08.db" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pyTK 2018/alliances.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pyTK 2018/controller/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pyTK 2018/controller/controller.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pyTK 2018/controller/portals/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pyTK 2018/controller/portals/cnavp.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pyTK 2018/controller/portals/coutp.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pyTK 2018/controller/portals/cportal.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pyTK 2018/controller/portals/ctoolbar.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pyTK 2018/controller/portals/cviewp.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pyTK 2018/controller/windows/Stuff to Do.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pyTK 2018/controller/windows/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pyTK 2018/controller/windows/cchoose.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pyTK 2018/controller/windows/cpredict.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pyTK 2018/controller/windows/cranking.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pyTK 2018/controller/windows/csearch.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pyTK 2018/controller/windows/cteamdata.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pyTK 2018/controller/windows/cwindow.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pyTK 2018/main.bat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pyTK 2018/main.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pyTK 2018/model/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pyTK 2018/model/calculate.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pyTK 2018/model/calculateowner.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pyTK 2018/model/calculatevault.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pyTK 2018/model/imports.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pyTK 2018/model/model.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pyTK 2018/model/stat.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pyTK 2018/model/team.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pyTK 2018/scouting.db" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pyTK 2018/view/__init__ (2).py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pyTK 2018/view/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pyTK 2018/view/customs/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pyTK 2018/view/customs/ddlist.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pyTK 2018/view/customs/lreg.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pyTK 2018/view/data.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pyTK 2018/view/portals/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pyTK 2018/view/portals/vnavp.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pyTK 2018/view/portals/voutp.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pyTK 2018/view/portals/vportal.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pyTK 2018/view/portals/vtoolbar.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pyTK 2018/view/portals/vviewp.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pyTK 2018/view/view.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pyTK 2018/view/windows/Stuff to do in View.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pyTK 2018/view/windows/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pyTK 2018/view/windows/vchoose.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pyTK 2018/view/windows/vpredict.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pyTK 2018/view/windows/vranking.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pyTK 2018/view/windows/vsearch.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pyTK 2018/view/windows/vteamdata.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pyTK 2018/view/windows/vwindow.py" beforeDir="false" />
+    </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/model/imports.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="2009">
+              <caret line="129" column="72" selection-start-line="129" selection-start-column="72" selection-end-line="129" selection-end-column="72" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/model/calculate.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1932">
+              <caret line="176" selection-start-line="176" selection-end-line="176" />
+              <folding>
+                <element signature="e#246#257#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/model/model.py">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/model/stat.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="92">
+              <caret line="57" column="16" selection-start-line="57" selection-start-column="16" selection-end-line="57" selection-end-column="16" />
+              <folding>
+                <element signature="e#0#14#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/model/team.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="249">
+              <caret line="26" column="17" selection-start-line="26" selection-start-column="17" selection-end-line="26" selection-end-column="17" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/model/calculate.py" />
+        <option value="$PROJECT_DIR$/model/stat.py" />
+        <option value="$PROJECT_DIR$/model/imports.py" />
+        <option value="$PROJECT_DIR$/model/team.py" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectFrameBounds">
+    <option name="x" value="676" />
+    <option name="width" value="697" />
+    <option name="height" value="735" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="Scope" />
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="pyTK 2019" type="b2602c69:ProjectViewProjectNode" />
+              <item name="pyTK 2019" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="pyTK 2019" type="b2602c69:ProjectViewProjectNode" />
+              <item name="pyTK 2019" type="462c0819:PsiDirectoryNode" />
+              <item name="controller" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="pyTK 2019" type="b2602c69:ProjectViewProjectNode" />
+              <item name="pyTK 2019" type="462c0819:PsiDirectoryNode" />
+              <item name="model" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="pyTK 2019" type="b2602c69:ProjectViewProjectNode" />
+              <item name="pyTK 2019" type="462c0819:PsiDirectoryNode" />
+              <item name="view" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="last_opened_file_path" value="C:/Scouting2018/pyTK 2018" />
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="a01cf454-5174-414d-93d1-3d71fe25c063" name="Default Changelist" comment="" />
+      <created>1551764766311</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1551764766311</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="676" y="0" width="697" height="735" extended-state="0" />
+    <layout>
+      <window_info id="Favorites" order="0" side_tool="true" />
+      <window_info content_ui="combo" id="Project" order="1" weight="0.49620637" />
+      <window_info id="Structure" order="2" side_tool="true" weight="0.25" />
+      <window_info anchor="bottom" id="Terminal" order="0" />
+      <window_info anchor="bottom" id="Event Log" order="1" side_tool="true" />
+      <window_info anchor="bottom" id="Python Console" order="2" />
+      <window_info anchor="bottom" id="Message" order="3" />
+      <window_info anchor="bottom" id="Find" order="4" />
+      <window_info anchor="bottom" id="Version Control" order="5" />
+      <window_info anchor="bottom" id="Run" order="6" />
+      <window_info anchor="bottom" id="Debug" order="7" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="8" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="9" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="10" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+    </layout>
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/model/__init__.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/model/model.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/model/stat.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="92">
+          <caret line="57" column="16" selection-start-line="57" selection-start-column="16" selection-end-line="57" selection-end-column="16" />
+          <folding>
+            <element signature="e#0#14#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/model/calculate.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1932">
+          <caret line="176" selection-start-line="176" selection-end-line="176" />
+          <folding>
+            <element signature="e#246#257#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/model/imports.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2009">
+          <caret line="129" column="72" selection-start-line="129" selection-start-column="72" selection-end-line="129" selection-end-column="72" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/model/team.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="249">
+          <caret line="26" column="17" selection-start-line="26" selection-start-column="17" selection-end-line="26" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>

@@ -36,14 +36,14 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     @Override
     //creates all tables using the string from each of the repo
     public void onCreate(SQLiteDatabase db) {
-//        db.execSQL(TeamsRepo.createTable());
-//        db.execSQL(PitDataRepo.createTable());
-//        db.execSQL(CompetitionsRepo.createTable());
+        db.execSQL(TeamsRepo.createTable());
+        db.execSQL(PitDataRepo.createTable());
+        db.execSQL(CompetitionsRepo.createTable());
         db.execSQL(MatchesRepo.createTable());
-//        db.execSQL(MatchInfoRepo.createTable());
-//        db.execSQL(MatchInfoRepo.createIndex());
-//        db.execSQL(StatsRepo.createTable());
-//        db.execSQL(StatsRepo.createIndex());
+        db.execSQL(MatchInfoRepo.createTable());
+        db.execSQL(MatchInfoRepo.createIndex());
+        db.execSQL(StatsRepo.createTable());
+        db.execSQL(StatsRepo.createIndex());
 
 }
     @Override

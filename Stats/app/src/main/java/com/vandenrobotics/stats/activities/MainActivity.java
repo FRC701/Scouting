@@ -1,5 +1,6 @@
 package com.vandenrobotics.stats.activities;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
@@ -8,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,9 +33,10 @@ public class MainActivity extends AppCompatActivity {
     private MatchesRepo matchrepo = new MatchesRepo();
 
     // View elements
-    TextView db1Display;
-    TextView db2Display;
-    TextView mergeDisplay;
+    private Button pitData;
+    private Button avgWeight;
+    private Button minMax;
+    private Button matchPrediction;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +45,12 @@ public class MainActivity extends AppCompatActivity {
         merge2();
         merge3();
         merge4();
+
+
+        pitData = (Button) findViewById(R.id.pitData);
+        avgWeight = (Button) findViewById(R.id.avgWeights);
+        minMax = (Button) findViewById(R.id.minMax);
+        matchPrediction = (Button) findViewById(R.id.matchPrediction);
     }
 
     public void merge2() {
@@ -66,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
             String addDB1Data = "" +
                     "INSERT INTO " + Matches.TABLE + " " +
                     "SELECT " + "S.comp, S.matchNum, S.teamNumber, S.matchPos " +
-                    "FROM db1.table1 S " +
+                    "FROM db1." + Matches.TABLE +" S " +
                     "WHERE NOT EXISTS ("+
                     "SELECT T."+Matches.KEY_CompId+", T."+Matches.KEY_MatchNumber +", T."+Matches.KEY_TeamNumber + " " +
                     "FROM "+Matches.TABLE+" T " +
@@ -77,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
             String addDB2Data = "" +
                     "INSERT INTO " + Matches.TABLE + "( "+ Matches.KEY_COLUMNS+ ") " +
                     "SELECT " + "S.comp, S.team, S.matches, S.score " +
-                    "FROM db2.tabel1 S " +
+                    "FROM db2." + Matches.TABLE +" S " +
                     "WHERE NOT EXISTS ("+
                     "SELECT T."+Matches.KEY_CompId+", T."+Matches.KEY_MatchNumber +", T."+Matches.KEY_TeamNumber + " " +
                     "FROM "+Matches.TABLE+" T " +
@@ -88,7 +97,7 @@ public class MainActivity extends AppCompatActivity {
             String addDB3Data = "" +
                     "INSERT INTO " + Matches.TABLE + "( "+ Matches.KEY_COLUMNS+ ") " +
                     "SELECT " + "S.comp, S.team, S.matches, S.score " +
-                    "FROM db3.tabel1 S " +
+                    "FROM db3." + Matches.TABLE +" S " +
                     "WHERE NOT EXISTS ("+
                     "SELECT T."+Matches.KEY_CompId+", T."+Matches.KEY_MatchNumber +", T."+Matches.KEY_TeamNumber + " " +
                     "FROM "+Matches.TABLE+" T " +
@@ -99,7 +108,7 @@ public class MainActivity extends AppCompatActivity {
             String addDB4Data = "" +
                     "INSERT INTO " + Matches.TABLE + "( "+ Matches.KEY_COLUMNS+ ") " +
                     "SELECT " + "S.comp, S.team, S.matches, S.score " +
-                    "FROM db4.tabel1 S " +
+                    "FROM db4." + Matches.TABLE +" S " +
                     "WHERE NOT EXISTS ("+
                     "SELECT T."+Matches.KEY_CompId+", T."+Matches.KEY_MatchNumber +", T."+Matches.KEY_TeamNumber + " " +
                     "FROM "+Matches.TABLE+" T " +
@@ -110,7 +119,7 @@ public class MainActivity extends AppCompatActivity {
             String addDB5Data = "" +
                     "INSERT INTO " + Matches.TABLE + "( "+ Matches.KEY_COLUMNS+ ") " +
                     "SELECT " + "S.comp, S.team, S.matches, S.score " +
-                    "FROM db5.tabel1 S " +
+                    "FROM db5." + Matches.TABLE +" S " +
                     "WHERE NOT EXISTS ("+
                     "SELECT T."+Matches.KEY_CompId+", T."+Matches.KEY_MatchNumber +", T."+Matches.KEY_TeamNumber + " " +
                     "FROM "+Matches.TABLE+" T " +
@@ -121,7 +130,7 @@ public class MainActivity extends AppCompatActivity {
             String addDB6Data = "" +
                     "INSERT INTO " + Matches.TABLE + "( "+ Matches.KEY_COLUMNS+ ") " +
                     "SELECT " + "S.comp, S.team, S.matches, S.score " +
-                    "FROM db6.tabel1 S " +
+                    "FROM db6." + Matches.TABLE +" S " +
                     "WHERE NOT EXISTS ("+
                     "SELECT T."+Matches.KEY_CompId+", T."+Matches.KEY_MatchNumber +", T."+Matches.KEY_TeamNumber + " " +
                     "FROM "+Matches.TABLE+" T " +
@@ -155,11 +164,11 @@ public class MainActivity extends AppCompatActivity {
             stats.execSQL(detachDB4);
             stats.execSQL(detachDB5);
             stats.execSQL(detachDB6);
+            Toast.makeText(this, "merged stats", Toast.LENGTH_SHORT).show();
         } catch (Exception e) {
             Log.d("Test", "Merge: error " + e);
         }
     }
-
     public void merge3() {
 
         // Notes:
@@ -172,12 +181,12 @@ public class MainActivity extends AppCompatActivity {
         try {
             SQLiteDatabase stats = DatabaseManager.getInstance().openDatabase();
 
-            String attachDB1 = "ATTACH DATABASE '" + DOWNLOADS_FILE.getAbsolutePath() + "/db1.db" + "' as db1";
-            String attachDB2 = "ATTACH DATABASE '" + DOWNLOADS_FILE.getAbsolutePath() + "/db2.db" + "' as db2";
-            String attachDB3 = "ATTACH DATABASE '" + DOWNLOADS_FILE.getAbsolutePath() + "/db3.db" + "' as db3";
-            String attachDB4 = "ATTACH DATABASE '" + DOWNLOADS_FILE.getAbsolutePath() + "/db4.db" + "' as db4";
-            String attachDB5 = "ATTACH DATABASE '" + DOWNLOADS_FILE.getAbsolutePath() + "/db5.db" + "' as db5";
-            String attachDB6 = "ATTACH DATABASE '" + DOWNLOADS_FILE.getAbsolutePath() + "/db6.db" + "' as db6";
+            String attachDB1 = "ATTACH DATABASE '" + DOWNLOADS_FILE.getAbsolutePath() + "/TabletData1.db" + "' as db1";
+            String attachDB2 = "ATTACH DATABASE '" + DOWNLOADS_FILE.getAbsolutePath() + "/TabletData2.db" + "' as db2";
+            String attachDB3 = "ATTACH DATABASE '" + DOWNLOADS_FILE.getAbsolutePath() + "/TabletData3.db" + "' as db3";
+            String attachDB4 = "ATTACH DATABASE '" + DOWNLOADS_FILE.getAbsolutePath() + "/TabletData4.db" + "' as db4";
+            String attachDB5 = "ATTACH DATABASE '" + DOWNLOADS_FILE.getAbsolutePath() + "/TabletData5.db" + "' as db5";
+            String attachDB6 = "ATTACH DATABASE '" + DOWNLOADS_FILE.getAbsolutePath() + "/TabletData6.db" + "' as db6";
 
             String addDB1Data = "" +
                     "INSERT INTO " + Stats.TABLE + " " +
@@ -280,12 +289,12 @@ public class MainActivity extends AppCompatActivity {
         try {
             SQLiteDatabase stats = DatabaseManager.getInstance().openDatabase();
 
-            String attachDB1 = "ATTACH DATABASE '" + DOWNLOADS_FILE.getAbsolutePath() + "/db1.db" + "' as db1";
-            String attachDB2 = "ATTACH DATABASE '" + DOWNLOADS_FILE.getAbsolutePath() + "/db2.db" + "' as db2";
-            String attachDB3 = "ATTACH DATABASE '" + DOWNLOADS_FILE.getAbsolutePath() + "/db3.db" + "' as db3";
-            String attachDB4 = "ATTACH DATABASE '" + DOWNLOADS_FILE.getAbsolutePath() + "/db4.db" + "' as db4";
-            String attachDB5 = "ATTACH DATABASE '" + DOWNLOADS_FILE.getAbsolutePath() + "/db5.db" + "' as db5";
-            String attachDB6 = "ATTACH DATABASE '" + DOWNLOADS_FILE.getAbsolutePath() + "/db6.db" + "' as db6";
+            String attachDB1 = "ATTACH DATABASE '" + DOWNLOADS_FILE.getAbsolutePath() + "/TabletData1.db" + "' as db1";
+            String attachDB2 = "ATTACH DATABASE '" + DOWNLOADS_FILE.getAbsolutePath() + "/TabletData2.db" + "' as db2";
+            String attachDB3 = "ATTACH DATABASE '" + DOWNLOADS_FILE.getAbsolutePath() + "/TabletData3.db" + "' as db3";
+            String attachDB4 = "ATTACH DATABASE '" + DOWNLOADS_FILE.getAbsolutePath() + "/TabletData4.db" + "' as db4";
+            String attachDB5 = "ATTACH DATABASE '" + DOWNLOADS_FILE.getAbsolutePath() + "/TabletData5.db" + "' as db5";
+            String attachDB6 = "ATTACH DATABASE '" + DOWNLOADS_FILE.getAbsolutePath() + "/TabletData6.db" + "' as db6";
 
 
             String addDB1Data = "" +
@@ -376,5 +385,22 @@ public class MainActivity extends AppCompatActivity {
         } catch (Exception e) {
             Log.d("Test", "Merge: error " + e);
         }
+    }
+
+    public void pit(View view){
+        Intent intent = new Intent(this, PitScout.class );
+        startActivity(intent);
+    }
+    public void avg(View view){
+        Intent intent = new Intent(this, avgWeight.class );
+        startActivity(intent);
+    }
+    public void min (View view){
+        Intent intent = new Intent(this, MinMax.class );
+        startActivity(intent);
+    }
+    public void matchpred(View view){
+        Intent intent = new Intent(this, MatchPrediction.class );
+        startActivity(intent);
     }
 }

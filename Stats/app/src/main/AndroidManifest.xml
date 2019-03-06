@@ -20,9 +20,12 @@
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
+
             </intent-filter>
         </activity>
         <activity android:name=".activities.avgWeight"></activity>
+        <activity android:name=".activities.MatchPrediction" />
+        <activity android:name=".activities.MinMax" />
     </application>
 
 </manifest>

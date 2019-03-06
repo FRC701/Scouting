@@ -26,10 +26,12 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activities.OptionScreenActivity"/>
+            android:name=".activities.OptionScreenActivity"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".activities.PitScoutingActivity"/>
-        <activity android:name=".activities.ScoutActivity" />
+        <activity android:name=".activities.ScoutActivity"
+            android:screenOrientation="landscape" />
         <activity android:name=".activities.MatchActivity"
             android:screenOrientation="landscape"/>
     </application>

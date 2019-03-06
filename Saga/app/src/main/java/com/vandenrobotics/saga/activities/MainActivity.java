@@ -227,7 +227,7 @@ public class      MainActivity extends AppCompatActivity implements DialogListen
                 }
                 @Override
                 public void onFailure(int statusCode, Header[] headers, Throwable t, JSONObject jo){
-                    Log.d(TAG, "Failed to download events");
+                    Log.d(TAG, "Failed to download events: " + statusCode + " " + headers + " " + jo);
                     progressDialog.dismiss();
                 }
 
@@ -383,11 +383,11 @@ public class      MainActivity extends AppCompatActivity implements DialogListen
 
 
                             //TODO determine what this does
-                                downloadedEvents.add(event);
-                                downloadedEvents = sortJSONArray(downloadedEvents, "start_date", "name");
-                                downloadedAdapter.notifyDataSetChanged();
-
-                            ExternalStorageTools.writeEvents(downloadedEvents);
+//                                downloadedEvents.add(event);
+//                                downloadedEvents = sortJSONArray(downloadedEvents, "start_date", "name");
+//                                downloadedAdapter.notifyDataSetChanged();
+//
+//                            ExternalStorageTools.writeEvents(downloadedEvents);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }

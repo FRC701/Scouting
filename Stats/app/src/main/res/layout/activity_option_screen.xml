@@ -8,24 +8,32 @@
         android:layout_height="match_parent"
         android:layout_weight="1"
         android:text="Pit Data"
-        android:textSize="40dp"/>
+        android:textSize="40dp"
+        android:id="@+id/pitData"
+        android:onClick="pit"/>
     <Button
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"
         android:text="Averages and weights"
-        android:textSize="40dp"/>
+        android:textSize="40dp"
+        android:id="@+id/avgWeights"
+        android:onClick="avg"/>
     <Button
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"
         android:text="Min and Max"
-        android:textSize="40dp"/>
+        android:textSize="40dp"
+        android:id="@+id/minMax"
+        android:onClick="min"/>
     <Button
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"
         android:textSize="40dp"
-        android:text="Match Predictions"/>
+        android:text="Match Predictions"
+        android:id="@+id/matchPrediction"
+        android:onClick="matchpred"/>
 
 </LinearLayout>

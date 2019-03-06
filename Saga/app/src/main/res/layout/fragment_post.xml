@@ -100,14 +100,6 @@
         android:id="@+id/yellowCard_Cb"
         android:text="@string/CheckBox_yellowCard"
         />
-
-    <CheckBox
-        android:id="@+id/disqualified_Cb"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/disqualified_Cb"
-        android:textColor="@color/White" />
-
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
