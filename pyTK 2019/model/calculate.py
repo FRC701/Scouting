@@ -9,7 +9,7 @@ from stat import *
 #import imports
 import sys
 sys.path.append("..")
-from team import *
+from model.team import *
 
 #------------------------------------------------------------------------------
 # calculate_data function
