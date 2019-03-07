@@ -33,7 +33,6 @@ class RankingController():
                     "Cargo Ship Hatch"]
 
     rankingIndex = [("None", get_none),
-                    ("Auto Cubes In Opposing Switch", get_autoCubesInSw1_rank),
                     ("Rocket Top Cargo", get_rocketTopC_rank),
                     ("Rocket Top Hatch", get_rocketTopH_rank),
                     ("Rocket Middle Cargo", get_rocketMiddleC_rank),

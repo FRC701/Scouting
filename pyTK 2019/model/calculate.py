@@ -7,8 +7,6 @@ from statistics import *
 
 from stat import *
 #import imports
-import sys
-sys.path.append("..")
 from model.team import *
 
 #------------------------------------------------------------------------------
@@ -99,7 +97,7 @@ def get_rocketTopH_rank(sort="avg", rev=True):
     return TeamRankings.rocketTopH_rank
 
 
-def get_rockerMiddleC_rank(sort="avg", rev=True):
+def get_rocketMiddleC_rank(sort="avg", rev=True):
     TeamRankings.rocketMiddleC_rank = []
     for team in Team.team_list:
         if sort == "avg":

@@ -1,17 +1,17 @@
-p#------------------------------------------------------------------------------
+#------------------------------------------------------------------------------
 # Compiles all of the databases into one
 #------------------------------------------------------------------------------
 import sqlite3
 import os
 
-from team import *
+from model.team import *
 from controller.windows import cteamdata
 import model
 
-conn = sqlite3.connect('C:\\Workspace_2018\\pyTK 2018\\scouting.db')
+conn = sqlite3.connect('C:\\Scouting\\pyTK 2019\\TabletData.db')
 c = conn.cursor()
 
-filePath = "C:\\Workspace_2018\\pyTK 2018\\Sqlite Database\\"
+filePath = "C:\\Scouting\\pyTK 2019\\Sqlite Database\\"
 
 
 def create_table():

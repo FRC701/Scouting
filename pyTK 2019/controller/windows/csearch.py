@@ -19,10 +19,10 @@ class SearchController():
                         ("avgRocketTopH","Average Hatch In Top Rocket >= "),
                         ("avgRocketMiddleC","Average Cargo In Middle Rocket >= "),
                         ("avgRocketMiddleH","Average Hatch In Middle Rocket >= "),
-                        ("avgRocketBottomC","Average Cargo In Bottom Rocket <= "),
+                        ("avgRocketBottomC","Average Cargo In Bottom Rocket >= "),
                         ("avgRocketBottomH","Average Hatch In Bottom Rocket >= "),
-                        ("avgCargoShipC","Average Cargo In Cargo Ship <= "),
-                        ("avgCargoShipH","Average Hatch In Cargo Ship >= "),
+                        ("avgCargoShipC","Average Cargo In Cargo Ship >= "),
+                        ("avgCargoShipH","Average Hatch In Cargo Ship >= ")]
     
     checkItemTypes = [("startLevel1","Started on Level 1"),
                       ("startLevel2","Started on Level 2"),
@@ -43,14 +43,14 @@ class SearchController():
         try:
             self.matchedList = filter(lambda team:team.getAttr(index)>=float(value.get()), self.matchedList)
         except:
-             print "Invalid Search Parameter " + str(value.get()) + " for " + str(index)
+             print ("Invalid Search Parameter " + str(value.get()) + " for " + str(index))
              value.set(0)
 
     def searchLess(self, value=None, index=None):
         try:
             self.matchedList = filter(lambda team:team.getAttr(index)<=int(value.get()), self.matchedList)
         except:
-             print "Invalid Search Parameter " + str(value.get()) + " for " + str(index)
+             print ("Invalid Search Parameter " + str(value.get()) + " for " + str(index))
              value.set(999)
 
     def searchHas(self, value=None, index=None):

@@ -16,12 +16,14 @@ class App(Frame):
 
     def import_data(self):
         imports.create_table()
+        print("created table")
         imports.add_data()
+        print("added data")
         self.imported = model.imported
         if self.imported:
             calculate.calculate_data()
         else:
-            tkMessageBox.showinfo("Warning","Import Data Failed.")
+            messagebox.showinfo("Warning","Import Data Failed.")
 
 
     def import_pitData(self):
@@ -30,13 +32,13 @@ class App(Frame):
         if self.pitImported:
             calculate.calculate_pit_data()
         else:
-            tkMessageBox.showinfo("Warning","Import PitData Failed.")
+            messagebox.showinfo("Warning","Import PitData Failed.")
 
     def clear_importData(self):
         imports.clear_importData()
         self.pitImported = False
         self.imported = False
-        tkMessageBox.showinfo("INFO", "Data Cleared.")
+        messagebox.showinfo("INFO", "Data Cleared.")
         
     def teamdata(self):
         if self.imported:
@@ -44,7 +46,7 @@ class App(Frame):
             controller = cteamdata.TeamDataController()
             teamdata = vteamdata.TeamData(newWindow,self,controller)
         else:
-            tkMessageBox.showinfo("Warning","No data has been imported.")
+            messagebox.showinfo("Warning","No data has been imported.")
 
     def ranking(self):
         if self.imported:
@@ -52,7 +54,7 @@ class App(Frame):
             controller = cranking.RankingController()
             ranking = vranking.Ranking(newWindow,self,controller)
         else:
-            tkMessageBox.showinfo("Warning","No data has been imported.")
+            messagebox.showinfo("Warning","No data has been imported.")
 
     def search(self):
         if self.imported:
@@ -60,7 +62,7 @@ class App(Frame):
             controller = csearch.SearchController()
             search = vsearch.Search(newWindow,self,controller)
         else:
-            tkMessageBox.showinfo("Warning","No data has been imported.")
+            messagebox.showinfo("Warning","No data has been imported.")
         
     def predict(self):
         if self.imported:
@@ -68,7 +70,7 @@ class App(Frame):
             controller = cpredict.PredictController()
             predict = vpredict.Predict(newWindow,self,controller)
         else:
-            tkMessageBox.showinfo("Warning","No data has been imported.")
+            messagebox.showinfo("Warning","No data has been imported.")
 
     def choose(self):
         if self.imported:
@@ -76,7 +78,7 @@ class App(Frame):
             controller = cchoose.ChooseController()
             choose = vchoose.Choose(newWindow,self,controller)
         else:
-            tkMessageBox.showinfo("Warning","No data has been imported.")
+            messagebox.showinfo("Warning","No data has been imported.")
 
     def startup(self):
         # create a frame to put the window buttons in
