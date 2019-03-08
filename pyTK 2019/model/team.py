@@ -29,6 +29,7 @@ class _TeamInfo(object):
         self.yellowCard = 0
         self.fouls = 0
         self.techFouls = 0
+        self.hasFoul = 0
 
     def get_info(self):
         self.totalFoul = sum(self.fouls)

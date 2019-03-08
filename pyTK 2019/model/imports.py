@@ -74,7 +74,7 @@ def create_table():
               MinFouls REAL, MaxFouls REAL,
               MinTechFouls REAL, MaxTechFouls REAL)''')
 
-def add_data():
+def add_data(model):
     model.imported = False
     global conn
     global c
@@ -89,7 +89,7 @@ def add_data():
             matches = tc.fetchall()
             c.executemany('INSERT OR REPLACE INTO MatchesAll VALUES (?, ?, ?, ?)', matches)
             model.imported = True
-            print("successfully imported matches")
+            print("successfully imported matches", model.imported)
         except Exception as e:
             print ("exception in matches",e)
             model.imported = False
@@ -135,6 +135,8 @@ def add_data():
 
             
         tc.close()
+        print("Model.imported=", model.imported)
+
 def add_teamInfo(team):
     global conn
     global c

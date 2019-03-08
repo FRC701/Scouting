@@ -1,7 +1,7 @@
 import sqlite3
-from team import *
+from model.team import *
 
-conn = sqlite3.connect('C:\Workspace_2018\pyTK 2018\scouting.db')
+conn = sqlite3.connect('C:\Scouting\pyTK 2019\TabletData.db')
 c = conn.cursor()
 
 def get_teams():
@@ -56,11 +56,11 @@ def store_stats(rows):
     endLevel2 = 20
     endLevel3 = 21
     endNone = 22
-    robotiDisabled = 23
+    robotDisabled = 23
     redCard = 24
     yellowCard = 25
     foul = 26
-    techfoul = 27
+    techFoul = 27
     
     for row in rows:
         for team in Team.team_list:
@@ -71,7 +71,7 @@ def store_stats(rows):
                 team.Info.startLevel2 += row[startLevel2]
                 team.Info.preloadCargo += row[preloadCargo]
                 team.Info.preloadHatch += row[preloadHatch]
-                team.Info.crossHubLine += row[crossHubLine]
+                team.Info.crossHubline += row[crossHubline]
                 team.Info.endLevel1 += row[endLevel1]
                 team.Info.endLevel2 += row[endLevel2]
                 team.Info.endLevel3 += row[endLevel3]
@@ -79,23 +79,20 @@ def store_stats(rows):
                 team.Info.robotDisabled += row[robotDisabled]
 
                 team.Scores.rocketTopC.append(row[rocketTC])
-	        team.Scores.rocketTopH.append(row[rocketTH])
+                team.Scores.rocketTopH.append(row[rocketTH])
                 team.Scores.rocketMiddleC.append(row[rocketMC])
-	        team.Scores.rocketMiddleH.append(row[rocketMH])
-		team.Scores.rocketBottomC.append(row[rocketBC])
-		team.Scores.rocketBottomH.append(row[rocketBH])
-		team.Scores.cargoShipC.append(row[cargoShipC])
-		team.Scores.cargoShipH.append(row[cargoShipH])
+                team.Scores.rocketMiddleH.append(row[rocketMH])
+                team.Scores.rocketBottomC.append(row[rocketBC])
+                team.Scores.rocketBottomH.append(row[rocketBH])
+                team.Scores.cargoShipC.append(row[cargoShipC])
+                team.Scores.cargoShipH.append(row[cargoShipH])
 
-		team.Info.redCard += row[redCard]
-		team.Info.yellowCard += row[yellowCard]
-		team.Info.fouls.append(row[foul])
-		team.Info.techFouls.append(row[techFoul])
-				
-		if row[foul] > 1 or row[techFoul] > 1:
-		    team.Info.hasFoul += 1
+                team.Info.redCard += row[redCard]
+                team.Info.yellowCard += row[yellowCard]
 
-		print ("added stats values for " + str(team.number))
-		print (row)
-		    
-    
+            if row[foul] > 1 or row[techFoul] > 1:
+                team.Info.hasFoul += 1
+
+            print("added stats values for " + str(team.number))
+        print(row)
+

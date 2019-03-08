@@ -3,10 +3,10 @@
 #   -- functions for handling data input, output, and calculations
 #------------------------------------------------------------------------------
 import math
-from statistics import *
+#from statlib import *
 
-from stat import *
-#import imports
+from model.stat import *
+from model.imports import *
 from model.team import *
 
 #------------------------------------------------------------------------------

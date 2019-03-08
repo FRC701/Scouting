@@ -16,11 +16,10 @@ class App(Frame):
 
     def import_data(self):
         imports.create_table()
-        print("created table")
-        imports.add_data()
-        print("added data")
-        self.imported = model.imported
-        if self.imported:
+        print("created table", model.imported)
+        imports.add_data(model)
+        print("added data", model.imported)
+        if model.imported:
             calculate.calculate_data()
         else:
             messagebox.showinfo("Warning","Import Data Failed.")
