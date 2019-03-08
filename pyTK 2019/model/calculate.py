@@ -5,9 +5,9 @@
 import math
 #from statlib import *
 
-from . import stats.*
+from . import stat
 from . import imports
-from . import team
+from .team import Team
 
 # import model.stats
 # import model.imports
@@ -18,11 +18,12 @@ from . import team
 #------------------------------------------------------------------------------
 def calculate_data():
     #adds stats values to team data
-    populate_teaminfo()
+    stat.populate_teaminfo()
 
     # get primary offensive information about the team
 
     for team in Team.team_list:
+        team.get_primary_details()
         rocketTopC = (float(team.Scores.avgRocketTopC)/4)*3.0
         rocketTopH = (float(team.Scores.avgRocketTopH)/4)*2.0
         rocketMiddleC = (float(team.Scores.avgRocketMiddleC)/4)*3.0
@@ -33,7 +34,7 @@ def calculate_data():
         cargoShipH = (float(team.Scores.avgCargoShipH)/4)*2.0
 
         team.totalWS = str(round(float(team.totalWS)+(rocketTopC+rocketTopH+rocketMiddleC+rocketMiddleH+rocketBottomC+rocketBottomH+cargoShipC+cargoShipH), 2))
-        add_teamInfo(team)
+        imports.add_teamInfo(team)
         
         
 #------------------------------------------------------------------------------

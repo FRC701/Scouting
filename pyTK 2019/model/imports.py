@@ -4,14 +4,13 @@
 import sqlite3
 import os
 
-from team import *
+import model.team
 import controller.windows.cteamdata as cteamdata
-import . model
 
-conn = sqlite3.connect('C:\\Scouting\\pyTK 2019\\TabletData.db')
+conn = sqlite3.connect('TabletData.db')
 c = conn.cursor()
 
-filePath = "C:\\Scouting\\pyTK 2019\\Sqlite Database\\"
+filePath = "Sqlite Database\\"
 
 
 def create_table():
@@ -49,30 +48,29 @@ def create_table():
     CREATE TABLE IF NOT EXISTS TeamsAll( TeamNumber INTEGER not null PRIMARY KEY, TeamName TEXT);
     CREATE TABLE IF NOT EXISTS Alliances( AllianceNum INTEGER not null PRIMARY KEY, TeamNum INTEGER);
     CREATE TABLE IF NOT EXISTS TeamInfo(TeamNum INTEGER PRIMARY KEY, NumMatch INTEGER,
-              PercentNoShow REAL, OffWS REAL,
-              DefWS REAL, TotalWS REAL,
-              NegWS REAL,
-              PercentStartLevel1 REAL, PercentStartLevel2 REAL,
-              PercentPreloadC REAL, PercentPreloadH REAL, 
-              AvgRocketTopC REAL, AvgRocketTopH REAL,
-              AvgRocketMiddleC REAL, AvgRocketMiddleH REAL,
-              AvgRocketBottomC REAL, AvgRocketBottomH REAL,
-              AvgCargoShipC REAL, AvgCargoShipH REAL,
-              PercentCrossHubLine REAL, PercentEndLevel1 REAL,
-              PercentEndLevel2 REAL, PercentEndLevel3 REAL,
-              PercentEndNone REAL, PercentRobotDisabled REAL,
-              PercentRedCard REAL, PercentYellowCard REAL,
-              PercentFouls REAL, PercentTechFouls REAL,
-              MinRocketTopC REAL, MaxRocketTopC REAL,
-              MinRocketTopH REAL, MaxRocketTopH REAL,
-              MinRocketMiddleC REAL, MaxRocketMiddleC REAL,
-              MinRocketMiddleH REAL, MaxRocketMiddleH REAL,
-              MinRocketBottomC REAL, MaxRocketBottomC REAL,
-              MinRocketBottomH REAL, MaxRocketBottomH REAL,
-              MinCargoShipC REAL, MaxCargoShipC REAL,
-              MinCargoShipH REAL, MaxCargoShipH REAL,
-              MinFouls REAL, MaxFouls REAL,
-              MinTechFouls REAL, MaxTechFouls REAL)''')
+                OffWS REAL,
+                TotalWS REAL, NegWS REAL,
+                PercentNoShow REAL,
+                PercentStartLevel1 REAL, PercentStartLevel2 REAL,
+                PercentPreloadC REAL, PercentPreloadH REAL, 
+                PercentCrossHubLine REAL,
+                AvgRocketTopC REAL, AvgRocketTopH REAL,
+                AvgRocketMiddleC REAL, AvgRocketMiddleH REAL,
+                AvgRocketBottomC REAL, AvgRocketBottomH REAL,
+                AvgCargoShipC REAL, AvgCargoShipH REAL,
+                PercentEndLevel1 REAL, PercentEndLevel2 REAL, 
+                PercentEndLevel3 REAL, PercentEndNone REAL,
+                PercentFouls REAL, PercentTechFouls REAL,
+                PercentYellowCard REAL, PercentRedCard REAL, 
+                PercentRobotDisabled REAL,
+                MaxRocketTopC REAL, MinRocketTopC REAL,
+                MaxRocketTopH REAL, MinRocketTopH REAL,
+                MaxRocketMiddleC REAL, MinRocketMiddleC REAL,
+                MaxRocketMiddleH REAL, MinRocketMiddleH REAL,
+                MaxRocketBottomC REAL, MinRocketBottomC REAL,
+                MaxRocketBottomH REAL, MinRocketBottomH REAL,
+                MaxCargoShipC REAL, MinCargoShipC REAL,
+                MaxCargoShipH REAL, MinCargoShipH REAL)''')
 
 def add_data(model):
     model.imported = False
@@ -144,15 +142,19 @@ def add_teamInfo(team):
     controller = cteamdata.TeamDataController()
     teamInfo.append(team.number)
     for x, y in controller.dataLabelVals:
+        print(x)
         try:
             teamInfo.append(float(team.getAttr(x)))
         except:
             teamInfo.append(float((team.getAttr(x)[:team.getAttr(x).find("%")])))
     for x, y in controller.maxminLabelVals:
-            teamInfo.append(int(team.Scores.getAttr(x)))
+        print(x)
+        teamInfo.append(int(team.Scores.getAttr(x)))
     temp = []
+    print(teamInfo)
     temp.append(tuple(teamInfo))
-    c.executemany('INSERT OR REPLACE INTO TeamInfo VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', temp)
+    print(len(temp))
+    c.executemany('INSERT OR REPLACE INTO TeamInfo VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', temp)
     conn.commit()
     
     

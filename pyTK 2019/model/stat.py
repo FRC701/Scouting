@@ -1,7 +1,7 @@
 import sqlite3
 from model.team import *
 
-conn = sqlite3.connect('C:\Scouting\pyTK 2019\TabletData.db')
+conn = sqlite3.connect('TabletData.db')
 c = conn.cursor()
 
 def get_teams():
@@ -94,5 +94,5 @@ def store_stats(rows):
                 team.Info.hasFoul += 1
 
             print("added stats values for " + str(team.number))
-        print(row)
+        # print(row)
 

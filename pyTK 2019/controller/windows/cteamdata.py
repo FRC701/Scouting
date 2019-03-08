@@ -15,7 +15,6 @@ class TeamDataController():
     # use these to index values to display, use the system: ("key", "term")
     # where key corresponds to a value in team and term labels that value
     dataLabelVals = [("numMatch", "Number of Matches: "),
-                     ("pNoShow", "No Show: "),
                      ("offensiveWS", "Offensive Weighted Score: "),
                      ("totalWS", "Total Weighted Score: "),
                      ("negativeWS", "Negative Weighted Score: "),
@@ -23,9 +22,9 @@ class TeamDataController():
                      ("pNoShow", "No Show Percentage: "),
                      ("pStartLevel1", "Start on Level 1 Percentage: "),
                      ("pStartLevel2", "Start on Level 2 Percentage: "),
-                     ("pPreloadC", "Preload Cargo Percentage: "),
-                     ("pPrealoadH", "Preload Hatch Percentage: "),
-                     ("pCrossHubline", "Cross Hubline Percentage: "),
+                     ("pPreloadCargo", "Preload Cargo Percentage: "),
+                     ("pPreloadHatch", "Preload Hatch Percentage: "),
+                     ("pCrossHubLine", "Cross Hubline Percentage: "),
                      ("avgRocketTopC", "Average Number Of Cargo in Top Rocket: "),
                      ("avgRocketTopH", "Average Number Of Hatch in Top Rocket: "),
                      ("avgRocketMiddleC", "Average Number Of Cargo in Middle Rocket: "),
@@ -40,7 +39,6 @@ class TeamDataController():
                      ("pEndLevel3", "End Level 3 Percentage: "),
                      ("pEndNone", "No End Level Percentage: "),
 
-                     ("pHasFoul", "Matches Had Any Foul: "),
                      ("pFoul", "Matches Had Foul: "),
                      ("pTechFoul", "Matches Had Tech Foul: "),
                      ("pYellowCard", "Matches Had Yellow Card: "),
@@ -53,8 +51,8 @@ class TeamDataController():
                        ("maxRocketMiddleH","Maximum Number Of Hatch in Middle Rocket: "),("minRocketMiddleH","Minimum Number Of Hatch in Middle Rocket: "),
                        ("maxRocketBottomC","Maximum Number Of Cargo in Bottom Rocket: "),("minRocketBottomC","Minimum Number Of Cargo in Bottom Rocket: "),
                        ("maxRocketBottomH","Maximum Number Of Hatch in Bottom Rocket: "),("minRocketBottomH","Minimum Number Of Hatch in Bottom Rocket: "),
-                       ("maxCargoShipC","Maximum Number Of Cargo in Cargo Ship: "),("minRocketTopC","Minimum Number Of Cargo in Cargo Ship: "),
-                       ("maxCargoShipH","Maximum Number Of Hatch in Cargo Ship: "),("minRocketTopH","Minimum Number Of Hatch in Cargo Ship: ")]
+                       ("maxCargoShipC","Maximum Number Of Cargo in Cargo Ship: "),("minCargoShipC","Minimum Number Of Cargo in Cargo Ship: "),
+                       ("maxCargoShipH","Maximum Number Of Hatch in Cargo Ship: "),("minCargoShipH","Minimum Number Of Hatch in Cargo Ship: ")]
     
     pitDataStrings = []
                        

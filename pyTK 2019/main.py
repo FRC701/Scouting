@@ -9,6 +9,9 @@ from tkinter import messagebox
 import view.windows
 import controller.windows 
 
+import model.imports as imports
+import model.model as model
+import model.calculate as calculate
 
 class App(Frame):
 

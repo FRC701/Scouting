@@ -32,9 +32,9 @@ class _TeamInfo(object):
         self.hasFoul = 0
 
     def get_info(self):
-        self.totalFoul = sum(self.fouls)
+        self.totalFoul =  self.fouls
         # you don't need to the the redCard, yellowCard, and disabled because they add up on their own
-        self.totalTechFoul = sum(self.techFouls)
+        self.totalTechFoul = self.techFouls
         # fouls are in arrays so they need to be added manually
 
         self.pCrossHubLine = float(100 * self.crossHubline) / float(len(self.matches)) if len(self.matches) else 0
@@ -50,7 +50,8 @@ class _TeamInfo(object):
         self.pEndLevel2 = float(100*self.endLevel2)/float(len(self.matches)) if len(self.matches) else 0
         self.pEndLevel3 = float(100*self.endLevel3)/float(len(self.matches)) if len(self.matches) else 0
         self.pEndNone = float(100*self.endNone)/float(len(self.matches)) if len(self.matches) else 0
-                                                      
+
+        self.pDisabled = float(100*self.robotDisabled)/float(len(self.matches)) if len(self.matches) else 0                             
         self.pRedCard = float(100*self.redCard)/float(len(self.matches)) if len(self.matches) else 0
         self.pYellowCard = float(100*self.yellowCard)/float(len(self.matches)) if len(self.matches) else 0
         self.pFoul = float(100*self.totalFoul)/float(len(self.matches)) if len(self.matches) else 0
@@ -219,8 +220,6 @@ class Team(object):
         self.pRedCard = str(round(self.Info.pRedCard,2))  + "%"
         self.pYellowCard = str(round(self.Info.pYellowCard,2))  + "%"
 
-        self.totTechFoul = str(round(self.Info.totalTechFoul))
-        self.totFoul = str(round(self.Info.totalFoul))
         self.pHasFoul = str(int(100*self.Info.hasFoul)/len(matches)) + "%" if len(matches) else "0%"
         self.pFoul = str(round(self.Info.pFoul, 2)) + "%"
         self.pTechFoul = str(round(self.Info.pTechFoul, 2)) + "%"
@@ -234,6 +233,7 @@ class Team(object):
         self.avgRocketBottomH = str(round(self.Scores.avgRocketBottomH))
         self.avgCargoShipC = str(round(self.Scores.avgCargoShipC))
         self.avgCargoShipH = str(round(self.Scores.avgCargoShipH))
+
 
     def getAttr(self, source):
         return getattr(self, source)

@@ -1,1 +1,1 @@
-__all__=["calculate","calculatepredictions","imports","model","stats","team"]
+__all__=["calculate","imports","model","stat","team"]
