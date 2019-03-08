@@ -5,10 +5,13 @@
 import math
 #from statlib import *
 
-from model.stat import *
-from model.imports import *
-from model.team import *
+from . import stats.*
+from . import imports
+from . import team
 
+# import model.stats
+# import model.imports
+# import model.team
 #------------------------------------------------------------------------------
 # calculate_data function
 #   -- handles data and stores it to the teams

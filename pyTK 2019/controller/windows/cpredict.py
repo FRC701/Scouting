@@ -4,8 +4,7 @@
 #------------------------------------------------------------------------------
 from tkinter import *
 
-from model import team
-from model import calculate
+
 
 #------------------------------------------------------------------------------
 # SearchController class

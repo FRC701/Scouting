@@ -6,10 +6,8 @@ except ImportError:
     from tkinter import *   ## notice lowercase 't' in tkinter here
 from tkinter import filedialog
 from tkinter import messagebox
-from view.windows import *
-from controller.windows import *
-
-from model import model, imports, calculate
+import view.windows
+import controller.windows 
 
 
 class App(Frame):

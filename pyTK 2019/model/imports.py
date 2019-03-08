@@ -4,9 +4,9 @@
 import sqlite3
 import os
 
-from model.team import *
-from controller.windows import cteamdata
-import model
+from team import *
+import controller.windows.cteamdata as cteamdata
+import . model
 
 conn = sqlite3.connect('C:\\Scouting\\pyTK 2019\\TabletData.db')
 c = conn.cursor()
