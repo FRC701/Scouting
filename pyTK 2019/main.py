@@ -9,16 +9,6 @@ from tkinter import messagebox
 import view.windows
 import controller.windows 
 
-import controller.windows.cranking as cranking
-import controller.windows.cpredict as cpredict
-import controller.windows.cchoose as cchoose
-import controller.windows.csearch as csearch
-import controller.windows.cteamdata as cteamdata
-import view.windows.vteamdata as vteamdata
-import view.windows.vranking as vranking
-import view.windows.vsearch as vsearch
-import view.windows.vpredict as vpredict
-import view.windows.vchoose as vchoose
 import model.imports as imports
 import model.model as model
 import model.calculate as calculate
@@ -32,13 +22,12 @@ class App(Frame):
         print("added data", model.imported)
         if model.imported:
             calculate.calculate_data()
-            self.imported = True
         else:
             messagebox.showinfo("Warning","Import Data Failed.")
 
 
     def import_pitData(self):
-        imports.import_pitData(filedialog.askopenfilename())
+        imports.import_pitData(tkFileDialog.askopenfilename())
         self.pitImported = model.pitImported
         if self.pitImported:
             calculate.calculate_pit_data()

@@ -5,7 +5,7 @@
 from tkinter import *
 import re
 
-from controller.windows import *
+from controller.windows import cranking.*
 from controller.windows import cteamdata
 from view.windows import vteamdata
     

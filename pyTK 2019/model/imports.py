@@ -148,12 +148,12 @@ def add_teamInfo(team):
         except:
             teamInfo.append(float((team.getAttr(x)[:team.getAttr(x).find("%")])))
     for x, y in controller.maxminLabelVals:
-        #print(x)
+        print(x)
         teamInfo.append(int(team.Scores.getAttr(x)))
     temp = []
-    #print(teamInfo)
+    print(teamInfo)
     temp.append(tuple(teamInfo))
-    #print(len(temp))
+    print(len(temp))
     c.executemany('INSERT OR REPLACE INTO TeamInfo VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', temp)
     conn.commit()
     
@@ -225,7 +225,7 @@ def add_stats():
 def clear_importData():
     model.imported = False
     model.pitImported = False
-    # Team.available = []
-    # Team.team_list = []
+    Team.available = []
+    Team.team_list = []
 
-000000000000
+

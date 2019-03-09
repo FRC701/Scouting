@@ -29,48 +29,126 @@ public class TeamInfoRepo {
         return "CREATE TABLE " + TeamInfo.TABLE + "("
                 + TeamInfo.KEY_TeamNum + " INTEGER not null , "
                 + TeamInfo.KEY_NumMatch + " REAL , "
+                + TeamInfo.KEY_PNoShow + " REAL  , "
                 + TeamInfo.KEY_AvgOff + " REAL , "
+                + TeamInfo.KEY_AvgDef + " REAL , "
                 + TeamInfo.KEY_AvgTotal + " REAL , "
                 + TeamInfo.KEY_AvgNeg + " REAL , "
-                + TeamInfo.KEY_PNoShow + " REAL  , "
-                + TeamInfo.KEY_PStartLevel + " REAL , "
-                + TeamInfo.KEY_PStartLevel2 + " REAL , "
-                + TeamInfo.KEY_PPreloadCargo + " REAL , "
-                + TeamInfo.KEY_PPreloadHatch + " REAL , "
-                + TeamInfo.KEY_PCrossHubLine + " REAL , "
-                + TeamInfo.KEY_AvgRobotTopC + " REAL , "
-                + TeamInfo.KEY_AvgRobotTopH + " REAL , "
-                + TeamInfo.KEY_AvgRobotMiddleC + " REAL , "
-                + TeamInfo.KEY_AvgRobotMiddleH + " REAL , "
-                + TeamInfo.KEY_AvgRobotBottomC + " REAL , "
-                + TeamInfo.KEY_AvgRobotBottomH + " REAL , "
-                + TeamInfo.KEY_AvgCargoShipC + " REAL , "
-                + TeamInfo.KEY_AvgCargoShipH + " REAL , "
-                + TeamInfo.KEY_PEndLevel1 + " REAL , "
-                + TeamInfo.KEY_PEndLevel2 + " REAL , "
-                + TeamInfo.KEY_PEndLevel3 + " REAL , "
-                + TeamInfo.KEY_PEndNone + " REAL , "
-                + TeamInfo.KEY_PFoul + " REAL , "
+                + TeamInfo.KEY_AvgAuto + " REAL , "
+                + TeamInfo.KEY_PHadAuto + " REAL , "
+                + TeamInfo.KEY_PCrossAutoLine + " REAL , "
+                + TeamInfo.KEY_PAutoPickedUpCube + " REAL , "
+                + TeamInfo.KEY_AvgAutoCubesInSw1 + " REAL , "
+                + TeamInfo.KEY_AvgAutoCubesInSw2 + " REAL , "
+                + TeamInfo.KEY_AvgAutoCubesInScl + " REAL , "
+                + TeamInfo.KEY_AvgAutoCubesInEx + " REAL , "
+                + TeamInfo.KEY_AvgAutoOwnGainSw1 + " REAL , "
+                + TeamInfo.KEY_AvgAutoOwnedSw1 + " REAL , "
+                + TeamInfo.KEY_AvgAutoOwnGainSw2 + " REAL , "
+                + TeamInfo.KEY_AvgAutoOwnedSw2 + " REAL , "
+                + TeamInfo.KEY_AvgAutoOwnGainScl + " REAL , "
+                + TeamInfo.KEY_AvgAutoOwnedScl + " REAL , "
+                + TeamInfo.KEY_AvgAutoNumOwnChangesSw1 + " REAL , "
+                + TeamInfo.KEY_AvgAutoNumOwnChangesSw2 + " REAL , "
+                + TeamInfo.KEY_AvgAutoNumOwnChangesScl + " REAL , "
+                + TeamInfo.KEY_AvgTele + " REAL , "
+                + TeamInfo.KEY_PTelePickedUpCube + " REAL , "
+                + TeamInfo.KEY_AvgTeleCubesInSw1 + " REAL , "
+                + TeamInfo.KEY_AvgTeleCubesInSw2 + " REAL , "
+                + TeamInfo.KEY_AvgTeleCubesInScl + " REAL , "
+                + TeamInfo.KEY_AvgTeleCubesInEx + " REAL , "
+                + TeamInfo.KEY_AvgTeleOwnGainSw1 + " REAL , "
+                + TeamInfo.KEY_AvgTeleOwnedSw1 + " REAL , "
+                + TeamInfo.KEY_AvgTeleOwnGainSw2 + " REAL , "
+                + TeamInfo.KEY_AvgTeleOwnedSw2 + " REAL , "
+                + TeamInfo.KEY_AvgTeleOwnGainScl + " REAL , "
+                + TeamInfo.KEY_AvgTeleOwnedScl + " REAL , "
+                + TeamInfo.KEY_AvgTeleNumOwnChangesSw1 + " REAL , "
+                + TeamInfo.KEY_AvgTeleNumOwnChangesSw2 + " REAL , "
+                + TeamInfo.KEY_AvgTeleNumOwnChangesScl + " REAL , "
+                + TeamInfo.KEY_PClimb + " REAL , "
+                + TeamInfo.KEY_PClimbAssist + " REAL , "
+                + TeamInfo.KEY_PParking + " REAL , "
+                + TeamInfo.KEY_PHumanPlayer + " REAL , "
+                + TeamInfo.KEY_HadFoul + " REAL , "
                 + TeamInfo.KEY_PTechFoul + " REAL , "
+                + TeamInfo.KEY_PFoul + " REAL , "
                 + TeamInfo.KEY_PYellowCard + " REAL , "
                 + TeamInfo.KEY_PRedCard + " REAL , "
                 + TeamInfo.KEY_PDisabled + " REAL , "
-                + TeamInfo.KEY_MaxRocketTopC + " REAL , "
-                + TeamInfo.KEY_MinRocketTopC+ " REAL , "
-                + TeamInfo.KEY_MaxRocketTopH + " REAL , "
-                + TeamInfo.KEY_MinRocketTopH + " REAL , "
-                + TeamInfo.KEY_MaxRocketMiddleC + " REAL , "
-                + TeamInfo.KEY_MinRocketMiddleC + " REAL , "
-                + TeamInfo.KEY_MaxRocketMiddleH + " REAL , "
-                + TeamInfo.KEY_MinRocketMiddleH + " REAL , "
-                + TeamInfo.KEY_MaxRocketBottomC + " REAL , "
-                + TeamInfo.KEY_MinRocketBottomC + " REAL , "
-                + TeamInfo.KEY_MaxRocketBottomH + " REAL , "
-                + TeamInfo.KEY_MinRocketBottomH + " REAL , "
-                + TeamInfo.KEY_MaxCargoShipC + " REAL , "
-                + TeamInfo.KEY_MinCargoShipC + " REAL , "
-                + TeamInfo.KEY_MaxCargoShipH + " REAL , "
-                + TeamInfo.KEY_MinCargoShipH + " REAL , " +
+                + TeamInfo.KEY_AvgNumCubesInVault + " REAL , "
+                + TeamInfo.KEY_AvgActiveFceTime + " REAL , "
+                + TeamInfo.KEY_AvgActiveLevTime + " REAL , "
+                + TeamInfo.KEY_AvgActiveBstTime + " REAL , "
+                + TeamInfo.KEY_AvgCubesAtActiveFce + " REAL , "
+                + TeamInfo.KEY_AvgCubesAtActiveLev + " REAL , "
+                + TeamInfo.KEY_AvgCubesAtActiveBst + " REAL , "
+                + TeamInfo.KEY_MaxAutoNumOwnChangesSw1 + " INTEGER , "
+                + TeamInfo.KEY_MinAutoNumOwnChangesSw1 + " INTEGER , "
+                + TeamInfo.KEY_MaxAutoNumOwnChangesSw2 + " INTEGER , "
+                + TeamInfo.KEY_MinAutoNumOwnChangesSw2 + " INTEGER , "
+                + TeamInfo.KEY_MaxAutoNumOwnChangesScl + " INTEGER , "
+                + TeamInfo.KEY_MinAutoNumOwnChangesScl + " INTEGER , "
+                + TeamInfo.KEY_MaxAutoCubesInSw1 + " INTEGER , "
+                + TeamInfo.KEY_MinAutoCubesInSw1 + " INTEGER , "
+                + TeamInfo.KEY_MaxAutoCubesInSw2 + " INTEGER , "
+                + TeamInfo.KEY_MinAutoCubesInSw2 + " INTEGER , "
+                + TeamInfo.KEY_MaxAutoCubesInScl + " INTEGER , "
+                + TeamInfo.KEY_MinAutoCubesInScl + " INTEGER , "
+                + TeamInfo.KEY_MaxAutoCubesInEx + " INTEGER , "
+                + TeamInfo.KEY_MinAutoCubesInEx + " INTEGER , "
+                + TeamInfo.KEY_MaxAutoOwnGainSw1 + " INTEGER , "
+                + TeamInfo.KEY_MinAutoOwnGainSw1 + " INTEGER , "
+                + TeamInfo.KEY_MaxAutoOwnedSw1 + " INTEGER , "
+                + TeamInfo.KEY_MinAutoOwnedSw1 + " INTEGER , "
+                + TeamInfo.KEY_MaxAutoOwnGainSw2 + " INTEGER , "
+                + TeamInfo.KEY_MinAutoOwnGainSw2 + " INTEGER , "
+                + TeamInfo.KEY_MaxAutoOwnedSw2 + " INTEGER , "
+                + TeamInfo.KEY_MinAutoOwnedSw2 + " INTEGER , "
+                + TeamInfo.KEY_MaxAutoOwnGainScl + " INTEGER , "
+                + TeamInfo.KEY_MinAutoOwnGainScl + " INTEGER , "
+                + TeamInfo.KEY_MaxAutoOwnedScl + " INTEGER , "
+                + TeamInfo.KEY_MinAutoOwnedScl + " INTEGER , "
+                + TeamInfo.KEY_MaxTeleNumOwnChangesSw1 + " INTEGER , "
+                + TeamInfo.KEY_MinTeleNumOwnChangesSw1 + " INTEGER , "
+                + TeamInfo.KEY_MaxTeleNumOwnChangesSw2 + " INTEGER , "
+                + TeamInfo.KEY_MinTeleNumOwnChangesSw2 + " INTEGER , "
+                + TeamInfo.KEY_MaxTeleNumOwnChangesScl + " INTEGER , "
+                + TeamInfo.KEY_MinTeleNumOwnChangesScl + " INTEGER , "
+                + TeamInfo.KEY_MaxTeleCubesInSw1 + " INTEGER , "
+                + TeamInfo.KEY_MinTeleCubesInSw1 + " INTEGER , "
+                + TeamInfo.KEY_MaxTeleCubesInSw2 + " INTEGER , "
+                + TeamInfo.KEY_MinTeleCubesInSw2 + " INTEGER , "
+                + TeamInfo.KEY_MaxTeleCubesInScl + " INTEGER , "
+                + TeamInfo.KEY_MinTeleCubesInScl + " INTEGER , "
+                + TeamInfo.KEY_MaxTeleCubesInEx + " INTEGER , "
+                + TeamInfo.KEY_MinTeleCubesInEx + " INTEGER , "
+                + TeamInfo.KEY_MaxTeleOwnGainSw1 + " INTEGER , "
+                + TeamInfo.KEY_MinTeleOwnGainSw1 + " INTEGER , "
+                + TeamInfo.KEY_MaxTeleOwnedSw1 + " INTEGER , "
+                + TeamInfo.KEY_MinTeleOwnedSw1 + " INTEGER , "
+                + TeamInfo.KEY_MaxTeleOwnGainSw2 + " INTEGER , "
+                + TeamInfo.KEY_MinTeleOwnGainSw2 + " INTEGER , "
+                + TeamInfo.KEY_MaxTeleOwnedSw2 + " INTEGER , "
+                + TeamInfo.KEY_MinTeleOwnedSw2 + " INTEGER , "
+                + TeamInfo.KEY_MaxTeleOwnGainScl + " INTEGER , "
+                + TeamInfo.KEY_MinTeleOwnGainScl + " INTEGER , "
+                + TeamInfo.KEY_MaxTeleOwnedScl + " INTEGER , "
+                + TeamInfo.KEY_MinTeleOwnedScl + " INTEGER , "
+                + TeamInfo.KEY_MaxNumCubesInVault + " INTEGER , "
+                + TeamInfo.KEY_MinNumCubesInVault + " INTEGER , "
+                + TeamInfo.KEY_MaxActiveFceTime + " INTEGER , "
+                + TeamInfo.KEY_MinActiveFceTime + " INTEGER , "
+                + TeamInfo.KEY_MaxActiveLevTime + " INTEGER , "
+                + TeamInfo.KEY_MinActiveLevTime + " INTEGER , "
+                + TeamInfo.KEY_MaxActiveBstTime + " INTEGER , "
+                + TeamInfo.KEY_MinActiveBstTime + " INTEGER , "
+                + TeamInfo.KEY_MaxCubesAtActiveFce + " INTEGER , "
+                + TeamInfo.KEY_MinCubesAtActiveFce + " INTEGER , "
+                + TeamInfo.KEY_MaxCubesAtActiveLev + " INTEGER , "
+                + TeamInfo.KEY_MinCubesAtActiveLev + " INTEGER , "
+                + TeamInfo.KEY_MaxCubesAtActiveBst + " INTEGER , "
+                + TeamInfo.KEY_MinCubesAtActiveBst + " INTEGER , "+
                 //makes the CompId, MatchNum and MatchPos Primary Key so there needs
                 //to be a unique combination of these attributes in each row in the TeamInfo table
                 "PRIMARY KEY ( '" + TeamInfo.KEY_TeamNum + "' ), "
@@ -95,47 +173,125 @@ public class TeamInfoRepo {
         values.put(TeamInfo.KEY_TeamNum, teamInfo.getTeamNum());
         values.put(TeamInfo.KEY_PNoShow, teamInfo.getPNoShow());
         values.put(TeamInfo.KEY_AvgOff, teamInfo.getOffensiveWS());
+        values.put(TeamInfo.KEY_AvgDef, teamInfo.getDefensiveWS());
         values.put(TeamInfo.KEY_AvgTotal, teamInfo.getTotalWS());
         values.put(TeamInfo.KEY_AvgNeg, teamInfo.getNegWS());
-        values.put(TeamInfo.KEY_PNoShow, teamInfo.getPNoShow());
-        values.put(TeamInfo.KEY_PStartLevel, teamInfo.getpStartLevel1());
-        values.put(TeamInfo.KEY_PStartLevel2, teamInfo.getpStartLevel2());
-        values.put(TeamInfo.KEY_PPreloadCargo, teamInfo.getpPreloadCargo());
-        values.put(TeamInfo.KEY_PPreloadHatch, teamInfo.getpPreloadHatch());
-        values.put(TeamInfo.KEY_PCrossHubLine, teamInfo.getpCrossHubLine());
-        values.put(TeamInfo.KEY_AvgRobotTopC, teamInfo.getAvgRocketTopC());
-        values.put(TeamInfo.KEY_AvgRobotTopH, teamInfo.getAvgRocketTopH());
-        values.put(TeamInfo.KEY_AvgRobotMiddleC, teamInfo.getAvgRocketMiddleC());
-        values.put(TeamInfo.KEY_AvgRobotMiddleH, teamInfo.getAvgRocketMiddleH());
-        values.put(TeamInfo.KEY_AvgRobotBottomC, teamInfo.getAvgRocketBottomC());
-        values.put(TeamInfo.KEY_AvgRobotBottomH, teamInfo.getAvgRocketBottomH());
-        values.put(TeamInfo.KEY_AvgCargoShipC, teamInfo.getAvgCargoShipC());
-        values.put(TeamInfo.KEY_AvgCargoShipH, teamInfo.getAvgCargoShipH());
-        values.put(TeamInfo.KEY_PEndLevel1, teamInfo.getpEndLevel1());
-        values.put(TeamInfo.KEY_PEndLevel2, teamInfo.getpEndLevel2());
-        values.put(TeamInfo.KEY_PEndLevel3, teamInfo.getpEndLevel3());
-        values.put(TeamInfo.KEY_PEndNone, teamInfo.getpEndNone());
+        values.put(TeamInfo.KEY_AvgAuto, teamInfo.getAutoWS());
+        values.put(TeamInfo.KEY_PHadAuto, teamInfo.getPHadAuto());
+        values.put(TeamInfo.KEY_PCrossAutoLine, teamInfo.getPCrossAutoLine());
+        values.put(TeamInfo.KEY_PAutoPickedUpCube, teamInfo.getPAutoPickedUpCube());
+        values.put(TeamInfo.KEY_AvgAutoCubesInSw1, teamInfo.getAvgAutoCubesInSw1());
+        values.put(TeamInfo.KEY_AvgAutoCubesInScl, teamInfo.getAvgAutoCubesInScl());
+        values.put(TeamInfo.KEY_AvgAutoCubesInSw2, teamInfo.getAvgAutoCubesInSw2());
+        values.put(TeamInfo.KEY_AvgAutoCubesInEx, teamInfo.getAvgAutoCubesInEx());
+        values.put(TeamInfo.KEY_AvgAutoOwnGainSw1, teamInfo.getAvgAutoOwnGainSw1());
+        values.put(TeamInfo.KEY_AvgAutoOwnedSw1, teamInfo.getAvgAutoOwnedSw1());
+        values.put(TeamInfo.KEY_AvgAutoOwnGainSw2, teamInfo.getAvgAutoOwnGainSw2());
+        values.put(TeamInfo.KEY_AvgAutoOwnedSw2, teamInfo.getAvgAutoOwnedSw2());
+        values.put(TeamInfo.KEY_AvgAutoOwnGainScl, teamInfo.getAvgAutoOwnGainScl());
+        values.put(TeamInfo.KEY_AvgAutoOwnedScl, teamInfo.getAvgAutoOwnedScl());
+        values.put(TeamInfo.KEY_AvgAutoNumOwnChangesSw1, teamInfo.getAvgAutoNumOwnChangesSw1());
+        values.put(TeamInfo.KEY_AvgAutoNumOwnChangesSw2, teamInfo.getAvgAutoNumOwnChangesSw2());
+        values.put(TeamInfo.KEY_AvgAutoNumOwnChangesScl, teamInfo.getAvgAutoNumOwnChangesScl());
+        values.put(TeamInfo.KEY_AvgTele, teamInfo.getTeleWS());
+        values.put(TeamInfo.KEY_PTelePickedUpCube, teamInfo.getPTelePickedUpCube());
+        values.put(TeamInfo.KEY_AvgTeleCubesInSw1, teamInfo.getAvgTeleCubesInSw1());
+        values.put(TeamInfo.KEY_AvgTeleCubesInScl, teamInfo.getAvgTeleCubesInScl());
+        values.put(TeamInfo.KEY_AvgTeleCubesInSw2, teamInfo.getAvgTeleCubesInSw2());
+        values.put(TeamInfo.KEY_AvgTeleCubesInEx, teamInfo.getAvgTeleCubesInEx());
+        values.put(TeamInfo.KEY_AvgTeleOwnGainSw1, teamInfo.getAvgTeleOwnGainSw1());
+        values.put(TeamInfo.KEY_AvgTeleOwnedSw1, teamInfo.getAvgTeleOwnedSw1());
+        values.put(TeamInfo.KEY_AvgTeleOwnGainSw2, teamInfo.getAvgTeleOwnGainSw2());
+        values.put(TeamInfo.KEY_AvgTeleOwnedSw2, teamInfo.getAvgTeleOwnedSw2());
+        values.put(TeamInfo.KEY_AvgTeleOwnGainScl, teamInfo.getAvgTeleOwnGainScl());
+        values.put(TeamInfo.KEY_AvgTeleOwnedScl, teamInfo.getAvgTeleOwnedScl());
+        values.put(TeamInfo.KEY_AvgTeleNumOwnChangesSw1, teamInfo.getAvgTeleNumOwnChangesSw1());
+        values.put(TeamInfo.KEY_AvgTeleNumOwnChangesSw2, teamInfo.getAvgTeleNumOwnChangesSw2());
+        values.put(TeamInfo.KEY_AvgTeleNumOwnChangesScl, teamInfo.getAvgTeleNumOwnChangesScl());
+        values.put(TeamInfo.KEY_PClimb, teamInfo.getPClimb());
+        values.put(TeamInfo.KEY_PClimbAssist, teamInfo.getPClimbAssist());
+        values.put(TeamInfo.KEY_PParking, teamInfo.getPParking());
+        values.put(TeamInfo.KEY_PHumanPlayer, teamInfo.getPHumanPlayer());
+        values.put(TeamInfo.KEY_PDisabled, teamInfo.getPDisabled());
+        values.put(TeamInfo.KEY_PRedCard, teamInfo.getPRedCard());
+        values.put(TeamInfo.KEY_PYellowCard, teamInfo.getPYellowCard());
+        values.put(TeamInfo.KEY_HadFoul, teamInfo.getHadFoul());
         values.put(TeamInfo.KEY_PFoul, teamInfo.getPFoul());
         values.put(TeamInfo.KEY_PTechFoul, teamInfo.getPTechFoul());
-        values.put(TeamInfo.KEY_PYellowCard, teamInfo.getPYellowCard());
-        values.put(TeamInfo.KEY_PRedCard, teamInfo.getPRedCard());
-        values.put(TeamInfo.KEY_PDisabled, teamInfo.getPDisabled());
-        values.put(TeamInfo.KEY_MaxRocketTopC, teamInfo.getMaxRocketTopC());
-        values.put(TeamInfo.KEY_MinRocketTopC, teamInfo.getMinRocketTopC());
-        values.put(TeamInfo.KEY_MaxRocketTopH, teamInfo.getMaxRocketTopH());
-        values.put(TeamInfo.KEY_MinRocketTopH, teamInfo.getMinRocketTopH());
-        values.put(TeamInfo.KEY_MaxRocketMiddleC, teamInfo.getMaxRocketMiddleC());
-        values.put(TeamInfo.KEY_MinRocketMiddleC, teamInfo.getMinRocketMiddleC());
-        values.put(TeamInfo.KEY_MaxRocketMiddleH, teamInfo.getMaxRocketMiddleH());
-        values.put(TeamInfo.KEY_MinRocketMiddleH, teamInfo.getMinRocketMiddleH());
-        values.put(TeamInfo.KEY_MaxRocketBottomC, teamInfo.getMaxRocketBottomC());
-        values.put(TeamInfo.KEY_MinRocketBottomC, teamInfo.getMinRocketBottomC());
-        values.put(TeamInfo.KEY_MaxRocketBottomH, teamInfo.getMaxRocketBottomH());
-        values.put(TeamInfo.KEY_MinRocketBottomH, teamInfo.getMinRocketBottomH());
-        values.put(TeamInfo.KEY_MaxCargoShipC, teamInfo.getMaxCargoShipC());
-        values.put(TeamInfo.KEY_MinCargoShipC, teamInfo.getMinCargoShipC());
-        values.put(TeamInfo.KEY_MaxCargoShipH, teamInfo.getMaxCargoShipH());
-        values.put(TeamInfo.KEY_MinCargoShipH, teamInfo.getMinCargoShipH());
+        values.put(TeamInfo.KEY_AvgNumCubesInVault, teamInfo.getAvgNumCubesInVault());
+        values.put(TeamInfo.KEY_AvgActiveFceTime, teamInfo.getAvgActiveFceTime());
+        values.put(TeamInfo.KEY_AvgActiveLevTime, teamInfo.getAvgActiveLevTime());
+        values.put(TeamInfo.KEY_AvgActiveBstTime, teamInfo.getAvgActiveBstTime());
+        values.put(TeamInfo.KEY_AvgCubesAtActiveFce, teamInfo.getAvgCubesAtActiveFce());
+        values.put(TeamInfo.KEY_AvgCubesAtActiveLev, teamInfo.getAvgCubesAtActiveLev());
+        values.put(TeamInfo.KEY_AvgCubesAtActiveBst, teamInfo.getAvgCubesAtActiveBst());
+        values.put(TeamInfo.KEY_MaxAutoNumOwnChangesSw1, teamInfo.getMaxAutoNumOwnChangesSw1());
+        values.put(TeamInfo.KEY_MinAutoNumOwnChangesSw1, teamInfo.getMinAutoNumOwnChangesSw1());
+        values.put(TeamInfo.KEY_MaxAutoNumOwnChangesSw2, teamInfo.getMaxAutoNumOwnChangesSw2());
+        values.put(TeamInfo.KEY_MinAutoNumOwnChangesSw2, teamInfo.getMinAutoNumOwnChangesSw2());
+        values.put(TeamInfo.KEY_MaxAutoNumOwnChangesScl, teamInfo.getMaxAutoNumOwnChangesScl());
+        values.put(TeamInfo.KEY_MinAutoNumOwnChangesScl, teamInfo.getMinAutoNumOwnChangesScl());
+        values.put(TeamInfo.KEY_MaxAutoCubesInSw1, teamInfo.getMaxAutoCubesInSw1());
+        values.put(TeamInfo.KEY_MinAutoCubesInSw1, teamInfo.getMinAutoCubesInSw1());
+        values.put(TeamInfo.KEY_MaxAutoCubesInSw2, teamInfo.getMaxAutoCubesInSw2());
+        values.put(TeamInfo.KEY_MinAutoCubesInSw2, teamInfo.getMinAutoCubesInSw2());
+        values.put(TeamInfo.KEY_MaxAutoCubesInScl, teamInfo.getMaxAutoCubesInScl());
+        values.put(TeamInfo.KEY_MinAutoCubesInScl, teamInfo.getMinAutoCubesInScl());
+        values.put(TeamInfo.KEY_MaxAutoCubesInEx, teamInfo.getMaxAutoCubesInEx());
+        values.put(TeamInfo.KEY_MinAutoCubesInEx, teamInfo.getMinAutoCubesInEx());
+        values.put(TeamInfo.KEY_MaxAutoOwnGainSw1, teamInfo.getMaxAutoOwnGainSw1());
+        values.put(TeamInfo.KEY_MinAutoOwnGainSw1, teamInfo.getMinAutoOwnGainSw1());
+        values.put(TeamInfo.KEY_MaxAutoOwnedSw1, teamInfo.getMaxAutoOwnedSw1());
+        values.put(TeamInfo.KEY_MinAutoOwnedSw1, teamInfo.getMinAutoOwnedSw1());
+        values.put(TeamInfo.KEY_MaxAutoOwnGainSw2, teamInfo.getMaxAutoOwnGainSw2());
+        values.put(TeamInfo.KEY_MinAutoOwnGainSw2, teamInfo.getMinAutoOwnGainSw2());
+        values.put(TeamInfo.KEY_MaxAutoOwnedSw2, teamInfo.getMaxAutoOwnedSw2());
+        values.put(TeamInfo.KEY_MinAutoOwnedSw2, teamInfo.getMinAutoOwnedSw2());
+        values.put(TeamInfo.KEY_MaxAutoOwnGainScl, teamInfo.getMaxAutoOwnGainScl());
+        values.put(TeamInfo.KEY_MinAutoOwnGainScl, teamInfo.getMinAutoOwnGainScl());
+        values.put(TeamInfo.KEY_MaxAutoOwnedScl, teamInfo.getMaxAutoOwnedScl());
+        values.put(TeamInfo.KEY_MinAutoOwnedScl, teamInfo.getMinAutoOwnedScl());
+        values.put(TeamInfo.KEY_MaxTeleNumOwnChangesSw1, teamInfo.getMaxTeleNumOwnChangesSw1());
+        values.put(TeamInfo.KEY_MinTeleNumOwnChangesSw1, teamInfo.getMinTeleNumOwnChangesSw1());
+        values.put(TeamInfo.KEY_MaxTeleNumOwnChangesSw2, teamInfo.getMaxTeleNumOwnChangesSw2());
+        values.put(TeamInfo.KEY_MinTeleNumOwnChangesSw2, teamInfo.getMinTeleNumOwnChangesSw2());
+        values.put(TeamInfo.KEY_MaxTeleNumOwnChangesScl, teamInfo.getMaxTeleNumOwnChangesScl());
+        values.put(TeamInfo.KEY_MinTeleNumOwnChangesScl, teamInfo.getMinTeleNumOwnChangesScl());
+        values.put(TeamInfo.KEY_MaxTeleCubesInSw1, teamInfo.getMaxTeleCubesInSw1());
+        values.put(TeamInfo.KEY_MinTeleCubesInSw1, teamInfo.getMinTeleCubesInSw1());
+        values.put(TeamInfo.KEY_MaxTeleCubesInSw2, teamInfo.getMaxTeleCubesInSw2());
+        values.put(TeamInfo.KEY_MinTeleCubesInSw2, teamInfo.getMinTeleCubesInSw2());
+        values.put(TeamInfo.KEY_MaxTeleCubesInScl, teamInfo.getMaxTeleCubesInScl());
+        values.put(TeamInfo.KEY_MinTeleCubesInScl, teamInfo.getMinTeleCubesInScl());
+        values.put(TeamInfo.KEY_MaxTeleCubesInEx, teamInfo.getMaxTeleCubesInEx());
+        values.put(TeamInfo.KEY_MinTeleCubesInEx, teamInfo.getMinTeleCubesInEx());
+        values.put(TeamInfo.KEY_MaxTeleOwnGainSw1, teamInfo.getMaxTeleOwnGainSw1());
+        values.put(TeamInfo.KEY_MinTeleOwnGainSw1, teamInfo.getMinTeleOwnGainSw1());
+        values.put(TeamInfo.KEY_MaxTeleOwnedSw1, teamInfo.getMaxTeleOwnedSw1());
+        values.put(TeamInfo.KEY_MinTeleOwnedSw1, teamInfo.getMinTeleOwnedSw1());
+        values.put(TeamInfo.KEY_MaxTeleOwnGainSw2, teamInfo.getMaxTeleOwnGainSw2());
+        values.put(TeamInfo.KEY_MinTeleOwnGainSw2, teamInfo.getMinTeleOwnGainSw2());
+        values.put(TeamInfo.KEY_MaxTeleOwnedSw2, teamInfo.getMaxTeleOwnedSw2());
+        values.put(TeamInfo.KEY_MinTeleOwnedSw2, teamInfo.getMinTeleOwnedSw2());
+        values.put(TeamInfo.KEY_MaxTeleOwnGainScl, teamInfo.getMaxTeleOwnGainScl());
+        values.put(TeamInfo.KEY_MinTeleOwnGainScl, teamInfo.getMinTeleOwnGainScl());
+        values.put(TeamInfo.KEY_MaxTeleOwnedScl, teamInfo.getMaxTeleOwnedScl());
+        values.put(TeamInfo.KEY_MinTeleOwnedScl, teamInfo.getMinTeleOwnedScl());
+        values.put(TeamInfo.KEY_MaxNumCubesInVault, teamInfo.getMaxNumCubesInVault());
+        values.put(TeamInfo.KEY_MinNumCubesInVault, teamInfo.getMinNumCubesInVault());
+        values.put(TeamInfo.KEY_MaxActiveFceTime, teamInfo.getMaxActiveFceTime());
+        values.put(TeamInfo.KEY_MinActiveFceTime, teamInfo.getMinActiveFceTime());
+        values.put(TeamInfo.KEY_MaxActiveLevTime, teamInfo.getMaxActiveLevTime());
+        values.put(TeamInfo.KEY_MinActiveLevTime, teamInfo.getMinActiveLevTime());
+        values.put(TeamInfo.KEY_MaxActiveBstTime, teamInfo.getMaxActiveBstTime());
+        values.put(TeamInfo.KEY_MinActiveBstTime, teamInfo.getMinActiveBstTime());
+        values.put(TeamInfo.KEY_MaxCubesAtActiveFce, teamInfo.getMaxCubesAtActiveFce());
+        values.put(TeamInfo.KEY_MinCubesAtActiveFce, teamInfo.getMinCubesAtActiveFce());
+        values.put(TeamInfo.KEY_MaxCubesAtActiveLev, teamInfo.getMaxCubesAtActiveLev());
+        values.put(TeamInfo.KEY_MinCubesAtActiveLev, teamInfo.getMinCubesAtActiveLev());
+        values.put(TeamInfo.KEY_MaxCubesAtActiveBst, teamInfo.getMaxCubesAtActiveBst());
+        values.put(TeamInfo.KEY_MinCubesAtActiveBst, teamInfo.getMinCubesAtActiveBst());
+
         //check if there is a conflict. It should return -1 if there is a copy of the exact combination of the Primary Keys
         teamInfoId=(int)db.insertWithOnConflict(TeamInfo.TABLE, null, values, SQLiteDatabase.CONFLICT_IGNORE);
         DatabaseManager.getInstance().closeDatabase();
@@ -200,6 +356,7 @@ public class TeamInfoRepo {
         String selectQuery = " SELECT TeamInfo." + TeamInfo.KEY_NumMatch
                 + ", TeamInfo." + TeamInfo.KEY_PNoShow
                 + ", TeamInfo." + TeamInfo.KEY_AvgOff
+                + ", TeamInfo." + TeamInfo.KEY_AvgDef
                 + ", TeamInfo." + TeamInfo.KEY_AvgTotal
                 + ", TeamInfo." + TeamInfo.KEY_AvgNeg
                 + ", TeamInfo." + TeamInfo.KEY_AvgAuto

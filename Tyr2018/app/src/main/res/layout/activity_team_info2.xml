@@ -11,6 +11,7 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -20,1236 +21,847 @@
                 android:id="@+id/spinner"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <Space
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1" />
-                <Space
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1" />
-
-                <TextView
-                    android:id="@+id/teamInfo_numMatch"
-                    android:text="@string/number_of_matches"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/White"/>
-
-                <TextView
-                    android:id="@+id/teamInfo_numMatchAns"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/zero"
-                    android:textColor="@color/White"/>
-
-                <Space
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1" />
-
-            </LinearLayout>
-
-            <TableLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <TableRow>
-                    <TextView
-                        android:id="@+id/teamInfo_AvgTotal"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="@string/total_weighted_score"
-                        android:textColor="@color/Yellow"/>
-                    <TextView
-                        android:id="@+id/teamInfo_AvgOff"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="@string/offensive_weighted_score"
-                        android:textColor="@color/Yellow"/>
-                    <TextView
-                        android:id="@+id/teamInfo_AvgDef"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="@string/defensive_weighted_score"
-                        android:textColor="@color/Yellow"/>
-                    <TextView
-                        android:id="@+id/teamInfo_AvgNeg"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="@string/negative_weighted_score"
-                        android:textColor="@color/Yellow"/>
-                </TableRow>
-                <TableRow>
-                    <TextView
-                        android:id="@+id/teamInfo_AvgTotalAns"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="@string/ans"
-                        android:textColor="@color/Yellow"/>
-                    <TextView
-                        android:id="@+id/teamInfo_AvgOffAns"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="@string/ans"
-                        android:textColor="@color/Yellow"/>
-                    <TextView
-                        android:id="@+id/teamInfo_AvgDefAns"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="@string/ans"
-                        android:textColor="@color/Yellow"/>
-                    <TextView
-                        android:id="@+id/teamInfo_AvgNegAns"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="@string/ans"
-                        android:textColor="@color/Yellow"/>
-                </TableRow>
-            </TableLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <Space
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1" />
-                <Space
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1" />
-
-                <TextView
-                    android:id="@+id/teamInfo_Auto"
-                    android:text="@string/auto_weighted_score"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/White"/>
-
-                <TextView
-                    android:id="@+id/teamInfo_autoAns"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/zero"
-                    android:textColor="@color/White"/>
-
-                <Space
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1" />
-
-            </LinearLayout>
-
-            <android.support.constraint.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="350dp"
-                android:background="@drawable/ownershipfield">
-
-
-                <TextView
-                    android:id="@+id/teamInfo_avgAutoCubesInSclAns"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="8dp"
-                    android:text="0.00"
-                    android:textSize="20dp"
-                    app2:layout_constraintBottom_toBottomOf="parent"
-                    app2:layout_constraintEnd_toEndOf="parent"
-                    app2:layout_constraintStart_toStartOf="parent"
-                    app2:layout_constraintTop_toTopOf="parent"
-                    app2:layout_constraintVertical_bias="0.257"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.26999998" />
-
-                <TextView
-                    android:id="@+id/teamInfo_avgAutoCubesInSw1Ans"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="84dp"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="8dp"
-                    android:text="0.00"
-                    android:textSize="20dp"
-                    app2:layout_constraintBottom_toBottomOf="parent"
-                    app2:layout_constraintEnd_toEndOf="parent"
-                    app2:layout_constraintHorizontal_bias="0.235"
-                    app2:layout_constraintStart_toStartOf="parent"
-                    app2:layout_constraintTop_toTopOf="parent"
-                    app2:layout_constraintVertical_bias="0.425"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.27"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.43" />
-
-                <TextView
-                    android:id="@+id/teamInfo_avgAutoCubesInSw2Ans"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="8dp"
-                    android:text="0.00"
-                    android:textSize="20dp"
-                    app2:layout_constraintBottom_toBottomOf="parent"
-                    app2:layout_constraintEnd_toEndOf="parent"
-                    app2:layout_constraintHorizontal_bias="0.768"
-                    app2:layout_constraintStart_toStartOf="parent"
-                    app2:layout_constraintTop_toTopOf="parent"
-                    app2:layout_constraintVertical_bias="0.319"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.735"
-                    app:layout_constraintStart_toStartOf="@+id/imageView"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.32999998"  />
-
-                <TextView
-                    android:id="@+id/teamInfo_avgAutoCubesInExAns"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="148dp"
-                    android:text="0.00"
-                    android:textSize="20dp"
-                    app2:layout_constraintEnd_toEndOf="parent"
-                    app2:layout_constraintHorizontal_bias="0.992"
-                    app2:layout_constraintStart_toStartOf="parent"
-                    app2:layout_constraintTop_toTopOf="parent"
-                    app2:layout_constraintVertical_bias="0.608"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.95"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.598" />
-
-                <TextView
-                    android:id="@+id/textView8"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="8dp"
-                    android:text="Average Auto Cubes"
-                    android:textColor="@color/Blue"
-                    android:textSize="10dp"
-                    app2:layout_constraintBottom_toBottomOf="parent"
-                    app2:layout_constraintEnd_toEndOf="parent"
-                    app2:layout_constraintHorizontal_bias="0.283"
-                    app2:layout_constraintStart_toStartOf="parent"
-                    app2:layout_constraintTop_toTopOf="parent"
-                    app2:layout_constraintVertical_bias="0.88"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.279"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.923" />
-
-            </android.support.constraint.ConstraintLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <Space
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1.5" />
-
-
-                <TextView
-                    android:id="@+id/teamInfo_timeGain"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Time to Gain"
-                    android:textColor="@color/White"/>
-
-                <TextView
-                    android:id="@+id/teamInfo_Owning"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1.3"
-                    android:text="Owning"
-                    android:textColor="@color/White"/>
-                <TextView
-                    android:id="@+id/teamInfo_OwnChanges"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight=".68"
-                    android:text="Own Change"
-                    android:textColor="@color/White"/>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/teamInfo_AutoSw1Times"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/textView2"
+                    android:layout_width="61dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight=".1"
-                    android:text="Opponent"
-                    android:textColor="@color/White"/>
+                    android:layout_weight="1"
+                    android:text="Number of Matches" />
+
                 <TextView
-                    android:id="@+id/teamInfo_avgAutoOwnGainSw1Ans"
+                    android:id="@+id/numMatch"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="@string/zero"
-                    android:textColor="@color/White"/>
-
-                <Space
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight=".175" />
-
-                <TextView
-                    android:id="@+id/teamInfo_avgAutoOwnedSw1Ans"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/zero"
-                    android:textColor="@color/White"/>
-                <TextView
-                    android:id="@+id/teamInfo_avgAutoNumOwnChangeSw1Ans"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/zero"
-                    android:textColor="@color/White"/>
-
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/teamInfo_AutoSwitch2Times"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight=".22"
-                    android:text="Alliance"
-                    android:textColor="@color/White"/>
-                <TextView
-                    android:id="@+id/teamInfo_avgAutoOwnGainSw2Ans"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/zero"
-                    android:textColor="@color/White"/>
-
-                <Space
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight=".175" />
-
-                <TextView
-                    android:id="@+id/teamInfo_avgAutoOwnedSw2Ans"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/zero"
-                    android:textColor="@color/White"/>
-                <TextView
-                    android:id="@+id/teamInfo_avgAutoNumOwnChangeSw2Ans"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/zero"
-                    android:textColor="@color/White"/>
-
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/teamInfo_AutoScaleTimes"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight=".37"
-                    android:text="Scale"
-                    android:textColor="@color/White"/>
-                <TextView
-                    android:id="@+id/teamInfo_avgAutoOwnGainSclAns"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/zero"
-                    android:textColor="@color/White"/>
-
-               <Space
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight=".175" />
-
-                <TextView
-                    android:id="@+id/teamInfo_avgAutoOwnedSclAns"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/zero"
-                    android:textColor="@color/White"/>
-
-                <TextView
-                    android:id="@+id/teamInfo_avgAutoNumOwnChangeSclAns"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/zero"
-                    android:textColor="@color/White"/>
-
-         </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/teamInfo_pHadAuto"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/had_auto_percentage"
-                    android:textColor="@color/Goldish"/>
-
-                <TextView
-                    android:id="@+id/teamInfo_pHadAutoAns"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/ans"
-                    android:textColor="@color/Goldish"/>
-                <Space
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="10"
-                    />
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/teamInfo_pCrossAutoLine"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/cross_autoline_percentage"
-                    android:textColor="@color/Goldish"/>
-
-                <TextView
-                    android:id="@+id/teamInfo_pCrossAutoLineAns"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/ans"
-                    android:textColor="@color/Goldish"/>
-                <Space
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="10"
-                    />
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/teamInfo_pAutoPickedUpCube"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/picked_up_cube_in_auto_percentage"
-                    android:textColor="@color/Goldish"/>
-
-                <TextView
-                    android:id="@+id/teamInfo_pAutoPickedUpCubeAns"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/ans"
-                    android:textColor="@color/Goldish"/>
-                <Space
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="10"
-                    />
+                    android:text="" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <Space
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1" />
-                <Space
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1" />
-
-                <TextView
-                    android:id="@+id/teamInfo_Tele"
-                    android:text="@string/tele_weighted_score"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/White"/>
-
-                <TextView
-                    android:id="@+id/teamInfo_teleAns"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/zero"
-                    android:textColor="@color/White"/>
-
-                <Space
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1" />
-
-            </LinearLayout>
-
-
-            <android.support.constraint.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="350dp"
-                android:background="@drawable/ownershipfield">
-
-                <TextView
-                    android:id="@+id/teamInfo_avgTeleCubesInSclAns"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="8dp"
-                    android:text="0.00"
-                    android:textSize="20dp"
-                    app2:layout_constraintBottom_toBottomOf="parent"
-                    app2:layout_constraintEnd_toEndOf="parent"
-                    app2:layout_constraintStart_toStartOf="parent"
-                    app2:layout_constraintTop_toTopOf="parent"
-                    app2:layout_constraintVertical_bias="0.257"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.26999998" />
-
-                <TextView
-                    android:id="@+id/teamInfo_avgTeleCubesInSw1Ans"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="84dp"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="8dp"
-                    android:text="0.00"
-                    android:textSize="20dp"
-                    app2:layout_constraintBottom_toBottomOf="parent"
-                    app2:layout_constraintEnd_toEndOf="parent"
-                    app2:layout_constraintHorizontal_bias="0.235"
-                    app2:layout_constraintStart_toStartOf="parent"
-                    app2:layout_constraintTop_toTopOf="parent"
-                    app2:layout_constraintVertical_bias="0.425"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.27"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.43" />
-
-                <TextView
-                    android:id="@+id/teamInfo_avgTeleCubesInSw2Ans"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="8dp"
-                    android:text="0.00"
-                    android:textSize="20dp"
-                    app2:layout_constraintBottom_toBottomOf="parent"
-                    app2:layout_constraintEnd_toEndOf="parent"
-                    app2:layout_constraintHorizontal_bias="0.768"
-                    app2:layout_constraintStart_toStartOf="parent"
-                    app2:layout_constraintTop_toTopOf="parent"
-                    app2:layout_constraintVertical_bias="0.319"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.735"
-                    app:layout_constraintStart_toStartOf="@+id/imageView"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.32999998" />
-
-                <TextView
-                    android:id="@+id/teamInfo_avgTeleCubesInExAns"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="148dp"
-                    android:text="0.00"
-                    android:textSize="20dp"
-                    app2:layout_constraintEnd_toEndOf="parent"
-                    app2:layout_constraintHorizontal_bias="0.992"
-                    app2:layout_constraintStart_toStartOf="parent"
-                    app2:layout_constraintTop_toTopOf="parent"
-                    app2:layout_constraintVertical_bias="0.608"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.95"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.598" />
-
-                <TextView
-                    android:id="@+id/textView9"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="8dp"
-                    android:text="Average Tele Cubes"
-                    android:textColor="@color/Blue"
-                    android:textSize="10dp"
-                    app2:layout_constraintBottom_toBottomOf="parent"
-                    app2:layout_constraintEnd_toEndOf="parent"
-                    app2:layout_constraintHorizontal_bias="0.283"
-                    app2:layout_constraintStart_toStartOf="parent"
-                    app2:layout_constraintTop_toTopOf="parent"
-                    app2:layout_constraintVertical_bias="0.88"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.279"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.923" />
-
-            </android.support.constraint.ConstraintLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <Space
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1.5" />
-
-
-                <TextView
-                    android:id="@+id/teamInfo_timeGain2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Time to Gain"
-                    android:textColor="@color/White"/>
-
-                <TextView
-                    android:id="@+id/teamInfo_Owning2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1.3"
-                    android:text="Owning"
-                    android:textColor="@color/White"/>
-                <TextView
-                    android:id="@+id/teamInfo_OwnChanges2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight=".68"
-                    android:text="Own Change"
-                    android:textColor="@color/White"/>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/teamInfo_TeleSw1Times"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/textView4"
+                    android:layout_width="60dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight=".1"
-                    android:text="Opponent"
-                    android:textColor="@color/White"/>
+                    android:layout_weight="1"
+                    android:text="Offensive Weighted Scores" />
+
                 <TextView
-                    android:id="@+id/teamInfo_avgTeleOwnGainSw1Ans"
+                    android:id="@+id/offensiveWS"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="@string/zero"
-                    android:textColor="@color/White"/>
-
-                <Space
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight=".175" />
-
-                <TextView
-                    android:id="@+id/teamInfo_avgTeleOwnedSw1Ans"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/zero"
-                    android:textColor="@color/White"/>
-                <TextView
-                    android:id="@+id/teamInfo_avgTeleNumOwnChangeSw1Ans"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/zero"
-                    android:textColor="@color/White"/>
-
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/teamInfo_TeleSwitch2Times"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight=".22"
-                    android:text="Alliance"
-                    android:textColor="@color/White"/>
-                <TextView
-                    android:id="@+id/teamInfo_avgTeleOwnGainSw2Ans"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/zero"
-                    android:textColor="@color/White"/>
-
-                <Space
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight=".175" />
-
-                <TextView
-                    android:id="@+id/teamInfo_avgTeleOwnedSw2Ans"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/zero"
-                    android:textColor="@color/White"/>
-                <TextView
-                    android:id="@+id/teamInfo_avgTeleNumOwnChangeSw2Ans"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/zero"
-                    android:textColor="@color/White"/>
-
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/teamInfo_TeleScaleTimes"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight=".37"
-                    android:text="Scale"
-                    android:textColor="@color/White"/>
-                <TextView
-                    android:id="@+id/teamInfo_avgTeleOwnGainSclAns"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/zero"
-                    android:textColor="@color/White"/>
-
-                <Space
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight=".175" />
-
-                <TextView
-                    android:id="@+id/teamInfo_avgTeleOwnedSclAns"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/zero"
-                    android:textColor="@color/White"/>
-
-                <TextView
-                    android:id="@+id/teamInfo_avgTeleNumOwnChangeSclAns"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/zero"
-                    android:textColor="@color/White"/>
-
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/teamInfo_pTelePickedUpCube"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/picked_up_cube_in_tele_percentage"
-                    android:textColor="@color/Goldish"/>
-
-                <TextView
-                    android:id="@+id/teamInfo_pTelePickedUpCubeAns"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/ans"
-                    android:textColor="@color/Goldish"/>
-                <Space
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="10"
-                    />
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/teamInfo_pHumanPlayer"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/human_player_at_vault_percentage"
-                    android:textColor="@color/Goldish"/>
-
-                <TextView
-                    android:id="@+id/teamInfo_pHumanPlayerAns"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/ans"
-                    android:textColor="@color/Goldish"/>
-                <Space
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="10"
-                    />
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/teamInfo_pClimb"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1.9"
-                    android:text="@string/climb_percentage"
-                    android:textColor="@color/White"/>
-                <TextView
-                    android:id="@+id/teamInfo_pClimbAssist"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/climb_assist_percentage"
-                    android:textColor="@color/White"/>
-                <TextView
-                    android:id="@+id/teamInfo_pParking"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1.65"
-                    android:text="@string/parking_percentage"
-                    android:textColor="@color/White"/>
-
+                    android:text="" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/teamInfo_pClimbAns"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/textView6"
+                    android:layout_width="64dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1.26"
-                    android:text="@string/zero"
-                    android:textColor="@color/White"/>
+                    android:layout_weight="1"
+                    android:text="Total Weighted Score" />
 
                 <TextView
-                    android:id="@+id/teamInfo_pClimbAssistAns"
+                    android:id="@+id/totalWS"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="@string/zero"
-                    android:textColor="@color/White" />
-                <TextView
-                    android:id="@+id/teamInfo_pParkingAns"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1.19"
-                    android:text="@string/zero"
-                    android:textColor="@color/White"/>
-
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/teamInfo_hadFoul"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/had_foul"
-                    android:textColor="@color/Goldish"/>
-
-                <TextView
-                    android:id="@+id/teamInfo_hadFoulAns"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/ans"
-                    android:textColor="@color/Goldish"/>
-                <Space
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="10"
-                    />
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/teamInfo_pDisabled"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/disabled_percentage"
-                    android:textColor="@color/Goldish"/>
-
-                <TextView
-                    android:id="@+id/teamInfo_pDisabledAns"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/ans"
-                    android:textColor="@color/Goldish"/>
-                <Space
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="10"
-                    />
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/teamInfo_pNoShow"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/no_show_percentage"
-                    android:textColor="@color/Goldish"/>
-
-                <TextView
-                    android:id="@+id/teamInfo_pNoShowAns"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/ans"
-                    android:textColor="@color/Goldish"/>
-                <Space
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="10"
-                    />
-            </LinearLayout>
-            <TableLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <TableRow>
-                    <TextView
-                        android:id="@+id/teamInfo_pTechFoul"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="Tech Foul"
-                        android:textColor="@color/White"/>
-                    <TextView
-                        android:id="@+id/teamInfo_pFoul"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="Foul"
-                        android:textColor="@color/White"/>
-                    <TextView
-                        android:id="@+id/teamInfo_pRedCard"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="Red Card"
-                        android:textColor="@color/White"/>
-                    <TextView
-                        android:id="@+id/teamInfo_pYellowCard"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="Yellow Card"
-                        android:textColor="@color/White"/>
-                </TableRow>
-                <TableRow>
-                    <TextView
-                        android:id="@+id/teamInfo_pTechFoulAns"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="@string/ans"
-                        android:textColor="@color/White"/>
-                    <TextView
-                        android:id="@+id/teamInfo_pFoulAns"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="@string/ans"
-                        android:textColor="@color/White"/>
-                    <TextView
-                        android:id="@+id/teamInfo_pRedCardAns"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="@string/ans"
-                        android:textColor="@color/White"/>
-                    <TextView
-                        android:id="@+id/teamInfo_pYellowCardAns"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="@string/ans"
-                        android:textColor="@color/White"/>
-                </TableRow>
-            </TableLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <Space
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1" />
-                <Space
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1" />
-
-                <TextView
-                    android:id="@+id/teamInfo_avgNumCubesInVault"
-                    android:text="Avg Number of Cubes in Vault: "
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/LightBlue"/>
-
-                <TextView
-                    android:id="@+id/teamInfo_avgNumCubesInVaultAns"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/zero"
-                    android:textColor="@color/LightBlue"/>
-
-                <Space
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1" />
-
-            </LinearLayout>
-            <TableLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <TableRow>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="FCE"
-                        android:textAlignment="center"
-                        android:textColor="@color/LightBlue" />
-                    <TextView
-                        android:layout_height="wrap_content"
-                        android:layout_width="wrap_content"
-                        android:textColor="@color/LightBlue"
-                        android:text="LEV"
-                        android:layout_weight="1"/>
-                    <TextView
-                        android:layout_height="wrap_content"
-                        android:layout_width="wrap_content"
-                        android:textColor="@color/LightBlue"
-                        android:text="BST"
-                        android:layout_weight="1"/>
-                </TableRow>
-                <TableRow>
-                    <TextView
-                        android:layout_height="wrap_content"
-                        android:layout_width="wrap_content"
-                        android:textColor="@color/LightBlue"
-                        android:text="0:00"
-                        android:id="@+id/teamInfo_avgActiveFceTimeAns"
-                        android:layout_weight="1"/>
-                    <TextView
-                        android:layout_height="wrap_content"
-                        android:layout_width="wrap_content"
-                        android:textColor="@color/LightBlue"
-                        android:text="0:00"
-                        android:id="@+id/teamInfo_avgActiveLevTimeAns"
-                        android:layout_weight="1"/>
-                    <TextView
-                        android:layout_height="wrap_content"
-                        android:layout_width="wrap_content"
-                        android:textColor="@color/LightBlue"
-                        android:text="0:00"
-                        android:id="@+id/teamInfo_avgActiveBstTimeAns"
-                        android:layout_weight="1"/>
-                </TableRow>
-            </TableLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="91dp"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:id="@+id/fceCube3"
-                    android:layout_width="100dp"
-                    android:layout_height="90dp"
-                    android:layout_margin="5dp"
-                    android:layout_weight="1"
-                    app2:srcCompat="@drawable/greybox" />
-
-                <ImageView
-                    android:id="@+id/levCube3"
-                    android:layout_width="100dp"
-                    android:layout_height="90dp"
-                    android:layout_margin="5dp"
-                    android:layout_weight="1"
-                    app2:srcCompat="@drawable/greybox" />
-
-                <ImageView
-                    android:id="@+id/bstCube3"
-                    android:layout_width="100dp"
-                    android:layout_height="90dp"
-                    android:layout_margin="5dp"
-                    android:layout_weight="1"
-                    app2:srcCompat="@drawable/greybox" />
+                    android:text="" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:orientation="horizontal">
 
-                <ImageView
-                    android:id="@+id/fceCube2"
-                    android:layout_width="100dp"
-                    android:layout_height="90dp"
+                <TextView
+                    android:id="@+id/textView10"
+                    android:layout_width="62dp"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:layout_margin="5dp"
-                    app2:srcCompat="@drawable/greybox" />
-                <ImageView
-                    android:id="@+id/levCube2"
-                    android:layout_width="100dp"
-                    android:layout_height="90dp"
+                    android:text="Negative weighted Score" />
+
+                <TextView
+                    android:id="@+id/negativeWS"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:layout_margin="5dp"
-                    app2:srcCompat="@drawable/greybox" />
-                <ImageView
-                    android:id="@+id/bstCube2"
-                    android:layout_width="100dp"
-                    android:layout_height="90dp"
-                    android:layout_weight="1"
-                    android:layout_margin="5dp"
-                    app2:srcCompat="@drawable/greybox" />
+                    android:text="" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:orientation="horizontal">
 
-                <ImageView
-                    android:id="@+id/fceCube1"
-                    android:layout_width="100dp"
-                    android:layout_height="90dp"
+                <TextView
+                    android:id="@+id/textView12"
+                    android:layout_width="64dp"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginRight="5dp"
-                    app2:srcCompat="@drawable/greybox" />
-                <ImageView
-                    android:id="@+id/levCube1"
-                    android:layout_width="100dp"
-                    android:layout_height="90dp"
+                    android:text="No Show Percentage" />
+
+                <TextView
+                    android:id="@+id/pNoShow"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginRight="5dp"
-                    app2:srcCompat="@drawable/greybox" />
-                <ImageView
-                    android:id="@+id/bstCube1"
-                    android:layout_width="100dp"
-                    android:layout_height="90dp"
-                    android:layout_weight="1"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginRight="5dp"
-                    app2:srcCompat="@drawable/greybox" />
+                    android:text="" />
             </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textView14"
+                    android:layout_width="66dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Start on Level 1 Percentage" />
+
+                <TextView
+                    android:id="@+id/pStartLevel1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textView16"
+                    android:layout_width="65dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Start on Level 2 Percentage" />
+
+                <TextView
+                    android:id="@+id/pStartLevel2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textView19"
+                    android:layout_width="66dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Preload Cargo Percentage" />
+
+                <TextView
+                    android:id="@+id/pPreloadCargo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textView21"
+                    android:layout_width="66dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Preload Hatch Percentage" />
+
+                <TextView
+                    android:id="@+id/pPreLoadHatch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textView25"
+                    android:layout_width="68dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Cross Hubline Percentage" />
+
+                <TextView
+                    android:id="@+id/pCrossHubline"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textView26"
+                    android:layout_width="121dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Average Number Of Cargo in Top Rocket" />
+
+                <TextView
+                    android:id="@+id/avgRocketTopC"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textView28"
+                    android:layout_width="119dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Average Number of Hatch in Top Rocket" />
+
+                <TextView
+                    android:id="@+id/avgRocketTopH"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textView30"
+                    android:layout_width="140dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Average Number Of Cargo in Middle Rocket" />
+
+                <TextView
+                    android:id="@+id/avgRocketMiddleC"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textView32"
+                    android:layout_width="146dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Average Number Of Hatch in Middle Rocket" />
+
+                <TextView
+                    android:id="@+id/avgRocketMiddleC"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textView34"
+                    android:layout_width="154dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Average Number Of Cargo in Bottom Rocket" />
+
+                <TextView
+                    android:id="@+id/avgRocketBottomC"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textView36"
+                    android:layout_width="127dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Average Number of Cargo in Cargo Ship" />
+
+                <TextView
+                    android:id="@+id/avgCargoShipC"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textView38"
+                    android:layout_width="131dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Average Number of Hatch in Cargo Ship" />
+
+                <TextView
+                    android:id="@+id/avgCargoShipH"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textView40"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="End Level 1 Percentage" />
+
+                <TextView
+                    android:id="@+id/pEndLevel1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textView42"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="End Level 2 Percentage" />
+
+                <TextView
+                    android:id="@+id/pEndLevel2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="End Level 3 Percentage" />
+
+                <TextView
+                    android:id="@+id/pEndlevel3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textView46"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="No End Level Percentage" />
+
+                <TextView
+                    android:id="@+id/pEndNone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textView48"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Matches Had Foul" />
+
+                <TextView
+                    android:id="@+id/pFoul"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/Matches Had Tech Foul"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="TextView" />
+
+                <TextView
+                    android:id="@+id/pTechFoul"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textView53"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Matches Had Yellow Card" />
+
+                <TextView
+                    android:id="@+id/pYellowCard"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textView55"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Matches Had Red Card" />
+
+                <TextView
+                    android:id="@+id/pRedCard"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textView56"
+                    android:layout_width="172dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Matches Where The Robot Was Disabled" />
+
+                <TextView
+                    android:id="@+id/pDisabled"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textView58"
+                    android:layout_width="172dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Maximum Number Of Cargo in Top Rocket" />
+
+                <TextView
+                    android:id="@+id/maxRocketTopC"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textView60"
+                    android:layout_width="173dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Maximum Number Of Hatch in Top Rocket" />
+
+                <TextView
+                    android:id="@+id/maxRocketTopH"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textView62"
+                    android:layout_width="173dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Maximum Number Of Cargo in Middle Rocket" />
+
+                <TextView
+                    android:id="@+id/maxRocketMiddleC"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textView64"
+                    android:layout_width="172dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Max Number Of Hatch in Middle Rocket" />
+
+                <TextView
+                    android:id="@+id/maxRocketMiddleH"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textView66"
+                    android:layout_width="173dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Maximum Number of Cargo in Bottom Rocket" />
+
+                <TextView
+                    android:id="@+id/maxRocketBottomC"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textView68"
+                    android:layout_width="171dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Maximum Number of Hatch in Bottom Rocket" />
+
+                <TextView
+                    android:id="@+id/maxRocketBottomH"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textView70"
+                    android:layout_width="172dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Maximum Number of Cargo in Cargo Ship" />
+
+                <TextView
+                    android:id="@+id/maxCargoShipC"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textView72"
+                    android:layout_width="174dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Maximum Number of Hatch in Cargo Ship" />
+
+                <TextView
+                    android:id="@+id/maxCargoShipH"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textView74"
+                    android:layout_width="180dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Minimum Number of Cargo in Top Rocket" />
+
+                <TextView
+                    android:id="@+id/minRocketTopC"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textView76"
+                    android:layout_width="180dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Minimum Number of Hatch in Top Rocket" />
+
+                <TextView
+                    android:id="@+id/minRocketTopH"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textView78"
+                    android:layout_width="184dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Minimum Number of Cargo in Middle Rocket" />
+
+                <TextView
+                    android:id="@+id/minRocketMiddleC"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textView80"
+                    android:layout_width="176dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Minimum Number of Hatch in Middle Rocket" />
+
+                <TextView
+                    android:id="@+id/minRocketMiddleH"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textView82"
+                    android:layout_width="182dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Minimum Number of Cargo in Bottom Rocket" />
+
+                <TextView
+                    android:id="@+id/minRocketBottomC"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textView84"
+                    android:layout_width="181dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Minimum Number of Hatch in Bottom Rocket" />
+
+                <TextView
+                    android:id="@+id/minRocketBottomH"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textView86"
+                    android:layout_width="178dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Minimum Number of Cargo in Cargo Ship" />
+
+                <TextView
+                    android:id="@+id/minCargoShipC"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textView88"
+                    android:layout_width="179dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Minimum Number of Hatch in Cargo Ship" />
+
+                <TextView
+                    android:id="@+id/minCargoShipH"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="" />
+            </LinearLayout>
+
 
         </LinearLayout>
     </ScrollView>
