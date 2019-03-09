@@ -56,18 +56,17 @@ public class StatsRepo {
                 + Stats.KEY_RedCard + " INTEGER , "
                 + Stats.KEY_YellowCard + " INTEGER , "
                 + Stats.KEY_Fouls + " INTEGER , "
-                + Stats.KEY_TechFouls + " INTEGER , "
-                + Stats.KEY_Defense + " BOOL , " +
+                + Stats.KEY_TechFouls + " INTEGER , " +
                 //makes the CompId, MatchNum and MatchPos Primary Key so there needs
                 //to be a unique combination of these attributes in each row in the Stats table
                 "PRIMARY KEY ( '" + Stats.KEY_CompId
                 + "' , '" + Stats.KEY_MatchNum
                 + "' , '" + Stats.KEY_MatchPosition + "' ), "
                 //makes sure CompId column exists in the Competitions Table
-                + " FOREIGN KEY ( " + Stats.KEY_CompId + " ) REFERENCES " + Competitions.TABLE
+                + "FOREIGN KEY ( " + Stats.KEY_CompId + " ) REFERENCES " + Competitions.TABLE
                 + " ( " + Competitions.KEY_CompId + " ), "
                 //makes sure TeamNum column exists in the Team Table
-                + " FOREIGN KEY ( " + Stats.KEY_TeamNum + " ) REFERENCES " + Teams.TABLE
+                + "FOREIGN KEY ( " + Stats.KEY_TeamNum + " ) REFERENCES " + Teams.TABLE
                 + " ( " + Teams.KEY_TeamNumber + " ))";
     }
 
@@ -131,7 +130,7 @@ public class StatsRepo {
         values.put(Stats.KEY_YellowCard, stats.getYellowCard());
         values.put(Stats.KEY_Fouls, stats.getFoul());
         values.put(Stats.KEY_TechFouls, stats.getTechFoul());
-        values.put(Stats.KEY_Defense, stats.getDefense());
+//        values.put(Stats.KEY_Defense, stats.getDefense());
 
         //check if there is a conflict. It should return -1 if there is a copy of the exact combination of the Primary Keys
         statsId=(int)db.insertWithOnConflict(Stats.TABLE, null, values, SQLiteDatabase.CONFLICT_IGNORE);

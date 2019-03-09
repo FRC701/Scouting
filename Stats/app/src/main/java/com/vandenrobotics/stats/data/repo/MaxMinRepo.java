@@ -11,11 +11,11 @@ import com.vandenrobotics.stats.data.model.MaxMin;
 import com.vandenrobotics.stats.data.model.Teams;
 
 public class MaxMinRepo {
-    private MaxMinRepo maxMin;
+    private MaxMin maxMin;
 
     private final String TAG = MaxMinRepo.class.getSimpleName();
     public MaxMinRepo(){
-        maxMin = new MaxMinRepo();
+        maxMin = new MaxMin();
     }
 
     //Holds String to execute SQLite where the MaxMin Table is created and specified how it is made

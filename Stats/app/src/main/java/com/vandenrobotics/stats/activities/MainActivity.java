@@ -22,6 +22,8 @@ import com.vandenrobotics.stats.data.repo.MatchesRepo;
 
 import java.io.File;
 import java.io.PipedReader;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class MainActivity extends AppCompatActivity {
     private SQLiteDatabase db1;     // Data in table called 'table1'
@@ -42,10 +44,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_option_screen);
-        merge2();
-        merge3();
-        merge4();
 
+        mergeDatabases();
 
         pitData = (Button) findViewById(R.id.pitData);
         avgWeight = (Button) findViewById(R.id.avgWeights);
@@ -53,338 +53,53 @@ public class MainActivity extends AppCompatActivity {
         matchPrediction = (Button) findViewById(R.id.matchPrediction);
     }
 
-    public void merge2() {
+    public void mergeDatabases() {
+        SQLiteDatabase mainDB = DatabaseManager.getInstance().openDatabase();
 
-        // Notes:
-        //          In order for this method to work, matchNumber cannot be primary key since
-        //          multiple matches will be going in that are the same number but different teams
-        //
-        //          These strings can be place inside of match repo or elsewhere, probably making a function
-        //          to generate them. Doing both manually because of differences in names
+        //Attach all the databases
+        attachDB("TabletData1.db", "db1");
+        attachDB("TabletData2.db", "db2");
+        attachDB("TabletData3.db", "db3");
+        attachDB("TabletData4.db", "db4");
+        attachDB("TabletData5.db", "db5");
+        attachDB("TabletData6.db", "db6");
 
-        try {
-            SQLiteDatabase stats = DatabaseManager.getInstance().openDatabase();
+        // Merge database
+        mainDB.execSQL(genAddMatchesDataScript("db1"));
+        mainDB.execSQL(genAddStatsDataScript("db1"));
+        mainDB.execSQL(genAddPitDataScript("db1"));
 
-            String attachDB1 = "ATTACH DATABASE '" + DOWNLOADS_FILE.getAbsolutePath() + "/TabletData1.db" + "' as db1";
-            String attachDB2 = "ATTACH DATABASE '" + DOWNLOADS_FILE.getAbsolutePath() + "/TabletData2.db" + "' as db2";
-            String attachDB3 = "ATTACH DATABASE '" + DOWNLOADS_FILE.getAbsolutePath() + "/TabletData3.db" + "' as db3";
-            String attachDB4 = "ATTACH DATABASE '" + DOWNLOADS_FILE.getAbsolutePath() + "/TabletData4.db" + "' as db4";
-            String attachDB5 = "ATTACH DATABASE '" + DOWNLOADS_FILE.getAbsolutePath() + "/TabletData5.db" + "' as db5";
-            String attachDB6 = "ATTACH DATABASE '" + DOWNLOADS_FILE.getAbsolutePath() + "/TabletData6.db" + "' as db6";
+        mainDB.execSQL(genAddMatchesDataScript("db2"));
+        mainDB.execSQL(genAddStatsDataScript("db2"));
+        mainDB.execSQL(genAddPitDataScript("db2"));
 
-            String addDB1Data = "" +
-                    "INSERT INTO " + Matches.TABLE + " " +
-                    "SELECT " + "S.comp, S.matchNum, S.teamNumber, S.matchPos " +
-                    "FROM db1." + Matches.TABLE +" S " +
-                    "WHERE NOT EXISTS ("+
-                    "SELECT T."+Matches.KEY_CompId+", T."+Matches.KEY_MatchNumber +", T."+Matches.KEY_TeamNumber + " " +
-                    "FROM "+Matches.TABLE+" T " +
-                    "WHERE T."+Matches.KEY_CompId + " = S.comp AND T." + Matches.KEY_MatchNumber+" = S.matchNum AND T." +
-                        Matches.KEY_TeamNumber + " = S.teamNumber" +
-                    ")";
+        mainDB.execSQL(genAddMatchesDataScript("db3"));
+        mainDB.execSQL(genAddStatsDataScript("db3"));
+        mainDB.execSQL(genAddPitDataScript("db3"));
 
-            String addDB2Data = "" +
-                    "INSERT INTO " + Matches.TABLE + "( "+ Matches.KEY_COLUMNS+ ") " +
-                    "SELECT " + "S.comp, S.team, S.matches, S.score " +
-                    "FROM db2." + Matches.TABLE +" S " +
-                    "WHERE NOT EXISTS ("+
-                    "SELECT T."+Matches.KEY_CompId+", T."+Matches.KEY_MatchNumber +", T."+Matches.KEY_TeamNumber + " " +
-                    "FROM "+Matches.TABLE+" T " +
-                    "WHERE T."+Matches.KEY_CompId + " = S.comp AND T." + Matches.KEY_MatchNumber+" = S.matchNum AND T." +
-                    Matches.KEY_TeamNumber + " = S.teamNumber" +
-                    ")";
+        mainDB.execSQL(genAddMatchesDataScript("db3"));
+        mainDB.execSQL(genAddStatsDataScript("db3"));
+        mainDB.execSQL(genAddPitDataScript("db3"));
 
-            String addDB3Data = "" +
-                    "INSERT INTO " + Matches.TABLE + "( "+ Matches.KEY_COLUMNS+ ") " +
-                    "SELECT " + "S.comp, S.team, S.matches, S.score " +
-                    "FROM db3." + Matches.TABLE +" S " +
-                    "WHERE NOT EXISTS ("+
-                    "SELECT T."+Matches.KEY_CompId+", T."+Matches.KEY_MatchNumber +", T."+Matches.KEY_TeamNumber + " " +
-                    "FROM "+Matches.TABLE+" T " +
-                    "WHERE T."+Matches.KEY_CompId + " = S.comp AND T." + Matches.KEY_MatchNumber+" = S.matchNum AND T." +
-                    Matches.KEY_TeamNumber + " = S.teamNumber" +
-                    ")";
+        mainDB.execSQL(genAddMatchesDataScript("db4"));
+        mainDB.execSQL(genAddStatsDataScript("db4"));
+        mainDB.execSQL(genAddPitDataScript("db4"));
 
-            String addDB4Data = "" +
-                    "INSERT INTO " + Matches.TABLE + "( "+ Matches.KEY_COLUMNS+ ") " +
-                    "SELECT " + "S.comp, S.team, S.matches, S.score " +
-                    "FROM db4." + Matches.TABLE +" S " +
-                    "WHERE NOT EXISTS ("+
-                    "SELECT T."+Matches.KEY_CompId+", T."+Matches.KEY_MatchNumber +", T."+Matches.KEY_TeamNumber + " " +
-                    "FROM "+Matches.TABLE+" T " +
-                    "WHERE T."+Matches.KEY_CompId + " = S.comp AND T." + Matches.KEY_MatchNumber+" = S.matchNum AND T." +
-                    Matches.KEY_TeamNumber + " = S.teamNumber" +
-                    ")";
+        mainDB.execSQL(genAddMatchesDataScript("db5"));
+        mainDB.execSQL(genAddStatsDataScript("db5"));
+        mainDB.execSQL(genAddPitDataScript("db5"));
 
-            String addDB5Data = "" +
-                    "INSERT INTO " + Matches.TABLE + "( "+ Matches.KEY_COLUMNS+ ") " +
-                    "SELECT " + "S.comp, S.team, S.matches, S.score " +
-                    "FROM db5." + Matches.TABLE +" S " +
-                    "WHERE NOT EXISTS ("+
-                    "SELECT T."+Matches.KEY_CompId+", T."+Matches.KEY_MatchNumber +", T."+Matches.KEY_TeamNumber + " " +
-                    "FROM "+Matches.TABLE+" T " +
-                    "WHERE T."+Matches.KEY_CompId + " = S.comp AND T." + Matches.KEY_MatchNumber+" = S.matchNum AND T." +
-                    Matches.KEY_TeamNumber + " = S.teamNumber" +
-                    ")";
+        mainDB.execSQL(genAddMatchesDataScript("db6"));
+        mainDB.execSQL(genAddStatsDataScript("db6"));
+        mainDB.execSQL(genAddPitDataScript("db6"));
 
-            String addDB6Data = "" +
-                    "INSERT INTO " + Matches.TABLE + "( "+ Matches.KEY_COLUMNS+ ") " +
-                    "SELECT " + "S.comp, S.team, S.matches, S.score " +
-                    "FROM db6." + Matches.TABLE +" S " +
-                    "WHERE NOT EXISTS ("+
-                    "SELECT T."+Matches.KEY_CompId+", T."+Matches.KEY_MatchNumber +", T."+Matches.KEY_TeamNumber + " " +
-                    "FROM "+Matches.TABLE+" T " +
-                    "WHERE T."+Matches.KEY_CompId + " = S.comp AND T." + Matches.KEY_MatchNumber+" = S.matchNum AND T." +
-                    Matches.KEY_TeamNumber + " = S.teamNumber" +
-                    ")";
-
-
-            String detachDB1 = "DETACH db1";
-            String detachDB2 = "DETACH db2";
-            String detachDB3 = "DETACH db3";
-            String detachDB4 = "DETACH db4";
-            String detachDB5 = "DETACH db5";
-            String detachDB6 = "DETACH db6";
-
-            stats.execSQL(attachDB1);
-            stats.execSQL(attachDB2);
-            stats.execSQL(attachDB3);
-            stats.execSQL(attachDB4);
-            stats.execSQL(attachDB5);
-            stats.execSQL(attachDB6);
-            stats.execSQL(addDB1Data);
-            stats.execSQL(addDB2Data);
-            stats.execSQL(addDB3Data);
-            stats.execSQL(addDB4Data);
-            stats.execSQL(addDB5Data);
-            stats.execSQL(addDB6Data);
-            stats.execSQL(detachDB1);
-            stats.execSQL(detachDB2);
-            stats.execSQL(detachDB3);
-            stats.execSQL(detachDB4);
-            stats.execSQL(detachDB5);
-            stats.execSQL(detachDB6);
-            Toast.makeText(this, "merged stats", Toast.LENGTH_SHORT).show();
-        } catch (Exception e) {
-            Log.d("Test", "Merge: error " + e);
-        }
-    }
-    public void merge3() {
-
-        // Notes:
-        //          In order for this method to work, matchNumber cannot be primary key since
-        //          multiple matches will be going in that are the same number but different teams
-        //
-        //          These strings can be place inside of match repo or elsewhere, probably making a function
-        //          to generate them. Doing both manually because of differences in names
-
-        try {
-            SQLiteDatabase stats = DatabaseManager.getInstance().openDatabase();
-
-            String attachDB1 = "ATTACH DATABASE '" + DOWNLOADS_FILE.getAbsolutePath() + "/TabletData1.db" + "' as db1";
-            String attachDB2 = "ATTACH DATABASE '" + DOWNLOADS_FILE.getAbsolutePath() + "/TabletData2.db" + "' as db2";
-            String attachDB3 = "ATTACH DATABASE '" + DOWNLOADS_FILE.getAbsolutePath() + "/TabletData3.db" + "' as db3";
-            String attachDB4 = "ATTACH DATABASE '" + DOWNLOADS_FILE.getAbsolutePath() + "/TabletData4.db" + "' as db4";
-            String attachDB5 = "ATTACH DATABASE '" + DOWNLOADS_FILE.getAbsolutePath() + "/TabletData5.db" + "' as db5";
-            String attachDB6 = "ATTACH DATABASE '" + DOWNLOADS_FILE.getAbsolutePath() + "/TabletData6.db" + "' as db6";
-
-            String addDB1Data = "" +
-                    "INSERT INTO " + Stats.TABLE + " " +
-                    "SELECT " + Stats.KEY_Columns + " " +
-                    "FROM db1." + Stats.TABLE +" S " +
-                    "WHERE NOT EXISTS ("+
-                    "SELECT T."+Stats.KEY_TeamNum+", T."+Stats.KEY_MatchNum + " " +
-                    "FROM "+Stats.TABLE+" T " +
-                    "WHERE T."+Stats.KEY_TeamNum+" = S."+Stats.KEY_TeamNum +" AND T."+Stats.KEY_MatchNum+" = S." + Stats.KEY_MatchNum+
-                    ")";
-
-            String addDB2Data = "" +
-                    "INSERT INTO " + Stats.TABLE + " " +
-                    "SELECT " + Stats.KEY_Columns + " " +
-                    "FROM db2." + Stats.TABLE +" S " +
-                    "WHERE NOT EXISTS ("+
-                    "SELECT T."+Stats.KEY_TeamNum+", T."+Stats.KEY_MatchNum + " " +
-                    "FROM "+Stats.TABLE+" T " +
-                    "WHERE T."+Stats.KEY_TeamNum+" = S."+Stats.KEY_TeamNum +" AND T."+Stats.KEY_MatchNum+" = S." + Stats.KEY_MatchNum+
-                    ")";
-
-            String addDB3Data = "" +
-                    "INSERT INTO " + Stats.TABLE + " " +
-                    "SELECT " + Stats.KEY_Columns + " " +
-                    "FROM db3." + Stats.TABLE +" S " +
-                    "WHERE NOT EXISTS ("+
-                    "SELECT T."+Stats.KEY_TeamNum+", T."+Stats.KEY_MatchNum + " " +
-                    "FROM "+Stats.TABLE+" T " +
-                    "WHERE T."+Stats.KEY_TeamNum+" = S."+Stats.KEY_TeamNum +" AND T."+Stats.KEY_MatchNum+" = S." + Stats.KEY_MatchNum+
-                    ")";
-
-            String addDB4Data = "" +
-                    "INSERT INTO " + Stats.TABLE + " " +
-                    "SELECT " + Stats.KEY_Columns + " " +
-                    "FROM db4." + Stats.TABLE +" S " +
-                    "WHERE NOT EXISTS ("+
-                    "SELECT T."+Stats.KEY_TeamNum+", T."+Stats.KEY_MatchNum + " " +
-                    "FROM "+Stats.TABLE+" T " +
-                    "WHERE T."+Stats.KEY_TeamNum+" = S."+Stats.KEY_TeamNum +" AND T."+Stats.KEY_MatchNum+" = S." + Stats.KEY_MatchNum+
-                    ")";
-
-            String addDB5Data = "" +
-                    "INSERT INTO " + Stats.TABLE + " " +
-                    "SELECT " + Stats.KEY_Columns + " " +
-                    "FROM db5." + Stats.TABLE +" S " +
-                    "WHERE NOT EXISTS ("+
-                    "SELECT T."+Stats.KEY_TeamNum+", T."+Stats.KEY_MatchNum + " " +
-                    "FROM "+Stats.TABLE+" T " +
-                    "WHERE T."+Stats.KEY_TeamNum+" = S."+Stats.KEY_TeamNum +" AND T."+Stats.KEY_MatchNum+" = S." + Stats.KEY_MatchNum+
-                    ")";
-
-            String addDB6Data = "" +
-                    "INSERT INTO " + Stats.TABLE + " " +
-                    "SELECT " + Stats.KEY_Columns + " " +
-                    "FROM db6." + Stats.TABLE +" S " +
-                    "WHERE NOT EXISTS ("+
-                    "SELECT T."+Stats.KEY_TeamNum+", T."+Stats.KEY_MatchNum + " " +
-                    "FROM "+Stats.TABLE+" T " +
-                    "WHERE T."+Stats.KEY_TeamNum+" = S."+Stats.KEY_TeamNum +" AND T."+Stats.KEY_MatchNum+" = S." + Stats.KEY_MatchNum+
-                    ")";
-
-            String detachDB1 = "DETACH db1";
-            String detachDB2 = "DETACH db2";
-            String detachDB3 = "DETACH db3";
-            String detachDB4 = "DETACH db4";
-            String detachDB5 = "DETACH db5";
-            String detachDB6 = "DETACH db6";
-
-            stats.execSQL(attachDB1);
-            stats.execSQL(attachDB2);
-            stats.execSQL(attachDB3);
-            stats.execSQL(attachDB4);
-            stats.execSQL(attachDB5);
-            stats.execSQL(attachDB6);
-            stats.execSQL(addDB1Data);
-            stats.execSQL(addDB2Data);
-            stats.execSQL(addDB3Data);
-            stats.execSQL(addDB4Data);
-            stats.execSQL(addDB5Data);
-            stats.execSQL(addDB6Data);
-            stats.execSQL(detachDB1);
-            stats.execSQL(detachDB2);
-            stats.execSQL(detachDB3);
-            stats.execSQL(detachDB4);
-            stats.execSQL(detachDB5);
-            stats.execSQL(detachDB6);
-        } catch (Exception e) {
-            Log.d("Test", "Merge: error " + e);
-        }
-    }
-    public void merge4() {
-
-        // Notes:
-        //          In order for this method to work, matchNumber cannot be primary key since
-        //          multiple matches will be going in that are the same number but different teams
-        //
-        //          These strings can be place inside of match repo or elsewhere, probably making a function
-        //          to generate them. Doing both manually because of differences in names
-
-        try {
-            SQLiteDatabase stats = DatabaseManager.getInstance().openDatabase();
-
-            String attachDB1 = "ATTACH DATABASE '" + DOWNLOADS_FILE.getAbsolutePath() + "/TabletData1.db" + "' as db1";
-            String attachDB2 = "ATTACH DATABASE '" + DOWNLOADS_FILE.getAbsolutePath() + "/TabletData2.db" + "' as db2";
-            String attachDB3 = "ATTACH DATABASE '" + DOWNLOADS_FILE.getAbsolutePath() + "/TabletData3.db" + "' as db3";
-            String attachDB4 = "ATTACH DATABASE '" + DOWNLOADS_FILE.getAbsolutePath() + "/TabletData4.db" + "' as db4";
-            String attachDB5 = "ATTACH DATABASE '" + DOWNLOADS_FILE.getAbsolutePath() + "/TabletData5.db" + "' as db5";
-            String attachDB6 = "ATTACH DATABASE '" + DOWNLOADS_FILE.getAbsolutePath() + "/TabletData6.db" + "' as db6";
-
-
-            String addDB1Data = "" +
-                    "INSERT INTO " + PitData.TABLE + " " +
-                    "SELECT " + PitData.KEY_Columns + " " +
-                    "FROM db1." + PitData.TABLE +" S " +
-                    "WHERE NOT EXISTS ("+
-                    "SELECT T."+PitData.KEY_TeamNum + " " +
-                    "FROM "+ PitData.TABLE+" T " +
-                    "WHERE T."+PitData.KEY_TeamNum+" = S."+PitData.KEY_TeamNum +
-                    ")";
-
-            String addDB2Data = "" +
-                    "INSERT INTO " + PitData.TABLE + " " +
-                    "SELECT " + PitData.KEY_Columns + " " +
-                    "FROM db2." + PitData.TABLE +" S " +
-                    "WHERE NOT EXISTS ("+
-                    "SELECT T."+PitData.KEY_TeamNum + " " +
-                    "FROM "+PitData.TABLE+" T " +
-                    "WHERE T."+PitData.KEY_TeamNum+" = S."+PitData.KEY_TeamNum +
-                    ")";
-
-            String addDB3Data = "" +
-                    "INSERT INTO " + PitData.TABLE + " " +
-                    "SELECT " + PitData.KEY_Columns + " " +
-                    "FROM db3." + PitData.TABLE +" S " +
-                    "WHERE NOT EXISTS ("+
-                    "SELECT T."+PitData.KEY_TeamNum + " " +
-                    "FROM "+PitData.TABLE+" T " +
-                    "WHERE T."+PitData.KEY_TeamNum+" = S."+PitData.KEY_TeamNum +
-                    ")";
-
-            String addDB4Data = "" +
-                    "INSERT INTO " + PitData.TABLE + " " +
-                    "SELECT " + PitData.KEY_Columns + " " +
-                    "FROM db4." + PitData.TABLE +" S " +
-                    "WHERE NOT EXISTS ("+
-                    "SELECT T."+PitData.KEY_TeamNum + " " +
-                    "FROM "+PitData.TABLE+" T " +
-                    "WHERE T."+PitData.KEY_TeamNum+" = S."+PitData.KEY_TeamNum +
-                    ")";
-
-            String addDB5Data = "" +
-                    "INSERT INTO " + PitData.TABLE + " " +
-                    "SELECT " + PitData.KEY_Columns + " " +
-                    "FROM db5." + PitData.TABLE +" S " +
-                    "WHERE NOT EXISTS ("+
-                    "SELECT T."+PitData.KEY_TeamNum + " " +
-                    "FROM "+PitData.TABLE+" T " +
-                    "WHERE T."+PitData.KEY_TeamNum+" = S."+PitData.KEY_TeamNum +
-                    ")";
-
-            String addDB6Data = "" +
-                    "INSERT INTO " + PitData.TABLE + " " +
-                    "SELECT " + PitData.KEY_Columns + " " +
-                    "FROM db6." + PitData.TABLE +" S " +
-                    "WHERE NOT EXISTS ("+
-                    "SELECT T."+PitData.KEY_TeamNum + " " +
-                    "FROM "+PitData.TABLE+" T " +
-                    "WHERE T."+PitData.KEY_TeamNum+" = S."+PitData.KEY_TeamNum +
-                    ")";
-
-            String detachDB1 = "DETACH db1";
-            String detachDB2 = "DETACH db2";
-            String detachDB3 = "DETACH db3";
-            String detachDB4 = "DETACH db4";
-            String detachDB5 = "DETACH db5";
-            String detachDB6 = "DETACH db6";
-
-            stats.execSQL(attachDB1);
-            stats.execSQL(attachDB2);
-            stats.execSQL(attachDB3);
-            stats.execSQL(attachDB4);
-            stats.execSQL(attachDB5);
-            stats.execSQL(attachDB6);
-            stats.execSQL(addDB1Data);
-            stats.execSQL(addDB2Data);
-            stats.execSQL(addDB3Data);
-            stats.execSQL(addDB4Data);
-            stats.execSQL(addDB5Data);
-            stats.execSQL(addDB6Data);
-            stats.execSQL(detachDB1);
-            stats.execSQL(detachDB2);
-            stats.execSQL(detachDB3);
-            stats.execSQL(detachDB4);
-            stats.execSQL(detachDB5);
-            stats.execSQL(detachDB6);
-        } catch (Exception e) {
-            Log.d("Test", "Merge: error " + e);
-        }
+        // Detach all databse
+        detachDB("db1");
+        detachDB("db2");
+        detachDB("db3");
+        detachDB("db4");
+        detachDB("db5");
+        detachDB("db6");
     }
 
     public void pit(View view){
@@ -403,4 +118,56 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, MatchPrediction.class );
         startActivity(intent);
     }
+
+    public String genAddPitDataScript(String attachedDBName){
+        return  "" +
+                "INSERT INTO " + PitData.TABLE + " " +
+                "SELECT * " +
+                "FROM "+attachedDBName+".PitData S " +
+                "WHERE NOT EXISTS ("+
+                "SELECT T."+PitData.KEY_TeamNum + " " +
+                "FROM "+ PitData.TABLE+" T " +
+                "WHERE T."+PitData.KEY_TeamNum+" = S."+PitData.KEY_TeamNum +
+                ")";
+    }
+
+    public String genAddStatsDataScript(String attachedDBName) {
+        return  "" +
+                "INSERT INTO " + Stats.TABLE + " " +
+                "SELECT * " +
+                "FROM "+attachedDBName+"." + Stats.TABLE +" S " +
+                "WHERE NOT EXISTS ("+
+                "SELECT T."+Stats.KEY_TeamNum+", T."+Stats.KEY_MatchNum + " " +
+                "FROM "+Stats.TABLE+" T " +
+                "WHERE T."+Stats.KEY_TeamNum+" = S."+Stats.KEY_TeamNum +" AND T."+Stats.KEY_MatchNum+" = S." + Stats.KEY_MatchNum+
+                ")";
+    }
+
+    public String genAddMatchesDataScript(String attachedDBName) {
+        return  "" +
+                "INSERT INTO " + Matches.TABLE + " " +
+                "SELECT * " +
+                "FROM "+attachedDBName+"." + Matches.TABLE +" S " +
+                "WHERE NOT EXISTS ("+
+                "SELECT T."+Matches.KEY_CompId+", T."+Matches.KEY_MatchNumber +", T."+Matches.KEY_TeamNumber + " " +
+                "FROM "+Matches.TABLE+" T " +
+                "WHERE T."+Matches.KEY_CompId+" = S."+Matches.KEY_CompId+" AND T." + Matches.KEY_MatchNumber+" = S."+Matches.KEY_MatchNumber+" AND T." +
+                Matches.KEY_TeamNumber+" = S."+Matches.KEY_TeamNumber+
+                ")";
+    }
+
+    public void attachDB(String fileName, String name) {
+        SQLiteDatabase mainDB = DatabaseManager.getInstance().openDatabase();
+        String attachDB = "ATTACH DATABASE '"+DOWNLOADS_FILE.getAbsolutePath()+"/"+fileName+"' as "+name;
+
+        mainDB.execSQL(attachDB);
+    }
+
+    public void detachDB(String name) {
+        SQLiteDatabase mainDB = DatabaseManager.getInstance().openDatabase();
+        String detachDB = "DETACH "+name;
+
+        mainDB.execSQL(detachDB);
+    }
+
 }

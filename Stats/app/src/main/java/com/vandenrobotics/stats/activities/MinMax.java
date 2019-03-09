@@ -139,7 +139,7 @@ public class MinMax extends AppCompatActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_avg_weight);
+        setContentView(R.layout.activity_min_max);
 
         TeamsRepo teamsRepo = new TeamsRepo();
         team_numbers = teamsRepo.getTeams();

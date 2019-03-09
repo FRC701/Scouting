@@ -50,9 +50,9 @@ public class PitDataRepo {
                 + PitData.KEY_DriveTrain + " TEXT , "
                 + PitData.KEY_Lang + " TEXT , "
                 + PitData.KEY_Comments + " TEXT , "
-                + PitData.KEY_Speed + " TEXT ) "
+                + PitData.KEY_Speed + " TEXT , "
                 //makes sure TeamNumber column exists in the Team Table
-                + " FOREIGN KEY ( " + PitData.KEY_TeamNum + " ) REFERENCES " + Teams.TABLE
+                + "FOREIGN KEY ( " + PitData.KEY_TeamNum + " ) REFERENCES " + Teams.TABLE
                 + " ( " + Teams.KEY_TeamNumber + " ))";
     }
 

@@ -39,7 +39,6 @@ public class Stats {
     public static final String KEY_YellowCard = "YellowCard";
     public static final String KEY_Fouls = "Fouls";
     public static final String KEY_TechFouls = "TechFouls";
-    public static final String KEY_Defense = "Defense";
 
     //TODO add rest later
     public static final String KEY_Columns = "S."+KEY_CompId + ", S." + KEY_MatchNum + ", S." + KEY_TeamNum+ ", S." + KEY_MatchPosition+ ", S." + KEY_NoShow + ", S." + KEY_StartLevel1 + ", S." + KEY_StartLevel2 + ", S." + KEY_PreloadCargo + ", S." + KEY_PreloadHatch + ", S." + KEY_SsComments + ", S." + KEY_RocketTopC + ", S." + KEY_RocketTopH + ", S." + KEY_RocketMiddleC + ", S." + KEY_RocketMiddleH + ", S." + KEY_RocketBottomC + ", S." + KEY_RocketBottomH + ", S." + KEY_CargoShipC + ", S." + KEY_CargoShipH
