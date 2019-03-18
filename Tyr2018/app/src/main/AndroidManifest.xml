@@ -22,9 +22,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activities.PitDisplay" />
         <activity android:name=".activities.TeamInfoDisplay" />
-        <activity android:name=".activities.MinMax" />
         <activity
             android:name=".activities.MatchData"
             android:label="@string/title_activity_match_data"

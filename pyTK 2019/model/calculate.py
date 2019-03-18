@@ -5,9 +5,12 @@
 import math
 #from statlib import *
 
-from . import stat
+from scipy import stats
+
+from .team import TeamRankings
 from . import imports
 from .team import Team
+from . import stat
 
 # import model.stats
 # import model.imports
@@ -44,17 +47,17 @@ def calculate_data():
 
 #TODO change to incorperate sql
 def calculate_pit_data():
-    for entry in PitEntry.entries:
-        done = False
-        for team in Team.team_list:
-            if team.number == entry.team:
-                assign_pit_entry_values(team, entry)
-                done = True
-        if done == False:
-            newTeam = Team(entry.team)
-            print ("Added Team #: " + str(entry.team))
-            assign_pit_entry_values(Team.team_list[len(Team.team_list)-1],entry)
-        
+    # for entry in PitEntry.entries:
+    #     done = False
+    #     for team in Team.team_list:
+    #         if team.number == entry.team:
+    #             assign_pit_entry_values(team, entry)
+    done = True
+        # if done == False:
+        #     newTeam = Team(entry.team)
+        #     print ("Added Team #: " + str(entry.team))
+        #     assign_pit_entry_values(Team.team_list[len(Team.team_list)-1],entry)
+        #
 #------------------------------------------------------------------------------
 # assign_pit_entry_values function
 #   -- takes PitEntry values and puts them into a team
@@ -235,12 +238,12 @@ def predict_outcome(teams=[]):
     
     if mur > mub:
         zval = (mur-mub)/math.sqrt((rst**2)+(bst**2)) if math.sqrt((rst**2)+(bst**2)) > 0 else 0
-        perr = stats.lzprob(zval)
+        perr = 1 - stats.special.ndtri(zval)
         perr = round(perr,4)
-        return "Red Alliance: " + str(100*perr)
+        return "Red Alliance: " + str(100)
     
     else:
         zval = (mub-mur)/math.sqrt((rst**2)+(bst**2)) if math.sqrt((rst**2)+(bst**2)) > 0 else 0
-        perr = stats.lzprob(zval)
+        perr = 1 - stats.special.ndtri(zval)
         perr = round(perr, 4)
-        return "Blue Alliance: " + str(100*perr)
+        return "Blue Alliance: " + str(100)

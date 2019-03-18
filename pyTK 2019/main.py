@@ -12,6 +12,17 @@ import controller.windows
 import model.imports as imports
 import model.model as model
 import model.calculate as calculate
+import controller.windows.cchoose as cchoose
+import controller.windows.cpredict as cpredict
+import controller.windows.csearch as csearch
+import controller.windows.cranking as cranking
+import controller.windows.cteamdata as cteamdata
+import view.windows.vchoose as vchoose
+import view.windows.vsearch as vsearch
+import view.windows.vpredict as vpredict
+import view.windows.vranking as vranking
+import view.windows.vteamdata as vteamdata
+
 
 class App(Frame):
 
@@ -19,6 +30,7 @@ class App(Frame):
         imports.create_table()
         print("created table", model.imported)
         imports.add_data(model)
+        self.imported = True
         print("added data", model.imported)
         if model.imported:
             calculate.calculate_data()
@@ -27,7 +39,7 @@ class App(Frame):
 
 
     def import_pitData(self):
-        imports.import_pitData(tkFileDialog.askopenfilename())
+        imports.import_pitData(filedialog.askopenfilename())
         self.pitImported = model.pitImported
         if self.pitImported:
             calculate.calculate_pit_data()

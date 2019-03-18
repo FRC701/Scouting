@@ -80,7 +80,7 @@ def add_data(model):
     dirList = os.listdir(filePath)
     for filename in dirList:
         tabletconn = sqlite3.connect(filePath + filename)
-        print (filename)
+        print(filename)
         tc = tabletconn.cursor()
         try:
             tc.execute('SELECT * FROM Matches')
@@ -225,7 +225,7 @@ def add_stats():
 def clear_importData():
     model.imported = False
     model.pitImported = False
-    Team.available = []
-    Team.team_list = []
+    # Team.available = []
+    # Team.team_list = []
 
 

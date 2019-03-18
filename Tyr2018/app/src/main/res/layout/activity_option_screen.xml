@@ -12,18 +12,6 @@
         android:orientation="vertical">
 
         <Button
-            android:id="@+id/button2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:fontFamily="casual"
-            android:text="@string/pit_data"
-            android:textColor="@color/BackGroundGreen"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:onClick="pit_scout"/>
-
-        <Button
             android:id="@+id/button3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -39,12 +27,12 @@
             android:id="@+id/button4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/min_s_and_max_s"
+            android:text="Match predictions"
             android:layout_weight="1"
             android:fontFamily="casual"
             android:textColor="@color/BackGroundGreen"
             android:textSize="18sp"
             android:textStyle="bold"
-            android:onClick="min_max"/>
+            android:onClick="match_pred"/>
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>

@@ -4,9 +4,7 @@
 #------------------------------------------------------------------------------
 from tkinter import *
 
-from model import calculate.*
-print(dir(model))
-print(model.__path__)
+from model.calculate import *
 
 #------------------------------------------------------------------------------
 # get_none function
@@ -35,7 +33,7 @@ class RankingController():
                     "Cargo Ship Hatch"]
 
     rankingIndex = [("None", get_none),
-                    ("Rocket Top Cargo", calculate.get_rocketTopC_rank),
+                    ("Rocket Top Cargo", get_rocketTopC_rank),
                     ("Rocket Top Hatch", get_rocketTopH_rank),
                     ("Rocket Middle Cargo", get_rocketMiddleC_rank),
                     ("Rocket Middle Hatch", get_rocketMiddleH_rank),

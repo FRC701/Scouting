@@ -34,7 +34,7 @@ public class DatabaseManager {
     public synchronized SQLiteDatabase openDatabase(){
         mOpenCounter++;
         if(mOpenCounter == 1){
-            mDatabase = SQLiteDatabase.openDatabase(Environment.getExternalStorageDirectory() + "/data/Tyr2018/scouting.db", null, SQLiteDatabase.OPEN_READONLY);
+            mDatabase = SQLiteDatabase.openDatabase(Environment.getExternalStorageDirectory() + "/data/Tyr2018/TabletData.db", null, SQLiteDatabase.OPEN_READONLY);
         }
         return mDatabase;
     }

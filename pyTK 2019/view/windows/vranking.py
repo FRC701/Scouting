@@ -5,7 +5,7 @@
 from tkinter import *
 import re
 
-from controller.windows import cranking.*
+from controller.windows.cranking import *
 from controller.windows import cteamdata
 from view.windows import vteamdata
     
@@ -18,7 +18,7 @@ class _Listing(Frame):
     def __init__(self,parent=None,grandParent=None,kind="None"):
         self.parent = parent
         self.grandParent = grandParent
-        self.controller = cranking.RankingController()
+        self.controller = RankingController()
         
         Frame.__init__(self,parent,relief=RAISED,bd=2)
         self.pack(side=LEFT,padx=10,pady=10,fill=Y)
