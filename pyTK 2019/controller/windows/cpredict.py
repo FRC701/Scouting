@@ -4,7 +4,8 @@
 #------------------------------------------------------------------------------
 from tkinter import *
 
-
+from model import team
+from model import calculate
 
 #------------------------------------------------------------------------------
 # SearchController class
@@ -44,11 +45,11 @@ class PredictController():
         if int(teamVals[index][0].get()) != 0:
             for t in team.Team.team_list:
                 if t.number == int(teamVals[index][0].get()):
-                    for i in xrange(0,len(self.predictIndex)):
+                    for i in range(len(self.predictIndex)):
                         teamVals[index][i+1].set(str(t.getAttr(self.predictIndex[i][0])))
                     break
         else:
-            for i in xrange(0,len(self.predictIndex)):
+            for i in range(len(self.predictIndex)):
                 teamVals[index][i+1].set("0")
 
     def getPrediction(self,team1,team2,team3):

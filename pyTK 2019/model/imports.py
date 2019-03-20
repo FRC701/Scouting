@@ -10,7 +10,7 @@ import controller.windows.cteamdata as cteamdata
 conn = sqlite3.connect('TabletData.db')
 c = conn.cursor()
 
-filePath = "Sqlite Database\\"
+filePath = "C:\Scouting\pyTK 2019\Sqlite Database\\"
 
 
 def create_table():

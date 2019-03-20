@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.RadioButton;
 
 import com.vandenrobotics.saga.R;
@@ -33,6 +34,7 @@ public class PostMatchFragment extends Fragment {
     private NumberPicker techFoul_Np;
     private CheckBox redCard_Cb;
     private CheckBox yellowCard_Cb;
+    private EditText startClimb_Et;
 
     private String mEvent;
     private int mMatchNum;

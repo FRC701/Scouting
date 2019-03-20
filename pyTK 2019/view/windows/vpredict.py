@@ -3,6 +3,7 @@
 #   -- contains information for displaying the predict window
 #------------------------------------------------------------------------------
 from tkinter import *
+from tkinter import messagebox
 import re
 
 from controller.windows import cpredict
@@ -79,7 +80,7 @@ class Predict(Frame):
     def load_team(self, event=None, teamVals=None, index=None):
         team = teamVals[index][0].get()
         if team not in self.controller.available and team != "0":
-            tkMessageBox.showinfo("Team Status","That team is not available. Please choose another.")
+            messagebox.showinfo("Team Status","That team is not available. Please choose another.")
             teamVals[index][0].set("0")
 
         self.controller.getInfo(teamVals,index)
@@ -164,7 +165,7 @@ class Predict(Frame):
         self.label = Label(self.rTeams,text="Team")
         self.label.pack(side=TOP)
         # create the team entries
-        for i in xrange(0,3):
+        for i in range(3):
             self.EntryVar = StringVar()
             self.EntryVar.set("0")
             self.rVals[i].append(self.EntryVar)
@@ -183,7 +184,7 @@ class Predict(Frame):
         self.label = Label(self.bTeams,text="Team")
         self.label.pack(side=TOP)
         # create the team entries
-        for i in xrange(0,3):
+        for i in range(3):
             self.EntryVar = StringVar()
             self.EntryVar.set("0")
             self.bVals[i].append(self.EntryVar)
@@ -202,7 +203,7 @@ class Predict(Frame):
 
             self.label = Label(self.nextFrame,text=y)
             self.label.pack(side=TOP)
-            for i in xrange(0,3):
+            for i in range(3):
                 self.EntryVar = StringVar()
                 self.EntryVar.set("0")
                 self.rVals[i].append(self.EntryVar)
@@ -218,7 +219,7 @@ class Predict(Frame):
 
             self.label = Label(self.nextFrame,text=y)
             self.label.pack(side=TOP)
-            for i in xrange(0,3):
+            for i in range(3):
                 self.EntryVar = StringVar()
                 self.EntryVar.set("0")
                 self.bVals[i].append(self.EntryVar)

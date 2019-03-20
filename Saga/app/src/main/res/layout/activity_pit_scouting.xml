@@ -8,9 +8,6 @@
     android:background="@color/BackGroundGreen"
     tools:context="com.vandenrobotics.saga.activities.PitScoutingActivity">
 
-    inputType="text".
-
-
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">

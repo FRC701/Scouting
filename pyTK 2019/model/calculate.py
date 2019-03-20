@@ -209,7 +209,7 @@ def predict_scores(team1=None,team2=None,team3=None):
     return expectedScores
 
 def predict_outcome(teams=[]):
-
+    
     team1 = teams[0]
     team2 = teams[1]
     team3 = teams[2]
@@ -238,12 +238,12 @@ def predict_outcome(teams=[]):
     
     if mur > mub:
         zval = (mur-mub)/math.sqrt((rst**2)+(bst**2)) if math.sqrt((rst**2)+(bst**2)) > 0 else 0
-        perr = 1 - stats.special.ndtri(zval)
+        perr = 1 - stats.stats.special.ndtri(zval)
         perr = round(perr,4)
         return "Red Alliance: " + str(100)
     
     else:
         zval = (mub-mur)/math.sqrt((rst**2)+(bst**2)) if math.sqrt((rst**2)+(bst**2)) > 0 else 0
-        perr = 1 - stats.special.ndtri(zval)
+        perr = 1 - stats.stats.special.ndtri(zval)
         perr = round(perr, 4)
         return "Blue Alliance: " + str(100)

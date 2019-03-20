@@ -100,6 +100,16 @@
         android:id="@+id/yellowCard_Cb"
         android:text="@string/CheckBox_yellowCard"
         />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Start climb"/>
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Start climb"
+        android:id="@+id/startClimb_Et"
+        android:inputType="time"/>
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
