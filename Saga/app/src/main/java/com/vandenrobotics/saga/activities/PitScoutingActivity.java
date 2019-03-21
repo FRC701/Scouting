@@ -28,6 +28,9 @@ public class PitScoutingActivity extends AppCompatActivity {
     private EditText speed;
     private EditText lang;
     private EditText comments;
+    private EditText driverExperience;
+    private EditText coDriverExperience;
+    private EditText climb;
     private CheckBox driveBlindly;
     private CheckBox auto;
     private CheckBox vision;
@@ -57,6 +60,7 @@ public class PitScoutingActivity extends AppCompatActivity {
     private Spinner spinnerTeams;
     private ArrayAdapter<Integer> teamAdapter;
     private int mTeamNumber;
+
 
 
     @Override
@@ -112,6 +116,9 @@ public class PitScoutingActivity extends AppCompatActivity {
         speed = (EditText)findViewById(R.id.speedAnswer);
         lang = (EditText)findViewById(R.id.programmingLanguageAnswer);
         comments = (EditText)findViewById(R.id.commentsAnswer);
+        driverExperience = (EditText)findViewById(R.id.driverExperience);
+        coDriverExperience = (EditText)findViewById(R.id.coDriverExperience);
+        climb = (EditText)findViewById(R.id.climbTime);
         driveBlindly = (CheckBox)findViewById(R.id.pitDriveBlindly_Cb);
         auto = (CheckBox)findViewById(R.id.pitAuto_Cb);
         vision = (CheckBox)findViewById(R.id.pitVision_Cb);
@@ -145,6 +152,9 @@ public class PitScoutingActivity extends AppCompatActivity {
        pitdata.setSpeed(speed.getText().toString());
        pitdata.setLang(lang.getText().toString());
        pitdata.setComments(comments.getText().toString());
+       pitdata.setDriverExperience(driverExperience.getText().toString());
+       pitdata.setCoDriverExperience(coDriverExperience.getText().toString());
+       pitdata.setClimb(climb.getText().toString());
 
        int db = (driveBlindly.isChecked() ? 1:0);
        pitdata.setDriveBlindly(db);
@@ -210,6 +220,9 @@ public class PitScoutingActivity extends AppCompatActivity {
         speed.setText(pitData.getSpeed());
         lang.setText(pitData.getLang());
         comments.setText(pitData.getComments());
+        driverExperience.setText(pitData.getDriverExperience());
+        coDriverExperience.setText(pitData.getCoDriverExperience());
+        climb.setText(pitData.getClimb());
         driveBlindly.setChecked(pitData.getDriveBlindly() == 1);
         auto.setChecked(pitData.getAuto() == 1);
         vision.setChecked(pitData.getVision() == 1);

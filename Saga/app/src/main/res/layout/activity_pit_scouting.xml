@@ -365,6 +365,7 @@
                 android:id="@+id/speedAnswer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:inputType="text"
                 android:textColor="@color/White" />
 
             <TextView
@@ -378,6 +379,7 @@
                 android:id="@+id/programmingLanguageAnswer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:inputType="text"
                 android:textColor="@color/White" />
 
             <TextView
@@ -391,46 +393,49 @@
                 android:id="@+id/commentsAnswer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:inputType="text"
                 android:textColor="@color/White" />
 
             <TextView
                 android:id="@+id/textView18"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/How many years of experience does your driver have?"
+                android:text="@string/yearsDiverInDiveTeam"
                 android:textColor="@color/Goldish" />
 
             <EditText
                 android:id="@+id/driverExperience"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:inputType="text"
                 android:textColor="@color/White" />
 
             <TextView
                 android:id="@+id/textView19"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/How many years of experience does your co-driver have"
+                android:text="@string/yearsCoInDriveTeam"
                 android:textColor="@color/Goldish" />
 
             <EditText
                 android:id="@+id/coDriverExperience"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:inputType="text"
                 android:textColor="@color/White" />
             
             <TextView
                 android:id="@+id/textView20"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/When in the match do you start to climb?"
+                android:text="@string/matchClimbTime"
                 android:textColor="@color/Goldish" />
 
             <EditText
-                android:id="@+id/ClimbTime"
+                android:id="@+id/climbTime"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@color/White" />
+                android:inputType="text" />
 
             <Button
                 android:id="@+id/button"

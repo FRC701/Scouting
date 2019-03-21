@@ -45,7 +45,10 @@ public class PitDataRepo {
                 + PitData.KEY_DriveTrain + " TEXT , "
                 + PitData.KEY_Lang + " TEXT , "
                 + PitData.KEY_Comments + " TEXT , "
-                + PitData.KEY_Speed + " TEXT ) ";
+                + PitData.KEY_Speed + " TEXT ) "
+                + PitData.KEY_CoDriverExperience + " TEXT ) "
+                + PitData.KEY_DriverExperience + " TEXT ) "
+                + PitData.KEY_Climb + " TEXT ) ";
     }
 
     public int insert (PitData pitData){
@@ -58,6 +61,9 @@ public class PitDataRepo {
         values.put(PitData.KEY_Lang, pitData.getLang());
         values.put(PitData.KEY_Comments, pitData.getComments());
         values.put(PitData.KEY_Speed, pitData.getSpeed());
+        values.put(PitData.KEY_DriverExperience, pitData.getDriverExperience());
+        values.put(PitData.KEY_CoDriverExperience, pitData.getCoDriverExperience());
+        values.put(PitData.KEY_Climb, pitData.getClimb());
         values.put(PitData.KEY_DriveBlindly, pitData.getDriveBlindly());
         values.put(PitData.KEY_Auto, pitData.getAuto());
         values.put(PitData.KEY_Vision, pitData.getVision());
@@ -95,6 +101,9 @@ public class PitDataRepo {
         values.put(PitData.KEY_Lang, pitData.getLang());
         values.put(PitData.KEY_Comments, pitData.getComments());
         values.put(PitData.KEY_Speed, pitData.getSpeed());
+        values.put(PitData.KEY_DriverExperience, pitData.getDriverExperience());
+        values.put(PitData.KEY_CoDriverExperience, pitData.getCoDriverExperience());
+        values.put(PitData.KEY_Climb, pitData.getClimb());
         values.put(PitData.KEY_DriveBlindly, pitData.getDriveBlindly());
         values.put(PitData.KEY_Auto, pitData.getAuto());
         values.put(PitData.KEY_Vision, pitData.getVision());
@@ -152,6 +161,9 @@ public class PitDataRepo {
                 + ", PitData." + PitData.KEY_Lang
                 + ", PitData." + PitData.KEY_Comments
                 + ", PitData." + PitData.KEY_Speed
+                + ", PitData." + PitData.KEY_DriverExperience
+                + ", PitData." + PitData.KEY_CoDriverExperience
+                + ", PitData." + PitData.KEY_Climb
                 + ", PitData." + PitData.KEY_DriveBlindly
                 + ", PitData." + PitData.KEY_Auto
                 + ", PitData." + PitData.KEY_Vision
@@ -185,6 +197,9 @@ public class PitDataRepo {
             pitData.setLang(cursor.getString(cursor.getColumnIndex(PitData.KEY_Lang)));
             pitData.setComments(cursor.getString(cursor.getColumnIndex(PitData.KEY_Comments)));
             pitData.setSpeed(cursor.getString(cursor.getColumnIndex(PitData.KEY_Speed)));
+            pitData.setSpeed(cursor.getString(cursor.getColumnIndex(PitData.KEY_DriverExperience)));
+            pitData.setSpeed(cursor.getString(cursor.getColumnIndex(PitData.KEY_CoDriverExperience)));
+            pitData.setSpeed(cursor.getString(cursor.getColumnIndex(PitData.KEY_Climb)));
             pitData.setDriveBlindly(cursor.getInt(cursor.getColumnIndex(PitData.KEY_DriveBlindly)));
             pitData.setVision(cursor.getInt(cursor.getColumnIndex(PitData.KEY_Vision)));
             pitData.setCamera(cursor.getInt(cursor.getColumnIndex(PitData.KEY_Camera)));

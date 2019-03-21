@@ -16,6 +16,10 @@ public class PitData {
     public static final String KEY_Speed = "AverageSpeed";
     public static final String KEY_Lang = "ProgrammingLanguage";
     public static final String KEY_Comments = "Comments";
+    public static final String KEY_DriverExperience = "Comments";
+    public static final String KEY_CoDriverExperience = "Comments";
+    public static final String KEY_Climb = "Comments";
+
     //i did everything after here
     public static final String KEY_DriveBlindly = "DriveBlindly";
     public static final String KEY_Auto = "Auto";
@@ -50,6 +54,9 @@ public class PitData {
     private String speed;
     private String lang;
     private String comments;
+    private String driverExperience;
+    private String coDriverExperience;
+    private String climb;
     //and after here
     private int driveBlindly;
     private int auto;
@@ -83,6 +90,9 @@ public class PitData {
         driveTrain = "";
         lang = "";
         comments = "";
+        driverExperience = "";
+        coDriverExperience = "";
+        climb = "";
         driveBlindly = 0;
         auto = 0;
         vision = 0;
@@ -149,6 +159,25 @@ public class PitData {
         return comments;
     }
     public void setComments(String s){ comments = s; }
+
+    public String getDriverExperience(){
+        return driverExperience;
+    }
+    public void setDriverExperience(String s){ driverExperience = s; }
+
+    public String getCoDriverExperience(){
+        return coDriverExperience;
+    }
+    public void setCoDriverExperience(String s){ coDriverExperience = s; }
+
+    public String getClimb(){
+        return climb;
+    }
+    public void setClimb(String s){ climb = s; }
+
+
+
+
 
 //lol kaylani work after here
 
