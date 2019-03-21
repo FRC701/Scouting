@@ -39,6 +39,8 @@ public class Stats {
     public static final String KEY_YellowCard = "YellowCard";
     public static final String KEY_Fouls = "Fouls";
     public static final String KEY_TechFouls = "TechFouls";
+    public static final String KEY_Disqualified = "Disqualified";
+    public static final String KEY_ClimbTime ="ClimbTime";
 
     private String compId;
     private int matchNum;
@@ -69,6 +71,8 @@ public class Stats {
     private int endLevel2;
     private int endLevel3;
     private int endNone;
+    private int disqualified;
+    private String climbTime;
 
 
     public Stats(){
@@ -101,6 +105,8 @@ public class Stats {
         endLevel2 = 0;
         endLevel3 = 0;
         endNone = 0;
+        disqualified = 0;
+        climbTime = "";
     }
 
     public String getCompId(){
@@ -204,6 +210,11 @@ public class Stats {
         return sandstormComments;
     }
     public void setSscomments(String b){sandstormComments = b;}
+
+    public String getClimbTime() {
+        return climbTime;
+    }
+    public void setClimbTime(String b){climbTime = b;}
 
     public int getRocketTopC() {
         return rocketTopC;

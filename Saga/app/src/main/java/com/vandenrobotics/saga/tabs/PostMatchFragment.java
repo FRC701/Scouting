@@ -34,7 +34,8 @@ public class PostMatchFragment extends Fragment {
     private NumberPicker techFoul_Np;
     private CheckBox redCard_Cb;
     private CheckBox yellowCard_Cb;
-    private EditText startClimb_Et;
+    private CheckBox disqualified_Cb;
+    private EditText climbStart;
 
     private String mEvent;
     private int mMatchNum;
@@ -100,6 +101,10 @@ public class PostMatchFragment extends Fragment {
         stats.setFoul(foul);
         int techFoul = (techFoul_Np.getValue());
         stats.setTechFoul(techFoul);
+        int disqualified = (disqualified_Cb.isChecked() ? 1 : 0);
+        stats.setDisqualified(disqualified);
+        String cS = (climbStart.getText().toString());
+        stats.setClimbTime(cS);
         Log.d("TeleFrag saveData", "team id " + stats.getTeamNum());
         return stats;
     }
@@ -121,6 +126,8 @@ public class PostMatchFragment extends Fragment {
         yellowCard_Cb.setChecked(stats.getYellowCard() == 1);
         foul_Np.setValue(stats.getFoul());
         techFoul_Np.setValue(stats.getTechFoul());
+        disqualified_Cb.setChecked(stats.getDisqualified() == 1);
+        climbStart.setText(stats.getClimbTime());
 
     }
     public void assignViews(View view){
@@ -134,6 +141,8 @@ public class PostMatchFragment extends Fragment {
             techFoul_Np = (NumberPicker) view.findViewById(R.id.techFoul_Np);
             redCard_Cb = (CheckBox) view.findViewById(R.id.redCard_Cb);
             yellowCard_Cb = (CheckBox) view.findViewById(R.id.yellowCard_Cb);
+            disqualified_Cb = (CheckBox) view.findViewById(R.id.disqualified_Cb);
+            climbStart = (EditText) view.findViewById(R.id.climbStart);
 
             viewAssigned = true;
        }catch(Exception e){

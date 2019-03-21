@@ -258,4 +258,8 @@
     <string name="comments">Comments</string>
    <string name="hint">type here</string>
     <string name="disqualified_Cb">Disqualified</string>
+    <string name="yearsDiverInDiveTeam">How many years has you Driver had experience on the Drive team?</string>
+    <string name="yearsCoInDriveTeam">How many years of experience does your co-driver have?</string>
+    <string name="matchClimbTime">When in the match do you start to climb?</string>
+    <string name="climbStartTime">Time remaining when climb was started</string>
 </resources>
