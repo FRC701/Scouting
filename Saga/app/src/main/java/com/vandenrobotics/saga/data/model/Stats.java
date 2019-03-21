@@ -281,6 +281,11 @@ public class Stats {
     }
     public void setEndNone(int b){endNone = b;}
 
+    public int getDisqualified() {
+        return disqualified;
+    }
+    public void setDisqualified(int b){disqualified = b;}
+
 
 }
 

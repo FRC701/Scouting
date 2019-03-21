@@ -22,14 +22,15 @@ def create_table():
     CREATE TABLE IF NOT EXISTS MatchesAll( CompId TEXT, MatchNumber INTEGER,
               TeamNumber INTEGER, MatchPosition INTEGER,
               PRIMARY KEY(MatchNumber, TeamNumber, MatchPosition));
-    CREATE TABLE IF NOT EXISTS PitDataAll( TeamNumber INTEGER PRIMARY KEY, TypeOfIntakeAndMech TEXT,
-              TypeOfDriveTrain TEXT, AverageSpeed TEXT, ProgrammingLanguage TEXT, Comments TEXT,
-              DriveBlindly INTEGER, Auto INTEGER, Vision INTEGER, Camera INTEGER, Other INTEGER,
+    CREATE TABLE IF NOT EXISTS PitDataAll( TeamNumber INTEGER PRIMARY KEY,
+              Auto INTEGER, DriveBlindly INTEGER, Vision INTEGER, Camera INTEGER, Other INTEGER,
               StartLevel1 INTEGER, StartLevel2 INTEGER, RobotCargo INTEGER, RobotHatch INTEGER,
               CargoShipCargo INTEGER, CargoShipHatch INTEGER, HatchInCargoShip INTEGER, CargoInCargoShip INTEGER,
               HatchInRocket INTEGER, CargoInRocket INTEGER, IntakeHatch INTEGER, IntakeCargo INTEGER,
               ReachFirstPlatform INTEGER, ReachSecondPlatform INTEGER, ReachThirdPlatform INTEGER, ScoreBottom INTEGER,
-              ScoreMiddle INTEGER, ScoreTop INTEGER);
+              ScoreMiddle INTEGER, ScoreTop INTEGER, TypeOfIntakeAndMech TEXT,
+              TypeOfDriveTrain TEXT, ProgrammingLanguage TEXT, Comments TEXT, AverageSpeed TEXT,
+              CoDriverExperience TEXT, DriverExperience TEXT, Climb TEXT);
     CREATE TABLE IF NOT EXISTS StatsAll( CompId TEXT, MatchNumber INTEGER,
               TeamNumber INTEGER, MatchPosition INTEGER,
               NoShow INTEGER, StartLevel1 INTEGER, 

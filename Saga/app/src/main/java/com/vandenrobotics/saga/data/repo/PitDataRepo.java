@@ -87,6 +87,9 @@ public class PitDataRepo {
         values.put(PitData.KEY_ScoreBottom, pitData.getScoreBottom());
         values.put(PitData.KEY_ScoreMiddle, pitData.getScoreMiddle());
         values.put(PitData.KEY_ScoreTop, pitData.getScoreTop());
+        values.put(PitData.KEY_CoDriverExperience, pitData.getCoDriverExperience());
+        values.put(PitData.KEY_DriverExperience, pitData.getDriverExperience());
+        values.put(PitData.KEY_Climb, pitData.getClimb());
 
         pitDataId = (int)db.insertWithOnConflict(PitData.TABLE, null, values, SQLiteDatabase.CONFLICT_IGNORE);
         DatabaseManager.getInstance().closeDatabase();
@@ -127,6 +130,9 @@ public class PitDataRepo {
         values.put(PitData.KEY_ScoreBottom, pitData.getScoreBottom());
         values.put(PitData.KEY_ScoreMiddle, pitData.getScoreMiddle());
         values.put(PitData.KEY_ScoreTop, pitData.getScoreTop());
+        values.put(PitData.KEY_CoDriverExperience, pitData.getCoDriverExperience());
+        values.put(PitData.KEY_DriverExperience, pitData.getDriverExperience());
+        values.put(PitData.KEY_Climb, pitData.getClimb());
 
         pitDataId = (int)db.update(PitData.TABLE, values, PitData.KEY_TeamNum + " = " + pitData.getTeamNum(),null);
         DatabaseManager.getInstance().closeDatabase();
@@ -187,6 +193,9 @@ public class PitDataRepo {
                 + ", PitData." + PitData.KEY_ScoreBottom
                 + ", PitData." + PitData.KEY_ScoreMiddle
                 + ", PitData." + PitData.KEY_ScoreTop
+                + ", PitData." + PitData.KEY_CoDriverExperience
+                + ", PitData." + PitData.KEY_DriverExperience
+                + ", PitData." + PitData.KEY_Climb
                 + " FROM " + PitData.TABLE
                 + " WHERE PitData." + PitData.KEY_TeamNum + " = " + teamNum;
         Cursor cursor = db.rawQuery(selectQuery, null);
@@ -222,6 +231,9 @@ public class PitDataRepo {
             pitData.setScoreBottom(cursor.getInt(cursor.getColumnIndex(PitData.KEY_ScoreBottom)));
             pitData.setScoreMiddle(cursor.getInt(cursor.getColumnIndex(PitData.KEY_ScoreMiddle)));
             pitData.setScoreTop(cursor.getInt(cursor.getColumnIndex(PitData.KEY_ScoreTop)));
+            pitData.setCoDriverExperience(cursor.getString(cursor.getColumnIndex(PitData.KEY_CoDriverExperience)));
+            pitData.setDriverExperience(cursor.getString(cursor.getColumnIndex(PitData.KEY_DriverExperience)));
+            pitData.setClimb(cursor.getString(cursor.getColumnIndex(PitData.KEY_Climb)));
         }
         cursor.close();
         DatabaseManager.getInstance().closeDatabase();

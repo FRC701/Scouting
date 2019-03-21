@@ -77,6 +77,10 @@ class _TeamScores(object):
         self.rocketBottomH = []
         self.cargoShipC = []
         self.cargoShipH = []
+        
+        self.totalHatch = 0
+        self.totalCargo = 0
+        self.totalGamePiece = 0
 
     def get_maxmin_scores(self):
         self.maxRocketTopC = max(self.rocketTopC) if len(self.rocketTopC) else 0
@@ -109,6 +113,10 @@ class _TeamScores(object):
         self.avgRocketBottomH = float(sum(self.rocketBottomH))/float(matches) if matches else 0
         self.avgCargoShipC = float(sum(self.cargoShipC))/float(matches) if matches else 0
         self.avgCargoShipH = float(sum(self.cargoShipH))/float(matches) if matches else 0
+
+        self.totalCargo = sum(self.avgRocketTopC) + sum(self.avgRocketMiddleC) + sum(self.avgRocketBottomC) + sum(self.avgCargoShipC)
+        self.totalHatch = sum(self.avgrocketTopH) + sum(self.avgRocketMiddleH) + sum(self.avgRocketBottomH) + sum(self.avgCargoShipH)
+        self.totalGamePiece = self.totalCargo + self.totalHatch
 
     def getAttr(self, source):
         return getattr(self, source)
