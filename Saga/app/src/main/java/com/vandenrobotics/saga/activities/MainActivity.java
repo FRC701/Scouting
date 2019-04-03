@@ -153,6 +153,7 @@ public class      MainActivity extends AppCompatActivity implements DialogListen
         //This will auto update list when we add data
         downloadedAdapter.setNotifyOnChange(true);
         //Adding data to adapter
+
         downloadedAdapter.addAll(competitionsRepo.getAllCompetitions());
         downloadedListView.setAdapter(downloadedAdapter);
         downloadedListView.setOnItemClickListener(new ListView.OnItemClickListener() {

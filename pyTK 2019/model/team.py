@@ -30,6 +30,7 @@ class _TeamInfo(object):
         self.fouls = 0
         self.techFouls = 0
         self.hasFoul = 0
+        
 
     def get_info(self):
         self.totalFoul =  self.fouls
@@ -77,7 +78,7 @@ class _TeamScores(object):
         self.rocketBottomH = []
         self.cargoShipC = []
         self.cargoShipH = []
-        
+
         self.totalHatch = 0
         self.totalCargo = 0
         self.totalGamePiece = 0
@@ -114,9 +115,9 @@ class _TeamScores(object):
         self.avgCargoShipC = float(sum(self.cargoShipC))/float(matches) if matches else 0
         self.avgCargoShipH = float(sum(self.cargoShipH))/float(matches) if matches else 0
 
-        self.totalCargo = sum(self.avgRocketTopC) + sum(self.avgRocketMiddleC) + sum(self.avgRocketBottomC) + sum(self.avgCargoShipC)
-        self.totalHatch = sum(self.avgrocketTopH) + sum(self.avgRocketMiddleH) + sum(self.avgRocketBottomH) + sum(self.avgCargoShipH)
-        self.totalGamePiece = self.totalCargo + self.totalHatch
+        self.totalCargo = self.avgRocketTopC + self.avgRocketMiddleC + self.avgRocketBottomC + self.avgCargoShipC
+        self.totalHatch = self.avgRocketTopH + self.avgRocketMiddleH + self.avgRocketBottomH + self.avgCargoShipH
+        self.totalGamePiece = (float(sum(self.rocketTopC))+float(sum(self.rocketTopH))+float(sum(self.rocketMiddleC))+float(sum(self.rocketMiddleH))+float(sum(self.rocketBottomC))+float(sum(self.rocketBottomH))+float(sum(self.cargoShipC))+float(sum(self.cargoShipH)))/float(matches)if matches else 0
 
     def getAttr(self, source):
         return getattr(self, source)
@@ -233,6 +234,10 @@ class Team(object):
         self.pTechFoul = str(round(self.Info.pTechFoul, 2)) + "%"
         self.pDisabled = str(round(self.Info.pDisabled)) + "%"
 
+        self.totalHatch = str(round(self.Scores.totalHatch))
+        self.totalCargo = str(round(self.Scores.totalCargo))
+        self.totalGamePiece = str(round(self.Scores.totalGamePiece))
+        
         self.avgRocketTopC = str(round(self.Scores.avgRocketTopC))
         self.avgRocketTopH = str(round(self.Scores.avgRocketTopH))
         self.avgRocketMiddleC = str(round(self.Scores.avgRocketMiddleC))
@@ -241,7 +246,6 @@ class Team(object):
         self.avgRocketBottomH = str(round(self.Scores.avgRocketBottomH))
         self.avgCargoShipC = str(round(self.Scores.avgCargoShipC))
         self.avgCargoShipH = str(round(self.Scores.avgCargoShipH))
-
 
     def getAttr(self, source):
         return getattr(self, source)

@@ -18,41 +18,47 @@ class TeamDataController():
                      ("offensiveWS", "Offensive Weighted Score: "),
                      ("totalWS", "Total Weighted Score: "),
                      ("negativeWS", "Negative Weighted Score: "),
-                     
                      ("pNoShow", "No Show Percentage: "),
+                     
                      ("pStartLevel1", "Start on Level 1 Percentage: "),
                      ("pStartLevel2", "Start on Level 2 Percentage: "),
                      ("pPreloadCargo", "Preload Cargo Percentage: "),
                      ("pPreloadHatch", "Preload Hatch Percentage: "),
                      ("pCrossHubLine", "Cross Hubline Percentage: "),
+                     
                      ("avgRocketTopC", "Average Number Of Cargo in Top Rocket: "),
                      ("avgRocketTopH", "Average Number Of Hatch in Top Rocket: "),
                      ("avgRocketMiddleC", "Average Number Of Cargo in Middle Rocket: "),
                      ("avgRocketMiddleH", "Average Number Of Hatch in Middle Rocket: "),
                      ("avgRocketBottomC", "Average Number Of Cargo in Bottom Rocket: "),
+
                      ("avgRocketBottomH", "Average Number Of Hatch in Bottom Rocket: "),
                      ("avgCargoShipC", "Average Number Of Cargo in Cargo Ship: "),
                      ("avgCargoShipH", "Average Number Of Hatch in Cargo Ship: "),
-                     
                      ("pEndLevel1", "End Level 1 Percentage: "),
                      ("pEndLevel2", "End Level 2 Percentage: "),
+
                      ("pEndLevel3", "End Level 3 Percentage: "),
                      ("pEndNone", "No End Level Percentage: "),
-
                      ("pFoul", "Matches Had Foul: "),
                      ("pTechFoul", "Matches Had Tech Foul: "),
                      ("pYellowCard", "Matches Had Yellow Card: "),
+
                      ("pRedCard", "Matches Had Red Card: "),
                      ("pDisabled", "Matches Where The Robot Was Disabled: ")]
 
     maxminLabelVals = [("maxRocketTopC","Maximum Number Of Cargo in Top Rocket: "),("minRocketTopC","Minimum Number Of Cargo in Top Rocket: "),
                        ("maxRocketTopH","Maximum Number Of Hatch in Top Rocket: "),("minRocketTopH","Minimum Number Of Hatch in Top Rocket: "),
                        ("maxRocketMiddleC","Maximum Number Of Cargo in Middle Rocket: "),("minRocketMiddleC","Minimum Number Of Cargo in Middle Rocket: "),
+
                        ("maxRocketMiddleH","Maximum Number Of Hatch in Middle Rocket: "),("minRocketMiddleH","Minimum Number Of Hatch in Middle Rocket: "),
                        ("maxRocketBottomC","Maximum Number Of Cargo in Bottom Rocket: "),("minRocketBottomC","Minimum Number Of Cargo in Bottom Rocket: "),
                        ("maxRocketBottomH","Maximum Number Of Hatch in Bottom Rocket: "),("minRocketBottomH","Minimum Number Of Hatch in Bottom Rocket: "),
                        ("maxCargoShipC","Maximum Number Of Cargo in Cargo Ship: "),("minCargoShipC","Minimum Number Of Cargo in Cargo Ship: "),
-                       ("maxCargoShipH","Maximum Number Of Hatch in Cargo Ship: "),("minCargoShipH","Minimum Number Of Hatch in Cargo Ship: ")]
+                       ("maxCargoShipH","Maximum Number Of Hatch in Cargo Ship: "),("minCargoShipH","Minimum Number Of Hatch in Cargo Ship: "),
+                       ("totalCargo", "Average Total Cargo: "),
+                       ("totalHatch", "Average Total Hatch: "),
+                       ("totalGamePiece", "Average Total Game Pieces: "),]
     
     pitDataStrings = []
                        

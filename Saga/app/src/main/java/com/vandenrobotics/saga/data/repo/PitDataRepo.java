@@ -45,9 +45,9 @@ public class PitDataRepo {
                 + PitData.KEY_DriveTrain + " TEXT , "
                 + PitData.KEY_Lang + " TEXT , "
                 + PitData.KEY_Comments + " TEXT , "
-                + PitData.KEY_Speed + " TEXT ) "
-                + PitData.KEY_CoDriverExperience + " TEXT ) "
-                + PitData.KEY_DriverExperience + " TEXT ) "
+                + PitData.KEY_Speed + " TEXT , "
+                + PitData.KEY_CoDriverExperience + " TEXT , "
+                + PitData.KEY_DriverExperience + " TEXT , "
                 + PitData.KEY_Climb + " TEXT ) ";
     }
 

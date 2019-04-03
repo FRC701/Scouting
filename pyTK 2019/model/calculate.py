@@ -229,21 +229,31 @@ def predict_outcome(teams=[]):
 
     for score in totalRed:
         Sigmas[0].append((score-mur)**2)
-
+        print(Sigmas[0])
     for score in totalBlue:
         Sigmas[1].append((score-mub)**2)
+        print(Sigmas[1])
 
     rst = math.sqrt(sum(Sigmas[0])/3.0)
     bst = math.sqrt(sum(Sigmas[1])/3.0)
     
     if mur > mub:
+        #check zval and ntdri
         zval = (mur-mub)/math.sqrt((rst**2)+(bst**2)) if math.sqrt((rst**2)+(bst**2)) > 0 else 0
-        perr = 1 - stats.stats.special.ndtri(zval)
+        perr = 1-stats.stats.special.ndtri(zval)
         perr = round(perr,4)
-        return "Red Alliance: " + str(100)
+
+        zval2 = (mub-mur)/math.sqrt((rst**2)+(bst**2)) if math.sqrt((rst**2)+(bst**2)) > 0 else 0
+        perr2 = 1-stats.stats.special.ndtri(zval2)
+        perr2 = round(perr2, 4)
+        return "Red Alliance: " + str(perr*100) + " blue: " +str(perr2)
     
     else:
         zval = (mub-mur)/math.sqrt((rst**2)+(bst**2)) if math.sqrt((rst**2)+(bst**2)) > 0 else 0
-        perr = 1 - stats.stats.special.ndtri(zval)
+        perr = stats.stats.special.ndtri(zval)
         perr = round(perr, 4)
-        return "Blue Alliance: " + str(100)
+        
+        zval2 = (mur-mub)/math.sqrt((rst**2)+(bst**2)) if math.sqrt((rst**2)+(bst**2)) > 0 else 0
+        perr2 = stats.stats.special.ndtri(zval2)
+        perr2 = round(perr2, 4)
+        return "Blue Alliance: " + str(perr*100) + " red: " +str(perr2)

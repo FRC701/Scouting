@@ -45,6 +45,7 @@ def create_table():
               EndNone INTEGER, RobotDisabled INTEGER,
               RedCard INTEGER, YellowCard INTEGER, 
               Fouls INTEGER, TechFouls INTEGER,
+              ClimbTime TEXT,
               PRIMARY KEY(MatchNumber, TeamNumber , MatchPosition));
     CREATE TABLE IF NOT EXISTS TeamsAll( TeamNumber INTEGER not null PRIMARY KEY, TeamName TEXT);
     CREATE TABLE IF NOT EXISTS Alliances( AllianceNum INTEGER not null PRIMARY KEY, TeamNum INTEGER);
@@ -71,7 +72,8 @@ def create_table():
                 MaxRocketBottomC REAL, MinRocketBottomC REAL,
                 MaxRocketBottomH REAL, MinRocketBottomH REAL,
                 MaxCargoShipC REAL, MinCargoShipC REAL,
-                MaxCargoShipH REAL, MinCargoShipH REAL)''')
+                MaxCargoShipH REAL, MinCargoShipH REAL, TotalCargo REAL,
+                TotalHatch REAL, TotalGamePiece REAL)''')
 
 def add_data(model):
     model.imported = False
@@ -116,19 +118,25 @@ def add_data(model):
         try:
             tc.execute('SELECT * FROM PitData')
             pitData = tc.fetchall()
-            c.executemany('INSERT OR REPLACE INTO PitDataAll VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', pitData)
+            c.executemany('INSERT OR REPLACE INTO PitDataAll VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', pitData)
             model.imported = True
             print("successfully imported pitdata") 
         except Exception as e:
             print ("exception in pitdata",e)
             model.imported = False
+            exit
 
         try:
             tc.execute('SELECT * FROM Stats')
             stats = tc.fetchall()
-            c.executemany('INSERT OR REPLACE INTO StatsAll VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', stats)
-            model.imported = True
-            print("successfully imported stats") 
+            print(stats)
+            if stats.__sizeof__() <= 0:
+                print("No stats info to import")
+                model.imported = True
+            else:
+                c.executemany('INSERT OR REPLACE INTO StatsAll VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', stats)
+                model.imported = True
+                print("successfully imported stats") 
         except Exception as e:
             print ("exception in stats",e)
 
@@ -155,7 +163,7 @@ def add_teamInfo(team):
     print(teamInfo)
     temp.append(tuple(teamInfo))
     print(len(temp))
-    c.executemany('INSERT OR REPLACE INTO TeamInfo VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', temp)
+    c.executemany('INSERT OR REPLACE INTO TeamInfo VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', temp)
     conn.commit()
     
     
@@ -209,19 +217,21 @@ def add_pitData():
         
         tc.execute('SELECT * FROM PitData')
         pitData = tc.fetchall()
-        c.executemany('INSERT OR REPLACE INTO PitDataAll VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', pitData)
+        c.executemany('INSERT OR REPLACE INTO PitDataAll VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', pitData)
 def add_stats():
     global conn
     global c
     global filePath
     dirList = os.listdir(filePath)
+  
     for filename in dirList:
         tabletconn = sqlite3.connect(filePath + filename)
         tc = tabletconn.cursor()
         
         tc.execute('SELECT * FROM Stats')
         stats = tc.fetchall()
-        c.executemany('INSERT OR REPLACE INTO StatsAll VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', stats)
+        print(stats)
+        c.executemany('INSERT OR REPLACE INTO StatsAll VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', stats)
 
 def clear_importData():
     model.imported = False

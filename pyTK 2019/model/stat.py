@@ -61,6 +61,7 @@ def store_stats(rows):
     yellowCard = 25
     foul = 26
     techFoul = 27
+    climb = 28
     
     for row in rows:
         for team in Team.team_list:
@@ -86,6 +87,7 @@ def store_stats(rows):
                 team.Scores.rocketBottomH.append(row[rocketBH])
                 team.Scores.cargoShipC.append(row[cargoShipC])
                 team.Scores.cargoShipH.append(row[cargoShipH])
+                # team.Scores.climb.append(row[climb])
 
                 team.Info.redCard += row[redCard]
                 team.Info.yellowCard += row[yellowCard]
@@ -93,6 +95,6 @@ def store_stats(rows):
             if row[foul] > 1 or row[techFoul] > 1:
                 team.Info.hasFoul += 1
 
-            print("added stats values for " + str(team.number))
+            # print("added stats values for " + str(team.number))
         # print(row)
 
