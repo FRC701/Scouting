@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="72a1b6e5-98da-4a9f-869d-16e7a45b7309" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/../Saga/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Saga2020/app/src/main/java/com/vandenrobotics/saga2020/activities/MainActivity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Saga2020/app/src/main/java/com/vandenrobotics/saga2020/activities/MatchActivity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Saga2020/app/src/main/java/com/vandenrobotics/saga2020/activities/OptionScreenActivity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Saga2020/app/src/main/java/com/vandenrobotics/saga2020/activities/PitScoutingActivity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Saga2020/app/src/main/java/com/vandenrobotics/saga2020/activities/ScoutActivity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Saga2020/app/src/main/java/com/vandenrobotics/saga2020/app/App.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Saga2020/app/src/main/java/com/vandenrobotics/saga2020/data/DataBaseHelper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Saga2020/app/src/main/java/com/vandenrobotics/saga2020/data/DatabaseManager.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Saga2020/app/src/main/java/com/vandenrobotics/saga2020/data/model/Competitions.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Saga2020/app/src/main/java/com/vandenrobotics/saga2020/data/model/MatchInfo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Saga2020/app/src/main/java/com/vandenrobotics/saga2020/data/model/Matches.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Saga2020/app/src/main/java/com/vandenrobotics/saga2020/data/model/PitData.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Saga2020/app/src/main/java/com/vandenrobotics/saga2020/data/model/Stats.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Saga2020/app/src/main/java/com/vandenrobotics/saga2020/data/model/Teams.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Saga2020/app/src/main/java/com/vandenrobotics/saga2020/data/repo/CompetitionsRepo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Saga2020/app/src/main/java/com/vandenrobotics/saga2020/data/repo/MatchInfoRepo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Saga2020/app/src/main/java/com/vandenrobotics/saga2020/data/repo/MatchesRepo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Saga2020/app/src/main/java/com/vandenrobotics/saga2020/data/repo/PitDataRepo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Saga2020/app/src/main/java/com/vandenrobotics/saga2020/data/repo/StatsRepo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Saga2020/app/src/main/java/com/vandenrobotics/saga2020/data/repo/TeamsRepo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Saga2020/app/src/main/java/com/vandenrobotics/saga2020/dialogs/AddEventDialogFragment.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Saga2020/app/src/main/java/com/vandenrobotics/saga2020/dialogs/AddTeamDialogFragment.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Saga2020/app/src/main/java/com/vandenrobotics/saga2020/dialogs/CreateMatchlistDialogFragment.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Saga2020/app/src/main/java/com/vandenrobotics/saga2020/dialogs/DialogListener.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Saga2020/app/src/main/java/com/vandenrobotics/saga2020/dialogs/NoShowDialogFragment.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Saga2020/app/src/main/java/com/vandenrobotics/saga2020/tabs/MidMatchFragment.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Saga2020/app/src/main/java/com/vandenrobotics/saga2020/tabs/PostMatchFragment.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Saga2020/app/src/main/java/com/vandenrobotics/saga2020/tabs/PreMatchFragment.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Saga2020/app/src/main/java/com/vandenrobotics/saga2020/tools/ExternalStorageTools.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Saga2020/app/src/main/java/com/vandenrobotics/saga2020/tools/ImageTools.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Saga2020/app/src/main/java/com/vandenrobotics/saga2020/tools/JSONTools.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Saga2020/app/src/main/java/com/vandenrobotics/saga2020/tools/TheBlueAllianceRestClient.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Saga2020/app/src/main/java/com/vandenrobotics/saga2020/views/EventArrayAdapter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Saga2020/app/src/main/java/com/vandenrobotics/saga2020/views/EventListView.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Saga2020/app/src/main/java/com/vandenrobotics/saga2020/views/NumberPicker.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Saga2020/app/src/main/java/com/vandenrobotics/saga2020/views/SlidingTabLayout.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Saga2020/app/src/main/java/com/vandenrobotics/saga2020/views/SlidingTabStrip.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Saga2020/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Saga2020/app/src/main/res/drawable/blankscale.PNG" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Saga2020/app/src/main/res/drawable/blankswitch.PNG" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Saga2020/app/src/main/res/drawable/field2018blue.PNG" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Saga2020/app/src/main/res/drawable/field2018red.PNG" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Saga2020/app/src/main/res/drawable/fieldmask.PNG" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Saga2020/app/src/main/res/drawable/ic_launcher_background.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Saga2020/app/src/main/res/drawable/nopic.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Saga2020/app/src/main/res/drawable/ownershipfield.PNG" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Saga2020/app/src/main/res/drawable/saga2018.PNG" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Saga2020/app/src/main/res/drawable/scalebluebottom.PNG" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Saga2020/app/src/main/res/drawable/scalebluetop.PNG" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Saga2020/app/src/main/res/drawable/scaleredbottom.PNG" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Saga2020/app/src/main/res/drawable/scaleredtop.PNG" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Saga2020/app/src/main/res/drawable/switchbluebottom.PNG" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Saga2020/app/src/main/res/drawable/switchbluetop.PNG" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Saga2020/app/src/main/res/drawable/switchredbottom.PNG" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Saga2020/app/src/main/res/drawable/switchredtop.PNG" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Saga2020/app/src/main/res/layout/activity_main.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Saga2020/app/src/main/res/layout/activity_match.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Saga2020/app/src/main/res/layout/activity_pit_scouting.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Saga2020/app/src/main/res/layout/activity_scout.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Saga2020/app/src/main/res/layout/dialog_add_event.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Saga2020/app/src/main/res/layout/dialog_add_team.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Saga2020/app/src/main/res/layout/dialog_create_matchlist.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Saga2020/app/src/main/res/layout/fragment_mid.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Saga2020/app/src/main/res/layout/fragment_post.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Saga2020/app/src/main/res/layout/fragment_pre.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Saga2020/app/src/main/res/layout/option_screen.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Saga2020/app/src/main/res/layout/spinner_base.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Saga2020/app/src/main/res/layout/spinner_dropdown.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Saga2020/app/src/main/res/menu/menu_main.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Saga2020/app/src/main/res/menu/menu_opition.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Saga2020/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Saga2020/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Saga2020/app/src/main/res/mipmap-hdpi/ic_launcher.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Saga2020/app/src/main/res/mipmap-hdpi/ic_launcher_round.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Saga2020/app/src/main/res/mipmap-mdpi/ic_launcher.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Saga2020/app/src/main/res/mipmap-mdpi/ic_launcher_round.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Saga2020/app/src/main/res/mipmap-xhdpi/ic_launcher.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Saga2020/app/src/main/res/mipmap-xhdpi/ic_launcher_round.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Saga2020/app/src/main/res/mipmap-xxhdpi/ic_launcher.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Saga2020/app/src/main/res/mipmap-xxhdpi/ic_launcher_round.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Saga2020/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Saga2020/app/src/main/res/mipmap-xxxhdpi/ic_launcher_round.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Saga2020/app/src/main/res/values/colors.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Saga2020/app/src/main/res/values/dimens.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Saga2020/app/src/main/res/values/ids.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Saga2020/app/src/main/res/values/strings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Saga2020/app/src/main/res/values/styles.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Saga/.idea/caches/build_file_checksums.ser" beforeDir="false" afterPath="$PROJECT_DIR$/../Saga/.idea/caches/build_file_checksums.ser" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Saga/.idea/codeStyles/Project.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Saga/.idea/codeStyles/Project.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Saga/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Saga/.idea/gradle.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Saga/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Saga/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Saga/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Saga/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Saga/app/app.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../Saga/app/app.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Saga/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/../Saga/app/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Saga/app/src/main/java/com/vandenrobotics/saga/activities/ScoutActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Saga/app/src/main/java/com/vandenrobotics/saga/activities/ScoutActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Saga/app/src/main/java/com/vandenrobotics/saga/data/model/PitData.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Saga/app/src/main/java/com/vandenrobotics/saga/data/model/PitData.java" afterDir="false" />
+    </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/model/calculate.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="68">
+              <caret line="4" selection-start-line="4" selection-end-line="4" />
+              <folding>
+                <element signature="e#246#257#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/model/team.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-3009">
+              <caret line="151" column="23" lean-forward="true" selection-start-line="151" selection-start-column="23" selection-end-line="151" selection-end-column="23" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/model/stat.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="323">
+              <caret line="79" column="60" lean-forward="true" selection-start-line="68" selection-start-column="46" selection-end-line="79" selection-end-column="60" />
+              <folding>
+                <element signature="e#0#14#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="ProjectFrameBounds">
+    <option name="x" value="676" />
+    <option name="width" value="697" />
+    <option name="height" value="735" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="pyTK 2018" type="b2602c69:ProjectViewProjectNode" />
+              <item name="pyTK 2018" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="pyTK 2018" type="b2602c69:ProjectViewProjectNode" />
+              <item name="pyTK 2018" type="462c0819:PsiDirectoryNode" />
+              <item name="controller" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="pyTK 2018" type="b2602c69:ProjectViewProjectNode" />
+              <item name="pyTK 2018" type="462c0819:PsiDirectoryNode" />
+              <item name="model" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="Scope" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="settings.editor.selected.configurable" value="configurable.group.appearance" />
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="72a1b6e5-98da-4a9f-869d-16e7a45b7309" name="Default Changelist" comment="" />
+      <created>1579304897502</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1579304897502</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="676" y="0" width="697" height="735" extended-state="0" />
+    <editor active="true" />
+    <layout>
+      <window_info content_ui="combo" id="Project" order="0" weight="0.50986344" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Run" order="2" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Version Control" order="7" />
+      <window_info anchor="bottom" id="Terminal" order="8" />
+      <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
+      <window_info anchor="bottom" id="Python Console" order="10" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+    </layout>
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/model/calculate.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" selection-start-line="4" selection-end-line="4" />
+          <folding>
+            <element signature="e#246#257#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/model/team.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-3009">
+          <caret line="151" column="23" lean-forward="true" selection-start-line="151" selection-start-column="23" selection-end-line="151" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/model/stat.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="79" column="60" lean-forward="true" selection-start-line="68" selection-start-column="46" selection-end-line="79" selection-end-column="60" />
+          <folding>
+            <element signature="e#0#14#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>

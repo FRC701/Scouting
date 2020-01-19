@@ -1,0 +1,452 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="match_parent"
+    android:background="@color/BackGroundGreen"
+    tools:context="com.vandenrobotics.saga.activities.PitScoutingActivity">
+
+    inputType="text".
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <Spinner
+                android:id="@+id/pit_spinnerTeamNum"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                />
+
+            <TextView
+                android:id="@+id/duringSandstormMethod_Tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/during_sandstorm_what_do_you_use"
+                android:textColor="@color/Goldish" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <CheckBox
+                    android:id="@+id/pitDriveBlindly_Cb"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/drive_blindly"
+                    android:textColor="@color/White" />
+
+                <CheckBox
+                    android:id="@+id/pitAuto_Cb"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/auto"
+                    android:textColor="@color/White" />
+
+                <CheckBox
+                    android:id="@+id/pitVision_Cb"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/vision"
+                    android:textColor="@color/White" />
+
+                <CheckBox
+                    android:id="@+id/pitCamera_Cb"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/camera"
+                    android:textColor="@color/White" />
+
+                <CheckBox
+                    android:id="@+id/pitOther_Cb"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/other"
+                    android:textColor="@color/White" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/textView1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/during_sandstorm_where_do_you_start"
+                android:textColor="@color/Goldish" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <RadioGroup
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                <RadioButton
+                    android:id="@+id/pitLevel1_Rb"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/_1st_level"
+                    android:textColor="@color/White" />
+
+                <RadioButton
+                    android:id="@+id/pitLevel2_Rb"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/_2nd_level"
+                    android:textColor="@color/White"/>
+                </RadioGroup>
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/textView7"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/what_preloads_does_your_robot_have_during_sandstorm"
+                android:textColor="@color/Goldish" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <RadioGroup
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <RadioButton
+                        android:id="@+id/pitRobotCargo_Rb"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/robot_cargo"
+                        android:textColor="@color/White" />
+
+                    <RadioButton
+                        android:id="@+id/pitRobotHatch_Rb"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/robot_hatch"
+                        android:textColor="@color/White" />
+
+
+                </RadioGroup>
+
+                <RadioGroup
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <RadioButton
+                        android:id="@+id/pitCargoShipCargo_Rb"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/cargo_ship_cargo"
+                        android:textColor="@color/White" />
+
+                    <RadioButton
+                        android:id="@+id/pitCargoShipHatch_Rb"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/cargo_ship_hatch"
+                        android:textColor="@color/White" />
+                </RadioGroup>
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/textView8"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/during_sandstorm_what_does_your_robot_score"
+                android:textColor="@color/Goldish" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <CheckBox
+                    android:id="@+id/pitHatchInRocketShip_Cb"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/hatch_in_rocketship"
+                    android:textColor="@color/White" />
+
+                <CheckBox
+                    android:id="@+id/pitHatchInCargoShip_Cb"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/hatch_in_cargo_ship"
+                    android:textColor="@color/White" />
+
+                <CheckBox
+                    android:id="@+id/pitCargoInRocketShip_Cb"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/cargo_in_rocketship"
+                    android:textColor="@color/White" />
+
+                <CheckBox
+                    android:id="@+id/pitCargoInCargoShip_Cb"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/cargo_in_cargo_ship"
+                    android:textColor="@color/White" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/textView9"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/tele_period"
+                android:textColor="@color/Goldish" />
+
+            <TextView
+                android:id="@+id/textView10"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/can_your_robot_intake_from_the_ground"
+                android:textColor="@color/Goldish" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <CheckBox
+                    android:id="@+id/pitHatch_Cb"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/hatch"
+                    android:textColor="@color/White" />
+
+                <CheckBox
+                    android:id="@+id/cargo_Cb"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/cargo"
+                    android:textColor="@color/White" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/which_platforms_can_your_robot_reach"
+                android:textColor="@color/Goldish" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <CheckBox
+                    android:id="@+id/reachFirstPlatform_Cb"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/_1st_platform"
+                    android:textColor="@color/White" />
+
+                <CheckBox
+                    android:id="@+id/reachSecondPlatform_Cb"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/_2nd_platform"
+                    android:textColor="@color/White" />
+
+                <CheckBox
+                    android:id="@+id/reachThirdPlatform_Cb"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/_3rd_platform"
+                    android:textColor="@color/White" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Where can your robot score on the rocket?"
+                android:textColor="@color/Goldish" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <CheckBox
+                    android:id="@+id/scoreBottom_Cb"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/bottom"
+                    android:textColor="@color/White"
+                    android:layout_weight="1"/>
+                <CheckBox
+                    android:id="@+id/scoreMiddle_Cb"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/middle"
+                    android:textColor="@color/White"
+                    android:layout_weight="1"/>
+                <CheckBox
+                    android:id="@+id/scoreTop_Cb"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/top"
+                    android:textColor="@color/White"
+                    android:layout_weight="1"/>
+
+                </LinearLayout>
+
+            <TextView
+                android:id="@+id/textView5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/mechanism"
+                android:textColor="@color/Goldish" />
+
+            <EditText
+                android:id="@+id/mechanismAnswer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/White"
+                android:inputType=""
+                android:autofillHints="" />
+
+            <TextView
+                android:id="@+id/textView11"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/drive_train"
+                android:textColor="@color/Goldish" />
+
+            <EditText
+                android:id="@+id/driveTrainAnswer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:textColor="@color/White" />
+
+            <TextView
+                android:id="@+id/textView13"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/speed"
+                android:textColor="@color/Goldish" />
+
+            <EditText
+                android:id="@+id/speedAnswer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:textColor="@color/White" />
+
+            <TextView
+                android:id="@+id/textView15"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/programming_language"
+                android:textColor="@color/Goldish" />
+
+            <EditText
+                android:id="@+id/programmingLanguageAnswer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:textColor="@color/White" />
+
+            <TextView
+                android:id="@+id/textView17"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/comments"
+                android:textColor="@color/Goldish" />
+
+            <EditText
+                android:id="@+id/commentsAnswer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:textColor="@color/White" />
+
+            <TextView
+                android:id="@+id/textView18"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/yearsDiverInDiveTeam"
+                android:textColor="@color/Goldish" />
+
+            <EditText
+                android:id="@+id/driverExperience"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:textColor="@color/White" />
+
+            <TextView
+                android:id="@+id/textView19"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/yearsCoInDriveTeam"
+                android:textColor="@color/Goldish" />
+
+            <EditText
+                android:id="@+id/coDriverExperience"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:textColor="@color/White" />
+            
+            <TextView
+                android:id="@+id/textView20"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/matchClimbTime"
+                android:textColor="@color/Goldish" />
+
+            <EditText
+                android:id="@+id/climbTime"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text" />
+
+            <Button
+                android:id="@+id/button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Save"
+                android:onClick="save"/>
+
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>

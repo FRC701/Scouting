@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/BackGroundGreen">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/White"
+        android:text="Platform:"
+        />
+    <RadioGroup
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <RadioGroup
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/Yellow"
+                    android:text="@string/_1st"
+                    android:id="@+id/platform1st_Rb"
+                    />
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/Yellow"
+                    android:text="@string/_2nd"
+                    android:id="@+id/platform2nd_Rb"
+                    />
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/Yellow"
+                    android:text="@string/_3rd"
+                    android:id="@+id/platform3rd_Rb"
+                    />
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/Yellow"
+                    android:text="@string/none"
+                    android:id="@+id/platformNone_Rb"
+                    />
+            </RadioGroup>
+
+
+        </LinearLayout>
+    </RadioGroup>
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/White"
+        android:text="@string/disabled"
+        android:id="@+id/disabled_Cb"/>
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/climbStartTime"
+        android:textColor="@color/Goldish" />
+
+    <EditText
+        android:id="@+id/climbStart"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="text"
+        android:text=""
+        android:textColor="@color/Goldish" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/foul"
+        android:textColor="@color/Yellow"
+        />
+    <com.vandenrobotics.saga.views.NumberPicker
+        android:id="@+id/foul_Np"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </com.vandenrobotics.saga.views.NumberPicker>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/tech_foul"
+        android:textColor="@color/Yellow"/>
+    <com.vandenrobotics.saga.views.NumberPicker
+        android:id="@+id/techFoul_Np"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </com.vandenrobotics.saga.views.NumberPicker>
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/White"
+        android:id="@+id/redCard_Cb"
+        android:text="@string/CheckBox_redCard"
+        />
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/White"
+        android:id="@+id/yellowCard_Cb"
+        android:text="@string/CheckBox_yellowCard"
+        />
+
+    <CheckBox
+        android:id="@+id/disqualified_Cb"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/disqualified_Cb"
+        android:textColor="@color/White" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text = "@string/finish_match"
+        android:id="@+id/finishMatch_Btn"
+        android:onClick="finishMatch"/>
+</LinearLayout>

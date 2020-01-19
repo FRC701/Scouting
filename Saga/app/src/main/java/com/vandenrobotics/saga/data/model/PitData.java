@@ -16,9 +16,9 @@ public class PitData {
     public static final String KEY_Speed = "AverageSpeed";
     public static final String KEY_Lang = "ProgrammingLanguage";
     public static final String KEY_Comments = "Comments";
-    public static final String KEY_DriverExperience = "Comments";
-    public static final String KEY_CoDriverExperience = "Comments";
-    public static final String KEY_Climb = "Comments";
+    public static final String KEY_DriverExperience = "DriverExperience";
+    public static final String KEY_CoDriverExperience = "CoDriverExperience";
+    public static final String KEY_Climb = "Climb";
 
     //i did everything after here
     public static final String KEY_DriveBlindly = "DriveBlindly";
